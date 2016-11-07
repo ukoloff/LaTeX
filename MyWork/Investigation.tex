@@ -3,6 +3,8 @@
 \usepackage{epstopdf}% To incorporate .eps illustrations using PDFLaTeX, etc.
 \usepackage{subfigure}% Support for small, `sub' figures and tables
 
+\graphicspath{{media/}}
+
 \begin{document}
 
 \title{About some types of constraints in problems of routing}
@@ -68,6 +70,18 @@ The tool path contains the following components (see Fig.1):
 \item Lead-out (tool trajectory from exit point on equidistant contour up to tool switching off point); 
 \item Airtime motions (linear movement from tool switching off point up to the next piercing).
 \end{itemize}
+
+\begin{figure}
+\begin{center}
+\subfigure[Exact SCCP solution.]{
+\resizebox*{0.4\textwidth}{!}{\includegraphics{nest-a.png}}}\hspace{6pt}
+\subfigure[Solution with thermal cutting constraints.]{
+\resizebox*{0.4\textwidth}{!}{\includegraphics{nest-b.png}}}
+\caption{Results of tool path optimizations.} \label{nesting-results}
+\end{center}
+\end{figure}
+
+Se Fig. \ref{nesting-results}...
 
 \section*{Acknowledgements}
 
