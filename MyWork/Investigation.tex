@@ -75,6 +75,40 @@ The tool path contains the following components (see Fig.1):
 
 \section{Formal Definition of Tool Path}
 
+Finally, the tool path is defined by a tuple:
+
+\begin{equation} \label {tuple}
+ROUTE = < S_1, S_2, \dots S_K, i_1, i_2, \dots i_K > 
+\end{equation}
+
+During development of NC programs for CNC sheet metal cutting machines the problems of tool path optimization arise.
+As optimization criteria in these problems the parameters of cutting time $t_{cut}$ and cost $F_{cost}$ are considered.
+They are calculated by following formulas:
+
+\begin{equation} \label{time}
+t_{cut} = L_{on} \div V_{on} + L_{off} \div V_{off} + N_{pt} \cdot t_{pt}
+\end{equation}
+
+\begin{equation} \label {cost}
+F_{cost} = L_{on} \cdot C_{on} + L_{off} \cdot V_{off} + N_{pt} \cdot C_{pt}
+\end{equation}
+
+Here $L_{off}$ is length of idling tool path;
+$L_{on}$ is length of working tool path;
+$V_{off}$ is speed of idling tool path;
+$V_{on}$ is speed of the working tool path;
+$C_{off}$ is cost of idling tool path unit;
+$C_{on}$ is cost of working tool path unit;
+$N_{pt}$ is numbers of piercing;
+$t_{pt}$ is time of one piercing;
+$C_{pt}$ is cost of one piercing.
+
+Objective functions (\ref{time}) and (\ref{cost})
+for the tool path depend on elements of tuple (\ref{tuple}).
+Let us consider technological constraints on tuple
+$<M_1, M_1^*, \dots , M_K, M_K^*, i_1, \dots , i_K>$
+elements.
+
 \section{Tool Path Constraints Formalization}
 
 \subsection{Precedence Constraint}
