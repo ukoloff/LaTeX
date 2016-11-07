@@ -123,6 +123,16 @@ elements.
 
 \section{Tool Path Constraints Formalization}
 
+As we mentioned above,
+the tool path routing problem is often reduced to the Generalized Traveling Salesman Problem (GTSP),
+since a lot of algorithms are known to exist to solve it.
+Unfortunately, most solutions are not feasible for tool path routing problem due to many technological restrictions,
+especially dealing with thermal deformations during cutting process.
+These restrictions are mostly empirical,
+but after mathematical formalization they impose some strict constraints on the elements of tuple (\ref{tuple}).
+In some cases these constraints can be used to significantly reduce dimension of problem space,
+leading to decreasing computation complexity.
+
 \subsection{Precedence Constraint}
 
 \subsection{Piercing Coordinates Constraints}
@@ -142,7 +152,29 @@ See Fig. \ref{piercing-area}
 
 \subsubsection{Thermal Distribution Calculations}
 
+A series of numerical experiments was conducted to better understand a nature of Part Hardness Rule.
+For predefined sheet size, nesting, beam radius and power and cutting speed thermal filed was directly calculated using:
+
+These calculations can be also used as another (or additional) considerations for selecting piercing points and cutting directions.
+So far it is not practical though, for it takes too much time to calculate the whole thermal distribution for all the cutting process.
+More investigations in this direction are necessary.
+
 \subsection{Sheet Hardness Rules}
+
+As well as Part Hardness Rule, this series of constraints is to minimize thermal deformations during thermal cutting process.
+Unlike the former it primarily deals with second part (permutation) of tuple (\ref{tuple}).
+It defines sequence of parts cutting. It is also mainly empirical.
+
+The following rules are known:
+
+\begin{itemize}
+\item Start from sheet short edge
+\item Long narrow parts, located next to sheet edge should be cut first
+\item If a big free area (having no parts nested) exists, cutting should start from opposite sheet side
+\item Start from the side with greater heat release (smaller parts or greater total perimeter)
+\item Avoid uncut “islands”
+\item Avoid long narrow uncut areas
+\end{itemize}
 
 \section{Discrete Optimization Algorithms}
 
