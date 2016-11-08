@@ -72,7 +72,7 @@ Tool path problems are usually divided into 4 classes depending on cutting techn
 
 \subsection{Tool Path Components}
 
-The tool path contains the following components (see Fig.1):
+The tool path contains the following components (see Fig.\ref{toolpath}):
 
 \begin{itemize}
 \item Pierce points (piercings);
@@ -83,7 +83,34 @@ The tool path contains the following components (see Fig.1):
 \item Airtime motions (linear movement from tool switching off point up to the next piercing).
 \end{itemize}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{toolpath.pdf}
+\caption{Scheme of the standard cutting technique.} \label{toolpath}
+\end{center}
+\end{figure}
+
+
 \subsection{Cutting Techniques}
+
+All the cutting techniques can be divided into three classes:
+
+\begin{enumerate}
+\item Standard cutting. 
+\item Multi-contour cutting.
+\item Multi-segment cutting.
+\end{enumerate}
+
+Standard cutting technique assumes:
+
+\begin{itemize}
+\item Piercings number is equal to contours number and parts number;
+\item Cutter head runs each closed equidistant contour of part to cut exactly once from beginning to end. 
+\end{itemize}
+
+The multi-contour cutting cuts several contours in one segment of cutting.
+External contours of parts are cut jointly with the only piercing without switching cutter head off.
+Multi-segment cutting cuts single contour in several segments of cutting (see Fig. \ref{???}).
 
 \section{Formal Definition of Tool Path}
 
