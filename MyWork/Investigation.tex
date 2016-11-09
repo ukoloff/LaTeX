@@ -190,6 +190,53 @@ leading to decreasing computation complexity.
 
 \subsection{Piercing Coordinates Constraints}
 
+This constraint is due to another technological feature of sheet cutting.
+Material deformation in the beginning of cutting segment (point of piercing) is usually greater than in its other points.
+So, the piercing point must lay at event greater distance from part boundary than cutting itself.
+Exact values of these two distances depend on technological parameters.
+In terms of tuple (\ref{tuple}) this constraints narrows the choice of feasible piercing points $M_i$
+for every segment $S_i$. (see Fig. \ref{piercing-area})
+
+Let us denote as $E^d_j (j = \overline{1, N})$
+an equidistant contour for part boundary $C_j$
+offset with a distance d:
+$E^d_j \subset \mathbb{R}^2$.
+$P^d_j$ is two-dimensional shape, bounded by $E^d_j (j=\overline{1, N})$.
+
+Next, let $OUT$ is a set of external contours indexes,
+while $IN$ is a set of internal contours indexes,
+i.e. $OUT \subseteq \{\overline{1, N}\},  IN \subseteq \{\overline{1, N}\}$.
+When $N = n$, all contours are external $OUT=\{\overline{1, N}\}, IN = \varnothing$.
+
+Let $\partial$  is a half width (a half allowance) for the cutting process.
+Then trajectories of the cutting segments for cutting of parts $A_1, A_2, \dots A_n$ has to contain all contours  $E^\partial_j (j = \overline{1, N})$:
+$$
+\bigcup^N_{j=1} E^\partial_j
+\subseteq
+\bigcup^K_{k=1} B^{S_k}
+\subset
+\bigcup^K_{k=1} S_k
+$$
+
+Let $\delta$  is a minimal distance from piercing point to equidistant contour (defined by technology).
+Then piercing points and tool switching off points must meet the following conditions (see Fig. \ref{piercing-area}):
+
+\begin{equation} \label{on-point}
+M_k \in
+( B \backslash \bigcup_{j \in OUT} P^{\partial + \delta}_j ) \bigcup_{q \in IN} P^{\partial + \delta}_q
+\end{equation}
+
+\begin{equation} \label{off-point}
+M_k^* \in
+( B \backslash \bigcup_{j \in OUT} P^\partial_j ) \bigcup_{q \in IN} P^\partial_q
+\end{equation}
+
+Having all feasible positions for piercing points $M_i$ found,
+one can reduce full tool path optimization problem
+(which is both continuous and discrete optimization problem)
+to discrete one simply by selecting finite set of possible piercing points on the border of area,
+defined by (\ref{on-point}), see Fig. \ref{discrete}.
+
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{ppc.jpeg}
@@ -197,7 +244,13 @@ leading to decreasing computation complexity.
 \end{center}
 \end{figure}
 
-See Fig. \ref{piercing-area}
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{discrete.png}
+\caption{Example of finite set of piercing points.} \label{discrete}
+\end{center}
+\end{figure}
+
 
 \subsection{Part Hardness Rule}
 
