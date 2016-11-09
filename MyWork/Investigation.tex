@@ -114,6 +114,32 @@ Multi-segment cutting cuts single contour in several segments of cutting (see Fi
 
 \section{Formal Definition of Tool Path}
 
+Let $A_1, A_2, \dots A_n$ to be finite set of two-dimensional geometrical objects
+(representations of parts to cut).
+Each object is described by one or several closed curves (boundary contours). 
+Let also $N$ to be number of external and the internal closed contours $C_1, C_2, \dots C_N$,
+that describe parts positions (the nesting) on sheet material
+$(A_i, C_j \subset \mathbb{R}^2; i = \overline{1,n}, j = \overline{1, N}, j \ge n )$.
+
+We define cutting segment  $S = \overrightarrow{M B^S M^*}$
+as a tool trajectory from piercing  $M$ up to point of switching the tool off  $M^*$
+$(S \subset \mathbb{R}^2; M = (x, y), M^ *= (x^*, y^*) \in \mathbb{R}^2)$.
+Basic segment $B^S$ is a part of segment $S = \overrightarrow{M M^*}$
+without trajectory lead-in and trajectory lead-out.
+
+Unlike full segment (which is oriented),
+its basic segment can be cut in both directions,
+it contains only geometric information.
+
+Let $K$ be the number of segments the tool path consists of.
+$S_k = \overrightarrow{M_k M_k^*}; k = \overline{1, K}$.
+Single segment may contain one contour,
+a few contours (for the multi-contour cutting),
+or a part of contour (for multi-segment cutting).
+Sequence of segments is a permutation $i_1, i_2, \dots, i_K$,
+i.e. the ordered set of natural numbers from $1$ to $K$
+or bijection on a set $\{\overline{1, K}\}$.
+
 Finally, the tool path is defined by a tuple:
 
 \begin{equation} \label {tuple}
