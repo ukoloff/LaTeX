@@ -188,6 +188,22 @@ leading to decreasing computation complexity.
 
 \subsection{Precedence Constraint}
 
+For most CNC cutting machines when some part (bounded with a closed contour) has been cut,
+nothing prevents it from slightly moving on the cutting table.
+Therefore, one cannot reliably cut inner contours (holes) of that part.
+This also applies to other parts, positioned in the holes of the former one.
+
+This constraint is well known and described in many papers
+(e.g. \cite{verkhoturov_mathematical_2008}, 
+\cite{dewil_cutting_2011})
+Its formalization and implementation usually doesn’t meet with great difficulties.
+
+In terms of tuple (\ref{tuple}),
+this constraint imposes restrictions on permutation 
+$I = \{i_1, i_2, \dots i_K\}$.
+\cite{petunin_2014}
+showed that this reduction of feasible permutations allows some algorithms that get exact solutions for some problems of big dimension.
+
 \subsection{Piercing Coordinates Constraints}
 
 This constraint is due to another technological feature of sheet cutting.
