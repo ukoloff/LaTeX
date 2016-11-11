@@ -2,6 +2,7 @@
 
 \usepackage{epstopdf}% To incorporate .eps illustrations using PDFLaTeX, etc.
 \usepackage{subfigure}% Support for small, `sub' figures and tables
+\usepackage{soul}		% <s>...</s> as \st
 
 \graphicspath{{media/}}
 
@@ -281,7 +282,47 @@ defined by (\ref{on-point}), see Fig. \ref{discrete}.
 
 \subsection{Part Hardness Rule}
 
+\begin{figure}
+\begin{center}
+\subfigure[Demonstration.]{\label{hardness-demo}
+\includegraphics[width=0.3\textwidth]{hardness-demo.png}}
+\subfigure[Formalization.]{\label{hardness}
+\includegraphics[width=0.4\textwidth]{hardness.png}}
+\caption{``Part hardness rule''.}
+\end{center}
+\end{figure}
+
+This restriction is caused by thermal deformations of part during cutting process.
+It was first described by \cite{???} as an empirical rule for NC program development (mostly manual).
+
+In terms of tuple (\ref{tuple}) it deals with choice of piercing points $M_i$
+and cutting direction for every cutting segment $S_i$.
+Briefly, cutting should start next to sheet border or already cut area and finish in “hard” area,
+i.e. next to not cut yet area (see Fig. \ref{hardness-demo}).
+
+\begin{center}
+\begin{tabular}{ c | c | c | c | c}
+%\hline
+  \multicolumn{1}{c|}{Part} & \multicolumn{4}{c}{Piercing points} \\ \hline
+  3 & (6) & 7 (CW) & (8) CCW & (\st{9}) \\
+  2 & (4) CW & (\st{5}) & (6) CCW & (7) CW +  CCW \\
+  1 & (1) CW & (\st{2}) & (3) CCW & (4) CW +  CCW \\
+\end{tabular}
+\end{center}
+
 \subsubsection{Formalization of Part Hardness Rule}
+
+For piercing point $M_k$ and its corresponding switching off point $M^*_k$
+(meeting conditions (\ref{on-point}) and (\ref{off-point}))
+we build two-dimensional ``hardness'' area,
+bounded by basic segment (ended in  $M^*_k$) of length $L$,
+equidistant contour $E^R$  (with radius also determined by technological parameters)
+and two straight line segments, perpendicular to the base segment (see Fig. \ref{hardness}).
+This area should lay entirely in (not cut yet) sheet areas.
+In the following example piercing point $M1$ is valid, while $M2$ is not.
+
+Thus defined ``hardness'' area can be used to prohibit some (otherwise feasible) values of tuple~(\ref{tuple})
+or as penalty for objective function (\ref{cost}) with some heuristic coefficient.
 
 \subsubsection{Thermal Distribution Calculations}
 
