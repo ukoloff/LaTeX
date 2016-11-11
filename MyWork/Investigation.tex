@@ -153,7 +153,7 @@ or bijection on a set $\{\overline{1, K}\}$.
 
 Finally, the tool path is defined by a tuple:
 
-\begin{equation} \label {tuple}
+\begin{equation} \label{tuple}
 ROUTE = \langle S_1, S_2, \dots S_K, i_1, i_2, \dots i_K \rangle 
 \end{equation}
 
@@ -296,7 +296,7 @@ as an empirical rule for NC program development (mostly manual).
 
 In terms of tuple (\ref{tuple}) it deals with choice of piercing points $M_i$
 and cutting direction for every cutting segment $S_i$.
-Briefly, cutting should start next to sheet border or already cut area and finish in “hard” area,
+Briefly, cutting should start next to sheet border or already cut area and finish in ``hard'' area,
 i.e. next to not cut yet area (see Fig. \ref{hardness-demo}).
 
 \begin{center}
@@ -384,7 +384,7 @@ The following rules are known:
 \item Long narrow parts, located next to sheet edge should be cut first
 \item If a big free area (having no parts nested) exists, cutting should start from opposite sheet side
 \item Start from the side with greater heat release (smaller parts or greater total perimeter)
-\item Avoid uncut “islands”
+\item Avoid uncut ``islands''
 \item Avoid long narrow uncut areas
 \end{itemize}
 
@@ -404,13 +404,15 @@ with their basic segments.
 Optimization problem reduces to finding positions for points  $M_k, M^*_k$
 and integer permutation $I = \{i_1, i_2, \dots i_K\}$.
 This is both continuous and discrete optimization problem,
-but it can be easily reduced to discrete optimization by selecting finite set of possible piercing points (as mentioned in above).
+but it can be easily reduced to discrete optimization by selecting finite set of possible piercing points
+(as mentioned in above).
 
 Thus SCCP can be interpreted as GTSP, with additional aforementioned constraints.
 
 For the solution of GTSP the mathematical model of megalopolises
 based on the special scheme of a dynamic programming offered by A. Chentsov is used.
 The following algorithms for solution of SCCP are developed:
+
 \begin{itemize}
 \item Exact algorithm based on a dynamic programming (see Fig. \ref{exact});
 \item Genetic algorithm;
