@@ -218,6 +218,13 @@ showed that this reduction of feasible permutations allows some algorithms that 
 
 \subsection{Piercing Coordinates Constraints}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{ppc.jpeg}
+\caption{Feasible piercing area is marked with brown color.} \label{piercing-area}
+\end{center}
+\end{figure}
+
 This constraint is due to another technological feature of sheet cutting.
 Material deformation in the beginning of cutting segment (point of piercing) is usually greater than in its other points.
 So, the piercing point must lay at event greater distance from part boundary than cutting itself.
@@ -267,18 +274,10 @@ defined by (\ref{on-point}), see Fig. \ref{discrete}.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{ppc.jpeg}
-\caption{Feasible piercing area is marked with brown color.} \label{piercing-area}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
 \includegraphics[width=0.6\textwidth]{discrete.png}
 \caption{Example of finite set of piercing points.} \label{discrete}
 \end{center}
 \end{figure}
-
 
 \subsection{Part Hardness Rule}
 
@@ -326,16 +325,6 @@ or as penalty for objective function (\ref{cost}) with some heuristic coefficien
 
 \subsubsection{Thermal Distribution Calculations}
 
-\begin{figure}
-\begin{center}
-\subfigure[Initial nesting.]{
-\includegraphics[width=0.35\textwidth]{initial.png}}
-\subfigure[Thermal distribution calculated.]{
-\includegraphics[width=0.4\textwidth]{thermal.png}}
-\caption{Direct calculation of thermal field distribution.}\label{thermal}
-\end{center}
-\end{figure}
-
 A series of numerical experiments was conducted to better understand a nature of Part Hardness Rule.
 For predefined sheet size, nesting, beam radius and power and cutting speed thermal filed was directly calculated using:
 
@@ -352,6 +341,16 @@ $\partial \Omega \subset \mathbb{R}^2$ is boundary of latter area.
 For computation purposes $\Omega$ was discretized (split into tetrahedra)
 as well as cutting time interval.
 Example of such a calculation is on Fig. \ref{thermal}.
+
+\begin{figure}
+\begin{center}
+\subfigure[Initial nesting.]{
+\includegraphics[width=0.35\textwidth]{initial.png}}
+\subfigure[Thermal distribution calculated.]{
+\includegraphics[width=0.4\textwidth]{thermal.png}}
+\caption{Direct calculation of thermal field distribution.}\label{thermal}
+\end{center}
+\end{figure}
 
 The results of these experiments are in good accordance with aforementioned Part Hardness Rule
 (see Fig. \ref{thermals}).
