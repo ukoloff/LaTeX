@@ -326,12 +326,51 @@ or as penalty for objective function (\ref{cost}) with some heuristic coefficien
 
 \subsubsection{Thermal Distribution Calculations}
 
+\begin{figure}
+\begin{center}
+\subfigure[Initial nesting.]{
+\includegraphics[width=0.35\textwidth]{initial.png}}
+\subfigure[Thermal distribution calculated.]{
+\includegraphics[width=0.4\textwidth]{thermal.png}}
+\caption{Direct calculation of thermal field distribution.}\label{thermal}
+\end{center}
+\end{figure}
+
 A series of numerical experiments was conducted to better understand a nature of Part Hardness Rule.
 For predefined sheet size, nesting, beam radius and power and cutting speed thermal filed was directly calculated using:
+
+\begin{itemize}
+\item Heat equation: $c \rho \frac{\partial \theta (t, x)}{\partial t} = k \Delta \theta(t ,x) + N(t, x), x \in \Omega$
+\item Initial conditions: $\theta(t_0, x_0) = \theta_0(x), x \in \Omega$
+\item And boundary conditions: $-k \frac{\partial \theta(t, x)}{\partial n} = M(\theta(t, x) - \theta^*), x \in \partial \Omega$
+\end{itemize}
+
+Where $\theta(t, x)$ is temperature,
+$\Omega \subset \mathbb{R}^2$ is sheet area, left after cutting of all previous parts and
+$\partial \Omega \subset \mathbb{R}^2$ is boundary of latter area.
+
+For computation purposes $\Omega$ was discretized (split into tetrahedra)
+as well as cutting time interval.
+Example of such a calculation is on Fig. \ref{thermal}.
+
+The results of these experiments are in good accordance with aforementioned Part Hardness Rule
+(see Fig. \ref{thermals}).
+When piercing point is selected according to rule,
+the resulting average temperature is somewhat lower, leading to lower thermal deformations.
 
 These calculations can be also used as another (or additional) considerations for selecting piercing points and cutting directions.
 So far it is not practical though, for it takes too much time to calculate the whole thermal distribution for all the cutting process.
 More investigations in this direction are necessary.
+
+\begin{figure}
+\begin{center}
+\subfigure[Against Part Hardness Rule, $ \langle T \rangle = 480^\circ \text{C}$.]{
+\includegraphics[width=0.4\textwidth]{t1.png}}
+\subfigure[According to Part Hardness Rule, $ \langle T \rangle = 362^\circ \text{C}$.]{
+\includegraphics[width=0.4\textwidth]{t2.png}}
+\caption{Selection of piercing point.}\label{thermals}
+\end{center}
+\end{figure}
 
 \subsection{Sheet Hardness Rules}
 
