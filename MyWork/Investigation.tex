@@ -86,11 +86,10 @@ The tool path contains the following components (see Fig.\ref{toolpath}):
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=0.6\textwidth]{toolpath.pdf}
+\includegraphics[width=0.5\textwidth]{toolpath.pdf}
 \caption{Scheme of the standard cutting technique.} \label{toolpath}
 \end{center}
 \end{figure}
-
 
 \subsection{Cutting Techniques}
 
@@ -109,10 +108,6 @@ Standard cutting technique assumes:
 \item Cutter head runs each closed equidistant contour of part to cut exactly once from beginning to end. 
 \end{itemize}
 
-The multi-contour cutting cuts several contours in one segment of cutting.
-External contours of parts are cut jointly with the only piercing without switching cutter head off.
-Multi-segment cutting cuts single contour in several segments of cutting (see Fig. \ref{technics}).
-
 \begin{figure}
 \begin{center}
 \subfigure[``Snake'' technique of multi-contour cutting.]{
@@ -123,6 +118,9 @@ Multi-segment cutting cuts single contour in several segments of cutting (see Fi
 \end{center}
 \end{figure}
 
+The multi-contour cutting cuts several contours in one segment of cutting.
+External contours of parts are cut jointly with the only piercing without switching cutter head off.
+Multi-segment cutting cuts single contour in several segments of cutting (see Fig. \ref{technics}).
 
 \section{Formal Definition of Tool Path}
 
@@ -220,7 +218,7 @@ showed that this reduction of feasible permutations allows some algorithms that 
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{ppc.jpeg}
+\includegraphics[width=0.7\textwidth]{ppc.jpeg}
 \caption{Feasible piercing area is marked with brown color.} \label{piercing-area}
 \end{center}
 \end{figure}
@@ -281,7 +279,7 @@ defined by (\ref{on-point}), see Fig. \ref{discrete}.
 
 \subsection{Part Hardness Rule}
 
-\begin{figure}
+\begin{figure}[b]
 \begin{center}
 \subfigure[Demonstration.]{\label{hardness-demo}
 \includegraphics[width=0.3\textwidth]{hardness-demo.png}}
@@ -303,7 +301,7 @@ i.e. next to not cut yet area (see Fig. \ref{hardness-demo}).
 \begin{tabular}{ c | c | c | c | c}
 %\hline
   \multicolumn{1}{c|}{Part} & \multicolumn{4}{c}{Piercing points} \\ \hline
-  3 & (6) & 7 (CW) & (8) CCW & (\st{9}) \\
+  3 & (\st{6}) & 7 (CW) & (8) CCW & (\st{9}) \\
   2 & (4) CW & (\st{5}) & (6) CCW & (7) CW +  CCW \\
   1 & (1) CW & (\st{2}) & (3) CCW & (4) CW +  CCW \\
 \end{tabular}
@@ -342,7 +340,7 @@ For computation purposes $\Omega$ was discretized (split into tetrahedra)
 as well as cutting time interval.
 Example of such a calculation is on Fig. \ref{thermal}.
 
-\begin{figure}
+\begin{figure}[b]
 \begin{center}
 \subfigure[Initial nesting.]{
 \includegraphics[width=0.35\textwidth]{initial.png}}
