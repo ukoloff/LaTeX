@@ -396,17 +396,43 @@ for the solution of the megalopolises problem. See also \cite{2015}.
 
 \section{Discrete Optimization Algorithms}
 
+As the main optimization problem we consider
+\textit{Segment Continuous Cutting Problem (SCCP)}
+for objective functions (\ref{time}) and (\ref{cost}),
+see \cite{2014}.
+It assumes we have predefined nesting and then we fix segments to cut $S_i$
+with their basic segments.
+Optimization problem reduces to finding positions for points  $M_k, M^*_k$
+and integer permutation $I = \{i_1, i_2, \dots i_K\}$.
+This is both continuous and discrete optimization problem,
+but it can be easily reduced to discrete optimization by selecting finite set of possible piercing points (as mentioned in above).
+
+Thus SCCP can be interpreted as GTSP, with additional aforementioned constraints.
+
+For the solution of GTSP the mathematical model of megalopolises
+based on the special scheme of a dynamic programming offered by A. Chentsov is used.
+The following algorithms for solution of SCCP are developed:
+\begin{itemize}
+\item Exact algorithm based on a dynamic programming (see Fig. \ref{exact});
+\item Genetic algorithm;
+\item Iterative greedy algorithm with Part Hardness Rule
+\item Special option of iterative greedy algorithm with Sheet Hardness Rules
+\end{itemize}
+
+All the algorithms consider the Precedence Constraints and the Piercing Points Coordinated Constraint.
+
+An exact algorithm considering all the constraints of thermal cutting is under active development now
+(see Fig. \ref{exact-constraints}).
+
 \begin{figure}
 \begin{center}
-\subfigure[Exact SCCP solution.]{
-\resizebox*{0.4\textwidth}{!}{\includegraphics{nest-a.png}}}
-\subfigure[Solution with thermal cutting constraints.]{
-\resizebox*{0.4\textwidth}{!}{\includegraphics{nest-b.png}}}
-\caption{Results of tool path optimizations.} \label{nesting-results}
+\subfigure[Exact SCCP solution.]{\label{exact}
+\includegraphics[width=0.4\textwidth]{nest-a.png}}
+\subfigure[Solution with thermal cutting constraints.]{\label{exact-constraints}
+\includegraphics[width=0.4\textwidth]{nest-b.png}}
+\caption{Results of tool path optimizations.}
 \end{center}
 \end{figure}
-
-See Fig. \ref{nesting-results}...
 
 \section*{Acknowledgements}
 
