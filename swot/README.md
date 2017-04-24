@@ -42,4 +42,8 @@
 - Девальвация информации
 - Информационный шум
 
+## See also
+
+[Лицензионный Достоевский или конец эры бумажных книг](http://afon-ru.com/Stas-Kozlovskij-Dostoevskij-Home-Edition-Licenzionnyj-Dostoevskij-ili-konec-ery-bumazhnyh-knig-Kak-Cifrovaya-era-nastupaet)
+
 [SWOT]: https://ru.wikipedia.org/wiki/SWOT-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7
