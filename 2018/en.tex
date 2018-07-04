@@ -1,6 +1,8 @@
 
 \documentclass{../download/tPRS2e}
 
+\usepackage{tikz}
+\usetikzlibrary{patterns}
 \usepackage{graphicx}
 \graphicspath{{media/}}
 
@@ -34,6 +36,8 @@ TODO
     thermal deformations
 \end{keywords}
 
+\section{Introduction}
+
 The problem of cutting tool path optimization
 is one of the applied optimization problems arising
 in the design of control programs for CNC plate cutting machines.
@@ -48,19 +52,44 @@ i.e. the problem of nesting
 The task is to minimize the consumption of sheet material
 to produce the parts of known shapes, sizes and quantity.
 The example of nesting of 24 parts bounded by 30 closed contours
-in rectangular area with minimal distance specified is at Fig. \ref{nezting}.
+in rectangular area with minimal distance specified is at Fig. \ref{nesting}.
 This nesting was obtained by means of Integrated CAD / CAM ``Sirius''.
 
 \begin{figure}[h]
     \begin{center}
     \includegraphics{nesting.png}
     \caption{Example of nesting to a sheet of $2000 \times 1000$ mm
-    with minimal distance of $10$ mm}
-    \label{nezting}
+    with minimal distance of $10$ mm} \label{nesting}
     \end{center}
 \end{figure}
 
-\section{Introduction}
+The process of figure plate cutting with a CNC machine includes
+the following activities:
+\begin{itemize}
+    \item{Pierce point} (cutting start)
+    \item{Actual cutting}
+    \item{Turning the cutter off} (cutting end)
+    \item{Linear movement from end of cut to start of next cut} (air move)
+\end{itemize}
+
+Control program usually starts with an air move from
+some starting point. Fig. \ref{toolpath} represents
+the scheme of cutting two parts with three pierce points.
+
+\begin{figure}[h]
+\begin{center}
+\tikz{
+    \draw[thick,pattern=north east lines, pattern color=gray,even odd rule, rounded corners=2mm]
+        (0, 0) ellipse (3 and 2)
+        (-2, -1) rectangle (2, 1);
+    \draw[thick,pattern=north east lines]
+        (7, -1) ellipse (3 and 2);
+    \draw[thick]
+        (-3, -3) circle(0.05) node[right] {Start of control program};
+}
+\caption{Example of cutting tool path for two parts and three pierce points} \label{toolpath}
+\end{center}    
+\end{figure}
 
 \section*{Acknowledgements}
 
