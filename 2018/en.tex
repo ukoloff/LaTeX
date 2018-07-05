@@ -242,6 +242,7 @@ Then we define cutting path as tuple
 \begin{equation}
     ROUTE = 
     \left< M_0, M_1, S_1, M_1^*, M_2, S_2, M_2^*, \dots, M_K, S_K, M_K^*, i_1, i_2, \dots, i_K\right>
+    \label{tuple}
 \end{equation}
 Here $i_1, i_2, \dots, i_K$ is the sequence of segments
 $S_1, S_2, \dots S_K$ processing,
@@ -323,7 +324,7 @@ as well as other operational expenses.
 
 Note that in general cutting cost is not 
 proprtional to cutting time,
-since it depends on also depends on cutting modes.
+since it also depends on cutting modes.
 It can be estimated like in (\ref{cut-time}):
 \begin{equation}
     F_{cost} = L_{on}\cdot C_{on} + L_{off}\cdot C_{off} + N_{pt} \cdot C_{pt}
@@ -339,7 +340,7 @@ Exact values of unit costs
 $C_{on}, C_{off}$ and $C_{pt}$
 depend on CNC equipment, cutting technology,
 sheet material and its thickness.
-This dependency is ususlly summarized
+This dependency is usually summarized
 in tabular form or even analitically.
 
 In its turn,
@@ -364,7 +365,7 @@ cost of piercing of kind $j$.
 
 In any case,
 the value of above objective function
-depends entirely on the tuple (\ref{toolpath})
+depends entirely on the tuple (\ref{tuple})
 elements,
 i.e. the cutting path.
 In detail,
@@ -378,8 +379,8 @@ describe air moves hence its total length $L_{off}$.
 Therefore,
 mentioned above problems
 of cutting path optimizations may be
-formulated as minimization of some objective function $F$,
-defined on set $G$ of addmisible tuples (\ref{toolpath}):
+stated as minimization of some objective function $F$,
+defined on set $G$ of addmisible tuples (\ref{tuple}):
 \begin{equation}
     F(ROUTE) \to \min_{ROUTE \in G}
     \label{minimize}
@@ -414,21 +415,147 @@ We mention four such classes [4-6].
     contour before it travels to the next contour.
     Accordingly, the same point must be used for
     entry and exit the contour.
+    In terms of cutting techniques CCP implies the standard one.
+    With no constraints on the pierce points,
+    problem (\ref{cut-time}) reduces to finding minimal
+    air move distance $L_{off}$,
+    which is equivalent to the classical metric TSP
+    (Travelling Salesman Problem).
+    A significant part of the publications is devoted precisely
+    to the solution of this particular optimization problem
     \item{\textbf{Endpoint Cutting Problem (ECP)}}:
     the tool can enter and exit contours only at some
     predefined points on the boundary.
     However, it may cut the contour in sections,
     or stated otherwise: a contour can be pre-empted.
+    This approach reduces the complexity of full problem
+    by discretiztion of possible pierce point set and therefore
+    contour entry points as well.
+    Set of contour exit points is equal to that of
+    entry points, however,
+    contour exit point is not neccesary
+    a point of cutting end 
+    (where cutting head is switched off),
+    because cutting can continue to another contour.
     \item{\textbf{Generalized Traveling Salesman Problem (GTSP)}}:
     the tool path visits each contour to be cut once
     and the tool can engage the contour only
     at some predened points on the boundary.
+    This is a special case for CCP and ECP problems.
     \item{\textbf{Segment Continuous Cutting Problem (SCCP)}}:
     cutter head visits each segment to be cut once.
     The tool can engage the segment at any point,
     but must cut the entire segment before it travels to the next segment.
     Note: $CCP \subset SCCP$.
+
+    This case uses the concept of basic cutting segment
+    (see [3])
+    $B^S$, the part of full cutting segment
+    $S = MM^*$ with lead-in and lead-out excluded.
+    Unlike full cutting segments,
+    basic ones doesn't assume cutting direction,
+    containig only geometrical data.
+    When standard cutting technique is used only,
+    the set of basic segments $\cup B^S = \cup C_i$
+    (the set of bounding contours).
 \end{enumerate}
+
+Most publications on the area explore GTSP problem
+and develop appropriate algorithms.
+Its main advantage is that most methods
+of standard GTSP problems can be applied,
+only some additional constraints should be
+taken into account,
+for instance -- precedence constraint.
+
+It imposes restrictions on the order of
+segment processing
+$I = (i_1, i_2, \dots i_K)$.
+Modern CNC cutting equipment cannot guarantee
+positioning of cutting head inside the contour
+that is alredy cut,
+because the part can freely move 
+(or even drop)
+after it is detached from the sheet.
+To cope with this,
+the following rules must be obeyed:
+
+\begin{enumerate}
+    \item{If one or more inner contours (holes) are inside outer one,
+    then they all must be cut before cutting of outer contour starts
+    }
+    \item{If some other part is placed inside
+    inner contour of a part,
+    the former one must be cut before the latter.
+    Rule 1 applies either.}
+\end{enumerate}
+These rules are the precedence constraint
+for the permutation
+$I = (i_1, i_2, \dots i_K)$.
+In other words:
+\begin{enumerate}
+    \item{If permutation 
+    $I = (i_1, \dots i_k, \dots i_K)$
+    contains outer contour $i_k$,
+    all its corresponding inner contours $i_x$
+    must apeear before $i_k$.
+    }
+    \item{If permutation 
+    $I = (i_1, \dots i_k, \dots i_K)$
+    contains inner contour $i_k$
+    and there is some outer contour
+    of another part $A_l, l \in \overline{1,n}$
+    inside it,
+    that outer contour must precede $i_k$
+    in permutation $I$}
+\end{enumerate}
+
+Both the precedence constraint
+and pierce point constraints
+are of static nature,
+that is they are completely defined by
+the nesting the parts on the sheet,
+CNC equipment and material used
+and are not affected by the elements
+of tuple itself.
+In terms of tool path $ROUTE$
+(\ref{tuple}),
+some of permutations
+$I = (i_1, i_2, \dots i_K)$
+are just forbidden.
+Of many recent papers
+on GTSP cutting optimization algorithms,
+we note [7-10].
+
+A number of technological features of modern CNC equipment
+impose a few other constraints on
+pierce points and segment cutting order.
+But unlike mentioned above,
+these constraints are dynamic,
+they depend on the preceding elements
+of tuple (\ref{tuple})
+and caused by
+thermal deformations of sheet material.
+It is rather difficult to get comprehensive
+equation for such constraints,
+see [11,12] for approaches.
+These constraints, however,
+are also beside the scope of the paper.
+
+Another class of cutting path optimization problems exists,
+named \textbf{Intermittent Cutting Problem (ICP)}.
+This is the most general version of the problem
+where contours can be pre-empted and there is
+no restriction on the points that can be used for entry or exit.
+It is roughly equivalent to problem (\ref{minimize}).
+
+We are going to explore the approach
+that from one hand
+extends problems CCP, SCCP and GTSP
+and from the other hand
+subclasses ICP.
+It gives birth to new algorithms for
+cutting path optimization.
 
 \section*{Acknowledgements}
 
