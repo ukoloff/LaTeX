@@ -557,6 +557,117 @@ subclasses ICP.
 It gives birth to new algorithms for
 cutting path optimization.
 
+\section{Dual relaxation}
+
+To solve CCP optimization problem one should find
+\begin{enumerate}
+    \item{Positions of all pierce point $M_j$} (continous optimization)
+    \item{Order of segment processing $I = (i_1, i_2, \dots i_K)$ } (discrete optimization)
+\end{enumerate}
+minimizing cutting time (\ref{cut-time})
+hence air move length $L_{off}$.
+
+Na\"ive but surprisingly well performant approach is to combine
+two independent optimizations.
+
+\subsection{Continous optimization}
+
+Assuming permutation 
+$I = (i_1, i_2, \dots i_K)$
+is fixed somehow,
+we are to find pierce point positions for every
+cutting segment $S_k$.
+We start from arbitrary positions
+and relax them one by one,
+minimizing total length.
+
+If all but one pierce points are fixed,
+finding optimal position for that one 
+is rather trivial using Fermat principle,
+see Fig. \ref{fermat}.
+
+\begin{figure}[h]
+    \begin{center}
+    \tikz{
+        \draw[thick]
+            (0, 0) -- (2, 3) node[right] {$S_k$};
+        \fill[black] (0.6666, 1) circle (0.1) coordinate (middle) node[right]  {$M_k \equiv M_k^*$};
+        \fill[black] (-2, 0.5) circle (0.1) coordinate (from) node[below]  {$M_{k-1}$};
+        \fill[black] (-1, 2.5) circle (0.1) coordinate (to) node[above] {$M_{k+1}$};
+
+        \draw[dashed] (from) -- (middle) -- (to);
+    }
+    \caption{Optimal pierce point position} \label{fermat}
+    \end{center}    
+\end{figure}
+    
+The relaxation is performed for every cutting segment
+in sequential or random order.
+This is rather fast routine
+of asymptotic complexity
+$O(K)$.
+
+\subsection{Discrete optimization}
+
+The hard part is to find optimal permutation
+$I = (i_1, i_2, \dots i_K)$
+which is $O(K!)$
+(exponential time).
+
+Luckily,
+simple brute force attack seems
+to quickly bring us next to optimal solution.
+We start from some permutation
+(random, or from another optimization algorithm)
+and attempt to improve it with the following simple steps:
+
+\begin{enumerate}
+    \item{}
+    It's practical to test all pairwise permutations of initial one.
+    Complexity is $O(C_K^2) = O(K^2)$.
+    \item{}
+    Triple and quadruple permutation are too numerous
+    ($O(K^3), O(K^4)$),
+    but we test only part of them,
+    i.e. ``local'' permutations
+    exchanging only segments that are no farther
+    than say 50 steps from each other.
+    \item{}
+    Circular permutations are also good candidates to test.
+    \item{}
+    Other heuristics can be easily coined.
+\end{enumerate}
+
+Continous optimization is performed for every candidate permutation
+and when is gives better
+(shorter) path,
+it replaces the initial permutation.
+
+Such a simple process quickly converges to near optimal solution.
+It can be easily parallelized and many other
+modern techniques used to improve performance.
+
+\subsection{Precedence constraint}
+
+It's suprisingly easy to meet precedence constraint in such a process.
+
+We start from removing all segments $S_k$,
+that contains other segments inside.
+This happily decreases dimension of problem space
+hence decreasing time complexity.
+
+Diecrete optimization is performed as described above.
+As soon as better solution is found we just
+insert outer contours after their corresponding inner ones,
+selecting pierce point as the intersection of air moves with
+outer contours.
+This process is also $O(K)$.
+
+\subsection{Numerical expreriments}
+
+Such a simple algorithm has a pretty good performance
+both in terms of speed and solution quality.
+
 \section*{Acknowledgements}
 
 The work was supported by Act 211 Government of the Russian Federation, contract № 02.A03.21.0006
