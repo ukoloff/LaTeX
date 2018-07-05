@@ -312,6 +312,99 @@ Additional research is required in this area,
 some results can be found in [3],
 but this is beyond of scope of this article.
 
+Total cost of cutting is another very important
+objective function,
+especially from economical point of view.
+This is rather complex indicator dependent on
+electric power consumption,
+expendables,
+CNC machine maintenance
+as well as other operational expenses.
+
+Note that in general cutting cost is not 
+proprtional to cutting time,
+since it depends on also depends on cutting modes.
+It can be estimated like in (\ref{cut-time}):
+\begin{equation}
+    F_{cost} = L_{on}\cdot C_{on} + L_{off}\cdot C_{off} + N_{pt} \cdot C_{pt}
+    \label{cut-cost}
+\end{equation}
+Where
+$C_{on}$ is the unit cost of cutting,
+$C_{off}$ is that of air move and
+$C_{pt}$ is the cost of a piercing a point,
+while $L_{on}, L_{off}$ and $N_{pt}$
+make the same sence as in (\ref{cut-time}).
+Exact values of unit costs
+$C_{on}, C_{off}$ and $C_{pt}$
+depend on CNC equipment, cutting technology,
+sheet material and its thickness.
+This dependency is ususlly summarized
+in tabular form or even analitically.
+
+In its turn,
+the task of finding appropriate unit costs
+$C_{on}, C_{off}$ and $C_{pt}$
+for specific equipment and material 
+is  low-studied itself.
+[4] contains some data concerning this problem
+for cutting carbon and stainless stell
+as well as aluminium and its alloys
+with laser CNC machine ByStar 3015.
+
+When different pierce technologies are used,
+(\ref{cut-cost}) becomes
+\begin{equation}
+    F_{cost} = L_{on}\cdot C_{on} + L_{off}\cdot C_{off}
+    + \sum_{j=1}^p C_{pt}^j \cdot t_{pt}^j
+    \label{piercings-cost}
+\end{equation}
+using $C_{pt}^j$ for
+cost of piercing of kind $j$.
+
+In any case,
+the value of above objective function
+depends entirely on the tuple (\ref{toolpath})
+elements,
+i.e. the cutting path.
+In detail,
+the geometry of cutting segments
+$S_1, S_2, \dots S_K$ gives us
+total cutting length $L_{on}$,
+while points $M_0, M_1, M_1^*, \dots M_K, M_K^*$
+with permutation $i_1, i_2, \dots i_K$
+describe air moves hence its total length $L_{off}$.
+
+Therefore,
+mentioned above problems
+of cutting path optimizations may be
+formulated as minimization of some objective function $F$,
+defined on set $G$ of addmisible tuples (\ref{toolpath}):
+\begin{equation}
+    F(ROUTE) \to \min_{ROUTE \in G}
+    \label{minimize}
+\end{equation}
+As tuple contains both
+cutting sequence 
+$i_1, i_2, \dots i_K$
+and cutting start and end points 
+$M_kM_k^*, k \in \overline{1, K}$,
+the latter located on the Euclidean plane $\mathbb R^2$,
+general optimization problem (\ref{minimize})
+is a very complex 
+continuous-discrete optimization problem,
+even with significant restrictions imposed
+on admissible segments
+$S_1, S_2, \dots S_K$.
+
+This leads to the fact that
+there are no general algorithms for solving the problem (\ref{minimize})
+described in the scientific literature. 
+Nevertheless,
+some narrow classes of problems
+exist,
+that allow efficent optimization algorithms to be developed.
+We note four such classes [4-6].
 
 \section*{Acknowledgements}
 
