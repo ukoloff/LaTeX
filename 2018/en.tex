@@ -404,7 +404,31 @@ Nevertheless,
 some narrow classes of problems
 exist,
 that allow efficent optimization algorithms to be developed.
-We note four such classes [4-6].
+We mention four such classes [4-6].
+
+\begin{enumerate}
+    \item{\textbf{Continuous Cutting Problem (CCP)}}:
+    the cutter head visits each contour to be cut once.
+    The tool can engage the contour at any point on its perimeter,
+    but must cut the entire
+    contour before it travels to the next contour.
+    Accordingly, the same point must be used for
+    entry and exit the contour.
+    \item{\textbf{Endpoint Cutting Problem (ECP)}}:
+    the tool can enter and exit contours only at some
+    predefined points on the boundary.
+    However, it may cut the contour in sections,
+    or stated otherwise: a contour can be pre-empted.
+    \item{\textbf{Generalized Traveling Salesman Problem (GTSP)}}:
+    the tool path visits each contour to be cut once
+    and the tool can engage the contour only
+    at some predened points on the boundary.
+    \item{\textbf{Segment Continuous Cutting Problem (SCCP)}}:
+    cutter head visits each segment to be cut once.
+    The tool can engage the segment at any point,
+    but must cut the entire segment before it travels to the next segment.
+    Note: $CCP \subset SCCP$.
+\end{enumerate}
 
 \section*{Acknowledgements}
 
