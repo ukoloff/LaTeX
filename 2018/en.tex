@@ -78,18 +78,38 @@ some starting point. Fig. \ref{toolpath} represents
 the scheme of cutting two parts with three pierce points.
 
 \begin{figure}[h]
-\begin{center}
-\tikz{
-    \draw[thick,pattern=north east lines, pattern color=gray,even odd rule, rounded corners=2mm]
-        (0, 0) ellipse (3 and 2)
-        (-2, -1) rectangle (2, 1);
-    \draw[thick,pattern=north east lines]
-        (7, -1) ellipse (3 and 2);
-    \draw[thick]
-        (-3, -3) circle(0.05) node[right] {Start of control program};
-}
-\caption{Example of cutting tool path for two parts and three pierce points} \label{toolpath}
-\end{center}    
+    \begin{center}
+        \tikz{
+            \tikzstyle{part}=[pattern=north east lines, pattern color=gray,even odd rule]
+            \tikzstyle{cutting}=[thick,draw=red,>->|,>=stealth]
+            \tikzstyle{air move}=[thick,draw=blue,->,>=stealth]
+            \draw[cutting,part,rounded corners=2mm]
+                (0, 0) ellipse (3 and 2)
+                (-2, -1) rectangle (2, 1);
+            \draw[cutting] 
+                (-2, 0) +(-45:0.5) coordinate(startA) to[bend left] +(0,0) to[bend left] +(45:0.5) coordinate(endA);
+            \draw[cutting] 
+                (0, 2) +(135:0.5) coordinate(startB) to[bend right] +(0,0) to[bend right] +(45:0.5) coordinate(endB);
+            \draw[cutting,part]
+                (7, -1) ellipse (3 and 2);
+            \draw[cutting] 
+                (7, 1) +(135:0.5) coordinate(startC) to[bend right] +(0,0) to[bend right] +(45:0.5) coordinate(endC);
+            \draw
+                (-3, -3) circle(0.05) coordinate(M0) node[below] {Start of control program}
+                (startA) circle(0.1) node[right] {Pierce point A}
+                (endA) node[right] {End of cut A}
+                (startB) circle(0.1) node[above left] {Pierce point B}
+                (endB) node[above right] {End of cut B}
+                (startC) circle(0.1) node[above right] {Pierce point C}
+                (endC) node[right] {End of cut C}
+                (7, -3) node[below] {Part boundary / cutting segment};
+            \draw[air move] (M0) -- (startA);
+            \draw[air move] (endA) -- (startB);
+            \draw[air move] (endB) -- node[sloped, below] {Air move} (startC);
+            \draw[air move] (endC) -- (M0);
+        }
+    \end{center}    
+    \caption{Example of cutting tool path for two parts and three pierce points} \label{toolpath}
 \end{figure}
 
 The above figure shows tool path going
