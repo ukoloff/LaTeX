@@ -1,6 +1,7 @@
 
 \documentclass{../download/tPRS2e}
 
+\usepackage{subfigure}  % Support for small, `sub' figures and tables
 \usepackage{tikz}
 \usetikzlibrary{patterns}
 \usepackage{graphicx}
@@ -667,6 +668,47 @@ This process is also $O(K)$.
 
 Such a simple algorithm has a pretty good performance
 both in terms of speed and solution quality.
+
+To evaluate quality
+we make comparison with another algorithm
+that is able to find exact solutions of GTSP
+up to 32 contours (megalopolises).
+The results are summarized in table \ref{exact-3}
+and visualised at Fig. \ref{quality}.
+
+\begin{table}[h]
+    \begin{center}    
+    \begin{tabular}{l|*{3}{r}}
+        Job & \#229 & \#464 & \#3211 \\
+        \hline
+        \# of parts & 11 & 14 & 17\\
+        \# of contours & 12 & 21 & 22 \\
+        $L_{on}$, m & 24.609 & 21.717 & 25.051 \\
+        \# of GTSP points & 491 & 429 & 493 \\
+        GTSP's $L_{off}$, m & 7.729 & 4.743 & 4.557 \\
+        Our $L_{off}$, m & 7.727 & 4.706 & 4.536 \\
+    \end{tabular}
+    \caption{Dual relaxation solution quality comparison}
+    \label{exact-3}
+    \end{center}
+    \end{table}
+
+Values of $L_{off}$ are in good compliance for two algorihtms used.
+Dual relaxation finds even slightly shorter tool path,
+because it can route cutting head along straight lines
+whereas GTSP's tool path is always polygonal
+due to preliminary discretization involved.
+
+\begin{figure}
+    \begin{center}
+    \subfigure[Exact GTSP solution]{
+    \resizebox*{0.48\textwidth}{!}{\includegraphics{464-gtsp.png}}}
+    \subfigure[Dual relaxation result]{
+    \resizebox*{0.48\textwidth}{!}{\includegraphics{464-dual.png}}}
+    \caption{Dual relaxation solution quality comparison, job \#464} \label{quality}
+    \end{center}
+\end{figure}
+
 
 \section*{Acknowledgements}
 
