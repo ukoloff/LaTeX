@@ -236,7 +236,7 @@ Example of multi-contour cutting is at
 Fig. \ref{cutting},
 it uses nesting from Fig. \ref{nesting}.
 There are 24 parts on the sheet.
-Three groups of thermalhave been cut with multi-contour cutting:
+Three groups of them have been cut with multi-contour cutting:
 $M1$ (3 parts),
 $M7$ (4 parts) and
 $M11$,
@@ -248,7 +248,7 @@ pierce points $M_j, j=1, 2, \dots 24$.
 Return to starting point $M_0$
 after cutting is skipped.
 
-\begin{figure}[h]
+\begin{figure}
     \begin{center}
     \includegraphics{cutting.png}
     \caption{Example of cutting path with 24 cutting segments} \label{cutting}
@@ -607,16 +607,26 @@ finding optimal position for that one
 is rather trivial using Fermat principle,
 see Fig. \ref{fermat}.
 
-\begin{figure}[h]
+\begin{figure}
     \begin{center}
-    \tikz{
+    \tikz[rotate=27]{
         \draw[thick]
-            (0, 0) -- (2, 3) node[right] {$S_k$};
-        \fill[black] (0.6666, 1) circle (0.1) coordinate (middle) node[right]  {$M_k \equiv M_k^*$};
-        \fill[black] (-2, 0.5) circle (0.1) coordinate (from) node[below]  {$M_{k-1}$};
-        \fill[black] (-1, 2.5) circle (0.1) coordinate (to) node[above] {$M_{k+1}$};
-
+            (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_k$};
+        \fill[black] 
+            (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_k \equiv M_k^*$}
+            (1, 1) circle(0.1) coordinate(from) node[above]  {$M_{k-1}$}
+            (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{k+1}$};
         \draw[dashed] (from) -- (middle) -- (to);
+        \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\overline{M_{k+1}}$};
+        \coordinate (opt) at (intersection of zero--future and mirror--from);
+        \draw[thin] (opt) circle(0.1);
+        \draw[dotted] 
+            (mirror) -- (opt)
+            (mirror) -- (to);
+        \draw[thin] (from) -- (opt) -- (to);
+
+        \draw[->,>=latex,red,thick] (middle) to[bend right] (opt);
+        
     }
     \caption{Optimal pierce point position} \label{fermat}
     \end{center}    
