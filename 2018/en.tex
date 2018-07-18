@@ -79,10 +79,11 @@ the scheme of cutting two parts with three pierce points.
 
 \begin{figure}[]
     \begin{center}
-        \tikz[scale=0.8]{
+        \tikz[scale=0.95]{
             \tikzstyle{part}=[pattern=north east lines, pattern color=gray,even odd rule]
             \tikzstyle{cutting}=[thick,draw=red,>->|,>=stealth]
             \tikzstyle{air move}=[thick,draw=blue,->,>=stealth]
+            \tikzstyle{cutdir}=[cutting,double,->]
             \draw[cutting,part,rounded corners=2mm]
                 (0, 0) ellipse (3 and 2)
                 (-2, -1) rectangle (2, 1);
@@ -94,14 +95,17 @@ the scheme of cutting two parts with three pierce points.
                 (7, -1) ellipse (3 and 2);
             \draw[cutting] 
                 (7, 1) +(135:0.5) coordinate(startC) to[bend right] +(0,0) to[bend right] +(45:0.5) coordinate(endC);
+            \draw[cutdir] (10.2,-0.5) -- node[sloped, above]{cutting direction} ++(0,-1);
+            \draw[cutdir] (-3.2,-0.5) -- node[sloped, above]{cutting direction} ++(0,+1);
+            \draw[cutdir] (1.8,0.5) -- ++(0,-1);
             \draw
-                (-3, -3) circle(0.05) coordinate(M0) node[below] {Start of control program}
-                (startA) circle(0.1) node[right] {Pierce point A}
-                (endA) node[right] {End of cut A}
-                (startB) circle(0.1) node[above left] {Pierce point B}
-                (endB) node[above right] {End of cut B}
-                (startC) circle(0.1) node[above right] {Pierce point C}
-                (endC) node[right] {End of cut C}
+                (-3, -3) circle(0.05) coordinate(M0) node[below] {$M_0$: Start of control program}
+                (startA) circle(0.1) node[right] {$M_1$: Pierce point}
+                (endA) node[right] {$M_1^*$: End of cut}
+                (startB) circle(0.1) node[above left] {$M_2$: Pierce point}
+                (endB) node[above right] {$M_2^*$: End of cut}
+                (startC) circle(0.1) node[above right] {$M_3$}
+                (endC) node[right] {$M_3^*$}
                 (7, -3) node[below] {Part boundary / cutting segment};
             \draw[air move] (M0) -- (startA);
             \draw[air move] (endA) -- (startB);
@@ -608,7 +612,8 @@ cutting segment $S_k$.
 We start from arbitrary positions
 and relax them one by one,
 minimizing total length,
-which yields $\forall k = \overline{1, K}$:
+which yields for
+$\forall k = \overline{1, K}$:
 $$
 \sqrt{\overrightarrow{M_k M_{k-1}}^2} +
 \sqrt{\overrightarrow{M_k M_{k+1}}^2} \to
@@ -682,7 +687,7 @@ and attempt to improve it with the following simple steps:
     ($C_K^2$ is a binomial coefficent, combination of choices).
     \item{}
     Triple and quadruple permutation are too numerous
-    ($O(K^3) \text{and} O(K^4)$),
+    ($O(K^3)$ and $O(K^4)$ respectively),
     but we test only part of them,
     i.e. ``local'' permutations
     exchanging only segments that are no farther
