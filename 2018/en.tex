@@ -56,9 +56,9 @@ The example of nesting of 24 parts bounded by 30 closed contours
 in rectangular area with minimal distance specified is at Fig. \ref{nesting}.
 This nesting was obtained by means of Integrated CAD / CAM ``Sirius''.
 
-\begin{figure}[h]
+\begin{figure}[]
     \begin{center}
-    \includegraphics{nesting.png}
+    \includegraphics[width=0.85\textwidth]{nesting.png}
     \caption{Example of nesting to a sheet of $2000 \times 1000$ mm
     with minimal distance of $10$ mm} \label{nesting}
     \end{center}
@@ -77,9 +77,9 @@ Control program usually starts with an air move from
 some starting point. Fig. \ref{toolpath} represents
 the scheme of cutting two parts with three pierce points.
 
-\begin{figure}[h]
+\begin{figure}[]
     \begin{center}
-        \tikz{
+        \tikz[scale=0.8]{
             \tikzstyle{part}=[pattern=north east lines, pattern color=gray,even odd rule]
             \tikzstyle{cutting}=[thick,draw=red,>->|,>=stealth]
             \tikzstyle{air move}=[thick,draw=blue,->,>=stealth]
@@ -240,7 +240,7 @@ Three groups of them have been cut with multi-contour cutting:
 $M1$ (3 parts),
 $M7$ (4 parts) and
 $M11$,
-marked brown.
+brown colored.
 All other contours have been cut
 with ctandard cutting technique.
 Parts are cutted in the order of
@@ -250,7 +250,7 @@ after cutting is skipped.
 
 \begin{figure}
     \begin{center}
-    \includegraphics{cutting.png}
+    \includegraphics[width=0.87\textwidth]{cutting.png}
     \caption{Example of cutting path with 24 cutting segments} \label{cutting}
     \end{center}
 \end{figure}
@@ -578,12 +578,19 @@ subclasses ICP.
 It gives birth to new algorithms for
 cutting path optimization.
 
+% \rule{\linewidth}{1.2pt}
+\hrulefill
+
 \section{Dual relaxation}
 
-To solve CCP optimization problem one should find
+For CCP (\textit{Continous Cutting Problem})
+cutting segments are simply part boundaries:
+$S_i = C_i, \forall i = \overline{1,K}, K=N$.
+In order to solve such optimization problem
+one should find
 \begin{enumerate}
-    \item{Positions of all pierce point $M_j$} (continous optimization)
-    \item{Order of segment processing $I = (i_1, i_2, \dots i_K)$ } (discrete optimization)
+    \item{Positions of all pierce point $M_j$ on their cutting segments} (continous optimization)
+    \item{Order of segment processing $I = (i_1, i_2, \dots i_K)$ i.e. permutation of initial segment ordering} (discrete optimization)
 \end{enumerate}
 minimizing cutting time (\ref{cut-time})
 hence air move length $L_{off}$.
@@ -600,7 +607,13 @@ we are to find pierce point positions for every
 cutting segment $S_k$.
 We start from arbitrary positions
 and relax them one by one,
-minimizing total length.
+minimizing total length,
+which yields $\forall k = \overline{1, K}$:
+$$
+\sqrt{\overrightarrow{M_k M_{k-1}}^2} +
+\sqrt{\overrightarrow{M_k M_{k+1}}^2} \to
+\min_{M_k \in S_k}
+$$
 
 If all but one pierce points are fixed,
 finding optimal position for that one 
@@ -609,13 +622,21 @@ see Fig. \ref{fermat}.
 
 \begin{figure}
     \begin{center}
-    \tikz[rotate=27]{
+    \tikz[rotate=27,scale=1.2]{
         \draw[thick]
             (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_k$};
         \fill[black] 
             (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_k \equiv M_k^*$}
-            (1, 1) circle(0.1) coordinate(from) node[above]  {$M_{k-1}$}
-            (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{k+1}$};
+            (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{k-1}$} ++(-1.5,0) node[above] {$S_{k-1}$}
+            (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{k+1}$} ++(1.5,0) node[below] {$S_{k+1}$};
+        \begin{scope}
+            \clip (from) circle(1);
+            \draw[thick] (from) ++(0, 3) circle(3);
+        \end{scope};
+        \begin{scope}
+            \clip (to) circle(1.5);
+            \draw[thick] (to) ++(3, 4) circle(5);
+        \end{scope};
         \draw[dashed] (from) -- (middle) -- (to);
         \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\overline{M_{k+1}}$};
         \coordinate (opt) at (intersection of zero--future and mirror--from);
@@ -628,7 +649,7 @@ see Fig. \ref{fermat}.
         \draw[->,>=latex,red,thick] (middle) to[bend right] (opt);
         
     }
-    \caption{Optimal pierce point position} \label{fermat}
+    \caption{Finding optimal pierce point position using Fermat principle} \label{fermat}
     \end{center}    
 \end{figure}
     
@@ -637,6 +658,8 @@ in sequential or random order.
 This is rather fast routine
 of asymptotic complexity
 $O(K)$.
+For every fixed permutation $I$
+it quickly discovers a local optimum.
 
 \subsection{Discrete optimization}
 
@@ -655,10 +678,11 @@ and attempt to improve it with the following simple steps:
 \begin{enumerate}
     \item{}
     It's practical to test all pairwise permutations of initial one.
-    Complexity is $O(C_K^2) = O(K^2)$.
+    Complexity is $O(C_K^2) = O(K^2)$
+    ($C_K^2$ is a binomial coefficent, combination of choices).
     \item{}
     Triple and quadruple permutation are too numerous
-    ($O(K^3), O(K^4)$),
+    ($O(K^3) \text{and} O(K^4)$),
     but we test only part of them,
     i.e. ``local'' permutations
     exchanging only segments that are no farther
@@ -694,7 +718,7 @@ selecting pierce point as the intersection of air moves with
 outer contours.
 This process is also $O(K)$.
 
-\subsection{Numerical expreriments}
+\subsection{Numerical experiments}
 
 Such a simple algorithm has a pretty good performance
 both in terms of speed and solution quality.
@@ -733,7 +757,7 @@ due to preliminary discretization involved.
     \begin{center}
     \subfigure[Exact GTSP solution]{
     \resizebox*{0.48\textwidth}{!}{\includegraphics{464-gtsp.png}}}
-    \subfigure[Dual relaxation result]{
+    \subfigure[CCP dual relaxation result]{
     \resizebox*{0.48\textwidth}{!}{\includegraphics{464-dual.png}}}
     \caption{Dual relaxation solution quality comparison, job \#464} \label{quality}
     \end{center}
