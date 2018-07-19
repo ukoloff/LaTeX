@@ -1,6 +1,7 @@
 
 \documentclass{../download/tPRS2e}
 
+\usepackage[english,russian]{babel}
 \usepackage{subfigure}  % Support for small, `sub' figures and tables
 \usepackage{tikz}
 \usetikzlibrary{patterns}
@@ -73,10 +74,6 @@ the following activities:
     \item{Linear movement from end of cut to start of next cut} (air move)
 \end{itemize}
 
-Control program usually starts with an air move from
-some starting point. Fig. \ref{toolpath} represents
-the scheme of cutting two parts with three pierce points.
-
 \begin{figure}[]
     \begin{center}
         \tikz[scale=0.95]{
@@ -116,7 +113,10 @@ the scheme of cutting two parts with three pierce points.
     \caption{Example of cutting tool path for two parts and three pierce points} \label{toolpath}
 \end{figure}
 
-The above figure shows tool path going
+Control program usually starts with an air move from
+some starting point. Fig. \ref{toolpath} represents
+the scheme of cutting two parts with three pierce points.
+It shows tool path going
 along the boundary contours of parts,
 while in real life it should be offset to
 a half cut width in order to preserve parts geometry and sizes.
@@ -139,6 +139,7 @@ We will further assume
 that cutting head path is programmed
 directly along bounding contours of the parts to cut,
 and final tool path contains all the parts contours.
+
 Due to certain technological requirements
 pierce points must lay at some extra distance
 from part boundaries.
@@ -294,7 +295,7 @@ control programs for CNC cutting machines.
 The most popular objective function
 is total cutting time.
 In case of thermal or 
-hydrobarasive cutting the following formaula applies:
+hydrobarasive cutting the following formula applies:
 \begin{equation}
     T_{cut} = \frac{L_{on}}{V_{on}} + \frac{L_{off}}{V_{off}} + N_{pt} \cdot t_{pt}
     \label{cut-time}
@@ -336,7 +337,7 @@ many technological features as well as
 control program itself.
 Additional research is required in this area,
 some results can be found in [3],
-but this is beyond of scope of this article.
+but this is beyond the scope of this article.
 
 Total cost of cutting is another very important
 objective function,
@@ -399,7 +400,7 @@ $S_1, S_2, \dots S_K$ gives us
 total cutting length $L_{on}$,
 while points $M_0, M_1, M_1^*, \dots M_K, M_K^*$
 with permutation $i_1, i_2, \dots i_K$
-describe air moves hence its total length $L_{off}$.
+describe air moves hence their total length $L_{off}$.
 
 Therefore,
 mentioned above problems
@@ -757,6 +758,9 @@ Dual relaxation finds even slightly shorter tool path,
 because it can route cutting head along straight lines
 whereas GTSP's tool path is always polygonal
 due to preliminary discretization involved.
+In other words,
+optimal solution for CCP is always a bit shorter
+than that of GTSP.
 
 \begin{figure}
     \begin{center}
