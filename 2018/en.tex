@@ -586,21 +586,29 @@ cutting path optimization.
 % \rule{\linewidth}{1.2pt}
 \hrulefill
 
-\section{Dual relaxation}
+\section{Dual relaxation for CCP}
 
-For CCP (\textit{Continous Cutting Problem})
+Let us start from the simplest
+of all cutting path optimization problems --
+CCP (\textit{Continous Cutting Problem})
+with objective function (\ref{cut-time})
+i.e. total cutting time. 
+
+In this case
 cutting segments are simply part boundaries:
-$S_i = C_i, \forall i = \overline{1,K}, K=N$.
-In order to solve such optimization problem
-one should find
+$S_i = C_i, \forall i = \overline{1,K}, K=N$,
+and optimal solution contains two variables:
 \begin{enumerate}
     \item{Positions of all pierce point $M_j$ on their cutting segments} (continous optimization)
     \item{Order of segment processing $I = (i_1, i_2, \dots i_K)$ i.e. permutation of initial segment ordering} (discrete optimization)
 \end{enumerate}
-minimizing cutting time (\ref{cut-time})
-hence air move length $L_{off}$.
+Since total cutting length $L_{on}$
+is fixed as well as number of pierce points $N_{pt}$,
+minimization of $T_{cut}$
+is strictly equivalent to
+that of total air move length $L_{off}$.
 
-Na\"ive but surprisingly well performant approach is to combine
+Na\"{\i}ve but surprisingly well performant approach is to combine
 two independent optimizations.
 
 \subsection{Continous optimization}
@@ -696,6 +704,9 @@ and attempt to improve it with the following simple steps:
     \item{}
     Circular permutations are also good candidates to test.
     \item{}
+    We can swap not only single segments but also
+    short sequential blocks of them.
+    \item{}
     Other heuristics can be easily coined.
 \end{enumerate}
 
@@ -733,7 +744,9 @@ To evaluate quality
 we make comparison with another algorithm
 that is able to find exact solutions of GTSP
 up to 32 contours (megalopolises).
-The results are summarized in table \ref{exact-3}
+The results for 3 independent 
+nesting plans
+are summarized in table \ref{exact-3}
 and visualised at Fig. \ref{quality}.
 
 \begin{table}[h]
@@ -776,6 +789,62 @@ than that of GTSP.
 
 \section{Multi-contour CCP}
 
+Any algorithm solving CCP problem
+can be applied to more el aborate one.
+We use above described double relaxation
+for the purpoces of this work.
+
+In practice, pure CCP is rarely used,
+for it employs only standard cutting technique,
+while other ones improve overall cutting performance.
+In particular,
+multi-contour cutting decreases
+the number of expensive piercing operations
+reducing both cutting time (\ref{cut-time})
+and cost (\ref{cut-cost}).
+
+A pair / row of parts nested next to each other
+can be combined into single cutting segments
+in several ways,
+as shown on Fig. \ref{merge}
+e.g. using small bridge or combined cut etc.
+The latter not only removes one pierce point,
+but also reduces total cutting length $L_{on}$.
+
+Regardless of combination method,
+the problem of combining of part boundaries
+$C_1, C_2, \dots C_N$
+into cutting segments
+$S_1, S_2, \dots S_K$
+(now $K<N$)
+is ambiguous and therefore
+is itself a subject for possible optimization.
+
+\begin{figure}
+    \begin{center}
+    \subfigure[Two independent parts]{\tikz{
+        \draw[thick,pattern=north west lines, pattern color=gray] (0,0) rectangle ++(2,3);
+        \draw[thick,pattern=north east lines, pattern color=gray] (2.1,0) rectangle ++(2,3);
+    }}
+    \subfigure[Two parts with a bridge]{\tikz{
+        \draw[thick,pattern=north west lines, pattern color=gray]
+            (0,0) -- (0,3) -- (2,3) -- (2,2.5) -- (2.1, 2.5) -- (2.1,3) --
+            (4.1,3) -- (4.1, 0) -- (2.1, 0) -- (2.1,2.4) -- (2.0,2.4) -- 
+            (2,0) -- cycle;
+    }}
+    \subfigure[Combined cut]{\tikz{
+        \draw[thin,pattern=north east lines, pattern color=gray]
+            (0,0) rectangle +(4.1, 3);
+        \draw[thick,->]
+            (2.0,3.05) -- (-0.05,3.05) -- (-0.05,-0.05) --
+            (2.05,-0.05) -- (2.05,3.05) -- (4.15,3.05) --
+            (4.15,-0.05) -- (2.1,-0.05);
+    }}
+    \caption{Multi-contour cutting segments} \label{merge}
+    \end{center}
+\end{figure}
+
+
 See Fig. \ref{mcontour}.
 
 \begin{figure}[h]
@@ -787,7 +856,6 @@ See Fig. \ref{mcontour}.
     \caption{Multi-contour cutting} \label{mcontour}
     \end{center}
 \end{figure}
-
 
 \section*{Acknowledgements}
 
