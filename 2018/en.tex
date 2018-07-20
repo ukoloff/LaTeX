@@ -1,7 +1,7 @@
 
 \documentclass{../download/tPRS2e}
 
-\usepackage[english,russian]{babel}
+\usepackage[english]{babel}
 \usepackage{subfigure}  % Support for small, `sub' figures and tables
 \usepackage{tikz}
 \usetikzlibrary{patterns}
@@ -74,7 +74,7 @@ the following activities:
     \item{Linear movement from end of cut to start of next cut} (air move)
 \end{itemize}
 
-\begin{figure}[]
+\begin{figure}[b]
     \begin{center}
         \tikz[scale=0.95]{
             \tikzstyle{part}=[pattern=north east lines, pattern color=gray,even odd rule]
@@ -728,7 +728,7 @@ that contains other segments inside.
 This happily decreases dimension of problem space
 hence decreasing time complexity.
 
-Diecrete optimization is performed as described above.
+Discrete optimization is performed as described above.
 As soon as better solution is found we just
 insert outer contours after their corresponding inner ones,
 selecting pierce point as the intersection of air moves with
@@ -790,7 +790,7 @@ than that of GTSP.
 \section{Multi-contour CCP}
 
 Any algorithm solving CCP problem
-can be applied to more el aborate one.
+can be applied to more elaborate one.
 We use above described double relaxation
 for the purpoces of this work.
 
@@ -804,10 +804,10 @@ reducing both cutting time (\ref{cut-time})
 and cost (\ref{cut-cost}).
 
 A pair / row of parts nested next to each other
-can be combined into single cutting segments
+can be combined into single cutting segment
 in several ways,
 as shown on Fig. \ref{merge}
-e.g. using small bridge or combined cut etc.
+e.g. using small bridge or common cut etc.
 The latter not only removes one pierce point,
 but also reduces total cutting length $L_{on}$.
 
@@ -832,7 +832,7 @@ is itself a subject for possible optimization.
             (4.1,3) -- (4.1, 0) -- (2.1, 0) -- (2.1,2.4) -- (2.0,2.4) -- 
             (2,0) -- cycle;
     }}
-    \subfigure[Combined cut]{\tikz{
+    \subfigure[Common cut]{\tikz{
         \draw[thin,pattern=north east lines, pattern color=gray]
             (0,0) rectangle +(4.1, 3);
         \draw[thick,->]
@@ -844,10 +844,17 @@ is itself a subject for possible optimization.
     \end{center}
 \end{figure}
 
+To evaluate proposed idea of multi-contour cutting segments
+we took nesting of 56 parts and combined 
+their outer contours
+(with small bridges)
+in two different ways
+(merging where appropriate left and right neighbours
+or upper and lower ones).
+Three resulting nesting plans were subjected to
+dual relaxation, producing results in Table \ref{hv-data}.
 
-See Fig. \ref{mcontour}.
-
-\begin{figure}[h]
+\begin{figure}[b]
     \begin{center}
     \subfigure[Standard cutting technique]{
     \resizebox*{0.48\textwidth}{!}{\includegraphics{ccp.png}}}
@@ -856,6 +863,56 @@ See Fig. \ref{mcontour}.
     \caption{Multi-contour cutting} \label{mcontour}
     \end{center}
 \end{figure}
+
+\begin{table}[]
+    \begin{center}    
+    \begin{tabular}{l|*{3}{r}}
+        Job & Original & Horizontal & Vertical \\
+        \hline
+        \# of parts & 56 & 48 & 47\\
+        \# of contours & 87 & 79 & 78 \\
+        $L_{on}$, m & 68.356 & 68.236 & 68.319 \\
+        $L_{off}$, m & 10.592 & 10.226 & 10.502 \\
+    \end{tabular}
+    \caption{Multi-contour cutting}
+    \label{hv-data}
+    \end{center}
+\end{table}
+
+Resulting path for ``vertical'' case is very similar to original 
+hence omitted in sake of brevity.
+But optimal path for ``horizontal'' combinations differs enough
+and is shown at Fig. \ref{mcontour}.
+
+Though in general,
+decreasing the number of cutting segments
+should cause objective function
+$L_{off}$ to increase,
+we can see in this case it decreased a bit.
+Thus, multi-contour cutting can reduce 
+all three terms in (\ref{cut-time}).
+
+This leads us to a new class of tool path optimization problems
+between CCP and ICP.
+Starting from a set of part bounding contours
+$C_1, C_2, \dots C_N$,
+we can build several possible sets of cutting segments
+$S_1, S_2, \dots S_K$
+(with different $K$ possible),
+solve tool path optimization problem for each of them
+and then evaluate complete objective
+function (\ref{cut-time}) or even (\ref{cut-cost})
+to choose the best solution.
+
+\section{Conclusion}
+
+A new algorithm for solving CCP problem is
+described and appeared both simple and powerful.
+
+Then a new class of tool path optimization problems
+is proposed
+that allows to use simple CCP-style optimization 
+algorithms to get a better results.
 
 \section*{Acknowledgements}
 
