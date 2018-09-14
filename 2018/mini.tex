@@ -176,14 +176,51 @@ but ensures that found broken line is a local minimum.
 We can run relaxation from several different initial broken lines,
 checking all of them give the same solution.
 
-\begin{figure}[b]
+\section{Order of contours to process}
+
+For approximate solution of main problem
+that includes finding order of contours to cut,
+the following process is proposed:
+
+An initial ordering is constructed by selecting 
+nearest contour to the current one as next to it.
+Pierce points for all contours 
+(vertices of broken line) are positioned arbitrarily.
+Then, relaxation of this initial broken line 
+is performed to find solution with minimal length.
+This is done by considering several permutations
+of initial ordering and optimal pierce point positions
+are calculated as stated above.
+When new broken line is found
+that has shorter total length,
+it replaces the initial one and process is restarted.
+
+\begin{enumerate}
+    \item{All permutation of two or three contours are processed}
+    \item{Shifts of blocks (several sequential contours) in several steps back and / or forward are applied}
+    \item{Ordering inside blocks is reversed}
+\end{enumerate}
+
+\section{Results}
+
+During numerical experiments,
+performance of algorithm described
+was compared to that reffered in [1].
+In general, our approach gives an improvement of 10\% to 20\%.
+
+See result of [1] at Fig. \ref{dynprog}
+\textit{cf} our result at Fig. \ref{heuristics}.
+
+\begin{figure}[]
     \includegraphics{mini-bad.png}
     \caption{Total length of path is 19649 mm}
+    \label{dynprog}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}[]
     \includegraphics{mini-good.png}
     \caption{Total length of path is 15836 mm}
+    \label{heuristics}
 \end{figure}
 
 \end{document}
