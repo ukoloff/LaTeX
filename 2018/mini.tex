@@ -40,6 +40,8 @@ used for piercing operation.
     minimal tool path;
 \end{keywords}
 
+\section{Introduction}
+
 During development of control programs for
 CNC sheet cutting machines,
 the problem of minimizing tool idle path
@@ -55,6 +57,8 @@ also be minimal.
 In addition, a technological requierment should be met,
 that if some contour lays inside another one,
 the former must be processed before the latter.
+
+\section{Precedence constraint handling}
 
 Note, that we can consider
 only contours containing no inner sub-contours.
@@ -99,6 +103,78 @@ technological constraint.
 
 Finally, $L_f = L_0$ and we can solve the problem,
 considering only non-outer contours.
+
+\section{Pierce point positioning}
+
+When the order of contours is fixed,
+the problem reduces to the following:
+
+There are $n$ closed contours
+$C_1, C_2, \dots C_n$ on Euclidean plane
+$\mathbb R^2$.
+Each contour consists of finite number of links,
+ie linear segments and arcs.
+Among all broken lines $\{M_1, M_2, \dots M_n\}$
+(where vertice $M_i$ belongs to a circuit $C_i$,
+$i = 1, 2, \dots n$),
+we look for the shortest one.
+
+This inherently continuous problem can be approximated
+by the discrete one [1].
+We choose fixed $\varepsilon$ and break all the contours
+into segments of length $\varepsilon$ (or less),
+then our minimization problem is solved for the 
+broken lines, whose vertices are selected from the
+breaking points. Note, that
+$$
+L \le L_\varepsilon \le L + \frac{\varepsilon}2 n
+$$
+where $L$ is the length of broken line for original
+(continuous) problew,
+while $L_\varepsilon$ is that for discrete one.
+To be sure, that
+$| L - L_\varepsilon | < \delta $
+for some fixed $\delta$,
+one should select $\varepsilon = 2 \delta /n$.
+For big $n$ this $\varepsilon$ is small hence
+the number of possible vertices is large.
+Such a problem can be solved using dynamic programming
+with time requirements of
+$O(m_1 \cdot m_2^2 \cdot \dots m_{n-1}^2 \cdot m_n)$,
+where $m_i$ is a number of discretization points on the
+contour $C_i$.
+Thus, low $\delta$ yields large $n$ and long
+calculation time.
+
+Instead we can directly solve original
+(continuous) problem as discussed below.
+
+An initial broken line is somehow constructed.
+We will gradually improve it.
+One step of iteraton is:
+
+For $ \forall i = 1, 2, \dots n$ we try to move vertex $M_i$
+along contour $C_i$ in order to minimize total length
+of broken line. All other vertices are fixed.
+This problem can be thus stated:
+find the point on the line segment (or arc)
+that minimizes sum of distances from it to
+two other fixed points.
+
+All possible dispositions of points around the contour
+are simply enumerated and analyzed.
+We highligh the only one case,
+when both fixed points are situated on the one side
+of the straight line containing segment of a contour.
+Here the Fermat principle applies
+(\textit{the angle of incidence is equal to the reflex angle}).
+
+Note, that like any descent algorithm of optimization,
+this cannot guarantee
+the global minimum can be obtained,
+but ensures that found broken line is a local minimum.
+We can run relaxation from several different initial broken lines,
+checking all of them give the same solution.
 
 \begin{figure}[b]
     \includegraphics{mini-bad.png}
