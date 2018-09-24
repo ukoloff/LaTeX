@@ -204,6 +204,13 @@ it replaces the initial one and process is restarted.
     \item{Ordering inside blocks is reversed}
 \end{enumerate}
 
+During relaxation to minimal path length,
+additional heuristic can be applied:
+if in attempt to rearrange some contours,
+the length of a polyline constructed
+only for these contours is longer than the current one,
+then no permutations containing this are considered.
+
 \section{Results}
 
 During numerical experiments,
