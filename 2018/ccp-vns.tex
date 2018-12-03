@@ -9,6 +9,10 @@
     % Related to math
     \usepackage{amsmath,amssymb,amsfonts,amsthm}
 
+    \usepackage{tikz}
+    \usetikzlibrary{patterns}
+    \usepackage{graphicx}
+    
 \begin{document}
 
 \section{Введение}
@@ -24,6 +28,9 @@ $C_1, C_2, \dots C_k$,
 $$
 \bigcup_{i=1}^n \delta A_i = \bigcup_{j=1}^k C_k
 $$
+Сами замкнутые контуры состоят из конечного числа
+отрезков прямых линий и дуг окружностей.
+
 Для упрощения задачи мы будем считать,
 что резка ведётся не по эквидистантному контуру,
 а непосредственно по контуру детали:
@@ -125,6 +132,103 @@ $M_i$ из конечного множества кандидатов.
 для поиска точек врезки $M_i$.
 
 \section{Непрерывная оптимизация}
+В практических приложениях
+форма контуров деталей ограничена
+набором отрезков прямых линий и дуг окружностей.
+В этих условиях оказывается возможным
+точно решить задачу нахождения
+\textit{одной} точки врезки
+при фиксированном положении всех остальных $M_i$,
+а также порядка обхода $I=(i_1, i_2, \dots, i_k)$.
+$$
+\mathcal L \to \min_{M_i}
+$$
+что упрощается до
+$$
+\sqrt{\overrightarrow{M_i M_{i-1}}^2} +
+\sqrt{\overrightarrow{M_i M_{i+1}}^2} \to
+\min_{M_i \in C_i}
+$$
+Простейший геометрический анализ показывает,
+что если соседние
+(считающиеся известными)
+точки врезки расположены
+\textit{с одной стороны}
+сегмента контура
+(точнее, содержащей его линии или окружности),
+то точное решение оптимизационной задачи
+находится как пересечение
+соединяющей линии $M_{i-1}M_{i+1}$
+с прямой или окружностью,
+на которой лежит сегмент.
+
+Если же обе точки находятся
+\textit{с одной стороны},
+то решение находится при помощи принципа Ферма,
+так чтобы соблюдалось правило
+\textit{угол падения равен углу отражения},
+как это можно видеть на рис. \ref{fermat}.
+
+По аналогии с ALS
+(Alternating Least Squares)
+оказывается возможным использовать
+процесс,
+который можно было бы назвать
+\textit{Alternative Fermat Principle}:
+\begin{itemize}
+    \item{}
+    Начальные положения точек врезки 
+    $M_i \in C_i$
+    выбираются
+    (для каждого контура)
+    случайным образом
+    \item{}
+    $\forall i \in \overline{1,k}$
+    решается задача поиска оптимального положения
+    \textit{одной} точки врезки $M_i$
+    (за константное время $O(1)$)
+    \item{}
+    Процесс повторяется до схождения
+    по позициям всех точек врезки
+    (с некоторой наперёд заданной точностью)
+\end{itemize}
+С практической точки зрения процесс оказывается
+очень хорошо сходящимся за время $O(k)$.
+Поэтому он используется в качестве одного шага
+полного алгоритма непрерывно-дискретной оптимизации.
+
+\begin{figure}
+    \begin{center}
+    \tikz[rotate=27,scale=1.1]{
+        \draw[thick]
+            (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_k$};
+        \fill[black] 
+            (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_i \equiv M_i^*$}
+            (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{i-1}$} ++(-1.5,0) node[above] {$S_{k-1}$}
+            (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{i+1}$} ++(1.5,0) node[below] {$S_{i+1}$};
+        \begin{scope}
+            \clip (from) circle(1);
+            \draw[thick] (from) ++(0, 3) circle(3);
+        \end{scope};
+        \begin{scope}
+            \clip (to) circle(1.5);
+            \draw[thick] (to) ++(3, 4) circle(5);
+        \end{scope};
+        \draw[dashed] (from) -- (middle) -- (to);
+        \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
+        \coordinate (opt) at (intersection of zero--future and mirror--from);
+        \draw[thin] (opt) circle(0.1);
+        \draw[dotted] 
+            (mirror) -- (opt)
+            (mirror) -- (to);
+        \draw[thin] (from) -- (opt) -- (to);
+
+        \draw[->,>=latex,red,thick] (middle) to[bend right] (opt);
+        
+    }
+    \caption{Принцип Ферма и поиск точки врезки} \label{fermat}
+    \end{center}    
+\end{figure}
 
 \section{Дискретная оптимизация}
 
