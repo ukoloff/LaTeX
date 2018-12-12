@@ -2,12 +2,15 @@
 
 \usepackage[english]{babel}
 \usepackage{graphicx}
+\usepackage{subfigure}
 \usepackage{natbib}
 
-\usepackage{amssymb}
+\usepackage{amssymb,amsmath}
 \usepackage{tikz}
 \usetikzlibrary{patterns}
 \graphicspath{{media/}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
 %===============================================================================
 
 \begin{document}
@@ -216,7 +219,439 @@ can be classified as:
     several part contours are cut at once within one cutting segment
 \end{enumerate}
 
+Let's suppose that our parts
+($A_1, A_2, \dots A_n$) were cut
+using $K$ cutting segments
+$S_k = M_kM_k^*, k \in \overline{1, K}$.
+Then we define cutting path as tuple
+\begin{multline}
+    ROUTE =
+    \big< M_0, M_1, S_1, M_1^*, M_2, S_2, M_2^*, \dots \\
+    M_K, S_K, M_K^*, i_1, i_2, \dots, i_K \big>
+  \label{tuple}
+\end{multline}
+Here $i_1, i_2, \dots, i_K$ is the sequence of segments
+$S_1, S_2, \dots S_K$ processing,
+$M_0$ -- starting point of control program.
+Linear air moves are impicitly defined by the tuple.
+In terms of discrete mathematics,
+the sequence is a permutation,
+i.e. an ordered set of natural numbers $1\dots K$,
+that unambiguously maps every
+$K \in \overline{1, K}$ to $i_k$.
+As noted before,
+we assume tool path to go along
+bounding contours of parts
+and cutting segments to contain all of them:
+$$
+\bigcup_{j=1}^N C_j \subset \bigcup_{k=1}^K S_k
+$$
+Modifying cutting path one can
+drastically change numerical parameters
+of cutting process.
+Therefore a number of optimization problems
+arise while developing
+control programs for CNC cutting machines.
+The most popular objective function
+is total cutting time.
+In case of thermal or
+hydrobarasive cutting the following formula applies:
+\begin{equation}
+    T_{cut} = \frac{L_{on}}{V_{on}} + \frac{L_{off}}{V_{off}} + N_{pt} \cdot t_{pt}
+    \label{cut-time}
+\end{equation}
+Here,
+$L_{off}$ is total length of air moves,
+$L_{on}$ is total length of cutting segments,
+$V_{off}$ is the speed of air move,
+$V_{on}$ is the speed of cutting,
+$N_{pt}$ is the number of pierce points,
+$t_{pt}$ is the time spent in a pierce point,
+assuming it is located in the body of sheet.
+In some scenarios other kinds of pierce points
+can be used
+with their own $t_{pt}$ constants.
+In that case, equation (\ref{cut-time})
+transforms to
+\begin{equation}
+    T_{cut} = \frac{L_{on}}{V_{on}} + \frac{L_{off}}{V_{off}}
+    + \sum_{j=1}^p N_{pt}^j \cdot t_{pt}^j
+    \label{piercings}
+\end{equation}
+Here,
+$p$ is a number of pierce point kinds,
+$N_{pt}^j$ -- a number of pierce points of kind $j$,
+$t_{pt}^j$ -- time to pierce point of kind $j$.
+Both in (\ref{cut-time}) and (\ref{piercings}),
+$V_{off}$ is a constant dependent on CNC machine used.
+Value of $V_{on}$ is to be determined along with
+control program development
+concerning cutting technology to use
+and parameters of sheet material
+(including its thickness).
+Thus defined $V_{on}$
+is often assumed to be a constant value,
+but in practice
+actual cutting speed depends on
+many technological features as well as
+control program itself.
+Additional research is required in this area,
+some results can be found in [3],
+but this is beyond the scope of this article.
+
+Total cost of cutting is another very important
+objective function,
+especially from economical point of view.
+This is rather complex indicator dependent on
+electric power consumption,
+expendables,
+CNC machine maintenance
+as well as other operational expenses.
+
+Note that in general cutting cost is not
+proprtional to cutting time,
+since it also depends on cutting modes.
+It can be estimated like in (\ref{cut-time}):
+\begin{equation}
+    F_{cost} = L_{on}\cdot C_{on} + L_{off}\cdot C_{off} + N_{pt} \cdot C_{pt}
+    \label{cut-cost}
+\end{equation}
+Where
+$C_{on}$ is the unit cost of cutting,
+$C_{off}$ is that of air move and
+$C_{pt}$ is the cost of a piercing a point,
+while $L_{on}, L_{off}$ and $N_{pt}$
+make the same sence as in (\ref{cut-time}).
+Exact values of unit costs
+$C_{on}, C_{off}$ and $C_{pt}$
+depend on CNC equipment, cutting technology,
+sheet material and its thickness.
+This dependency is usually summarized
+in tabular form or even analitically.
+
+In its turn,
+the task of finding appropriate unit costs
+$C_{on}, C_{off}$ and $C_{pt}$
+for specific equipment and material
+is  low-studied itself.
+[4] contains some data concerning this problem
+for cutting carbon and stainless stell
+as well as aluminium and its alloys
+with laser CNC machine ByStar 3015.
+
+When different pierce technologies are used,
+(\ref{cut-cost}) becomes
+\begin{equation}
+    F_{cost} = L_{on}\cdot C_{on} + L_{off}\cdot C_{off}
+    + \sum_{j=1}^p N_{pt}^j \cdot C_{pt}^j
+    \label{piercings-cost}
+\end{equation}
+using $C_{pt}^j$ for
+cost of piercing of kind $j$.
+
+In any case,
+the value of above objective function
+depends entirely on the tuple (\ref{tuple})
+elements,
+i.e. the cutting path.
+In detail,
+the geometry of cutting segments
+$S_1, S_2, \dots S_K$ gives us
+total cutting length $L_{on}$,
+while points $M_0, M_1, M_1^*, \dots M_K, M_K^*$
+with permutation $i_1, i_2, \dots i_K$
+describe air moves hence their total length $L_{off}$.
+
+Therefore,
+mentioned above problems
+of cutting path optimizations may be
+stated as minimization of some objective function $F$,
+defined on set $G$ of addmisible tuples (\ref{tuple}):
+\begin{equation}
+    F(ROUTE) \to \min_{ROUTE \in G}
+    \label{minimize}
+\end{equation}
+As tuple contains both
+cutting sequence
+$i_1, i_2, \dots i_K$
+and cutting start and end points
+$M_kM_k^*, k \in \overline{1, K}$,
+the latter located on the Euclidean plane $\mathbb R^2$,
+general optimization problem (\ref{minimize})
+is a very complex
+continuous-discrete optimization problem,
+even with significant restrictions imposed
+on admissible segments
+$S_1, S_2, \dots S_K$.
+
+This leads to the fact that
+there are no general algorithms for solving the problem (\ref{minimize})
+described in the scientific literature.
+Nevertheless,
+some narrow classes of problems
+exist,
+that allow efficent optimization algorithms to be developed.
+We mention four such classes [4-6].
+
+\begin{enumerate}
+    \item \textbf{Continuous Cutting Problem (CCP)}:
+    the cutter head visits each contour to be cut once.
+    The tool can engage the contour at any point on its perimeter,
+    but must cut the entire
+    contour before it travels to the next contour.
+    Accordingly, the same point must be used for
+    entry and exit the contour.
+    In terms of cutting techniques CCP implies the standard one.
+    With no constraints on the pierce points,
+    problem (\ref{cut-time}) reduces to finding minimal
+    air move distance $L_{off}$,
+    which is equivalent to the classical metric TSP
+    (Travelling Salesman Problem).
+    A significant part of the publications is devoted precisely
+    to the solution of this particular optimization problem
+    \item \textbf{Endpoint Cutting Problem (ECP)}:
+    the tool can enter and exit contours only at some
+    predefined points on the boundary.
+    However, it may cut the contour in sections,
+    or stated otherwise: a contour can be pre-empted.
+    This approach reduces the complexity of full problem
+    by discretiztion of possible pierce point set and therefore
+    contour entry points as well.
+    Set of contour exit points is equal to that of
+    entry points, however,
+    contour exit point is not neccesary
+    a point of cutting end
+    (where cutting head is switched off),
+    because cutting can continue to another contour.
+    \item \textbf{Generalized Traveling Salesman Problem \\ (GTSP)}:
+    the tool path visits each contour to be cut once
+    and the tool can engage the contour only
+    at some predened points on the boundary.
+    This is a special case for CCP and ECP problems.
+    \item \textbf{Segment Continuous Cutting Problem (SCCP)}:
+    cutter head visits each segment to be cut once.
+    The tool can engage the segment at any point,
+    but must cut the entire segment before it travels to the next segment.
+    Note: $CCP \subset SCCP$.
+
+    This case uses the concept of basic cutting segment
+    (see [3])
+    $B^S$, the part of full cutting segment
+    $S = MM^*$ with lead-in and lead-out excluded.
+    Unlike full cutting segments,
+    basic ones doesn't assume cutting direction,
+    containig only geometrical data.
+    When standard cutting technique is used only,
+    the set of basic segments $\bigcup B^S = \bigcup C_i$
+    (the set of bounding contours).
+\end{enumerate}
+
+Most publications on the area explore GTSP problem
+and develop appropriate algorithms.
+Its main advantage is that most methods
+of standard GTSP problems can be applied,
+only some additional constraints should be
+taken into account,
+for instance -- precedence constraint.
+
+It imposes restrictions on the order of
+segment processing
+$I = (i_1, i_2, \dots i_K)$.
+Modern CNC cutting equipment cannot guarantee
+positioning of cutting head inside the contour
+that is alredy cut,
+because the part can freely move
+(or even drop)
+after it is detached from the sheet.
+To cope with this,
+the following rules must be obeyed:
+
+\begin{enumerate}
+    \item{If one or more inner contours (holes) are inside outer one,
+    then they all must be cut before cutting of outer contour starts
+    }
+    \item{If some other part is placed inside
+    inner contour of a part,
+    the former one must be cut before the latter.
+    Rule 1 applies either.}
+\end{enumerate}
+These rules are the precedence constraint
+for the permutation
+$I = (i_1, i_2, \dots i_K)$.
+In other words:
+\begin{enumerate}
+    \item{If permutation
+    $I = (i_1, \dots i_k, \dots i_K)$
+    contains outer contour $i_k$,
+    all its corresponding inner contours $i_x$
+    must apeear before $i_k$.
+    }
+    \item{If permutation
+    $I = (i_1, \dots i_k, \dots i_K)$
+    contains inner contour $i_k$
+    and there is some outer contour
+    of another part $A_l, l \in \overline{1,n}$
+    inside it,
+    that outer contour must precede $i_k$
+    in permutation $I$}
+\end{enumerate}
+
+Both the precedence constraint
+and pierce point constraints
+are of static nature,
+that is they are completely defined by
+the nesting the parts on the sheet,
+CNC equipment and material used
+and are not affected by the elements
+of tuple itself.
+In terms of tool path $ROUTE$
+(\ref{tuple}),
+some of permutations
+$I = (i_1, i_2, \dots i_K)$
+are just forbidden.
+Of many recent papers
+on GTSP cutting optimization algorithms,
+we note [7-10].
+
+A number of technological features of modern CNC equipment
+impose a few other constraints on
+pierce points and segment cutting order.
+But unlike mentioned above,
+these constraints are dynamic,
+they depend on the preceding elements
+of tuple (\ref{tuple})
+and caused by
+thermal deformations of sheet material.
+It is rather difficult to get comprehensive
+equation for such constraints,
+see [11,12] for approaches.
+These constraints, however,
+are also beyond the scope of the paper.
+
+\section{Dual relaxation for CCP}
+$$
+\mathcal L = \sum_{j=0}^k |\overrightarrow{M_{i_j} M_{i_{{j+1}}}}|
+$$
+$$
+\mathcal L \to \min
+$$
+
+\subsection{Continuous optimization}
+
+See Fig. \ref{fermat}.
+
+\begin{figure}
+  \begin{center}
+  \tikz[rotate=27,scale=1.1]{
+      \draw[thick]
+          (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_k$};
+      \fill[black]
+          (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_i \equiv M_i^*$}
+          (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{i-1}$} ++(-1.5,0) node[above] {$S_{k-1}$}
+          (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{i+1}$} ++(1.5,0) node[below] {$S_{i+1}$};
+      \begin{scope}
+          \clip (from) circle(1);
+          \draw[thick] (from) ++(0, 3) circle(3);
+      \end{scope};
+      \begin{scope}
+          \clip (to) circle(1.5);
+          \draw[thick] (to) ++(3, 4) circle(5);
+      \end{scope};
+      \draw[dashed] (from) -- (middle) -- (to);
+      \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
+      \coordinate (opt) at (intersection of zero--future and mirror--from);
+      \draw[thin] (opt) circle(0.1);
+      \draw[dotted]
+          (mirror) -- (opt)
+          (mirror) -- (to);
+      \draw[thin] (from) -- (opt) -- (to);
+
+      \draw[->,>=latex,red,thick] (middle) to[bend right] (opt);
+
+  }
+  \caption{Applying Fermat principle to find piercing point} \label{fermat}
+  \end{center}
+\end{figure}
+
+
+\subsection{Discrete optimization}
+$$
+\mathcal L \to \min_{i_1, i_2, \dots i_k}
+$$
+\begin{enumerate}
+  \item $ I \gets random P_k$
+  \item $ k \gets 1$
+  \item \textbf{while} $k < k_{max}$
+  \begin{enumerate}
+  \item $ I' \gets \argmin\limits_{I' \in \mathcal N^k(I)} \mathcal L(I')$
+  \item \textbf{if} $\mathcal L(I') < \mathcal L(I)$
+  \begin{itemize}
+      \item $I \gets I'$
+      \item $ k \gets 1$
+  \end{itemize}
+  \item \textbf{else}
+  \begin{itemize}
+      \item $ k \gets k+1$
+  \end{itemize}
+  \end{enumerate}
+  \item \textbf{end}
+\end{enumerate}
+$$
+\mathcal L(I') = \min_{M_1, M_2, \dots M_k} \mathcal L(M_1, M_2, \dots M_k | I')
+$$
+
+\subsection{Precedence constraint}
+\begin{equation}
+\big\{
+    C_i | \forall j \ne i: C_j \cap \tilde C_i = \varnothing
+\big\}
+\label{non-outers}
+\end{equation}
+
+\begin{equation}
+  \bigcup_{i=0}^{k'} M_i M_{i+1}
+\label{path-found}
+\end{equation}
+
+\section{Numerical experiments}
+
+\begin{table}[h]
+  \begin{center}
+  \begin{tabular}{l|*{3}{r}}
+      Job & \#229 & \#464 & \#3211 \\
+      \hline
+      \# of parts & 11 & 14 & 17\\
+      \# of contours & 12 & 21 & 22 \\
+      $L_{on}$, m & 24.609 & 21.717 & 25.051 \\
+      \# of GTSP points & 491 & 429 & 493 \\
+      GTSP's $L_{off}$, m & 7.729 & 4.743 & 4.557 \\
+      Our $L_{off}$, m & 7.727 & 4.706 & 4.536 \\
+  \end{tabular}
+  \caption{Dual relaxation solution quality comparison}
+  \label{exact-3}
+  \end{center}
+\end{table}
+
+See Fig. \ref{quality}.
+
+\begin{figure}
+    \begin{center}
+    \subfigure[Exact solution of GTSP]{
+    \resizebox*{0.23\textwidth}{!}{\includegraphics{464-gtsp.png}}}
+    \subfigure[Solution of CCP]{
+    \resizebox*{0.23\textwidth}{!}{\includegraphics{464-dual.png}}}
+    \caption{Job 464}
+    \label{quality}
+    \end{center}
+\end{figure}
+
 \section{Conclusion}
+
+The new heuristic algorithm
+for solving
+Continuous Cutting Problem
+for CNC cutting machine
+is described end evaluated...
 
 \begin{ack}
 The work was supported by Act 211 Government of the Russian Federation,
