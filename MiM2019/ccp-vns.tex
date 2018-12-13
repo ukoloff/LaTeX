@@ -2,7 +2,6 @@
 
 \usepackage[english]{babel}
 \usepackage{graphicx}
-\usepackage{subfigure}
 \usepackage{natbib}
 
 \usepackage{amssymb,amsmath}
@@ -649,7 +648,7 @@ as seen on Fig. \ref{fermat}.
 
 \begin{figure}
   \begin{center}
-  \tikz[rotate=27,scale=1.1]{
+  \tikz[rotate=27,scale=1.3]{
       \draw[thick]
           (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_i$};
       \fill[black]
@@ -797,7 +796,7 @@ such as
 or
 stochastic point selection.
 Performance of these options
-is the subject ot further research.
+is the subject of further research.
 
 \subsection{Precedence constraint}
 
@@ -828,7 +827,8 @@ that contains others inside:
 \label{non-outers}
 \end{equation}
 For that new set of contours
-we solve the CCP as described above.
+we solve the unconstrained CCP
+as described above.
 Note, that resulting air move path
 \begin{equation}
   \bigcup_{i=0}^{k'} M_i M_{i+1}
@@ -903,6 +903,30 @@ leading to lower time requirements.
 
 \section{Numerical experiments}
 
+\begin{figure}
+  \resizebox*{0.48\textwidth}{!}{\includegraphics{464-gtsp.png}}
+  \caption{Exact solution of GTSP, Job \#464}
+  \label{gtsp-path}
+\end{figure}
+
+From a practical point of view, the proposed algorithm
+turns out to be very successful
+and finds easily good solutions
+despite the lack of mathematical guarantees for this.
+
+In order to confirm this claim
+a series of experiments were conducted.
+The results of the propsed algorithm
+were compared with the ones
+of another algorithm,
+which is proved to
+find the exact solution to the GTSP problem
+with the number of contours
+(\textit{megalopolices}) no more than 32,
+see \cite{?}.
+
+The comparison results are in the table. \ref {exact-3}.
+
 \begin{table}[h]
   \begin{center}
   \begin{tabular}{l|*{3}{r}}
@@ -915,23 +939,32 @@ leading to lower time requirements.
       GTSP's $L_{off}$, m & 7.729 & 4.743 & 4.557 \\
       Our $L_{off}$, m & 7.727 & 4.706 & 4.536 \\
   \end{tabular}
-  \caption{Dual relaxation solution quality comparison}
+  \caption{Solution quality comparison}
   \label{exact-3}
   \end{center}
 \end{table}
 
-See Fig. \ref{quality}.
+The quality of the constructed
+cutting path can be visually compared
+on Fig. \ref{gtsp-path} and Fig. \ref{ccp-path}.
+
+Values of $L_{off}$ are in good compliance for two algorihtms used
+as well as shapes of the paths themselves.
+
+Dual relaxation finds even slightly shorter tool path,
+because it can route cutting head along straight lines
+whereas GTSP's tool path is always polygonal
+due to preliminary discretization involved.
+In other words,
+optimal solution for CCP is always a bit shorter
+than that of GTSP.
 
 \begin{figure}
-    \begin{center}
-    \subfigure[Exact solution of GTSP]{
-    \resizebox*{0.23\textwidth}{!}{\includegraphics{464-gtsp.png}}}
-    \subfigure[Solution of CCP]{
-    \resizebox*{0.23\textwidth}{!}{\includegraphics{464-dual.png}}}
-    \caption{Job 464}
-    \label{quality}
-    \end{center}
+  \resizebox*{0.48\textwidth}{!}{\includegraphics{464-dual.png}}
+  \caption{Solution of CCP, Job \#464}
+  \label{ccp-path}
 \end{figure}
+
 
 \section{Conclusion}
 
