@@ -529,25 +529,132 @@ These constraints, however,
 are also beyond the scope of the paper.
 
 \section{Dual relaxation for CCP}
+As stated above,
+we assume cutting goes along part boundaries
+$S_i = C_i, \forall i=\overline{1, k}$
+and piercing point $M_i$ is always equal to
+cutter off point,
+so as both lie on the contour:
+$M_i \equiv M_i^* \in C_i, \forall i = \overline{1, k}$.
+
+Tool path starting point $M_0$ is also fixed.
+
+Finally,
+to suit most modern CNC cutting equipment,
+every closed contour $C_i \equiv S_i$
+is assumed to be
+a finite set of circular arcs
+and straight line segments.
+It is tempting to reduce
+CCP to
+Touring Polygons Problem
+(see, for example, \cite{Qin2017Nov}),
+but we consider more general problem.
+
+In our notations Continuous Cutting Problem is to find:
+\begin{enumerate}
+  \item Positions of $k$ piercing points $M_i \in C_i$
+  \item Order of contours $C_i$ processing,
+  i.e. the permutation of $k$ items
+  $I=(i_1, i_2, \dots, i_k),
+    i_j \in \overline{1,k}, \forall j \in \overline{1,k}$
+\end{enumerate}
+Objective function of cutting time (\ref{cut-time})
+in our case can be simplified to total length of air movements
 $$
 \mathcal L = \sum_{j=0}^k |\overrightarrow{M_{i_j} M_{i_{{j+1}}}}|
 $$
 $$
 \mathcal L \to \min
 $$
+where we suppose
+$M_{i_0} = M_{i_{k+1}} = M_0$
+in sake of brevity.
+
+This problem is often
+reduced to GTSP
+(Generalized Traveling Salesman Problem)
+by means of
+discretization of contours $C_i$
+with some step $\varepsilon$.
+Finding piercing point $M_i$
+becomes a discrete optimization problem
+of choosing among finite number of
+candidates.
+But we are to solve
+problem of both discrete and
+continuous optimiztion.
+
+In addition,
+the \textit{Precedence Constraint}
+is considered.
+For CCP we can state it in a simpler form:
+when some contour is inside another one,
+the former must be cut
+before the latter
+$$
+\tilde C_a \subset \tilde C_b
+\Rightarrow
+i_a < i_b
+$$
+where we denote
+$\tilde C_i$ a 2D figure,
+bounded by $C_i$.
+
+Thus stated Precedence Constraint
+limits the feasible subset of permutations
+$I=(i_1, i_2, \dots, i_k)$,
+that are the part of
+complete problem solution (\ref{tuple}).
 
 \subsection{Continuous optimization}
-
-See Fig. \ref{fermat}.
+In practice,
+the shape of part bounding contours
+is limited to a finite set
+of straight line segments and circular arcs.
+This allows exact solution of
+subproblem of optimal
+positioning of single pierce point $M_i$,
+while others are fixed as well as
+processing order
+$I=(i_1, i_2, \dots, i_k)$.
+$$
+\mathcal L \to \min_{M_i}
+$$
+which in turn means
+$$
+\sqrt{\overrightarrow{M_i M_{i-1}}^2} +
+\sqrt{\overrightarrow{M_i M_{i+1}}^2} \to
+\min_{M_i \in C_i}
+$$
+Simple consideration reveals,
+that
+if neighbour pierce
+point (assumed to be fixed)
+lay on both sides of cutting segment
+(i.e. line or circle containing the latter),
+optimal position is an
+inersection of line $M_{i-1}M_{i+1}$
+with segment itself
+$$
+M_i = M_{i-1}M_{i+1} \cap S_i
+$$
+When neighbours are situated
+on the same side,
+famous \textit{Fermat principle}
+should be applied,
+leading to
+angle of incidence be equal to the angle of reflection,
+as seen on Fig. \ref{fermat}.
 
 \begin{figure}
   \begin{center}
   \tikz[rotate=27,scale=1.1]{
       \draw[thick]
-          (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_k$};
+          (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_i$};
       \fill[black]
           (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_i \equiv M_i^*$}
-          (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{i-1}$} ++(-1.5,0) node[above] {$S_{k-1}$}
+          (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{i-1}$} ++(-1.5,0) node[above] {$S_{i-1}$}
           (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{i+1}$} ++(1.5,0) node[below] {$S_{i+1}$};
       \begin{scope}
           \clip (from) circle(1);
@@ -658,7 +765,6 @@ The work was supported by Act 211 Government of the Russian Federation,
 contract \# 02.A03.21.0006
 \end{ack}
 
-\nocite{*}
 \bibliography{ccp-vns}             % bib file to produce the bibliography
 
 \end{document}
