@@ -746,6 +746,59 @@ $$
 \mathcal L(I') = \min_{M_1, M_2, \dots M_k} \mathcal L(M_1, M_2, \dots M_k | I')
 $$
 
+To build neighbourhoods
+$\mathcal N^k(I)$
+of different structures,
+various techniques are used.
+Only a few of them
+can be expressed in terms of
+popular metrics.
+
+\begin{itemize}
+\item All pairwise permutations of the current one
+$I=(i_1, i_2, \dots, i_k)$.
+This neighbourhood can be
+generated using Levenshtein distance
+
+\item Permutations of three items (contours to cut).
+Enumeration of all triple permutations
+requires $O(k^3)$ time,
+so it was restricted
+by permutations with elements
+whose pairwise distance is below
+some value
+(algorithm parameter)
+
+\item In a similar manner,
+quadriple permutations are considered,
+limited to some pairwise distance
+
+\item Cyclic permutations inside a sequential block of arbitrary length
+\item Reversing sequential block of arbitrary length
+\item Permutations of two sequential blocks of the same length
+\item Cyclic shift of a chain of blocks of the same length
+\item About dozen other options for constructing a neighborhood of a permutation $ \mathcal N (I) $
+\end{itemize}
+
+When some technique yields
+too large neighbourhoods,
+it can be easily limited
+by simple heuristics,
+just as the one used for
+triple and quadriple permutations.
+
+Besides,
+various options of
+Variable Neighborhood Search approach
+may be used,
+such as
+\textit{First Improvement}
+(instead of above described \textit{Best Improvement})
+or
+stochastic point selection.
+Performance of these options
+is the subject ot further research.
+
 \subsection{Precedence constraint}
 \begin{equation}
 \big\{
