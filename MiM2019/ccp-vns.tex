@@ -389,8 +389,9 @@ described in the scientific literature.
 Nevertheless,
 some narrow classes of problems
 exist,
-that allow efficent optimization algorithms to be developed.
-We mention four such classes [4-6].
+that allow efficent optimization algorithms to be developed,
+see \cite{Dewil2016Nov}.
+We mention four such classes:
 
 \begin{enumerate}
     \item \textbf{Continuous Cutting Problem (CCP)}:
@@ -408,6 +409,7 @@ We mention four such classes [4-6].
     (Travelling Salesman Problem).
     A significant part of the publications is devoted precisely
     to the solution of this particular optimization problem
+
     \item \textbf{Endpoint Cutting Problem (ECP)}:
     the tool can enter and exit contours only at some
     predefined points on the boundary.
@@ -422,19 +424,22 @@ We mention four such classes [4-6].
     a point of cutting end
     (where cutting head is switched off),
     because cutting can continue to another contour.
+
     \item \textbf{Generalized Traveling Salesman Problem \\ (GTSP)}:
     the tool path visits each contour to be cut once
     and the tool can engage the contour only
     at some predened points on the boundary.
     This is a special case for CCP and ECP problems.
+
     \item \textbf{Segment Continuous Cutting Problem (SCCP)}:
     cutter head visits each segment to be cut once.
     The tool can engage the segment at any point,
-    but must cut the entire segment before it travels to the next segment.
+    but must cut the entire segment before it travels to the next segment,
+    see \cite{Petunin2015Nov}.
+
     Note: $CCP \subset SCCP$.
 
     This case uses the concept of basic cutting segment
-    (see [3])
     $B^S$, the part of full cutting segment
     $S = MM^*$ with lead-in and lead-out excluded.
     Unlike full cutting segments,
@@ -443,7 +448,12 @@ We mention four such classes [4-6].
     When standard cutting technique is used only,
     the set of basic segments $\bigcup B^S = \bigcup C_i$
     (the set of bounding contours).
+
 \end{enumerate}
+
+First classification of tool path routing problems
+was proposed in:
+\cite{Hoeft1997Sep}.
 
 Most publications on the area explore GTSP problem
 and develop appropriate algorithms.
@@ -523,9 +533,16 @@ and caused by
 thermal deformations of sheet material.
 It is rather difficult to get comprehensive
 equation for such constraints,
-see [11,12] for approaches.
+see \cite{chentsov2013dynamic}, \cite{chentsov2015model} for approaches.
 These constraints, however,
 are also beyond the scope of the paper.
+
+Another class of cutting path optimization problems exists,
+named \textbf{Intermittent Cutting Problem (ICP)}.
+This is the most general version of the problem
+where contours can be pre-empted and there is
+no restriction on the points that can be used for entry or exit.
+It is roughly equivalent to problem (\ref{minimize}).
 
 \section{Dual relaxation for CCP}
 As stated above,
@@ -852,7 +869,8 @@ contains at least one contour
 (\ref{non-outers}) inside.
 
 Now,
-we proceed to contour $C_i$
+we proceed to the
+previously skipped contour $C_i$
 without pierce point $M_i$
 (i.e. it contains some contours in
 (\ref{non-outers}) inside).
@@ -923,7 +941,7 @@ which is proved to
 find the exact solution to the GTSP problem
 with the number of contours
 (\textit{megalopolices}) no more than 32,
-see \cite{?}.
+see \cite{petunin2014local}.
 
 The comparison results are in the table. \ref {exact-3}.
 
@@ -964,7 +982,6 @@ than that of GTSP.
   \caption{Solution of CCP, Job \#464}
   \label{ccp-path}
 \end{figure}
-
 
 \section{Conclusion}
 
