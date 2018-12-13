@@ -680,11 +680,46 @@ as seen on Fig. \ref{fermat}.
   \end{center}
 \end{figure}
 
+Similar to
+\textit{Alternating Least Squares}
+(ALS)
+method,
+the complete process
+for positioing all the pierce points
+$M_i, i \in \overline{1,k}$
+could be called
+\textit{Alternative Fermat Principle}
+and organized as follow:
+\begin{itemize}
+  \item Randomly choose initial position $M_i \in C_i, \forall i$
+  \item $\forall i \in \overline{1,k}$ find optimal $M_i$ as stated above in constant time $O(1)$
+  \item Repeat until all pierce point position $M_i, \forall i$ converge
+  (with some predefined accuracy $\delta$)
+\end{itemize}
+
+In practice this process also
+converges well in $O(k)$ time,
+that is why we use it
+as one step for complete
+procedure of continuous and discrete optimization.
 
 \subsection{Discrete optimization}
+
+Discrete optimization problem
+to be solved inside CCP
+is to find permutation
+$I=(i_1, i_2, \dots, i_k)$,
+minimizing total air move length
 $$
 \mathcal L \to \min_{i_1, i_2, \dots i_k}
 $$
+Variable Neighborhood Search
+(VNS)
+over full set of permutations
+is used,
+see \cite{Hansen2010Mar}.
+
+The general scheme of VNS as applied to CCP:
 \begin{enumerate}
   \item $ I \gets random P_k$
   \item $ k \gets 1$
@@ -703,6 +738,10 @@ $$
   \end{enumerate}
   \item \textbf{end}
 \end{enumerate}
+Step (a) repeatedly applies
+above described continuous
+optimization,
+actually
 $$
 \mathcal L(I') = \min_{M_1, M_2, \dots M_k} \mathcal L(M_1, M_2, \dots M_k | I')
 $$
