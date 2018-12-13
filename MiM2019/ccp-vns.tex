@@ -534,7 +534,7 @@ we assume cutting goes along part boundaries
 $S_i = C_i, \forall i=\overline{1, k}$
 and piercing point $M_i$ is always equal to
 cutter off point,
-so as both lie on the contour:
+so as both lay on the contour:
 $M_i \equiv M_i^* \in C_i, \forall i = \overline{1, k}$.
 
 Tool path starting point $M_0$ is also fixed.
@@ -800,17 +800,106 @@ Performance of these options
 is the subject ot further research.
 
 \subsection{Precedence constraint}
+
+Described steps of the algorithm
+can be considered as one of the solutions
+for
+\textit{Traveling Salesman Problem}
+(TSP)
+with not quite Euclidean city distance.
+
+But cutting tool path optimization
+must also take into account a number of
+additional constraints,
+caused by technological features
+of CNC equipment.
+Most popular of them is
+\textit{Precedence Constraint}.
+
+Luckily, it can be easily accounted
+inside proposed algorithm.
+To do so,
+we start from discarding the contours,
+that contains others inside:
 \begin{equation}
 \big\{
     C_i | \forall j \ne i: C_j \cap \tilde C_i = \varnothing
 \big\}
 \label{non-outers}
 \end{equation}
-
+For that new set of contours
+we solve the CCP as described above.
+Note, that resulting air move path
 \begin{equation}
   \bigcup_{i=0}^{k'} M_i M_{i+1}
 \label{path-found}
 \end{equation}
+intersect \textbf{all}
+source contours
+$C_i, i \in \overline{1,k}$.
+
+Indeed,
+it intersects the contours in (\ref{non-outers})
+by construction,
+and the others
+(outer ones),
+because
+its start and finish point
+$M_0 \equiv M_{k+1}$
+is outside all the contours,
+and every outer contour
+contains at least one contour
+(\ref{non-outers}) inside.
+
+Now,
+we proceed to contour $C_i$
+without pierce point $M_i$
+(i.e. it contains some contours in
+(\ref{non-outers}) inside).
+We find all the intersection
+points $C_i \cap $ (\ref{path-found})
+and since there are several such points,
+we select \textit{last} one of them
+(according to path (\ref{path-found}) direction).
+
+Next, we add all new points $M_i$ found
+to path (\ref{path-found}).
+This is the solution of original CCP,
+considering the
+\textit{Precedence Constraint}.
+Its length obviously remains the same
+during extra point insertion.
+
+The resulting path contains all $k$
+piercing points
+$M_i, \forall i \in \overline{1,k}$
+and point for outer contour
+is guaranteed to pass after
+the points for its inner ones.
+
+Further,
+when solution for partial problem
+is optimal
+(according to length of air move),
+the final solution
+is optimal either.
+Indeed,
+if shorter full path existed,
+then one could build solution
+for partial problem
+by discarding all the contours not in
+(\ref{non-outers}) with their piercing points,
+preserving total path length.
+But it is supposed imposible
+for such a solution to exist.
+
+The technique described thus
+effectively takes
+\textit{Precedence Constraint}
+into account while solving CCP.
+Moreover,
+it reduces the problem space dimension,
+leading to lower time requirements.
 
 \section{Numerical experiments}
 
