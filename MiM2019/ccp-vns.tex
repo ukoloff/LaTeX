@@ -32,7 +32,7 @@ Continuous Cutting Problem
 is proposed
 based on local optimization
 using Fermat principle
-and Variable Neighbourhood Search approach,
+and Variable Neighborhood Search approach,
 which automatically takes
 Precedence Constraint into account,
 that is crucial for generating
@@ -46,7 +46,7 @@ CNC machine; thermal cutting;
 tool path optimization;
 CCP; GTSP;
 Fermat principle;
-Variable Neighbourhood Search
+Variable Neighborhood Search
 \end{keyword}
 
 \end{frontmatter}
@@ -56,7 +56,7 @@ Variable Neighbourhood Search
 The problem of cutting tool path optimization
 is one of the applied optimization problems arising
 in the design of control programs for CNC plate cutting machines,
-see \cite{Dewil2016Nov}.
+refer to \cite{Dewil2016Nov}.
 The cost or time spent is typically used
 as objective function to optimize,
 see
@@ -180,12 +180,12 @@ one closed point set bounded
 The holes
 (inner contours) are acceptable either.
 We will suppose the nesting
-(positon of the parts within $B$)
+(position of the parts within $B$)
 somehow fixed already,
 meeting the condition of
-mutual non-inersection.
+mutual non-intersection.
 Some other requirements may also arise
-due to specific technlogical features
+due to specific technological features
 of CNC equipment used.
 Any way,
 fixed disposition of
@@ -243,7 +243,7 @@ Then we define cutting path as tuple
 Here $i_1, i_2, \dots, i_K$ is the sequence of segments
 $S_1, S_2, \dots S_K$ processing,
 $M_0$ -- starting point of control program.
-Linear air moves are impicitly defined by the tuple.
+Linear air moves are implicitly defined by the tuple.
 In terms of discrete mathematics,
 the sequence is a permutation,
 i.e. an ordered set of natural numbers $1\dots K$,
@@ -321,7 +321,7 @@ CNC machine maintenance
 as well as other operational expenses.
 
 Note that in general cutting cost is not
-proprtional to cutting time,
+proportional to cutting time,
 since it also depends on cutting modes.
 It can be estimated like in (\ref{cut-time}):
 \begin{equation}
@@ -345,11 +345,10 @@ In its turn,
 the task of finding appropriate unit costs
 $C_{on}, C_{off}$ and $C_{pt}$
 for specific equipment and material
-is  low-studied itself.
-\cite{Tavaeva2015Nov} contains some data concerning this problem
-for cutting carbon and stainless steel
-as well as aluminium and its alloys
-with laser CNC machine ByStar 3015.
+is  low-studied itself,
+refer to
+\cite{Tavaeva2015Nov},
+\cite{tavaeva2014issue}.
 
 When different pierce technologies are used,
 (\ref{cut-cost}) becomes
@@ -363,7 +362,8 @@ cost of piercing of kind $j$.
 
 In any case,
 the value of above objective function
-depends entirely on the tuple (\ref{tuple})
+depends entirely on the tuple
+(\ref{tuple})
 elements,
 i.e. the cutting path.
 In detail,
@@ -378,7 +378,8 @@ Therefore,
 mentioned above problems
 of cutting path optimizations may be
 stated as minimization of some objective function $F$,
-defined on set $G$ of addmisible tuples (\ref{tuple}):
+defined on set $G$ of addmisible tuples
+(\ref{tuple}):
 \begin{equation}
     F(ROUTE) \to \min_{ROUTE \in G}
     \label{minimize}
@@ -397,12 +398,13 @@ on admissible segments
 $S_1, S_2, \dots S_K$.
 
 This leads to the fact that
-there are no general algorithms for solving the problem (\ref{minimize})
+there are no general algorithms for solving the problem
+(\ref{minimize})
 described in the scientific literature.
 Nevertheless,
 some narrow classes of problems
 exist,
-that allow efficent optimization algorithms to be developed,
+that allow efficient optimization algorithms to be developed,
 see \cite{dewil2012heuristics}.
 We mention four such classes:
 
@@ -429,11 +431,11 @@ We mention four such classes:
     However, it may cut the contour in sections,
     or stated otherwise: a contour can be pre-empted.
     This approach reduces the complexity of full problem
-    by discretiztion of possible pierce point set and therefore
+    by discretization of possible pierce point set and therefore
     contour entry points as well.
     Set of contour exit points is equal to that of
     entry points, however,
-    contour exit point is not neccesary
+    contour exit point is not necessary
     a point of cutting end
     (where cutting head is switched off),
     because cutting can continue to another contour.
@@ -457,7 +459,7 @@ We mention four such classes:
     $S = MM^*$ with lead-in and lead-out excluded.
     Unlike full cutting segments,
     basic ones doesn't assume cutting direction,
-    containig only geometrical data.
+    containing only geometrical data.
     When standard cutting technique is used only,
     the set of basic segments $\bigcup B^S = \bigcup C_i$
     (the set of bounding contours).
@@ -482,7 +484,7 @@ segment processing
 $I = (i_1, i_2, \dots i_K)$.
 Modern CNC cutting equipment cannot guarantee
 positioning of cutting head inside the contour
-that is alredy cut,
+that is already cut,
 because the part can freely move
 (or even drop)
 after it is detached from the sheet.
@@ -536,6 +538,7 @@ Of many recent papers
 on GTSP cutting optimization algorithms,
 we note
 \cite{Vicencio2014Sep},
+\cite{dewil2014construction},
 \cite{yu2014route},
 \cite{Karapetyan2012Jun},
 \cite{Yang2010},
@@ -618,7 +621,7 @@ of choosing among finite number of
 candidates.
 But we are to solve
 problem of both discrete and
-continuous optimiztion.
+continuous optimization.
 
 In addition,
 the \textit{Precedence Constraint}
@@ -669,7 +672,7 @@ point (assumed to be fixed)
 lay on both sides of cutting segment
 (i.e. line or circle containing the latter),
 optimal position is an
-inersection of line $M_{i-1}M_{i+1}$
+intersection of line $M_{i-1}M_{i+1}$
 with segment itself
 $$
 M_i = M_{i-1}M_{i+1} \cap S_i
@@ -720,10 +723,10 @@ Similar to
 (ALS)
 method,
 the complete process
-for positioing all the pierce points
+for positioning all the pierce points
 $M_i, i \in \overline{1,k}$
 could be called
-\textit{Alternative Fermat Principle}
+\textit{Alternating Fermat Principle}
 and organized as follow:
 \begin{itemize}
   \item Randomly choose initial position $M_i \in C_i, \forall i$
@@ -781,7 +784,7 @@ $$
 \mathcal L(I') = \min_{M_1, M_2, \dots M_k} \mathcal L(M_1, M_2, \dots M_k | I')
 $$
 
-To build neighbourhoods
+To build neighborhoods
 $\mathcal N^k(I)$
 of different structures,
 various techniques are used.
@@ -792,7 +795,7 @@ popular metrics.
 \begin{itemize}
 \item All pairwise permutations of the current one
 $I=(i_1, i_2, \dots, i_k)$.
-This neighbourhood can be
+This neighborhood can be
 generated using Levenshtein distance
 
 \item Permutations of three items (contours to cut).
@@ -805,7 +808,7 @@ some value
 (algorithm parameter)
 
 \item In a similar manner,
-quadriple permutations are considered,
+quadruple permutations are considered,
 limited to some pairwise distance
 
 \item Cyclic permutations inside a sequential block of arbitrary length
@@ -816,11 +819,11 @@ limited to some pairwise distance
 \end{itemize}
 
 When some technique yields
-too large neighbourhoods,
+too large neighborhoods,
 it can be easily limited
 by simple heuristics,
 just as the one used for
-triple and quadriple permutations.
+triple and quadruple permutations.
 
 Besides,
 various options of
@@ -987,7 +990,7 @@ The quality of the constructed
 cutting path can be visually compared
 on Fig. \ref{gtsp-path} and Fig. \ref{ccp-path}.
 
-Values of $L_{off}$ are in good compliance for two algorihtms used
+Values of $L_{off}$ are in good compliance for two algorithms used
 as well as shapes of the paths themselves.
 
 Dual relaxation finds even slightly shorter tool path,
@@ -1010,7 +1013,15 @@ The new heuristic algorithm
 for solving
 Continuous Cutting Problem
 for CNC cutting machine
-is described end evaluated...
+is described and evaluated.
+
+This work requires
+further investigation
+towards adoption of
+various technological constraints
+for thermal CNC cutting
+referred to in
+\cite{Petunin2016Dec}.
 
 \begin{ack}
 The work was supported by Act 211 Government of the Russian Federation,
