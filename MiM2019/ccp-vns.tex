@@ -154,33 +154,22 @@ and final tool path contains all the parts contours.
 Let us introduce some notation for tool path components.
 
 We denote $A_1, A_2, \dots A_n$ -- two-dimensional shapes
-(closed sets)
+(i.e. the parts to cut)
 that are single- or multiple-connected
 regions of Euclidean plane
 $\mathbb R^2$.
 They are bounded by one or several closed curves
 (bounding contours)
-$C_1, C_2, \dots C_N,
-A_i, C_j \subset \mathbb R^2,
+$C_1, C_2, \dots C_N$,
+$A_i, C_j \subset \mathbb R^2,
 i \in \overline{1, n},
 j \in \overline{1, N},
 n \leqslant N)$.
-Objects $A_1, A_2, \dots A_n$
-represent plain parts to cut.
 
 Let also define plane area
 $B \subset \mathbb R^2$,
 the model of
 sheet material, from which parts are to be cut out.
-In general,
-this area can be of arbitrary complex shape
-(contain several non-rectangular pieces),
-but in context of tool path optimization
-we will assume it to be
-one closed point set bounded
-(as well as a detail) by one outer contour.
-The holes
-(inner contours) are acceptable either.
 We will suppose the nesting
 (position of the parts within $B$)
 somehow fixed already,
@@ -208,15 +197,6 @@ M^*(x^*,y^*) \in \mathbb R^2$.
 We suppose
 the cut direction is defined
 in every point of segment $S$.
-In case when there are no
-closed loops inside segment,
-cut direction at each point of segment
-is defined uniquely by the starting
-point of segment $M$
-(pierce point).
-Tool path can contain closed loops
-not only as part bounding contours,
-but also to improve cutting quality.
 
 Using the notion of cutting segment,
 all the CNC machine cutting technics
@@ -354,16 +334,6 @@ is  low-studied itself,
 refer to
 \cite{Tavaeva2015Nov},
 \cite{tavaeva2014issue}.
-
-When different pierce technologies are used,
-(\ref{cut-cost}) becomes
-\begin{equation}
-    F_{cost} = L_{on}\cdot C_{on} + L_{off}\cdot C_{off}
-    + \sum_{j=1}^p N_{pt}^j \cdot C_{pt}^j
-    \label{piercings-cost}
-\end{equation}
-using $C_{pt}^j$ for
-cost of piercing of kind $j$.
 
 In any case,
 the value of above objective function
@@ -702,7 +672,7 @@ as seen on Fig. \ref{fermat}.
 
 \begin{figure}
   \begin{center}
-  \tikz[rotate=27,scale=1.3]{
+  \tikz[rotate=27,scale=1.1]{
       \draw[thick]
           (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_i$};
       \fill[black]
