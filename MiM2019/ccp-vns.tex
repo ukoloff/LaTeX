@@ -19,11 +19,12 @@
 
 \title{On the new Algorithm for Solving Continuous Cutting Problem}
 
-\author[urfu]{Petunin A.A}
+\author[urfu,imm]{Petunin A.A}
 \author[urfu]{Polishchuk E.G.}
 \author[urfu]{Ukolov S.S}
 
 \address[urfu]{Ural Federal University, Yekaterinburg, Russia}
+\address[imm]{Institute of Mathematics and Mechanics, UBr RAS, Yekaterinburg, Russia}
 
 \begin{abstract}                % Abstract of not more than 250 words.
 The problem of tool path optimization
@@ -154,33 +155,22 @@ and final tool path contains all the parts contours.
 Let us introduce some notation for tool path components.
 
 We denote $A_1, A_2, \dots A_n$ -- two-dimensional shapes
-(closed sets)
+(i.e. the parts to cut)
 that are single- or multiple-connected
 regions of Euclidean plane
 $\mathbb R^2$.
 They are bounded by one or several closed curves
 (bounding contours)
-$C_1, C_2, \dots C_N,
-A_i, C_j \subset \mathbb R^2,
+$C_1, C_2, \dots C_N$,
+$A_i, C_j \subset \mathbb R^2,
 i \in \overline{1, n},
 j \in \overline{1, N},
 n \leqslant N)$.
-Objects $A_1, A_2, \dots A_n$
-represent plain parts to cut.
 
 Let also define plane area
 $B \subset \mathbb R^2$,
 the model of
 sheet material, from which parts are to be cut out.
-In general,
-this area can be of arbitrary complex shape
-(contain several non-rectangular pieces),
-but in context of tool path optimization
-we will assume it to be
-one closed point set bounded
-(as well as a detail) by one outer contour.
-The holes
-(inner contours) are acceptable either.
 We will suppose the nesting
 (position of the parts within $B$)
 somehow fixed already,
@@ -208,15 +198,6 @@ M^*(x^*,y^*) \in \mathbb R^2$.
 We suppose
 the cut direction is defined
 in every point of segment $S$.
-In case when there are no
-closed loops inside segment,
-cut direction at each point of segment
-is defined uniquely by the starting
-point of segment $M$
-(pierce point).
-Tool path can contain closed loops
-not only as part bounding contours,
-but also to improve cutting quality.
 
 Using the notion of cutting segment,
 all the CNC machine cutting technics
@@ -354,16 +335,6 @@ is  low-studied itself,
 refer to
 \cite{Tavaeva2015Nov},
 \cite{tavaeva2014issue}.
-
-When different pierce technologies are used,
-(\ref{cut-cost}) becomes
-\begin{equation}
-    F_{cost} = L_{on}\cdot C_{on} + L_{off}\cdot C_{off}
-    + \sum_{j=1}^p N_{pt}^j \cdot C_{pt}^j
-    \label{piercings-cost}
-\end{equation}
-using $C_{pt}^j$ for
-cost of piercing of kind $j$.
 
 In any case,
 the value of above objective function
@@ -587,7 +558,10 @@ and straight line segments.
 It is tempting to reduce
 CCP to
 Touring Polygons Problem
-(see \cite{Qin2017Nov} for example),
+(see
+\cite{Dror1999Mar}
+and
+\cite{Qin2017Nov}),
 but we consider more general problem.
 
 In our notations Continuous Cutting Problem is to find:
@@ -608,8 +582,14 @@ $$
 $$
 where we suppose
 $M_{i_0} = M_{i_{k+1}} = M_0$
-in sake of brevity.
+for the brevity sake.
 
+Since
+\cite{Arkin1996}
+\textit{CCP}
+is also referred to as
+\textit{TSP-N}
+(Travelling Salesman Problem with Neighborhoods).
 This problem is often
 reduced to GTSP
 (Generalized Traveling Salesman Problem)
@@ -622,7 +602,12 @@ of choosing among finite number of
 candidates.
 But we are to solve
 problem of both discrete and
-continuous optimization.
+continuous optimization,
+using two-step process
+(see
+\cite{Lee2006Dec}
+for alternative application
+of these idea).
 
 In addition,
 the \textit{Precedence Constraint}
@@ -688,7 +673,7 @@ as seen on Fig. \ref{fermat}.
 
 \begin{figure}
   \begin{center}
-  \tikz[rotate=27,scale=1.3]{
+  \tikz[rotate=27,scale=1.1]{
       \draw[thick]
           (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$S_i$};
       \fill[black]
@@ -853,7 +838,10 @@ additional constraints,
 caused by technological features
 of CNC equipment.
 Most popular of them is
-\textit{Precedence Constraint}.
+\textit{Precedence Constraint},
+see
+\cite{Veeramani1998Jul}
+for example.
 
 Luckily, it can be easily accounted
 inside proposed algorithm.
