@@ -59,6 +59,18 @@ Piercings are operations where the laser cutting tool initiates the material.
 Piercings is selected according to the material type, its thickness and cutting parameters.
 In order to avoid material beading and part deformation the piercings must be selected by some distance from contour.
 
+During thermal cutting the ``burning out'' and ``sweeping'' of material are occurred.
+Due to the fact the contour of parts and cutting tool path are not matched.
+The cutting tool is moved by equidistant curve of contour (Fig. \ref{elements}).
+
+The set of precedence constraint is taken into account [1].
+In [2] shown that the precedence constraint is due to the features of portal type machine.
+The contour is fully cut, it detaches from the rest of the material and can possibly shift its position,
+and thus the additional cuts within this area may be inaccurate \cite{Dewil2015}.
+Consequently if the outer contour consists of inner contour,
+then inner contour need to be cut before the outer contour is cut.
+Fig. \ref{elements} presents example of cutting precedence of contour by number 1-3.
+
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{elements.png}
@@ -66,6 +78,232 @@ In order to avoid material beading and part deformation the piercings must be se
   \label{elements}
   \end{center}
 \end{figure}
+
+During development of NC program the optimization problems of cutting tool path are arisen.
+The cutting cost $F_{cost}$ are one of numerical characteristics
+that defines the effectiveness of NC program for special set of parts.
+$F_{cost}$ is calculated by [4]:
+
+\begin{equation}
+F_{cost} =
+L_{on} \cdot C_{on} +
+L_{off} \cdot C_{off} +
+N_{pt} \cdot C_{pt}
+\to \min
+\label{cost}
+\end{equation}
+
+$L_{on}$ is length of air tool path;
+$L_{off}$ is length of working tool path;
+$C{on}$ is cost of air tool path unit;
+$C_{off}$ is cost of working tool path unit;
+$N_{pt}$ is numbers of piercing;
+$C_{pt}$ is cost of one piercing.
+
+In general when using different types ($j = \overline{1, k}$) of piercing
+the $F_{cost}$ is calculated by:
+
+\begin{equation}
+  F_{cost} =
+  L_{on} \cdot C_{on} +
+  L_{off} \cdot C_{off} +
+  \sum_{j=1}^k L_{pt}^j \cdot C_{pt}^j
+  \to \min
+  \label{cost-n}
+\end{equation}
+
+The problem of cost function minimization is considered as
+\textit{generalized travelling salesman problem (GTSP) with restrictions}
+[4, 5].
+The formalization of minimization problem of cutting time and cost
+for CNC sheet cutting machines is presented in [4].
+
+In \cite{Dewil2016Nov,Hoeft1997Sep}
+the following classes of cutting tool routing problems
+for CNC sheet cutting machines are allocated:
+
+\begin{itemize}
+
+\item The Traveling Salesman Problem – TSP;
+
+\item The Generalized Traveling Salesman Problem – GTSP;
+
+\item The Continuous Cutting Problem – CCP;
+
+\item The End Point Cutting Problem – ECP;
+
+\item Intermittent Cutting Problem – ICP;
+
+\item Based on conception of contours cutting by segment \cite{Petunin2015Nov}
+the new class of optimization tool routing problem is presented:
+Segment Continious Cutting Problem (SCCP).
+
+\end{itemize}
+
+In optimization problem (\ref{cost-n})
+there are difficulties in calculating the basic parameters
+$C_{on}, C_{off}, C_{pt}$,
+depending on many factors.
+For CNC laser cutting machines $C_{on}, C_{off}, C_{pt}$
+depend on the type of laser used in CNC machine,
+type and thickness of treatment material.
+The dependence on selected factors is defined by analytically or tabular functions.
+The formulas of $C_{on}, C_{off}, C_{pt}$
+calculation and their values may significantly differ for various CNC sheet cutting machines.
+It is worth noting that time per pierce in laser cutting process is calculated in [6].
+In [7] the laser cutting cost is compared with water jet,
+plasma and oxygen cutting costs when treatment sheet material of St3
+(thicknesses $\Delta=3-10$ mm).
+In [8] the assessment of plasma and $CO_2$ laser cutting machines operating cost is performed.
+But it should be noted that the calculation of mentioned above parameters
+remains outside the scope of modern research,
+hence the research for $C_{on}, C_{off}, C_{pt}$
+calculation and consequently exact calculation of cost function $F_{cost}$
+is actual problems today, which is solved in this article.
+
+As seen from (\ref{cost-n})
+$F_{cost}$
+also depends on
+$L_{on}, L_{off}$ and $N_{pt}$,
+in turn $L_{on}$ depends on value of working tool speed $V_{on}$.
+The value of $V_{on}$ is usually constant parameter
+which is programming during the NC program development,
+but as the practical shows [9, 10]
+the value of actual working speed of cutting tool
+is varied by various technological factors and parameters of NC programs.
+Consequently problem of accurate calculation of cost function \ref{cost-n}
+in optimization problem of tool path routing is arisen.
+In order to solve the encountered problem
+the need of correction parameters calculation for $V_{on}$
+values is emerged.
+It should be noted that
+the question of exact calculation of  $V_{on}$ values remains open,
+then there is a need of research in order to calculate the correction parameters of  $V_{on}$
+values and consequently cutting cost in this article for CNC laser cutting machines.
+
+It is observed that $L_{on}, L_{off}$ and $N_{pt}$
+are interdependent.
+In some cases the reduction of  $N_{pt}$
+leads to some increase of total cutting tool path length value $L_{on}$
+due to cutting motion between contours.
+Wherein the length of air path $L_{off}$ is reduced.
+
+The problem of cost function minimization (\ref{cost-n})
+during treatment of figured parts from sheet material
+at CNC cutting machines is solved by the optimization of parameters
+$L_{on}, L_{off}$ and $N_{pt}$.
+As the practice shows the length of cutting tool motion  $L_{on}$
+and numbers of pierce points $N_{pt}$
+have the greatest impact on the cutting cost compared with the length of air tool motion $L_{off}$.
+Depending on the thickness and type of material the $C_{pt}$
+can reach up to 33\% from $C_{on}$
+and at the same time can exceed the $C_{off}$
+by three orders [14].
+Consequently the most interest are the methods of solving the problem aimed at the minimizing
+$L_{on}$ and $N_{pt}$.
+
+Analyze of existing methods of cost function minimizing showed that
+airtime and length of air motion are usually minimized when optimizing the path of cutting tool.
+In some works an algorithms for optimizing the airtime of cutting tool are considered.
+Yang et al. \cite{Yang2010}
+described the tool path airtime optimization problem in leather cutting.
+They proposed the hybrid intelligence algorithm.
+Castelino et al. \cite{d2003tool}
+described an algorithm for minimizing the airtime of cutting tool
+by optimally connecting the tool path.
+They considered the heuristic methods that are used
+in order to obtain the optimal or near optimal solutions.
+Murzakaev et al [17] considered the problem of cutter air motion length minimization.
+The model is presented for standard cutting technique.
+In order to minimize cutter air motion length the three metaheuristics
+(Simulated Annealing, Threshold Accepting, Great Deluge Algorithm) were chosen.
+They proposed the generalized scheme of problem solving.
+Chen et al \cite{Chen2014Dec}
+proposed algorithm of air motion path minimizing.
+They divided into two sub-optimal problems
+(pattern cutting order and entry/exit cutting point)
+and solve ones using an ant colony optimization algorithm (min-max ant system).
+Lee and Kwon \cite{Lee2006Dec}
+considered tool path problem and proposed two-step genetic algorithm.
+The aim is to minimize the air moving of cutting tool.
+They combined global search for piercing optimization and local search for part sequencing.
+Sherif et al \cite{Sherif2014Oct}
+presented the two stage sequential optimization procedure for nesting and cutting sequence.
+The objectives are maximizing material utilization and minimization of laser cutting tool air motion.
+They considered simulated annealing algorithm in order to find the near optimal cutting tool path.
+
+It should be noted that
+the deficiency of research in the field of reducing the numbers of pierce points $N_{pt}$
+and length of cutting tool motion  $L_{on}$
+in solving the optimization problem (\ref{cost-n}).
+In \cite{Manber1984Jan}
+the authors consider the problem of pierce point numbers reducing
+in thermal cutting of sheet material in terms of graph theory.
+It should be noted that the precedence constrain was not taken into account
+and the intersection of the existing cuts is allowed.
+The problem of cutting path optimization in terms of cutting of parts group
+with one of pierce point is considered in [22].
+The last stage of solving the problem
+(optimization of the cutter routing at idle)
+is reduced to the TSP.
+In [23] the problem of tool routing optimization at CNC machines is formulated
+and the mathematical model of total cutting time minimization is proposed
+by using standard and special cutting techniques.
+Verhoturov et al. [24] present ``chained'' cutting technique
+in order to minimize the numbers of pierce points.
+
+The one of cutting time and cost minimization methods is
+application of special cutting techniques.
+In order to optimize the cutting parameters
+and to observe the necessary cutting requirements
+the some special cutting techniques are used.
+There are ``chained'' cutting [24],
+common cut [25], partial cutting of contour
+with the subsequent completion of the contour cutting
+after cutting the contour of another part, et al.
+Petunin and Krotov [25] proposed the
+classification of various cutting techniques
+used to form the cutting tool path.
+The cutting techniques are classified into three main classes:
+standard cutting, multi-contour cutting and multi-segment cutting technique.
+The every contour is cut with pierce point by using
+\textit{standard cutting technique}.
+The numbers of pierce points equal numbers of contours.
+The several contours are cut in one cutting segment
+with one pierce point by using
+\textit{multi-contour cutting technique}.
+For example, the multi-contour cutting includes ``chained'' cutting, common cut.
+The several cutting segments are cut with several pierce points by using
+\textit{multi-segment technique}.
+
+The considered techniques applied for various types of parts
+and their effectiveness for different types are varied.
+In some cases the effectiveness reaches the minimum value.
+For this reason in order to minimize $F_{cost}$
+the development of special cutting techniques
+for various geometrical types of parts is actual problem today.
+The circle, polygon parts are often found during sheet-working production
+in engineering industry.
+The treatment of parts without additional cut is impossible
+with the help of the existing multi-contour cutting techniques.
+Due to this fact the special cutting technique
+for circle and polygon parts is proposed in this article.
+
+The article is organized as follows.
+The model of $F_{cost}$
+calculation and basic parameters
+$C_{on}, C_{off}, C_{pt}$
+is presented in Section 2.1.
+Exact calculation of $V_{on}$
+values and values of correction coefficients for $V_{on}$
+is given in Section 2.2.
+The special cutting technique for circle and polygon parts
+is proposed in Section 3.
+The results of the computational experiment,
+which shows a statistically significant improvement
+in the value of the objective function
+compared to using the standard cutting technique,
+are presented in Section 4.
 
 \section{Exact calculation of cost function $F_{cost}$ in cutting sheet material at CNC laser $CO_2$ machine}
 
@@ -201,6 +439,52 @@ The special cutting techniques use more complexity algorithm in contrast to stan
 \section{Conclusion}
 
 In this article the following results were obtained:
+
+\begin{enumerate}
+
+\item  The problem of cutting tool path optimization on CNC machines was considered.
+The model of cost function $F_{cost}$ and basic parameters calculation is presented for CNC laser cutting machines.
+$F_{cost}$ includes the costs of electricity and expendable materials,
+maintenance of a CNC machine and other operating costs incurred during cutting.
+The problem of exact calculation of cost function  $F_{cost}$
+in optimizing of cutting tool route related with search of adequate value  $F_{cost}$,
+which calculation depends on basic parameters $C_{on}, C_{off}, C_{pt}$
+
+\item The value of actual working speed of cutting tool is varied
+by various technological factors and parameters of NC programs.
+The problem of accurate calculation of cost function (1.2)
+in optimization problem of tool path construction is solved in this article.
+The correction parameters for $V_{on}$ values
+is presented for type of material AMg3M ($\Delta=1-5$ mm) and St10kp ($\Delta=1-10$ mm)
+
+\item The one of cutting time and cost minimization methods is application of special cutting techniques.
+In order to optimize the cutting parameters and to observe the necessary cutting requirements
+the some special cutting techniques are used.
+In this article the effective special cutting techniques
+for the common geometrical types of parts
+widely used in blank production of engineering plant are developed
+
+\item The computational experiments shown that
+application of presented special cutting technique allows to
+reduce the basic cutting parameters of $N_{pt}, L_{on}$
+and $L_{off}$ compared with standard cutting techniques.
+The calculation of $F_{cost}$ is performed by model presented in Section 2.1.
+In turn the calculation of  $F_{cost}$ is carried out by values of
+$V_{on}=const$ and $V_{on}=var$
+the results show value of $F_{cost}$ when $V_{on}=const$  is 30\% lower
+than value of $F_{cost}$  when $V_{on}=var$.
+The basic parameters of $N_{pt}, L_{on}$
+and $L_{off}$
+are reduced.
+For example, when using the special cutting technique
+$N_{pt}$ is reduced by 11\%  compared with standard cutting.
+The reduction $N_{pt}, L_{on}$
+and $L_{off}$
+leads to reduction of $F_{cost}$ by 5\%
+using special cutting technique (Fig. \ref{special})
+compared with standard cutting (Fig. \ref{std}).
+
+\end{enumerate}
 
 \bibliographystyle{splncs04}
 \bibliography{tavaeva}
