@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage[english]{babel}
 \usepackage{textcomp}
+\usepackage{multirow}
 
 \graphicspath{{tavaeva/}}
 
@@ -404,6 +405,19 @@ The special cutting techniques use more complexity algorithm in contrast to stan
 
 \section{Computational experiments}
 
+Based on algorithms presented on Section 3.2
+the cutting tool route for nesting is automatically built at CAD/CAM ``SIRIUS''.
+In order to evaluate the the effectiveness of developed special cutting techniques
+the four nesting is obtained by using standard (Fig. \ref{std}, \ref{spec-a})
+and special (Fig. \ref{special}, \ref{spec-b})
+cutting techniques for various types of parts including circles
+(Fig. \ref{std}, \ref{special}) and polygon (Fig. \ref{spec-a}, \ref{spec-b}) parts.
+
+Fig. \ref{std} presents the cutting tool path
+built for various geometrical types of parts including circles using standard cutting techniques.
+Fig. \ref{special} presents the cutting tool path built for various geometrical types of parts
+including circles using special cutting techniques.
+
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{std.png}
@@ -420,10 +434,27 @@ The special cutting techniques use more complexity algorithm in contrast to stan
   \end{center}
 \end{figure}
 
+Table \ref{f-cost} presents computational results of basic cutting parameters and values of $F_{cost}$
+for obtained NC programs developed based on cutting tool path for nesting
+(Fig. \ref{std} - \ref{spec-b}).
+The calculation of $F_{cost}$
+was carried out by using model presented in Section 2.1 and 2.2.
+The results are calculated for AMg3M $\Delta = 5$ mm.
+The following notations in table 2 are used:
+$n$ – numbers of frames in NC program;
+$F_{cost}$ - the cutting cost calculated taking into account that $V_{on}=const$;
+$F^n_{cost}$ - the cutting cost calculated taking into account that $V_{on}=var$  and depends on the frames numbers of NC program.
+
+Fig. \ref{spec-a}
+presents the cutting tool path built for various geometrical types of parts
+including polygons and circles using standard cutting techniques.
+Fig. \ref{spec-b} presents the cutting tool path built for various geometrical types of parts
+including polygons and circles using special cutting techniques.
+
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{spec-a.png}
-  \caption{Cutting scheme example of parts using special cutting technique}
+  \caption{Cutting scheme example of parts using standard cutting technique}
   \label{spec-a}
   \end{center}
 \end{figure}
@@ -435,6 +466,28 @@ The special cutting techniques use more complexity algorithm in contrast to stan
   \label{spec-b}
   \end{center}
 \end{figure}
+
+The results presented in Table \ref{f-cost} indicate that
+the basis cutting parameters are reduced by using special cutting techniques
+compared with standard cutting.
+In turn the reduction of $N_{pt}$, $L_{on}$ and $L_{off}$
+leads to reduction of $F_{cost}$  by 14\%
+using special cutting technique (Fig. \ref{spec-b})
+compared with standard cutting (Fig. \ref{spec-a}).
+
+\begin{table}
+  \begin{tabular}{c r | c c | r r r | r | r r | r}
+  Material & $\Delta$, mm & Technique & Fig. & $N_{pt}$ & $L_{on}, m$ & $L_{off}, m$ & $n$ & $F_{cost}$ & $F^n_{cost}$ & \% \\
+  \hline \hline
+  \multirow{4}{*}{AMg3M} & \multirow{4}{*}{5} & Standard & Fig. \ref{std}     & 66  & 63.3   & 20.34 & \multirow{2}{*}{169} & 22908.32 & 28519.79 & \multirow{2}{*}{4.5} \\
+                         &                    & Special  & Fig. \ref{special} & 32  & 63.55  & 11.46 &                      & 21890.75 & 27524.38 & \\
+                         &                    & Standard & Fig. \ref{spec-a}  & 407 & 117.78 & 50.47 & \multirow{2}{*}{888} & 51790.31 & 67100.44 & \multirow{2}{*}{4.7}\\
+                         &                    & Special  & Fig. \ref{spec-b}  & 361 & 114.93 & 47.61 &                      & 49371.17 & 64310.82 & \\
+  \hline
+  \end{tabular}
+  \caption{Results of $F_{cost}$ calculation}
+  \label{f-cost}
+\end{table}
 
 \section{Conclusion}
 
