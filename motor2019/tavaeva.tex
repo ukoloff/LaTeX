@@ -387,6 +387,31 @@ In engineering industry the geometrical forms of most parts are polygon and circ
 This paper considers the special cutting techniques for polygons and circles parts.
 The special cutting techniques use more complexity algorithm in contrast to standard cutting technique.
 
+In [26] the cutting techniques for circle and triangle parts were proposed.
+The effectiveness conditions of proposed techniques were obtained.
+Solving problem of irregular cutting the method of parts association
+in group or ``block'' is often used.
+During nesting the ``block'' is similarly the one part,
+i.e. the all movements / rotations are made simultaneously
+with all the details included in the ``block''.
+The association in ``blocks'' is actually in our case.
+Fig. \ref{8} presents the scheme of circle parts cutting using special cutting technique.
+
+The continuous cutting of parts is performed.
+At first the upper sectors are cut.
+At second the lower sectors are cut last.
+Wherein moving from one sector to another is implemented by cutting motion (Fig. \ref{8}).
+The proposed cutting technique reduces the number of piercing, air motions,
+but increases the cutting motion.
+Consequently the cutting motion length of cutter needs to be taken into account
+when moving from one contour to another.
+These cutting costs should not exceed the costs of piercing.
+Based on results [26],
+the algorithm of cutting tool route automation for CAD/CAM ``SIRIUS'' was developed.
+While cutting tool routing the Part Hardness Rule is taken into account [27].
+The proposed algorithm is applicable for any size circles
+and allows to automatically build the cutting tool route.
+
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{8.png}
@@ -395,6 +420,23 @@ The special cutting techniques use more complexity algorithm in contrast to stan
   \end{center}
 \end{figure}
 
+The special cutting technique for triangle parts was proposed [26].
+In engineering manufacturing the most geometrical form of parts is polygon.
+Therefore the algorithm of cutting tool route automation for polygon parts
+was developed based on proposed special cutting technique for CAD/CAM ``SIRIUS''.
+While cutting tool routing the Part Hardness Rule is taken into account [27].
+The algorithm can be used by designing NC program in interactive mode.
+The features of proposed technique are the reducing of piercing,
+the cutting and air motions of cutter.
+The proposed algorithm is applicable for various one-sided symmetry polygons.
+The proposed technique significantly reduces numbers of piercing,
+cutting and air motions of cutter for polygon parts.
+The polygons can be arranged in the cell type.
+Fig. \ref{tri} presents the cutting scheme of triangle parts.
+The parts are combined by ``blocks'' and within each ``block''
+the cutting is performed by one piercing.
+Moving from one ``block'' to another is implemented by air.
+
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{tri.png}
@@ -402,6 +444,11 @@ The special cutting techniques use more complexity algorithm in contrast to stan
   \label{tri}
   \end{center}
 \end{figure}
+
+In order to evaluate the effectiveness
+of developed special cutting techniques
+the computing experiments were conducted at CAD/CAM ``SIRIUS''
+and obtained results is presented in Section 4.
 
 \section{Computational experiments}
 
