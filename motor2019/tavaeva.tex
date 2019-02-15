@@ -2,6 +2,7 @@
 
 \usepackage{graphicx}
 \usepackage[english]{babel}
+\usepackage{amsmath}
 \usepackage{textcomp}
 \usepackage{multirow}
 
@@ -388,6 +389,124 @@ C^{on}_{elec} = P_{on} t_{on} C_{elec}
   \label{eq1.9}
   C^{on}_A = \frac{1}N \frac{C_{equip}}{1920} t_{on}
 \end{equation}
+
+In order to calculate $C_{off}$
+the following notations are entered:
+$P_{off}$ – the electricity costs for 1 hour of CNC laser machine work on air motion, $kW/h$;
+$t_{off}$ – the time spent on 1 m of air tool motion, h.
+
+\begin{equation}
+  \label{eq1.10}
+  C_{off}
+  = P_{off} t_{off} C_{elec}
+  + C_{salary} t_{off}
+  + \frac{1}N \frac{C_{equip}}{1920} t_{off}
+\end{equation}
+
+In order to calculate $C_{pt}$
+the following notations for cost parameters calculation on 1 pierce point are entered:
+$C^{pt}_{exp.mat}$ - the cost of expendable materials
+(for example, adjudge, protective glass, gas tubes);
+$C^{pt}_{tech}$ - the cost of technological gas
+(nitrogen or oxygen depending on processed material);
+$C^{pt}_{las}$ - the cost of cutting gas
+(when working on a gas flow laser);
+$C^{pt}_{elec}$ - the cost of electricity;
+$C^{pt}_{salary}$ - the cost related with salary of accompanying personnel;
+$C^{pt}_A$ - amortization of equipment.
+
+\begin{equation}
+  \label{eq1.11}
+  C_{pt}
+  = C^{pt}_{elec}
+  + C^{pt}_{exp.mat}
+  + C^{pt}_{las}
+  + C^{pt}_{tech}
+  + C^{pt}_{salary}
+  + C^{pt}_A
+\end{equation}
+
+In order to calculate $C^{pt}_{elec}, C^{pt}_{exp.mat}, C^{pt}_{las}, C^{pt}_{tech},
+C^{pt}_{salary}, C^{pt}_A$
+the additional notations are entered:
+$P_{pt}$ – the electricity costs for 1 pierce point, $kW/h$;
+$t_{pt}$  – the time spent on 1 pierce point, h.
+
+\begin{equation}
+  \label{eq1.12}
+  C^{pt}_{elec} = P_{pt} t_{pt} C_{elec}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.13}
+  C^{pt}_{exp.mat} = V_{tech} C_{tech M^3} t_{pt}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.14}
+  C^{pt}_{las} = V_{las} C_{las M^3} t_{pt}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.15}
+  C^{pt}_{exp.mat} = \frac{C_{exp.mat.Unit} t_{pt}}{t_{exp.mat.Term}}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.16}
+  C^{pt}_{salary} = C_{salary} t_{pt}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.17}
+  C^{pt}_A = \frac{1}N \frac{C_{equip}}{1920} t_{pt}
+\end{equation}
+
+During calculation of $C_{pt}$
+and $C_{on}$
+the following parameters $C^{pt}_{las}$
+and $C_{las}$ must be taken into account
+when processing of material at flow-through gas laser machines.
+The parameter $C^{pt}_{tech}$
+must be considered during calculation of $F_{cost}$
+when technological gas is applied.
+
+Consequently, $F_{cost}$
+can be written as follows:
+
+\begin{multline}
+  \label{eq1.18}
+  F_{cost}
+  = L_{on} \Big(
+    C^{on}_{elec} + C_{tech} + C_{las} + C_{exp.mat} + C^{on}_{salary} + C^{on}_A
+    \Big)
+  + L_{off} C_{off} \\
+  + N_{pt} \Big(
+    C^{pt}_{elec} + C^{pt}_{exp.mat} + C^{pt}_{las} + C^{pt}_{tech} + C^{pt}_{salary} + C^{pt}_A
+    \Big)
+\end{multline}
+
+The main expendable materials for gas laser include:
+swivel mirrors, focusing lenses, protective glasses, nozzles, adjusting units, gas tubes.
+The main expendable materials for fiber laser are nozzles, protective glasses, focusing lenses.
+And for the case of using solid-state lasers,
+the expendable materials are
+optical pumping lamps, protective glasses, mirrors, a quantron, an active element.
+In [14] the values of cost parameters
+$C_{on}, C_{off}, C_{pt}$
+are presented by taken into account the above parameters (\ref{eq1.3})-(\ref{eq1.17})
+for CNC laser cutting machine by example ByStar 3015.
+For each type of material the parameters $C_{on}, C_{off}, C_{pt}$
+are calculated by taken into account that
+$V_{on}=const$.
+As the practical shown [9, 10]
+the value of actual working speed of cutting tool
+is varied by various technological factors and parameters of NC programs.
+Consequently problem of accurate calculation of cost function (\ref{cost-n})
+in optimization problem of tool path construction is arisen.
+In order to solve the encountered problem
+the need of correction parameters calculation for $V_{on}$
+values is emerged.
 
 \subsection{Calculation of cutting tool speed $V_{on}$
 and correction coefficient depending on the complexity of
