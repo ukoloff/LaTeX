@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage[english]{babel}
 \usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage{textcomp}
 \usepackage{multirow}
 
@@ -530,14 +531,86 @@ The difference in formats is due to the fact that
 almost all CNC systems are equipped with only linear and circular interpolators.
 As a rule the approximation of a complex geometry reduces to a linear approximation.
 
+The functional dependence of $V_{on}$
+should be determined by science-based table functions or analytically.
+The algorithmization of objective function (\ref{cost-n})
+calculation based on science–based determination of function parameters
+is requirement for the development of cutting tool path optimization algorithms.
+The cutting tool route is optimal only if
+the objective function is adequate calculated.
+For this reason the exact parameters values of objective function (\ref{cost-n})
+must be calculated.
+
+The some practical results on determining
+the dependence of cutting tool speed on numbers of frames in NC program
+are given below [10].
+Based on received results the objective function (\ref{cost-n})
+can exactly calculated and optimal cutting tool route can developed.
+
+The research was conducted for following materials:
+10kp (thickness $\Delta=1-10$ mm) and
+AWAIMg3 (thickness $\Delta=1-10$ mm).
+In order to conduct experiments the 150 NC programs
+for cutting of various types of parts with numbers of frames
+$n=\overline{4, 5092}(n \in \mathbb{N})$
+for 10kp
+and 150 NC programs for cutting of various types of parts with numbers of frames
+$n = \overline{10, 1962} (n \in \mathbb N)$
+for AWAIMg3.
+
+The statistical materials were processed by using ``Mathcad''.
+Based on received results the following findings were made:
+
+\begin{enumerate}
+\item
+The actual average speed of cutting tool speed $V_{act}$
+is monotonically decreasing function depending on frames numbers of NC program
+(Fig. \ref{plot});
+
+\item
+The predetermined cutting tool speed $V_{on}$
+coincides with the actual average speed
+when the numbers of frames reaches a certain threshold value $N$.
+When the frames numbers $n < N$,
+then the actual speed is greater than predetermined cutting tool speed,
+if the frames numbers of NC program is arisen ($n>N$)
+then the actual speed is less than
+predetermined cutting tool speed of NC program
+(in the experiments the reduction of average actual cutting tool speed value
+compared with predetermined cutting tool speed in NC program is 70\%);
+
+\item
+The threshold value $N$ is varied for different thickness and grade of material.
+\end{enumerate}
+
 \begin{figure}
   \begin{center}
-  \includegraphics[width=0.77\textwidth]{plot.png}
+  \includegraphics[width=0.6\textwidth]{plot.png}
   \caption{Change of the real cutting tool speed for Amg3M, $\Delta=1$ mm}
   \label{plot}
   \end{center}
 \end{figure}
 
+In order to present the results of computational experiments
+the following notations are introduced:
+$n$ – frames numbers of NC program;
+$V_{act}$ - the actual speed of cutting too;
+$N$ – the frames numbers when $V_{act}=V_{on}$;
+$\sum_n e_n^2$  - the sum of squared deviations of the
+original data from the values of the approximation functions at these points.
+
+When approximation the point chart
+of the dependence of actual speed
+on the numbers of frames by approximating curves in ``Mathcad''
+it was established for all values of studied grade materials
+and thickness that values of $\sum_n e_n^2$
+are achieved by using logarithmic approximation function.
+Fig. \ref{plot} presents following results for material of AWAIMg3 with $\Delta=1$ mm.
+
+Similar results were obtained for AWAIMg3 with $\Delta=2-5$ mm
+and 1.4541 with $\Delta=1-10$ mm.
+The generalized formulas for calculating of cutting tool speed
+by example CNC laser cutting machine ByStar3015 are presented in [28].
 
 \section{Special cutting techniques used during optimization of cutting tool route}
 
