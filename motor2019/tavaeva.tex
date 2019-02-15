@@ -318,6 +318,77 @@ The problem of exact calculation of cost function $F_{cost}$
 in optimizing of cutting tool route related with search of adequate value  $F_{cost}$,
 which calculation depends on basic parameters  $C_{on}, C_{off}, C_{pt}$.
 
+The problem of accurate calculation of cutting cost
+in optimization problem of cutting tool routing applied to CNC laser cutting machine
+(laser type is $CO_2$)
+is considered.
+In order to calculate $C_{on}$
+the following notations for cost parameters calculation on 1 m of cutting tool motion are entered:
+$C_{exp.mat}$ - the cost of expendable materials
+(for example, adjudge, protective glass, gas tubes);
+$C_{tech}$  - the cost of technological gas
+(nitrogen or oxygen depending on processed material);
+$C_{las}$ - the cost of cutting gas
+(when working on a gas flow laser);
+$C^{on}_{elec}$ - the cost of electricity;
+$C^{on}_{salary}$ - the cost related with salary of accompanying personnel;
+$C^{on}_A$ - amortization of equipment.
+In general the  is calculated by:
+
+\begin{equation}
+C_{on} =
+C^{on}_{elec} + C_{tech} + C_{las} + C_{exp.mat} + C^{on}_{salary} + C^{on}_A
+\label{eq1.3}
+\end{equation}
+
+In order to calculate
+$C^{on}_{elec}, C_{tech}, C_{las}, C_{exp.mat}, C^{on}_{salary}, C^{on}_A$
+the additional notations are entered:
+$t_{on}$  - the time spent on 1 m of cutting tool motion, h.;
+$P_{on}$  - the electricity costs for 1 hour of CNC laser machine work on cutting motion, $kW/h$;
+$V_{tech}$  - technological gas consumption, $m^3/h$ ;
+$V_{las}$ - laser gas consumption, $m^3/h$;
+$C_{elec}$  - electricity cost per 1 kW;
+$C_{las M^3}$  - the cost of 1 $m^3$ laser gas;
+$C_{tech M^3}$  - the cost of 1 $m^3$ technological gas;
+$C_{exp.mat.Unit}$  - the cost of expendable materials unit;
+$t_{exp.mat.Term}$  - serviceable life of expendable materials;
+$C_{salary}$ - cost of 1 h work of accompanying personnel;
+$A$ – amortization of 1 h work of CNC laser cutting machine;
+$N$ - useful life of equipment;
+$C_{equip}$  - initial cost of the CNC laser cutting machine.
+They are thus calculated:
+
+\begin{equation}
+\label{eq1.4}
+C^{on}_{elec} = P_{on} t_{on} C_{elec}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.5}
+  C_{tech} = V_{tech} C_{tech M^3} t_{on}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.6}
+  C_{las} = V_{las} C_{las M^3} t_{on}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.7}
+  C_{exp.mat} = \frac{C_{exp.mat.Unit} t_{on}}{t_{exp.mat.Term}}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.8}
+  C^{on}_{salary} = C_{salary} t_{on}
+\end{equation}
+
+\begin{equation}
+  \label{eq1.9}
+  C^{on}_A = \frac{1}N \frac{C_{equip}}{1920} t_{on}
+\end{equation}
+
 \subsection{Calculation of cutting tool speed $V_{on}$
 and correction coefficient depending on the complexity of
 part contours by example of the CNC laser cutting machine ByStar 3015}
