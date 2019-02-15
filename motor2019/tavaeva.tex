@@ -614,89 +614,6 @@ by example CNC laser cutting machine ByStar3015 are presented in [28].
 
 \section{Special cutting techniques used during optimization of cutting tool route}
 
-\subsection{Classification of special cutting techniques}
-
-The special cutting techniques used during minimization of basic objective function
-are classified into three classes
-\cite{Petunin2015Nov}:
-
-\begin{itemize}
-\item Continuous cutting (standard cutting)
-\item Multi-contour cutting
-\item	Multi-segment cutting
-\end{itemize}
-
-In the case of standard cutting techniques
-the each contour is cut by one pierce points,
-motion from one contour to another is carried out by air (Fig. \ref{elements}).
-The multi-contour cutting cuts several contours in one cutting segment.
-Multi-segment cutting cuts one contour in several cutting segments.
-
-For example, the multi-contour cutting technique includes ``hained'' cutting
-(Fig. \ref{chain}),
-snake cutting technique (Fig. \ref{snake}),
-common cut (Fig. \ref{common}).
-
-Using of ``chained'' cutting technique
-the cutting of contours is performed by one piercing
-and the moving to next contour is carried out by cutting motion of cutter
-(Fig. \ref{chain}).
-
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.66\textwidth]{chain.png}
-  \caption{Cutting scheme example of two parts using ``chained'' cutting technique}
-  \label{chain}
-  \end{center}
-\end{figure}
-
-The common cut is applied to cut the contours containing straight-lines.
-The straight-lines of contours are common boundary of nesting contours (Fig. \ref{common}).
-The common rectilinear boundary allows to place parts with half allowance for cutting
-(i.e. kerf).
-The common cut reduces waste material,
-cutting and air motion of cutter.
-
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.66\textwidth]{common.png}
-  \caption{Cutting scheme example of common cut}
-  \label{common}
-  \end{center}
-\end{figure}
-
-Due to the fact that existing special cutting techniques
-do not always provide expected performance of their use
-the development of special cutting techniques
-for some groups of geometrical types contours,
-which are provided the significantly reduced of basic cutting parameters
-$N_{pt}, L_{on}, L_{off}$
-is actual problem today.
-In Section 3.2 the special cutting techniques are proposed
-for the most common geometric types of contours
-used in blank production of engineering plant.
-
-In the current scientific literature
-the conditions of effective application of special cutting techniques are not given.
-For example, application of ``chained'' or snake cutting
-is carried out by additional cuts $L_{add}$
-between contours that increases the  $L_{on}$.
-For this reason the permissible values of  $L_{add}$ need to know
-otherwise the effectiveness of ``chained'' or snake cutting application
-will be reduced to a negative result and value of $F_{cost}$
-will take the value of more than when using standard cutting.
-In [14] the values of $L_{add}$ based on model presented on Section 2.1 are presented.
-
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.6\textwidth]{snake.png}
-  \caption{Cutting scheme example of snake cutting}
-  \label{snake}
-  \end{center}
-\end{figure}
-
-\subsection{Classification of special cutting techniques for circle and polygon parts}
-
 The one method of cutting time and cost minimization is application of special cutting techniques.
 
 In engineering industry the geometrical forms of most parts are polygon and circle.
@@ -768,7 +685,7 @@ and obtained results is presented in Section 4.
 
 \section{Computational experiments}
 
-Based on algorithms presented on Section 3.2
+Based on algorithms presented on Section 3
 the cutting tool route for nesting is automatically built at CAD/CAM ``SIRIUS''.
 In order to evaluate the the effectiveness of developed special cutting techniques
 the four nesting is obtained by using standard (Fig. \ref{std}, \ref{spec-a})
