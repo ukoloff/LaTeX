@@ -548,12 +548,12 @@ Based on received results the objective function (\ref{cost-n})
 can exactly calculated and optimal cutting tool route can developed.
 
 The research was conducted for following materials:
-10kp (thickness $\Delta=1-10$ mm) and
+1.4541 (thickness $\Delta=1-10$ mm) and
 AWAIMg3 (thickness $\Delta=1-10$ mm).
 In order to conduct experiments the 150 NC programs
 for cutting of various types of parts with numbers of frames
 $n=\overline{4, 5092}(n \in \mathbb{N})$
-for 10kp
+for 1.4541
 and 150 NC programs for cutting of various types of parts with numbers of frames
 $n = \overline{10, 1962} (n \in \mathbb N)$
 for AWAIMg3.
@@ -586,7 +586,7 @@ The threshold value $N$ is varied for different thickness and grade of material.
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.6\textwidth]{plot.png}
-  \caption{Change of the real cutting tool speed for Amg3M, $\Delta=1$ mm}
+  \caption{Change of the real cutting tool speed for AWAIMg3, $\Delta=1$ mm}
   \label{plot}
   \end{center}
 \end{figure}
@@ -719,7 +719,7 @@ for obtained NC programs developed based on cutting tool path for nesting
 (Fig. \ref{std} - \ref{spec-b}).
 The calculation of $F_{cost}$
 was carried out by using model presented in Section 2.1 and 2.2.
-The results are calculated for AMg3M $\Delta = 5$ mm.
+The results are calculated for AWAIMg3 $\Delta = 5$ mm.
 The following notations in table 2 are used:
 $n$ – numbers of frames in NC program;
 $F_{cost}$ - the cutting cost calculated taking into account that $V_{on}=const$;
@@ -751,15 +751,15 @@ The results presented in Table \ref{f-cost} indicate that
 the basis cutting parameters are reduced by using special cutting techniques
 compared with standard cutting.
 In turn the reduction of $N_{pt}$, $L_{on}$ and $L_{off}$
-leads to reduction of $F_{cost}$  by 14\%
+leads to reduction of $F_{cost}$ by 4-5\%
 using special cutting technique (Fig. \ref{spec-b})
 compared with standard cutting (Fig. \ref{spec-a}).
 
 \begin{table}
-  \begin{tabular}{c r | c c | r r r | r | r r | r}
-  Material & $\Delta$, mm & Technique & Fig. & $N_{pt}$ & $L_{on}, m$ & $L_{off}, m$ & $n$ & $F_{cost}$ & $F^n_{cost}$ & \% \\
+  \begin{tabular}{c | c | c | c | r r r | c | r r | r}
+  Material & $\Delta$ & Technique & Fig. & $N_{pt}$ & $L_{on}, m$ & $L_{off}, m$ & $n$ & $F_{cost}$ & $F^n_{cost}$ & \% \\
   \hline \hline
-  \multirow{4}{*}{AMg3M} & \multirow{4}{*}{5} & Standard & Fig. \ref{std}     & 66  & 63.3   & 20.34 & \multirow{2}{*}{169} & 22908.32 & 28519.79 & \multirow{2}{*}{4.5} \\
+  \multirow{4}{*}{AWAIMg3} & \multirow{4}{*}{5 mm} & Standard & Fig. \ref{std}     & 66  & 63.3   & 20.34 & \multirow{2}{*}{169} & 22908.32 & 28519.79 & \multirow{2}{*}{4.5} \\
                          &                    & Special  & Fig. \ref{special} & 32  & 63.55  & 11.46 &                      & 21890.75 & 27524.38 & \\
                          &                    & Standard & Fig. \ref{spec-a}  & 407 & 117.78 & 50.47 & \multirow{2}{*}{888} & 51790.31 & 67100.44 & \multirow{2}{*}{4.7}\\
                          &                    & Special  & Fig. \ref{spec-b}  & 361 & 114.93 & 47.61 &                      & 49371.17 & 64310.82 & \\
@@ -788,7 +788,7 @@ by various technological factors and parameters of NC programs.
 The problem of accurate calculation of cost function (1.2)
 in optimization problem of tool path construction is solved in this article.
 The correction parameters for $V_{on}$ values
-is presented for type of material AMg3M ($\Delta=1-5$ mm) and St10kp ($\Delta=1-10$ mm)
+is presented for type of material AWAIMg3 ($\Delta=1-5$ mm) and St1.4541 ($\Delta=1-10$ mm)
 
 \item The one of cutting time and cost minimization methods is application of special cutting techniques.
 In order to optimize the cutting parameters and to observe the necessary cutting requirements
@@ -813,7 +813,7 @@ For example, when using the special cutting technique
 $N_{pt}$ is reduced by 11\%  compared with standard cutting.
 The reduction $N_{pt}, L_{on}$
 and $L_{off}$
-leads to reduction of $F_{cost}$ by 5\%
+leads to reduction of $F_{cost}$ by 4-5\%
 using special cutting technique (Fig. \ref{special})
 compared with standard cutting (Fig. \ref{std}).
 
