@@ -85,7 +85,7 @@ Fig. \ref{elements} presents example of cutting precedence of contour by number 
 During development of NC program the optimization problems of cutting tool path are arisen.
 The cutting cost $F_{cost}$ are one of numerical characteristics
 that defines the effectiveness of NC program for special set of parts.
-$F_{cost}$ is calculated by [4]:
+$F_{cost}$ is calculated by \cite{ru04}:
 
 \begin{equation}
 F_{cost} =
@@ -117,9 +117,9 @@ the $F_{cost}$ is calculated by:
 
 The problem of cost function minimization is considered as
 \textit{generalized travelling salesman problem (GTSP) with restrictions}
-[4, 5].
+\cite{ru04,ru05}.
 The formalization of minimization problem of cutting time and cost
-for CNC sheet cutting machines is presented in [4].
+for CNC sheet cutting machines is presented in \cite{ru04}.
 
 In \cite{Dewil2016Nov,Hoeft1997Sep}
 the following classes of cutting tool routing problems
@@ -153,11 +153,11 @@ type and thickness of treatment material.
 The dependence on selected factors is defined by analytically or tabular functions.
 The formulas of $C_{on}, C_{off}, C_{pt}$
 calculation and their values may significantly differ for various CNC sheet cutting machines.
-It is worth noting that time per pierce in laser cutting process is calculated in [6].
-In [7] the laser cutting cost is compared with water jet,
+It is worth noting that time per pierce in laser cutting process is calculated in \cite{ru06}.
+In \cite{ru07} the laser cutting cost is compared with water jet,
 plasma and oxygen cutting costs when treatment sheet material of St3
 (thicknesses $\Delta=3-10$ mm).
-In [8] the assessment of plasma and $CO_2$ laser cutting machines operating cost is performed.
+In \cite{ru08} the assessment of plasma and $CO_2$ laser cutting machines operating cost is performed.
 But it should be noted that the calculation of mentioned above parameters
 remains outside the scope of modern research,
 hence the research for $C_{on}, C_{off}, C_{pt}$
@@ -171,7 +171,7 @@ $L_{on}, L_{off}$ and $N_{pt}$,
 in turn $L_{on}$ depends on value of working tool speed $V_{on}$.
 The value of $V_{on}$ is usually constant parameter
 which is programming during the NC program development,
-but as the practical shows [9, 10]
+but as the practical shows \cite{ru09,Tavaeva2015Nov}
 the value of actual working speed of cutting tool
 is varied by various technological factors and parameters of NC programs.
 Consequently problem of accurate calculation of cost function \ref{cost-n}
@@ -500,7 +500,7 @@ for CNC laser cutting machine by example ByStar 3015.
 For each type of material the parameters $C_{on}, C_{off}, C_{pt}$
 are calculated by taken into account that
 $V_{on}=const$.
-As the practical shown [9, 10]
+As the practical shown \cite{ru09,Tavaeva2015Nov}
 the value of actual working speed of cutting tool
 is varied by various technological factors and parameters of NC programs.
 Consequently problem of accurate calculation of cost function (\ref{cost-n})
@@ -519,7 +519,7 @@ is actually varied by various technological factors.
 It was found that increasing of frames numbers in NC program
 for various sets of parts,
 which have the same total perimeter of the contours,
-the actual $V_{on}$ is decreased [9,10].
+the actual $V_{on}$ is decreased \cite{ru09,Tavaeva2015Nov}.
 The reasons why NC program can contain a large numbers of frames
 is mainly due to the contours of complex geometry (for example, splines)
 when converting from CAD systems to a CAM
