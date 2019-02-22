@@ -81,5 +81,7 @@
   "cSpell.words": [
     "GTSP",
     "SCCP"
-  ]
+  ],
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.intellisense.package.enabled": true
 }

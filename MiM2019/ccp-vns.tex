@@ -26,10 +26,14 @@
 \address[urfu]{Ural Federal University, Yekaterinburg, Russia}
 \address[imm]{Institute of Mathematics and Mechanics, UBr RAS, Yekaterinburg, Russia}
 
-\begin{abstract}                % Abstract of not more than 250 words.
+\begin{abstract}
+% Abstract of not more than 250 words.
 The problem of tool path optimization
-for CNC thermal cutting machines is considered
-along with its classification.
+for CNC
+(Computer Numerical Control)
+thermal cutting machines
+as well as its classification
+are considered.
 A new approach to solving
 Continuous Cutting Problem
 is proposed
@@ -42,6 +46,17 @@ that is crucial for generating
 correct CNC programs
 due to technological features
 of modern CNC cutting equipment.
+
+\bigbreak
+
+{\small
+\textcopyright
+2019,
+IFAC
+(International Federation of Automatic Control)
+Hosting by Elsevier Ltd.
+All rights reserved.
+}
 \end{abstract}
 
 \begin{keyword}
@@ -58,7 +73,9 @@ Variable Neighborhood Search
 
 The problem of cutting tool path optimization
 is one of the applied optimization problems arising
-in the design of control programs for CNC plate cutting machines,
+in the design of control programs for CNC
+(Computer Numerical Control)
+plate cutting machines,
 refer to \cite{Dewil2016Nov}.
 The cost or time spent is typically used
 as objective function to optimize,
@@ -156,7 +173,7 @@ Let us introduce some notation for tool path components.
 
 We denote $A_1, A_2, \dots A_n$ -- two-dimensional shapes
 (i.e. the parts to cut)
-that are single- or multiple-connected
+that are simple- or multiple-connected
 regions of Euclidean plane
 $\mathbb R^2$.
 They are bounded by one or several closed curves
@@ -167,7 +184,7 @@ i \in \overline{1, n},
 j \in \overline{1, N},
 n \leqslant N)$.
 
-Let also define plane area
+Also, define plane area
 $B \subset \mathbb R^2$,
 the model of
 sheet material, from which parts are to be cut out.
@@ -234,7 +251,7 @@ In terms of discrete mathematics,
 the sequence is a permutation,
 i.e. an ordered set of natural numbers $1\dots K$,
 that unambiguously maps every
-$K \in \overline{1, K}$ to $i_k$.
+$k \in \overline{1, K}$ to $i_k$.
 As noted before,
 we assume tool path to go along
 bounding contours of parts
@@ -448,7 +465,7 @@ was proposed in:
 
 Most publications on the area explore GTSP problem
 and develop appropriate algorithms,
-see for example \cite{Helsgaun2015Sep}.
+see for example \cite{Balas1999Jan,Helsgaun2015Sep}.
 Its main advantage is that most methods
 of standard GTSP problems can be applied,
 only some additional constraints
@@ -534,11 +551,11 @@ and caused by
 thermal deformations of sheet material.
 It is rather difficult to get comprehensive
 equation for such constraints,
-see \cite{chentsov2013dynamic}, \cite{chentsov2015model} for approaches.
+see \cite{chentsov2013dynamic,chentsov2015model} for approaches.
 These constraints, however,
 are also beyond the scope of the paper.
 
-\section{Dual relaxation for CCP}
+\section{Two-stage relaxation for CCP}
 As stated above,
 we assume cutting goes along part boundaries
 $S_i = C_i, \forall i=\overline{1, k}$
@@ -599,7 +616,8 @@ with some step $\varepsilon$.
 Finding piercing point $M_i$
 becomes a discrete optimization problem
 of choosing among finite number of
-candidates.
+candidates,
+refer to \cite{Khachai}.
 But we are to solve
 problem of both discrete and
 continuous optimization,
@@ -982,7 +1000,7 @@ on Fig. \ref{gtsp-path} and Fig. \ref{ccp-path}.
 Values of $L_{off}$ are in good compliance for two algorithms used
 as well as shapes of the paths themselves.
 
-Dual relaxation finds even slightly shorter tool path,
+Two-stage relaxation finds even slightly shorter tool path,
 because it can route cutting head along straight lines
 whereas GTSP's tool path is always polygonal
 due to preliminary discretization involved.
