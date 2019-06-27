@@ -126,10 +126,10 @@ N_{pt} \cdot C_{pt}
 \label{cost}
 \end{equation}
 
-$L_{on}$ is length of air tool path;
-$L_{off}$ is length of working tool path;
-$C{on}$ is cost of air tool path unit;
-$C_{off}$ is cost of working tool path unit;
+$L_{off}$ is length of air tool path;
+$L_{on}$ is length of working tool path;
+$C_{off}$ is cost of air tool path unit;
+$C_{on}$ is cost of working tool path unit;
 $N_{pt}$ is numbers of piercing;
 $C_{pt}$ is cost of one piercing.
 
@@ -246,26 +246,74 @@ Verhoturov et al. \cite{ru24}
 present ``chained'' cutting technique in order to
 minimize the numbers of pierce points.
 
-In optimization problem (\ref{cost-n})
+The one of cutting time and cost minimization methods is
+application of special cutting techniques.
+In order to optimize the cutting parameters
+and to observe the necessary cutting requirements
+the some special cutting techniques are used.
+There are ``chained'' cutting \cite{ru28},
+common cut \cite{ru25}, partial cutting of contour
+with the subsequent completion of the contour cutting
+after cutting the contour of another part, et al.
+Petunin and Krotov \cite{ru25} proposed the
+classification of various cutting techniques
+used to form the cutting tool path.
+The cutting techniques are classified into three main classes:
+standard cutting, multi-contour cutting and multi-segment cutting technique.
+Every contour is cut with pierce point by using
+\textit{standard cutting technique}.
+The numbers of pierce points equal numbers of contours.
+The several contours are cut in one cutting segment
+with one pierce point by using
+\textit{multi-contour cutting technique}.
+For example, the multi-contour cutting includes ``chained'' cutting, common cut.
+The several cutting segments are cut with several pierce points by using
+\textit{multi-segment technique}.
+
+Analysis of optimization problem solutions shows that
+there are no or are negligible considered the questions
+about cutting cost optimization in addressed articles.
+To this end the methodology of exact calculation of
+cutting cost objective function is conducted in this article.
+In optimization problem \ref{cost-n}
 there are difficulties in calculating the basic parameters
-$C_{on}, C_{off}, C_{pt}$,
-depending on many factors.
-For CNC laser cutting machines $C_{on}, C_{off}, C_{pt}$
+$C_{on}, C_{off}, C_{pt}$
+depending on many factors in order to exact computation of
+$F_{cost}$
+and construct the exact optimal cutting path.
+For CNC laser cutting machines
+$C_{on}, C_{off}, C_{pt}$
 depend on the type of laser used in CNC machine,
 type and thickness of treatment material.
-The dependence on selected factors is defined by analytically or tabular functions.
-The formulas of $C_{on}, C_{off}, C_{pt}$
-calculation and their values may significantly differ for various CNC sheet cutting machines.
-It is worth noting that time per pierce in laser cutting process is calculated in \cite{ru06}.
-In \cite{ru07} the laser cutting cost is compared with water jet,
-plasma and oxygen cutting costs when treatment sheet material of St3
-(thicknesses $\Delta=3-10$ mm).
-In \cite{ru08} the assessment of plasma and $CO_2$ laser cutting machines operating cost is performed.
-But it should be noted that the calculation of mentioned above parameters
-remains outside the scope of modern research,
-hence the research for $C_{on}, C_{off}, C_{pt}$
-calculation and consequently exact calculation of cost function $F_{cost}$
-is actual problems today, which is solved in this article.
+The selected factors depend on analytically or tabular functions.
+The formulas of
+$C_{on}, C_{off}, C_{pt}$
+calculation and their values may significantly differ
+for various CNC sheet cutting machines.
+The analysis of existing methods for cutting cost calculation
+shown the insufficiency of research in the field.
+The time per pierce in laser cutting process is calculated in
+\cite{ru06}.
+In \cite{ru07}
+the laser cutting cost is compared with water jet,
+plasma and oxygen cutting costs
+when treatment sheet material of 1.0114
+(thicknesses $\Delta=3-10 mm$).
+In \cite{ru08}
+the assessment of plasma and $CO_2$
+laser cutting machines operating cost is performed.
+But it should be noted that
+the calculation of cost parameters
+remains outside the scope of present researches,
+hence the calculation of
+$C_{on}, C_{off}, C_{pt}$
+values and consequently exact calculation of cost function
+$F_{cost}$
+value are actual problems today,
+which are solved in this article.
+The methodology of cost parameters calculation in objective function
+$F_{cost}$
+is developed.
 
 As seen from (\ref{cost-n})
 $F_{cost}$
@@ -307,43 +355,6 @@ and at the same time can exceed the $C_{off}$
 by three orders \cite{ru14}.
 Consequently the most interest are the methods of solving the problem aimed at the minimizing
 $L_{on}$ and $N_{pt}$.
-
-The one of cutting time and cost minimization methods is
-application of special cutting techniques.
-In order to optimize the cutting parameters
-and to observe the necessary cutting requirements
-the some special cutting techniques are used.
-There are ``chained'' cutting \cite{ru28},
-common cut \cite{ru25}, partial cutting of contour
-with the subsequent completion of the contour cutting
-after cutting the contour of another part, et al.
-Petunin and Krotov \cite{ru25} proposed the
-classification of various cutting techniques
-used to form the cutting tool path.
-The cutting techniques are classified into three main classes:
-standard cutting, multi-contour cutting and multi-segment cutting technique.
-Every contour is cut with pierce point by using
-\textit{standard cutting technique}.
-The numbers of pierce points equal numbers of contours.
-The several contours are cut in one cutting segment
-with one pierce point by using
-\textit{multi-contour cutting technique}.
-For example, the multi-contour cutting includes ``chained'' cutting, common cut.
-The several cutting segments are cut with several pierce points by using
-\textit{multi-segment technique}.
-
-The considered techniques applied for various types of parts
-and their effectiveness for different types are varied.
-In some cases the effectiveness reaches the minimum value.
-For this reason in order to minimize $F_{cost}$
-the development of special cutting techniques
-for various geometrical types of parts is actual problem today.
-The circle, polygon parts are often found during sheet-working production
-in engineering industry.
-The treatment of parts without additional cut is impossible
-with the help of the existing multi-contour cutting techniques.
-Due to this fact the special cutting technique
-for circle and polygon parts is proposed in this article.
 
 The article is organized as follows.
 The model of $F_{cost}$
@@ -640,6 +651,10 @@ As a rule the approximation of a complex geometry reduces to a linear approximat
 
 The functional dependence of $V_{on}$
 should be determined by science-based table functions or analytically.
+However in practice
+$V_{on}=const$
+and in this case the accuracy of objective function calculation
+during cutting path optimization is not provided
 The algorithmization of objective function (\ref{cost-n})
 calculation based on science–based determination of function parameters
 is requirement for the development of cutting tool path optimization algorithms.
@@ -649,10 +664,10 @@ For this reason the exact parameters values of objective function (\ref{cost-n})
 must be calculated.
 
 Some practical results on determining
-the dependence of cutting tool speed on numbers of frames in NC program
+dependence of cutting speed on number of NC program commands
 are given below.
 Based on received results the objective function (\ref{cost-n})
-can exactly calculated and optimal cutting tool route can developed.
+can exactly calculated and exact optimal cutting path can constructed.
 
 The research was conducted for following materials:
 1.0114 (thickness $\Delta=1-10$ mm) and
@@ -704,13 +719,13 @@ the following notations are introduced:
 $n$ – number of NC program commands;
 $V_{act}$ - the actual speed of cutting tool;
 $N$ – the number of commands when ;
-$\sum_n \varepsilon_n^2$ - the deviation squares sum of the original data
+$\sum \varepsilon_n^2$ - the deviation squares sum of the original data
 from the values of the approximation functions at these points.
 
 When approximation the actual speed dependence
 presented on point chart on the number of commands
 with approximating curves in ``Mathcad''
-$\sum_n \varepsilon_n^2 \to 0$
+$\sum \varepsilon_n^2 \to 0$
 for all values of studied grade materials
 and thickness are achieved using logarithmic approximation function.
 Fig. \ref{plot}
