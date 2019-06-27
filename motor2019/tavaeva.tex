@@ -667,13 +667,27 @@ by example CNC laser cutting machine ByStar3015 are presented in \cite{ru28}.
 
 \section{Computational experiments}
 
-Based on algorithms presented on Section 3
+The proposed methodology of
+$F_{cost}$
+calculation taking into account dependence of cutting speed
+$V_{on}$
+on parts complexity is useful during
+practice technological problems solving
+in terms of optimal cutting route planning on CNC thermal machines.
+There is example of cutting route planning below with reduction of
+$F_{cost}$
+for shaped parts taken into account
+application of special cutting techniques
+with thermal deformation reduction developed in \cite{ru26}.
+The conditions of thermal deformation reduction
+during nesting and cutting route planning are considered in \cite{ru01}.
+
+Based on algorithms presented on \cite{ru26}
 the cutting tool route for nesting is automatically built at CAD/CAM ``SIRIUS''.
 In order to evaluate the the effectiveness of developed special cutting techniques
-the four nesting is obtained by using standard (Fig. \ref{cut-std}, \ref{poly-std})
-and special (Fig. \ref{cut-spec}, \ref{poly-spec})
-cutting techniques for various types of parts including circles
-(Fig. \ref{cutting}) and polygon (Fig. \ref{polygons}) parts.
+two nestings are obtained by using standard (Fig. \ref{cut-std})
+and special (Fig. \ref{cut-spec})
+cutting techniques for various types of parts.
 
 Fig. \ref{cut-std} presents the cutting tool path
 built for various geometrical types of parts including circles using standard cutting techniques.
@@ -683,69 +697,57 @@ including circles using special cutting techniques.
 \begin{figure}
   \centering
   \subfigure[Standard cutting technique]{
-    \includegraphics[width=0.47\textwidth]{std.png}
+    \includegraphics[width=0.47\textwidth]{path-std.png}
     \label{cut-std}
   }
   \subfigure[Special cutting technique]{
-    \includegraphics[width=0.47\textwidth]{special.png}
+    \includegraphics[width=0.47\textwidth]{path-spec.png}
     \label{cut-spec}
   }
   \caption{Cutting scheme example}
   \label{cutting}
 \end{figure}
 
-Table \ref{f-cost} presents computational results of basic cutting parameters and values of $F_{cost}$
-for obtained NC programs developed based on cutting tool path for nesting
-(Fig. \ref{cutting}, \ref{polygons}).
+Table \ref{f-cost}
+presents computational results of basic cutting parameters and values of $F_{cost}$
+for obtained NC programs.
 The calculation of $F_{cost}$
-was carried out by using model presented in Section 2.1 and 2.2.
-The results are calculated for AWAIMg3 $\Delta = 5$ mm.
-The following notations in table 2 are used:
-$n$ – numbers of frames in NC program;
-$F_{cost}$ - the cutting cost calculated taking into account that $V_{on}=const$;
-$F^n_{cost}$ - the cutting cost calculated taking into account that $V_{on}=var$  and depends on the frames numbers of NC program.
-
-Fig. \ref{poly-std}
-presents the cutting tool path built for various geometrical types of parts
-including polygons and circles using standard cutting techniques.
-Fig. \ref{poly-spec} presents the cutting tool path built for various geometrical types of parts
-including polygons and circles using special cutting techniques.
-
-\begin{figure}
-  \centering
-  \subfigure[Standard cutting technique]{
-    \includegraphics[width=0.47\textwidth]{spec-a.png}
-    \label{poly-std}
-  }
-  \subfigure[Special cutting technique]{
-    \includegraphics[width=0.47\textwidth]{spec-b.png}
-    \label{poly-spec}
-  }
-  \caption{Cutting scheme example of special part shapes}
-  \label{polygons}
-\end{figure}
-
-The results presented in Table \ref{f-cost} indicate that
-the basis cutting parameters are reduced by using special cutting techniques
-compared with standard cutting.
-In turn the reduction of $N_{pt}$, $L_{on}$ and $L_{off}$
-leads to reduction of $F_{cost}$ by 4-5\%
-using special cutting technique
-compared with standard cutting.
+was carried out by using ``Cutting cost calculation''.
+The results are calculated for AWAIMg3 $\Delta = 1$ and 5 mm.
 
 \begin{table}
   \begin{tabular}{c | c | c | c | r r r | c | r r | r}
-  Material & $\Delta$ & Technique & Fig. & $N_{pt}$ & $L_{on}, m$ & $L_{off}, m$ & $n$ & $F_{cost}$ & $F^n_{cost}$ & \% \\
+  Material & $\Delta$ & Technique & Fig. & $N_{pt}$ & $L_{off}, m$ & $L_{on}, m$ & $n$ & $F_{cost}, rub$ & $F^n_{cost}, rub$ & \% \\
   \hline \hline
-  \multirow{4}{*}{AWAIMg3} & \multirow{4}{*}{5 mm} & Standard & Fig. \ref{cut-std}     & 66  & 63.3   & 20.34 & \multirow{2}{*}{169} & 22908.32 & 28519.79 & \multirow{2}{*}{4.5} \\
-                         &                    & Special  & Fig. \ref{cut-spec} & 32  & 63.55  & 11.46 &                      & 21890.75 & 27524.38 & \\
-                         &                    & Standard & Fig. \ref{poly-std}  & 407 & 117.78 & 50.47 & \multirow{2}{*}{888} & 51790.31 & 67100.44 & \multirow{2}{*}{4.7}\\
-                         &                    & Special  & Fig. \ref{poly-spec}  & 361 & 114.93 & 47.61 &                      & 49371.17 & 64310.82 & \\
+  \multirow{4}{*}{AWAIMg3} & \multirow{2}{*}{1 mm} & Standard & Fig. \ref{cut-std}     & 32  & 16.43   & 36.82 & \multirow{4}{*}{130} & 809.5 & 866.5 & 6.6 \\
+                         &                    & Special  & Fig. \ref{cut-spec} & 18  & 8.6  & 36.97 &                      & 757.1 & 814.3 & 7 \\
+                         & \multirow{2}{*}{5 mm} & Standard & Fig. \ref{cut-std}  & 32 & 16.43 & 36.82 &                    & 13121.1 & 16062.2 & 18.3 \\
+                         &                    & Special  & Fig. \ref{cut-spec}  & 18 & 8.6 & 36.97 &                      & 12748.1 & 15701.2 & 18.8 \\
   \hline
   \end{tabular}
   \caption{Results of $F_{cost}$ calculation}
   \label{f-cost}
 \end{table}
+
+The following notations in table \ref{f-cost}
+are used:
+$n$ – numbers of frames in NC program;
+$F_{cost}$ - the cutting cost calculated taking into account that $V_{on}=const$;
+$F^n_{cost}$ - the cutting cost calculated taking into account that $V_{on}=var$
+and depends on the frames numbers of NC program;
+\% - value of difference between
+$F_{cost}$
+and
+$F^n_{cost}$.
+
+The results presented in Table \ref{f-cost} indicate that
+the basis cutting parameters are reduced by using special cutting techniques
+compared with standard cutting.
+In turn the difference between
+$F_{cost}$
+and
+$F^n_{cost}$.
+reaches to 18\%.
 
 \section{Conclusion}
 
