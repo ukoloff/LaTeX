@@ -598,6 +598,14 @@ In order to solve the encountered problem
 the need of correction parameters calculation for $V_{on}$
 values is emerged.
 
+\begin{figure}
+  \begin{center}
+  \includegraphics[width=0.9\textwidth]{app.png}
+  \caption{The interface of ``Cutting cost calculation'' subsystem}
+  \label{app-window}
+  \end{center}
+\end{figure}
+
 Based on proposed methodology
 the subsystem ``Cutting cost calculation''
 was developed by using Net. Framework technology.
@@ -610,17 +618,7 @@ the values of basic cost parameters
 $C_{on}, C_{off}, C_{pt}$
 are added into database in XML format.
 
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{app.png}
-  \caption{The interface of ``Cutting cost calculation'' subsystem}
-  \label{app-window}
-  \end{center}
-\end{figure}
-
-\subsection{Calculation of cutting tool speed $V_{on}$
-and correction coefficient depending on the complexity of
-part contours by example of the CNC laser cutting machine ByStar 3015}
+\subsection{Accurate calculation of $V_{on}$ in objective function from the example of the CNC laser cutting machine ByStar 3015}
 
 The inaccuracy of the actual cutting time and cost calculation is due to the fact that $V_{on}$,
 which is programmed as constant value in NC program,
@@ -650,25 +648,26 @@ the objective function is adequate calculated.
 For this reason the exact parameters values of objective function (\ref{cost-n})
 must be calculated.
 
-The some practical results on determining
+Some practical results on determining
 the dependence of cutting tool speed on numbers of frames in NC program
-are given below [10].
+are given below.
 Based on received results the objective function (\ref{cost-n})
 can exactly calculated and optimal cutting tool route can developed.
 
 The research was conducted for following materials:
-1.4541 (thickness $\Delta=1-10$ mm) and
-AWAIMg3 (thickness $\Delta=1-10$ mm).
+1.0114 (thickness $\Delta=1-10$ mm) and
+AWAIMg3 (thickness $\Delta=1-5$ mm).
 In order to conduct experiments the 150 NC programs
 for cutting of various types of parts with numbers of frames
-$n=\overline{4, 5092}(n \in \mathbb{N})$
-for 1.4541
+$n=\overline{10, 5000}(n \in \mathbb{N})$
+for 1.0114
 and 150 NC programs for cutting of various types of parts with numbers of frames
-$n = \overline{10, 1962} (n \in \mathbb N)$
-for AWAIMg3.
+$n = \overline{10, 2000} (n \in \mathbb N)$
+for AWAIMg3
+were developed.
 
 The statistical materials were processed by using ``Mathcad''.
-Based on received results the following findings were made:
+Based on received results the following upshots were made:
 
 \begin{enumerate}
 \item
@@ -702,24 +701,108 @@ The threshold value $N$ is varied for different thickness and grade of material.
 
 In order to present the results of computational experiments
 the following notations are introduced:
-$n$ – frames numbers of NC program;
-$V_{act}$ - the actual speed of cutting too;
-$N$ – the frames numbers when $V_{act}=V_{on}$;
-$\sum_n e_n^2$  - the sum of squared deviations of the
-original data from the values of the approximation functions at these points.
+$n$ – number of NC program commands;
+$V_{act}$ - the actual speed of cutting tool;
+$N$ – the number of commands when ;
+$\sum_n \varepsilon_n^2$ - the deviation squares sum of the original data
+from the values of the approximation functions at these points.
 
-When approximation the point chart
-of the dependence of actual speed
-on the numbers of frames by approximating curves in ``Mathcad''
-it was established for all values of studied grade materials
-and thickness that values of $\sum_n e_n^2$
-are achieved by using logarithmic approximation function.
-Fig. \ref{plot} presents following results for material of AWAIMg3 with $\Delta=1$ mm.
+When approximation the actual speed dependence
+presented on point chart on the number of commands
+with approximating curves in ``Mathcad''
+$\sum_n \varepsilon_n^2 \to 0$
+for all values of studied grade materials
+and thickness are achieved using logarithmic approximation function.
+Fig. \ref{plot}
+presents following results for material of AWAIMg3 with $\Delta=1 mm$.
+Similar results were obtained for AWAIMg3 with $\Delta=1-5 mm$
+and 1.0114 with $\Delta=1-10 mm$.
+The generalized formulas for calculating of
+cutting tool speed by example CNC laser cutting machine
+ByStar3015 are presented in table \ref{formulas-table}.
 
-Similar results were obtained for AWAIMg3 with $\Delta=2-5$ mm
-and 1.4541 with $\Delta=1-10$ mm.
-The generalized formulas for calculating of cutting tool speed
-by example CNC laser cutting machine ByStar3015 are presented in \cite{ru28}.
+\begin{table}
+  \begin{tabular}{c | c | c }
+  Material & $\Delta$ &  Formulas for cutting tool speed calculation \\
+  \hline \hline
+  1.0114 & 1 mm & $V_{on}=-0.025 \cdot \ln n + 0.25$ \\
+  1.0114 & 2 mm & $V_{on}=-0.015 \cdot \ln n + 0.1711$ \\
+  1.0114 & 3 mm & $V_{on}=-0.009 \cdot \ln n + 0.1062$ \\
+  1.0114 & 3.5 mm & $V_{on}=-0.006 \cdot \ln n + 0.0759$ \\
+  1.0114 & 4 mm & $V_{on}=-0.006 \cdot \ln n + 0.0709$ \\
+  1.0114 & 8 mm & $V_{on}=-0.003 \cdot \ln n + 0.0443$ \\
+  1.0114 & 10 mm & $V_{on}=-0.002 \cdot \ln n + 0.0359$ \\
+  AWAIMg3 & 1 mm & $V_{on}=-0.014 \cdot \ln n + 0.1589$ \\
+  AWAIMg3 & 2 mm & $V_{on}=-0.004 \cdot \ln n + 0.0641$ \\
+  AWAIMg3 & 3 mm & $V_{on}=-0.001 \cdot \ln n + 0.0315$ \\
+  AWAIMg3 & 5 mm & $V_{on}=-7 \cdot 10^{-4} \cdot \ln n + 0.0182$ \\
+  \hline
+  \end{tabular}
+  \caption{Generalized table of formulas for calculating of cutting tool speed by example CNC laser cutting machine ByStar3015}
+  \label{formulas-table}
+\end{table}
+
+For subsystem ``Cutting cost calculation''
+the module,
+in which the complexity of processed contours
+and consequently developed functional dependences
+(presented in table \ref{formulas-table})
+may be taken into account,
+was developed.
+This enable to exact calculate an objective function
+$F_{cost}$.
+Based on practice obtained results of
+$F_{cost}$
+calculation considering developed formulas
+the values of cutting cost is significantly differ
+compared with values of
+$F_{cost}$
+calculated with above developed methodology.
+
+\begin{figure}
+  \centering
+  \subfigure[Standard cutting technique]{
+    \includegraphics[width=0.3\textwidth]{path-a.png}
+    \label{path-const}
+  }
+  \subfigure[Special cutting technique]{
+    \includegraphics[width=0.32\textwidth]{path-b.png}
+    \label{path-var}
+  }
+  \caption{Optimal cutting path }
+  \label{optimal-paths}
+\end{figure}
+
+In turn application of developed formulas
+during nesting and cutting path construction
+leads to modification of cutting path.
+The obtained path is accurate
+compared with path constrained with
+$V_{on}=const$.
+For example,
+fig. \ref{optimal-paths}
+presents the cutting path optimization
+for nesting of 15 parts
+(material of AWAIMg3, $\Delta=1 mm$).
+Each contour is cut used standard cutting technique
+(when number of piercing equals number of parts contours).
+In order to reduce acceptable solutions set
+the acceptable piercings set is limited with finite aggregate consists of 55 points
+(these points are green squares in fig. \ref{optimal-paths},
+in turn points of tool switching off are X).
+The blue arrows are idle moves of cutter.
+The number of NC program commands for this nesting is
+$n=120$.
+For the case of fig. \ref{path-const}
+$V_{on}=const=0.1 m/s$,
+for the case of fig. \ref{path-var}
+$V_{on}=-0.014 \cdot \ln n + 0.1589$.
+
+Based on proposed results (fig. \ref{optimal-paths})
+the accurate calculation of objective function ensures
+not only the exact computation of function extremum value
+but also the correct results of optimal cutting path search
+taking into account parts complexity.
 
 \section{Computational experiments}
 
