@@ -7,6 +7,7 @@
 \usepackage{textcomp}
 \usepackage{multirow}
 \usepackage{subfigure}
+\usepackage{textcomp}
 
 \graphicspath{{tavaeva/}}
 
@@ -664,77 +665,6 @@ and 1.4541 with $\Delta=1-10$ mm.
 The generalized formulas for calculating of cutting tool speed
 by example CNC laser cutting machine ByStar3015 are presented in \cite{ru28}.
 
-\section{Special cutting techniques used during optimization of cutting tool route}
-
-The one method of cutting time and cost minimization is application of special cutting techniques.
-
-In engineering industry the geometrical forms of most parts are polygon and circle.
-This paper considers the special cutting techniques for polygons and circles parts.
-The special cutting techniques use more complexity algorithm in contrast to standard cutting technique.
-
-In \cite{ru26} the cutting techniques for circle and triangle parts were proposed.
-The effectiveness conditions of proposed techniques were obtained.
-Solving problem of irregular cutting the method of parts association
-in group or ``block'' is often used.
-During nesting the ``block'' is similarly the one part,
-i.e. the all movements / rotations are made simultaneously
-with all the details included in the ``block''.
-The association in ``blocks'' is actually in our case.
-Fig. \ref{8} presents the scheme of circle parts cutting using special cutting technique.
-
-The continuous cutting of parts is performed.
-At first the upper sectors are cut.
-At second the lower sectors are cut last.
-Wherein moving from one sector to another is implemented by cutting motion (Fig. \ref{8}).
-The proposed cutting technique reduces the number of piercing, air motions,
-but increases the cutting motion.
-Consequently the cutting motion length of cutter needs to be taken into account
-when moving from one contour to another.
-These cutting costs should not exceed the costs of piercing.
-Based on results \cite{ru26},
-the algorithm of cutting tool route automation for CAD/CAM ``SIRIUS'' was developed.
-While cutting tool routing the Part Hardness Rule is taken into account \cite{ru27}.
-The proposed algorithm is applicable for any size circles
-and allows to automatically build the cutting tool route.
-
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{8.png}
-  \caption{Cutting scheme example of two parts using special cutting}
-  \label{8}
-  \end{center}
-\end{figure}
-
-The special cutting technique for triangle parts was proposed \cite{ru26}.
-In engineering manufacturing the most geometrical form of parts is polygon.
-Therefore the algorithm of cutting tool route automation for polygon parts
-was developed based on proposed special cutting technique for CAD/CAM ``SIRIUS''.
-While cutting tool routing the Part Hardness Rule is taken into account \cite{ru27}.
-The algorithm can be used by designing NC program in interactive mode.
-The features of proposed technique are the reducing of piercing,
-the cutting and air motions of cutter.
-The proposed algorithm is applicable for various one-sided symmetry polygons.
-The proposed technique significantly reduces numbers of piercing,
-cutting and air motions of cutter for polygon parts.
-The polygons can be arranged in the cell type.
-Fig. \ref{tri} presents the cutting scheme of triangle parts.
-The parts are combined by ``blocks'' and within each ``block''
-the cutting is performed by one piercing.
-Moving from one ``block'' to another is implemented by air.
-
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{tri.png}
-  \caption{Cutting scheme example of four triangle parts using special cutting techniques}
-  \label{tri}
-  \end{center}
-\end{figure}
-
-In order to evaluate the effectiveness
-of developed special cutting techniques
-the computing experiments were conducted at CAD/CAM ``SIRIUS''
-and obtained results is presented in Section 4.
-
 \section{Computational experiments}
 
 Based on algorithms presented on Section 3
@@ -819,56 +749,68 @@ compared with standard cutting.
 
 \section{Conclusion}
 
-In this article the following results were obtained:
+In this paper the following results were obtained:
 
 \begin{enumerate}
 
-\item  The problem of cutting tool path optimization on CNC machines was considered.
-The model of cost function $F_{cost}$ and basic parameters calculation is presented for CNC laser cutting machines.
-$F_{cost}$ includes the costs of electricity and expendable materials,
-maintenance of a CNC machine and other operating costs incurred during cutting.
-The problem of exact calculation of cost function  $F_{cost}$
-in optimizing of cutting tool route related with search of adequate value  $F_{cost}$,
-which calculation depends on basic parameters $C_{on}, C_{off}, C_{pt}$
+\item
+In order to exact calculate objective function and consequently
+to construct exact tool path the methodology of objective function
+$F_{cost}$
+and basic cost parameters calculation
+is presented for CNC laser cutting machines.
+Due to the problem of exact
+$F_{cost}$
+values calculation have arisen on many production factories
+and based on proposed methodology the subsystem
+``Cutting cost calculation''
+were developed used Net. Framework technology,
+which may be integrated with existing CAM software;
 
-\item The value of actual working speed of cutting tool is varied
-by various technological factors and parameters of NC programs.
-The problem of accurate calculation of cost function (1.2)
-in optimization problem of tool path construction is solved in this article.
-The correction parameters for $V_{on}$ values
-is presented for type of material AWAIMg3 ($\Delta=1-5$ mm) and St1.4541 ($\Delta=1-10$ mm)
+\item
+The functional dependencies on number of NC program commands for
+$V_{on}$
+are developed.
+These dependencies ensure exact calculation
+of objective function
+$F_{cost}$
+and exact tool optimization path construction.
+For subsystem ``Cutting cost calculation''
+the module of exact cutting cost computation
+of cutting cost was developed used functional dependencies for
+$V_{on}$;
 
-\item The one of cutting time and cost minimization methods is application of special cutting techniques.
-In order to optimize the cutting parameters and to observe the necessary cutting requirements
-the some special cutting techniques are used.
-In this article the effective special cutting techniques
-for the common geometrical types of parts
-widely used in blank production of engineering plant are developed
-
-\item The computational experiments shown that
-application of presented special cutting technique allows to
-reduce the basic cutting parameters of $N_{pt}, L_{on}$
-and $L_{off}$ compared with standard cutting techniques.
-The calculation of $F_{cost}$ is performed by model presented in Section 2.1.
-In turn the calculation of  $F_{cost}$ is carried out by values of
-$V_{on}=const$ and $V_{on}=var$
-the results show value of $F_{cost}$ when $V_{on}=const$  is 30\% lower
-than value of $F_{cost}$  when $V_{on}=var$.
-The basic parameters of $N_{pt}, L_{on}$
-and $L_{off}$
-are reduced.
-For example, when using the special cutting technique
-$N_{pt}$ is reduced by 11\%  compared with standard cutting.
-The reduction $N_{pt}, L_{on}$
-and $L_{off}$
-leads to reduction of $F_{cost}$ by 4-5\%
-using special cutting technique (Fig. \ref{cut-spec}, \ref{poly-spec})
-compared with standard cutting (Fig. \ref{cut-std}, \ref{poly-std}).
+\item
+In order to evaluate the developed results
+the computational experiments have been conducted
+taking into account previously proposed
+special cutting techniques compared with standard cutting.
+The cutting route is constructed
+with taking into account the thermal deformation reduction.
+The correct
+$F_{cost}$
+values calculation is carried out
+with developed above methodology given the
+$V_{on} = var(F_{cost}^n)$
+and
+$V_{on} = const(F_{cost})$.
+The results shown that
+the cutting cost is reduced by using special cutting techniques
+compared with standard cutting.
+In turn the difference between
+$F_{cost}$.
+and
+$F_{cost}^n$
+reaches to 18\%.
 
 \end{enumerate}
 
+\section{Acknowledgments}
+The work was supported by the Russian Foundation for Basic Research
+(grant \textnumero 19-01-00573).
+
 \bibliographystyle{splncs04}
 \bibliography{tavaeva}
-\nocite{*}
+% \nocite{*}
 
 \end{document}
