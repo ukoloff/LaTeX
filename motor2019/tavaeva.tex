@@ -68,26 +68,41 @@ compared with using standard cutting techniques are presented.
 
 \section{Introduction}
 
-Recently the CNC sheet cutting machines are widely used in blank production of engineering plant.
-In particular such machines include thermal cutting machines (laser, flame and plasma cutting).
-The CNC thermal cutting machines are worked by NC programs.
-During development of NC program the some features and restrictions are arisen.
+One of the complex optimization problems arising in technical applications
+is the cutting path optimization problem for CNC sheet cutting machines.
+This problem belongs to the class of NP-hard problems
+of continuous-discrete optimization
+equivalent to some types of traveling salesman problem
+with additional restrictions
+that do not allow the use of known algorithms to solve them.
+As an objective function of the problem,
+the cost of parts cutting process for the resulting cutting path is considered.
+
+Recently the CNC sheet cutting machines are widely used in order to manufacture sheet metal products.
+In particular, such machines include thermal cutting machines
+(laser, flame and plasma cutting).
+During development of NC programs need to take into account
+some important technological features and constraints
+arising in the process of part sheet cutting on CNC equipment.
 
 Before cutting of part contour the piercings must be selected (Fig. \ref{elements}).
 Piercings are operations where the laser cutting tool initiates the material.
 Piercings is selected according to the material type, its thickness and cutting parameters.
-In order to avoid material beading and part deformation the piercings must be selected by some distance from contour.
+In order to avoid material beading and part deformation
+the piercings must be selected by some distance from contour.
 
 During thermal cutting the ``burning out'' and ``sweeping'' of material are occurred.
 Due to the fact the contour of parts and cutting tool path are not matched.
 The cutting tool is moved by equidistant curve of contour (Fig. \ref{elements}).
 
-The set of precedence constraint is taken into account \cite{ru01}.
-In \cite{ru02} shown that the precedence constraint is due to the features of portal type machine.
-The contour is fully cut, it detaches from the rest of the material and can possibly shift its position,
-and thus the additional cuts within this area may be inaccurate \cite{Dewil2015}.
-Consequently if the outer contour consists of inner contour,
-then inner contour need to be cut before the outer contour is cut.
+The precedence constraint is taken into account
+which is due to the features of portal type machine \cite{ru01,ru02}.
+If the contour is fully cut,
+one detaches from the rest of the material
+and can possibly shift its position,
+and thus it will be impossible to continue cutting in this area \cite{Dewil2015}.
+The constraint ties to inner-outer contour relation which means that
+an inner contour needs to be completely cut before the outer contour is cut.
 Fig. \ref{elements} presents example of cutting precedence of contour by number 1-3.
 
 \begin{figure}
@@ -98,11 +113,9 @@ Fig. \ref{elements} presents example of cutting precedence of contour by number 
   \end{center}
 \end{figure}
 
-During development of NC program the optimization problems of cutting tool path are arisen.
-The cutting cost $F_{cost}$ are one of numerical characteristics
-that defines the effectiveness of NC program for special set of parts.
-$F_{cost}$ is calculated by \cite{ru04}:
-
+The objective function
+(cutting cost $F_{cost}$)
+is calculated by \cite{ru04}:
 \begin{equation}
 F_{cost} =
 L_{on} \cdot C_{on} +
@@ -137,7 +150,7 @@ The problem of cost function minimization is considered as
 The formalization of minimization problem of cutting time and cost
 for CNC sheet cutting machines is presented in \cite{ru04}.
 
-In \cite{Dewil2016Nov,Hoeft1997Sep}
+In \cite{Dewil2016Nov,Hoeft1997Sep,Petunin2015Nov}
 the following classes of cutting tool routing problems
 for CNC sheet cutting machines are allocated:
 
@@ -155,9 +168,82 @@ for CNC sheet cutting machines are allocated:
 
 \item Based on conception of contours cutting by segment \cite{Petunin2015Nov}
 the new class of optimization tool routing problem is presented:
-Segment Continious Cutting Problem (SCCP).
+Segment Continuous Cutting Problem (SCCP).
 
 \end{itemize}
+
+The detailed analysis of existing methods,
+which are solving the optimization problem
+of cutting tool route, was presented in \cite{Dewil2016Nov}.
+A few algorithms of tool routing for other technological equipments
+are particularly described in \cite{Grotschel,Ghiani}.
+In these articles there are questions relating to
+cutting time optimization.
+The present methods of cutting time optimization
+relate to minimization of idle moves time and
+slightly to minimization of cutting time.
+The analysis of current methods is provided below.
+
+Analysis  of existing methods of cost function minimizing showed that
+airtime and length of air motion are usually minimized
+during cutting path optimizing.
+The following researchers present algorithms for idle moves optimization.
+Yang et al. \cite{Yang2010}
+describe the airtime optimization problem in leather cutting.
+They proposed the hybrid intelligence algorithm.
+Castelino et al. \cite{d2003tool}
+describe an algorithm for airtime minimizing
+by optimally connecting the tool path.
+They consider heuristic methods
+that are used in order to obtain the optimal or near optimal solutions.
+Murzakaev et al \cite{ru17}
+consider problem of idle moves length minimization.
+The model is presented for standard cutting technique.
+In order to minimize cutter idle moves length
+the three metaheuristics
+(Simulated Annealing, Threshold Accepting, Great Deluge Algorithm)
+were chosen.
+They propose the generalized scheme of problem solving.
+The algorithm of idle moves minimizing is proposed by Chen et al \cite{Chen2014Dec}.
+They divide into two sub-optimal problems
+(pattern cutting order and entry/exit cutting point)
+and solve ones using an ant colony optimization algorithm
+(min-max ant system).
+Lee and Kwon \cite{Lee2006Dec}
+consider tool path problem and
+proposed two-step genetic algorithm.
+The aim is to minimize the idle moving of cutting tool.
+They combine global search for piercing optimization
+and local search for part sequencing.
+The two stage of sequential optimization procedure for
+nesting and cutting sequence are presented by Sherif et al \cite{Sherif2014Oct}.
+The objectives are maximizing the material utilization
+and minimizing the cutter idle moves.
+They consider simulated annealing algorithm
+in order to find the near optimal cutting tool path.
+
+Analysis of existing methods shows
+the deficiency of research in the field of piercing numbers $N_{pt}$
+reducing
+and length of cutting tool motion  $L_{on}$
+in solving the optimization problem (\ref{cost-n}).
+In \cite{Manber1984Jan}
+authors consider the problem of $N_{pt}$ reducing
+in thermal cutting of sheet material in terms of graph theory.
+It should be noted that the precedence constrain was not taken into account
+and the intersection of the existing cuts is allowed.
+The problem of cutting path optimization in terms of cutting of parts group
+with one of pierce point is considered in \cite{ru22}.
+The last stage of solving the problem
+(cutter routing optimization at idle moves)
+is reduced to the TSP.
+The problem of cutter routing optimization at CNC machines
+is formulated and the mathematical model of total cutting time minimization
+is proposed by using standard and special cutting techniques
+by Faizrahmanov et al. \cite{ru23}.
+Verhoturov et al. \cite{ru24}
+present ``chained'' cutting technique in order to
+minimize the numbers of pierce points.
 
 In optimization problem (\ref{cost-n})
 there are difficulties in calculating the basic parameters
@@ -221,62 +307,12 @@ by three orders \cite{ru14}.
 Consequently the most interest are the methods of solving the problem aimed at the minimizing
 $L_{on}$ and $N_{pt}$.
 
-Analyze of existing methods of cost function minimizing showed that
-airtime and length of air motion are usually minimized when optimizing the path of cutting tool.
-In some works an algorithms for optimizing the airtime of cutting tool are considered.
-Yang et al. \cite{Yang2010}
-described the tool path airtime optimization problem in leather cutting.
-They proposed the hybrid intelligence algorithm.
-Castelino et al. \cite{d2003tool}
-described an algorithm for minimizing the airtime of cutting tool
-by optimally connecting the tool path.
-They considered the heuristic methods that are used
-in order to obtain the optimal or near optimal solutions.
-Murzakaev et al \cite{ru17} considered the problem of cutter air motion length minimization.
-The model is presented for standard cutting technique.
-In order to minimize cutter air motion length the three metaheuristics
-(Simulated Annealing, Threshold Accepting, Great Deluge Algorithm) were chosen.
-They proposed the generalized scheme of problem solving.
-Chen et al \cite{Chen2014Dec}
-proposed algorithm of air motion path minimizing.
-They divided into two sub-optimal problems
-(pattern cutting order and entry/exit cutting point)
-and solve ones using an ant colony optimization algorithm (min-max ant system).
-Lee and Kwon \cite{Lee2006Dec}
-considered tool path problem and proposed two-step genetic algorithm.
-The aim is to minimize the air moving of cutting tool.
-They combined global search for piercing optimization and local search for part sequencing.
-Sherif et al \cite{Sherif2014Oct}
-presented the two stage sequential optimization procedure for nesting and cutting sequence.
-The objectives are maximizing material utilization and minimization of laser cutting tool air motion.
-They considered simulated annealing algorithm in order to find the near optimal cutting tool path.
-
-It should be noted that
-the deficiency of research in the field of reducing the numbers of pierce points $N_{pt}$
-and length of cutting tool motion  $L_{on}$
-in solving the optimization problem (\ref{cost-n}).
-In \cite{Manber1984Jan}
-the authors consider the problem of pierce point numbers reducing
-in thermal cutting of sheet material in terms of graph theory.
-It should be noted that the precedence constrain was not taken into account
-and the intersection of the existing cuts is allowed.
-The problem of cutting path optimization in terms of cutting of parts group
-with one of pierce point is considered in \cite{ru22}.
-The last stage of solving the problem
-(optimization of the cutter routing at idle)
-is reduced to the TSP.
-In \cite{ru23} the problem of tool routing optimization at CNC machines is formulated
-and the mathematical model of total cutting time minimization is proposed
-by using standard and special cutting techniques.
-Verhoturov et al. \cite{ru24} present ``chained'' cutting technique
-in order to minimize the numbers of pierce points.
-
 The one of cutting time and cost minimization methods is
 application of special cutting techniques.
 In order to optimize the cutting parameters
 and to observe the necessary cutting requirements
 the some special cutting techniques are used.
-There are ``chained'' cutting [24],
+There are ``chained'' cutting \cite{ru28},
 common cut \cite{ru25}, partial cutting of contour
 with the subsequent completion of the contour cutting
 after cutting the contour of another part, et al.
@@ -285,7 +321,7 @@ classification of various cutting techniques
 used to form the cutting tool path.
 The cutting techniques are classified into three main classes:
 standard cutting, multi-contour cutting and multi-segment cutting technique.
-The every contour is cut with pierce point by using
+Every contour is cut with pierce point by using
 \textit{standard cutting technique}.
 The numbers of pierce points equal numbers of contours.
 The several contours are cut in one cutting segment
