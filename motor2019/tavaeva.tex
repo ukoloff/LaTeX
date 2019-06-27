@@ -19,7 +19,7 @@
   \and
   Petunin A.A. \inst{2,3}
   \and
-  Kurennov D.V. \inst{2}
+  Ukolov S.S. \inst{2}
   \and Krotov V.I. \inst{4}
 }
 
@@ -35,20 +35,35 @@
 \maketitle              % typeset the header of the contribution
 
 \begin{abstract}
-The problem of cost minimizing at laser cutting of sheet parts on CNC machines is considered.
+The problem of cost minimizing at laser cutting of sheet parts on CNC machines is considered
+in this paper.
 As an objective function the cost function of cutting process is used.
 The model of exact cost function calculation is presented
-depending on the number of frames in the NC program.
-In order to solve the optimization problem the special cutting techniques are used.
-There are multi-contour and multi-segment cutting techniques.
-In this paper the special cutting techniques for common geometrical types of
-contours widely used in blank production of engineering plant are presented.
-The results of the computational experiment
-which show a statistically significant improvement
-of the objective function value compared
-with using the standard cutting techniques are presented.
+depending on the number of frames (commands) in the NC program.
+Rach command is written using G-code.
+In order to most correctly construct optimal cutting path
+the accurate value of objective function basic parameters should be calculated.
+To this end,
+the accurate calculation methodologies of basic parameters values are presented.
+The methodologies relate to calculation of cost parameters and cutting speed.
+Based on proposed methodology the subsystem of cutting cost calculation was developed by
+using .Net Framework technology.
+In order to solve optimization problem
+the special cutting techniques are used.
+There are some multi-contour and multi-segment cutting techniques.
+In this paper special cutting techniques
+for common geometrical types of contours
+widely used in blank production are presented.
+In order to verify the proposed methodologies on practice
+the computational experiments which show
+a statistically significant improvement of the objective function value
+compared with using standard cutting techniques are presented.
 
-\keywords{CNC laser cutting machines \and thermal cutting \and tool path optimization \and cost of cutting process \and cutting techniques}
+\keywords{CNC laser cutting machines
+  \and thermal cutting
+  \and tool path optimization
+  \and cost of cutting process
+  \and cutting techniques}
 \end{abstract}
 
 \section{Introduction}
