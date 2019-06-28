@@ -16,22 +16,22 @@
 \title{A Cost Minimizing at Laser Cutting of Sheet Parts on CNC Machines}
 
 \author{
-  Tavaeva A.F. \inst{1}
+  Tavaeva A.F. \inst{1,2}
   \and
-  Petunin A.A. \inst{2,3}
+  Petunin A.A. \inst{2,3} \orcidID{0000-0003-2540-1305}
   \and
-  Ukolov S.S. \inst{2}
+  Ukolov S.S. \inst{2} \orcidID{0000-0002-9946-6446}
   \and Krotov V.I. \inst{4}
 }
 
 \institute{
-  Production association ``Urals Optical and Mechanical Plant'', Yekaterinburg, Russia \url{http://www.uomz.ru/}
+  Production association ``Urals Optical and Mechanical Plant'', Yekaterinburg, Russia \email{a.f.tavaeva@urfu.ru}
   \and
-  Ural Federal University, Yekaterinburg, Russia \url{https://urfu.ru/}
+  Ural Federal University, Yekaterinburg, Russia \email{s.s.ukolov@urfu.ru}
   \and
-  Institute of Mathematics and Mechanics, UBr RAS, Yekaterinburg, Russia \url{https://www.imm.uran.ru/}
+  Institute of Mathematics and Mechanics, UBr RAS, Yekaterinburg, Russia \email{aapetunin@gmail.com}
   \and
-  Joint-Stock Company ``Technocomproject'', Yekaterinburg, Russia
+  Joint-Stock Company ``Technocomproject'', Yekaterinburg, Russia \email{wikrot@mail.ru}
 }
 \maketitle              % typeset the header of the contribution
 
@@ -41,7 +41,7 @@ in this paper.
 As an objective function the cost function of cutting process is used.
 The model of exact cost function calculation is presented
 depending on the number of frames (commands) in the NC program.
-Rach command is written using G-code.
+The each command is written using G-code.
 In order to most correctly construct optimal cutting path
 the accurate value of objective function basic parameters should be calculated.
 To this end,
@@ -69,7 +69,7 @@ compared with using standard cutting techniques are presented.
 
 \section{Introduction}
 
-One of the complex optimization problems arising in technical applications
+One of the complex optimization problem arising in technical applications
 is the cutting path optimization problem for CNC sheet cutting machines.
 This problem belongs to the class of NP-hard problems
 of continuous-discrete optimization
@@ -82,7 +82,8 @@ the cost of parts cutting process for the resulting cutting path is considered.
 Recently the CNC sheet cutting machines are widely used in order to manufacture sheet metal products.
 In particular, such machines include thermal cutting machines
 (laser, flame and plasma cutting).
-During development of NC programs need to take into account
+During development of NC programs
+there is need to take into account
 some important technological features and constraints
 arising in the process of part sheet cutting on CNC equipment.
 
@@ -275,7 +276,7 @@ there are no or are negligible considered the questions
 about cutting cost optimization in addressed articles.
 To this end the methodology of exact calculation of
 cutting cost objective function is conducted in this article.
-In optimization problem \ref{cost-n}
+In optimization problem (\ref{cost-n})
 there are difficulties in calculating the basic parameters
 $C_{on}, C_{off}, C_{pt}$
 depending on many factors in order to exact computation of
@@ -325,7 +326,7 @@ which is programming during the NC program development,
 but as the practical shows \cite{ru09,Tavaeva2015Nov}
 the value of actual working speed of cutting tool
 is varied by various technological factors and parameters of NC programs.
-Consequently problem of accurate calculation of cost function \ref{cost-n}
+Consequently problem of accurate calculation of cost function (\ref{cost-n})
 in optimization problem of tool path routing is arisen.
 In order to solve the encountered problem
 the need of correction parameters calculation for $V_{on}$
