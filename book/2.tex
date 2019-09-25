@@ -1,3 +1,4 @@
+
 \documentclass{article}
     \usepackage[utf8]{inputenc}
     \usepackage[T2A]{fontenc}
@@ -1601,7 +1602,7 @@ $\Omega_{i+1}$.
 на одной из стадий процесса резки 5-го контура.
 
 {\bf Замечание}.
-Рисунки \ref{thermal-high} и \ref{thermal-low}  иллюстрирую справедливость гипотезы.
+Рисунки \ref{thrm-high} и \ref{thrm-low}  иллюстрирую справедливость гипотезы.
 Эти процессы отличаются только выбором точкой врезки.
 На рис. \ref{thermal-high} точка врезки вблизи кромки пластины.
 Средняя температура в выделенном окне
@@ -1611,24 +1612,30 @@ $\Omega_{i+1}$.
 
 \begin{figure}
   \centering
-  \subfigure[Места точек врезки и порядок резки для 8-ми контуров]{
-    \includegraphics[width=0.37\textwidth]{thermal-plan.png}
-    \label{thermal-plan}
-  }
-  \subfigure[Пример распределения тепловых полей в процессе резки 5-го контура]{
-    \includegraphics[width=0.4\textwidth]{thermal-5.png}
-    \label{thermal-5}
-  }
-  \subfigure[Температурное поле при выборе точки врезки вблизи края пластины]{
-    \includegraphics[width=0.4\textwidth]{thermal-high.png}
-    \label{thermal-high}
-  }
-  \subfigure[Температурное поле при выборе точки врезки вдали от края пластины и границ вырезанных заготовок]{
-    \includegraphics[width=0.4\textwidth]{thermal-low.png}
-    \label{thermal-low}
-  }
-  \caption{Пример расчёта тепловых полей}
-  \label{thermal-fields}
+  \includegraphics[width=0.6\textwidth]{thermal-plan.png}
+  \caption{Места точек врезки и порядок резки для 8-ми контуров}
+  \label{thermal-plan}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{thermal-5.png}
+  \caption{Пример распределения тепловых полей в процессе резки 5-го контура}
+  \label{thermal-5}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{thermal-high.png}
+  \caption{Температурное поле при выборе точки врезки вблизи края пластины}
+  \label{thrm-high}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{thermal-low.png}
+  \caption{Температурное поле при выборе точки врезки вдали от края пластины и границ вырезанных заготовок}
+  \label{thrm-low}
 \end{figure}
 
 Другие проведенные вычислительные эксперименты
@@ -1639,11 +1646,11 @@ $\Omega_{i+1}$.
 \begin{figure}
   \centering
   \subfigure[309 градусов Цельсия (точка выключения инструмента не удовлетворят правилу «жесткости детали») ]{
-    \includegraphics[width=0.45\textwidth]{thermal-309.png}
+    \includegraphics[width=0.9\textwidth]{thermal-309.png}
     \label{thermal-309}
   }
   \subfigure[120 градусов (точка выключения удовлетворят данному правилу)]{
-    \includegraphics[width=0.45\textwidth]{thermal-120.png}
+    \includegraphics[width=0.9\textwidth]{thermal-120.png}
     \label{thermal-120}
   }
   \caption{Уменьшение температуры металла в зоне жёсткости }
@@ -1661,16 +1668,18 @@ $\Omega_{i+1}$.
 \begin{figure}
   \centering
   \subfigure[550 градусов]{
-    \includegraphics[width=0.45\textwidth]{thermal-550.png}
+    \includegraphics[width=0.9\textwidth]{thermal-550.png}
     \label{thermal-550}
   }
   \subfigure[130 градусов]{
-    \includegraphics[width=0.45\textwidth]{thermal-130.png}
+    \includegraphics[width=0.9\textwidth]{thermal-130.png}
     \label{thermal-130}
   }
   \caption{Уменьшение температуры металла в зоне жёсткости }
   \label{thermal-550-130}
 \end{figure}
+
+
 
 Рассмотрим далее один из простых способ учета правила жесткости листа,
 описанного в параграфе 1.3,
@@ -1696,13 +1705,22 @@ $$
 но с учётом правила «жёсткости детали»
 с помощью  алгоритма, описанного выше в этом параграфе.
 
-На Рис. 53
+На Рис.\ref{zones-a}
 приведён пример оптимизации траектории
 инструментадля задачи GTSP с учётом
 формирования подобластей  (1.3.3).
 Число подобластей в данном примере – 5.
 
-На Рис. 54
+\begin{figure}
+  \begin{center}
+  \includegraphics[width=0.9\textwidth]{zones-a.png}
+  \caption{Пример моделирования траектории инструмента машины листовой резки с ЧПУ
+    с учетом правила «жёсткости листа» и с использованием зон (20 контуров, задача GTSP)}
+  \label{zones-a}
+  \end{center}
+\end{figure}
+
+На Рис. \ref{zones-b}
 эта же задача решена без учёта
 «динамических» ограничений
 (и правила жёсткости детали и правила жёсткости листа).
@@ -1715,6 +1733,15 @@ $$
 т.е. решение является глобальным экстремумом.
 При этом для этого решения в маршруте резки
 длина холостого хода инструмента уменьшилась на 26\%.
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[width=0.9\textwidth]{zones-b.png}
+  \caption{Схема оптимального маршрута резки для примера на Рис. \ref{zones-a}}
+  \label{zones-b}
+  \end{center}
+\end{figure}
+
 
 {\bf Заключительные замечания}
 
