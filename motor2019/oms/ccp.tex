@@ -11,6 +11,8 @@
 \bibpunct[, ]{[}{]}{,}{n}{,}{,}% Citation support using natbib.sty
 \renewcommand\bibfont{\fontsize{10}{12}\selectfont}% Bibliography support using natbib.sty
 
+\usepackage{textcomp}
+
 \begin{document}
 
 \title{A novel algorithm for construction of the shortest path
@@ -31,7 +33,27 @@ between a finite set of nonintersecting contours on the plane}
 \maketitle
 
 \begin{abstract}
-  This template is for authors who are preparing a manuscript for a Taylor \& Francis journal using the \LaTeX\ document preparation system and the \texttt{interact} class file, which is available via selected journals' home pages on the Taylor \& Francis website.
+The article discusses one of the optimization problems
+that arise when modeling the tool path for CNC sheet metal
+cutting machines for the case when the boundary contours
+of the parts are defined by polygons and the pierce points
+are located on the boundary contours.
+Only closed-loop cutting is used,
+i.e. Continuous Cutting Problem (CCP),
+hence
+the task of minimizing the length of the tool path
+is reduced to the problem of finding the minimum air move length,
+which is shown to be equivalent to the problem of finding
+the shortest polyline with vertices on disjoint contours in the plane,
+while these contours do not contain internal contours.
+An algorithm for constructing minimal length broken line
+for a fixed order of cutting contours is described
+and is proved to provide local minimum.
+Sufficient conditions for this minimum to be global are given.
+Heuristic algorithm is suggested for finding the optimal order for cutting contours.
+The results of a computational experiment
+and a comparison of the results with an exact solution for the GTSP problem are presented.
+
 \end{abstract}
 
 \begin{keywords}
@@ -42,5 +64,56 @@ between a finite set of nonintersecting contours on the plane}
 \end{keywords}
 
 \section{Introduction}
+
+A number of optimization problems arise
+during development of control programs for CNC sheet cutting machines.
+One of them is
+the task of minimizing the tool air move,
+which in some special cases can be reduced
+to the problem of finding the shortest polyline
+with vertices on flat contours.
+Contours are interpreted as the boundaries of flat parts.
+The location of the contours on the plane is determined
+during the solution of the ``nesting'' problem.
+Both tasks are generally NP-hard.
+
+In its turn,
+the task of minimizing tool air move
+is a subtask of another optimization problem --
+the task of optimizing the tool path when cutting flat parts.
+Its exact solution cannot be obtained for problems
+that actually arise in production
+(for hundreds of parts / contours) in a reasonable time,
+therefore,
+various heuristics are typically applied
+to get solutions of acceptable quality.
+At the same time, the issues of developing algorithms
+that provide optimal solutions for some problem cases,
+as well as evaluating the quality of their solutions
+in comparison with the optimal solution,
+remain unresolved and are of significant scientific interest.
+
+The general problem of optimizing the tool path
+when cutting 2D objects on CNC machines,
+which consists in minimizing cutting time and cost,
+includes a whole range of different optimization tasks.
+A classification of such problems
+can be found
+in \cite{bi01,bi02,bi03}.
+
+\section{Conclusion}
+
+\section*{Acknowledgements}
+
+The work was supported by
+Act 211 Government of the Russian Federation,
+contract \textnumero 02.A03.21.0006,
+and by Ministry of Education and Science
+of the Russian Federation,
+project \textnumero 2.9563.2017/8.9
+
+\bibliographystyle{tfs}
+\bibliography{ccp}
+\nocite{*}
 
 \end{document}
