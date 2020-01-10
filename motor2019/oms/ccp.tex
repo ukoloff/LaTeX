@@ -20,8 +20,7 @@ between a finite set of nonintersecting contours on the plane}
 
 \author{
 \name{
-  A.~A. Petunin\textsuperscript{a}\textsuperscript{b}
-  and
+  A.~A. Petunin\textsuperscript{a}\textsuperscript{b},
   E.~G. Polishchuk\textsuperscript{a}
   and
   S.~S. Ukolov\textsuperscript{a}\thanks{CONTACT S.~S. Ukolov. Email: s.s.ukolov@urfu.ru}}
@@ -100,6 +99,79 @@ includes a whole range of different optimization tasks.
 A classification of such problems
 can be found
 in \cite{bi01,bi02,bi03}.
+
+\begin{itemize}
+  \item
+  Continuous Cutting Problem (CCP): each closed contour (that bounds a part)
+  is cut out entirely by one movement of the torch,
+  but cutting can start from any point (and finishes at the same point).
+
+  \item
+  Generalized Traveling Salesman Problem (GTSP):
+  cutting can start only at one of the predefined points on the contour,
+  the contour must be cut entirely.
+
+  \item
+  Endpoint Cutting Problem (ECP):
+  cutting can start only at one of the predefined points on the contour,
+  and the contour can be cut in several approaches, in parts.
+
+  \item
+  Segment Continuous Cutting Problem (SCCP):
+  the notion of a cutting segment is introduced,
+  which is a generalization of a contour;
+  it can be either a part of a contour
+  or a combination of several contours or their parts.
+  Each segment is cut out entirely, thus
+  $ CCP \subset SCCP$.
+
+  \item
+  Generalized Segment Continuous Cutting Problem (GSCCP):
+  segment cutting (SCCP),
+  but the selection of segments is not fixed in advance,
+  but is subject to optimization
+
+  \item
+  Intermittent Cutting Problem (ICP):
+  the most general cutting problem described in the literature,
+  when contours can be cut in parts,
+  in several approaches,
+  and cutting can begin at any point in the contour.
+\end{itemize}
+
+Tool path optimization problems
+in practice often reduce to discrete optimization problems
+by discretizing the contours to be cut with a certain step
+$\varepsilon$,
+that is, they reduce to ECP
+\cite{bi04,bi05,bi06}
+or its special case, GTSP
+\cite{bi07,bi08,bi09,bi10}.
+CCP can also be reduced to GTSP.
+In this case, however,
+the total error in the air move length reaches
+$N \cdot \varepsilon$,
+where $N$ is the number of contours.
+To guarantee the accuracy of the result of
+$\delta$,
+it is necessary to choose a small
+$\varepsilon \approx \delta / N$,
+so the total number of points on the contour grows
+(as $O (N)$)
+and the exhaustive search becomes exponential.
+Nevertheless, such problems can be successfully solved,
+for example, by the dynamic programming method,
+for small
+$N \approx 30$ even precisely (see, in particular ???).
+
+Tool path routing without using discretization (CCP)
+is further considered in this paper.
+The publications on this subject
+are rare.
+\cite{bi11,bi12}
+can be noted,
+where
+heuristic algorithms are proposed.
 
 \section{Conclusion}
 
