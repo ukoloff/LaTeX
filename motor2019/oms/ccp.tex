@@ -173,6 +173,37 @@ can be noted,
 where
 heuristic algorithms are proposed.
 
+\subsection{Technological constraints}
+
+The need to execute the tool path on a
+CNC sheet cutting machine imposes
+a number of technological limitations on it.
+
+The so-called ``precedence constraint''
+is by far most popular in the literature.
+It is caused by the fact that after cutting a closed contour,
+its interior is usually not held by anything
+and can freely shift, rotate and even fall.
+For this reason,
+the internal contours of parts must be cut
+before the external contours containing them,
+and parts located in the holes of large parts even earlier.
+
+Finally, most cutting technologies require
+that the cutting not be carried out strictly along the contour,
+but with some indentation.
+This shift can be performed both during the solution of the routing problem,
+and after -- at the stage of generating the control program for the CNC cutting machine
+or even by the machine itself during the cutting process.
+In addition, the pierce point (tool switch-on point)
+should generally be located even further
+from the contour to avoid part damage.
+However, this work completely ignores this requirement.
+Thus, it is further assumed that the tool moves exactly
+along the contour of the part
+and the pierce point is located directly on the contour
+(as well as the switch-off point of the tool).
+
 \section{Conclusion}
 
 \section*{Acknowledgements}
