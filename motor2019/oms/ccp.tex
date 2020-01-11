@@ -363,7 +363,7 @@ see fig. \ref{fermat}.
       \draw[thick]
           (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
       \fill[black]
-          (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_i \equiv M_i^*$}
+          (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_i$}
           (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
           (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
       \begin{scope}
@@ -386,7 +386,7 @@ see fig. \ref{fermat}.
       \draw[->,>=latex,red,thick] (middle) to[bend right] (opt);
 
   }
-  \caption{Applying Fermat principle to find piercing point} \label{fermat}
+  \caption{Applying \textit{Fermat principle} to find piercing point} \label{fermat}
   \end{center}
 \end{figure}
 
