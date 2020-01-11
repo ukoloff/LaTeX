@@ -12,6 +12,7 @@
 \renewcommand\bibfont{\fontsize{10}{12}\selectfont}% Bibliography support using natbib.sty
 
 \usepackage{textcomp}
+\usepackage{amssymb,amsmath}
 
 \begin{document}
 
@@ -203,6 +204,97 @@ Thus, it is further assumed that the tool moves exactly
 along the contour of the part
 and the pierce point is located directly on the contour
 (as well as the switch-off point of the tool).
+
+\section{Continuous Cutting Problem}
+
+Consider the Euclidean plane
+$\mathbb R ^ 2$
+and its region $B$ bounded by a closed contour
+(rectangle in most cases),
+which is a model of the sheet material to be cut.
+Let $N$ pairwise disjoint flat contours
+$\{C_1, C_2, ... C_N\}$
+be given inside $B$, bounding $n$ parts
+$\{A_1, A_2 ... A_n\}$.
+A part can be limited by either one contour or several
+(external and internal holes),
+so that in general
+$n \le N$.
+
+The contours
+$C_i$
+can have an arbitrary shape,
+but we will only consider the case
+when they consist of (a finite number)
+segments of lines and arcs of circles,
+which is determined by the existing technological equipment.
+In case when the contours consist only of line segments,
+the continuous cutting problem
+is reduced to one of the variants of the
+Touring Polygon Problem (TPP),
+see \cite{bi13}.
+
+Further, two points are set in region $B$ (usually at its boundary),
+we denote them as
+$M_0$, $M_{N + 1}$
+(almost always $M_0 = M_{N + 1}$),
+which represent the beginning and end of the cutting route.
+
+Continuous Cutting Problem is to find:
+\begin{enumerate}
+\item $N$ pierce points $M_i \in C_i, i \in \overline{1, N}$
+\item Contour $C_i$ traversal order, i.e. permutations of $N$ elements $I = (i_1, i_2, ... i_N)$
+\end{enumerate}
+
+The result of solving the problem will be the route
+$\{M_0, M_{i_1}, M_{i_2}, \dots M_{i_N}, M_{N + 1}\}$.
+The objective function in this case is greatly simplified
+in comparison with the general cutting problem
+and is reduced to minimizing the air move length.
+
+\begin{equation}
+  \mathcal{L} = \sum_{j=0}^N|M_{i_j}M_{i_{j+1}}|
+\end{equation}
+$$
+\mathcal{L} \to \min
+$$
+
+Where, for simplicity, we introduce the notation
+$M_{i_0} = M_0$,
+$M_{i_{N + 1}} = M_{N + 1}$.
+
+In addition,
+we will solve the optimization problem
+with an additional constraint,
+the so-called ``precedence constraint''.
+Although the contours $C_i$
+do not intersect,
+they can be nested into each other, i.e.,
+$\tilde{C_a} ̃\subset \tilde{C_b}$,
+where
+$\tilde{C_a}$
+denotes a 2-dimensional figure bounded by the contour
+$C_a$
+(in the more familiar notation
+$C_a = \partial \tilde{C_a}$).
+In the general tool path rouring problem,
+this can be caused by two different circumstances
+(holes in parts and
+placement of smaller parts
+in holes larger to save material),
+but in this case
+these options are processed the same way.
+
+If one contour is located inside another,
+then the nested contour must be cut out
+(visited)
+earlier than the outer one:
+$\tilde{C_a} ̃\subset \tilde{C_b} ̃\Rightarrow i_a < i_b$
+in the permutation
+$I = (i_1, i_2, ... i_N)$.
+Thus, not all permutation of the contours are feasible.
+
+\section{Algorithm to solve Continuous Cutting Problem}
 
 \section{Conclusion}
 
