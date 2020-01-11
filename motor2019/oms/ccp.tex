@@ -13,6 +13,7 @@
 
 \usepackage{textcomp}
 \usepackage{amssymb,amsmath}
+\usepackage{tikz}
 
 \begin{document}
 
@@ -254,6 +255,7 @@ and is reduced to minimizing the air move length.
 
 \begin{equation}
   \mathcal{L} = \sum_{j=0}^N|M_{i_j}M_{i_{j+1}}|
+  \label{air-move-length}
 \end{equation}
 $$
 \mathcal{L} \to \min
@@ -277,7 +279,7 @@ denotes a 2-dimensional figure bounded by the contour
 $C_a$
 (in the more familiar notation
 $C_a = \partial \tilde{C_a}$).
-In the general tool path rouring problem,
+In the general tool path routing problem,
 this can be caused by two different circumstances
 (holes in parts and
 placement of smaller parts
@@ -295,6 +297,128 @@ $I = (i_1, i_2, ... i_N)$.
 Thus, not all permutation of the contours are feasible.
 
 \section{Algorithm to solve Continuous Cutting Problem}
+
+The proposed solution algorithm
+consists of several stages,
+naturally associated with the nature of the problem being solved.
+
+\subsection{Removal of external contours}
+
+To automatically comply with the precedence constraint,
+the first step removes all contours containing nested ones,
+that is, only contours remain that satisfy the condition:
+$$
+\{C_i | \forall j \ne i: C_j \cap \tilde{C_i} = \varnothing \}
+$$
+This generally leads to a reduction
+(in some cases significant)
+of the size of the problem,
+and thus reduces the calculation time
+in the second and especially the third stage.
+
+\subsection{Continuous optimization}
+
+At this stage,
+we assume the bypass sequence
+$I = (i_1, i_2, ... i_N)$
+given and look for the coordinates of the pierce points
+in each contour
+$M_i \in C_i$,
+minimizing the total air move length (\ref{air-move-length}).
+To do this, the initial positions of the points are somehow selected
+(randomly, for instance)
+and the position of each pierce point $M_i$
+changes under the assumption that others are fixed:
+$\mathcal{L}(M_i) \to \min$.
+Most terms in the objective function
+(\ref{air-move-length})
+are constant, therefore it simplifies to
+$$
+|M_{i-1}M_i|+|M_iM_{i+1}| \to \min_{M_i \in C_i}
+$$
+
+Moreover,
+if the points
+$M_{i-1}$,
+$M_{i + 1}$
+are located on opposite sides of the segment of the contour
+$C_i$,
+then the optimal position of the
+pierce point $M_i$ is the intersection with the segment:
+$M_i = M_{i-1} M_{i + 1} \cap C_i$
+(if such an intersection exists;
+otherwise,
+the solution will be one of the ends of the segment).
+If the points are located on one side of the segment,
+then the solution can also be easily found using the
+\textit{Fermat principle},
+generating the famous rule
+``the angle of incidence is angle of reflection''
+(or again one of the ends of the segment),
+see fig. \ref{fermat}.
+
+\begin{figure}
+  \begin{center}
+  \tikz[rotate=27,scale=1.3]{
+      \draw[thick]
+          (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
+      \fill[black]
+          (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_i \equiv M_i^*$}
+          (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
+          (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
+      \begin{scope}
+          \clip (from) circle(1);
+          \draw[thick] (from) ++(0, 3) circle(3);
+      \end{scope};
+      \begin{scope}
+          \clip (to) circle(1.5);
+          \draw[thick] (to) ++(3, 4) circle(5);
+      \end{scope};
+      \draw[dashed] (from) -- (middle) -- (to);
+      \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
+      \coordinate (opt) at (intersection of zero--future and mirror--from);
+      \draw[thin] (opt) circle(0.1);
+      \draw[dotted]
+          (mirror) -- (opt)
+          (mirror) -- (to);
+      \draw[thin] (from) -- (opt) -- (to);
+
+      \draw[->,>=latex,red,thick] (middle) to[bend right] (opt);
+
+  }
+  \caption{Applying Fermat principle to find piercing point} \label{fermat}
+  \end{center}
+\end{figure}
+
+The general optimization scheme at this stage looks like this:
+\begin{enumerate}
+  \item
+  We choose arbitrary initial positions of the inset points
+  $M_i \in C_i, \forall i$.
+  \item
+  $\forall i \in \overline{1,N}$
+  we find the optimal position
+  $M_i$ as described above in constant time $O(1)$.
+  \item
+  We repeat the previous step
+  until the air move length
+  (\ref{air-move-length})
+  stabilizes (with some predetermined accuracy $\delta$).
+\end{enumerate}
+
+In practice,
+the whole process converges well in
+$O(N)$
+time and therefore is repeatedly used
+as a subroutine in the next step.
+
+\subsection{Discrete optimization}
+
+\subsection{Recovery of removed contours}
+
+\section{Optimality of continuous optimization problem solution}
+
+\section{Numerical experiments}
 
 \section{Conclusion}
 
