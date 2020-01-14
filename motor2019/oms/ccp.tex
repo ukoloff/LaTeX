@@ -16,6 +16,7 @@
 \usepackage{textcomp}
 \usepackage{amssymb,amsmath}
 \usepackage{tikz}
+\usepackage{theoremref}
 
 \theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
 \newtheorem{theorem}{Theorem}[section]
@@ -30,6 +31,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 \newtheorem{notation}{Notation}
+\newtheorem{condition}{Condition}
 
 \begin{document}
 
@@ -688,6 +690,8 @@ cannot be reduced by shifting its vertices individually
 or by shifting several vertices,
 among which there are no neighbors.
 
+\subsection{Local minimum}
+
 \begin{proposition}
 If we move several adjacent vertices of the broken line
 $L_*$
@@ -839,6 +843,167 @@ So, the broken
 $L_*$
 delivers a local minimum.
 \end{proof}
+
+\subsection{Global minimum}
+
+Now let's give a condition sufficient
+for a broken
+$L_*$
+to deliver a global minimum.
+
+Let
+$M_i \in C_i$ --
+vertex of of the broken line
+$L_*$.
+The adjacent vertices
+$M_{i-1}$
+and
+$M_{i+1}$
+are outside
+$C_i$,
+since there are no nested contours.
+By construction of
+$L_*$:
+$\forall M'_i \in C_i:
+|M_{i-1} M_i|+|M_i M_{i+1}|
+\le
+|M_{i-1} M'_i|+|M'_i M_{i+1}|
+$.
+
+\begin{condition}
+  \thlabel{cond2}
+Let \textbf{one} of the following requirements be satisfied:
+\begin{enumerate}
+  \item
+  Segment $M_{i-1} M_{i+1}$ intersects the contour
+  $C_i$,
+  i.e.
+  $M_i \in M_{i-1} M_{i+1}$
+  \item
+  The tangent at
+  $M_i$
+  to the ellipse with foci
+  $M_{i-1}$
+  and
+  $M_{i+1}$
+  and passing through
+  $M_i$
+  separates the ellipse and the contour
+  $C_i$.
+\end{enumerate}
+\end{condition}
+
+\begin{proposition}
+  Let \thref{cond2}
+  is satisfied for
+  (every contour of)
+  $L_*$.
+
+  If we move several adjacent vertices of the broken line
+  $L_*$ so that they remain on the contours,
+  then the length of the resulting broken line does not decrease,
+  that is, the broken line
+  $L_*$ delivers a global minimum.
+\end{proposition}
+
+\begin{proof}
+Use the same notations:
+consider four adjacent vertices
+$M_{i-1}, M_i, M_{i+1}, M_{i+2} \in L_*$.
+$M_i \in  C_i,
+M_{i+1} \in C_{i+1}$.
+
+Suppose
+$
+\exists M'_i \in C_i,
+\exists M'_{i+1} \in C_{i+1}
+$:
+$
+|M_{i-1} M'_i M'_{i+1} M_{i+2}|
+<
+|M_{i-1} M_i M_{i+1} M_{i+2}|
+$.
+Again,
+$
+M'_i \ne M_i,
+M'_{i+1} \ne M_{i+1}
+$.
+
+Let
+$
+M_i(s)=M_i+s \cdot \overrightarrow{M_i M'_i}
+$,
+$
+ M_{i+1}(t)= M_{i+1}+t \cdot \overrightarrow{M_{i+1} M'_{i+1}}
+$
+($s,t \in[0,1]$),
+$f(s,t)=
+|M_{i-1} M_i(s) M_{i+1}(t) M_{i+2}|
+$.
+
+Now,
+\thref{cond2}
+gurantees that
+$f(s,0)\ge f(0,0)$
+for
+$s\in[0,1]$,
+i.e. again
+\begin{equation}
+  \frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)} \ge 0,
+  \frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)} \ge 0
+  % \label{partials}
+\end{equation}
+This allows us to repeat the rest of the previous proof verbatim.
+\end{proof}
+
+\begin{remark}
+Suppose that besides the trajectory
+$L_*$ ,
+there is another trajectory delivering a global minimum.
+Then it follows from the proof
+that they coincide as lines,
+that is,
+the difference can only be at
+the points of intersection with the contours.
+\end{remark}
+
+\thref{cond2}
+is easily verified programmatically,
+but it can be simplified
+so that in most practical cases
+it can be checked simply visually.
+
+\begin{condition}
+When segment
+$M_{i-1} M_{i+1}$
+doesn't intersects the contour
+$C_i$ but
+\begin{enumerate}
+  \item
+  If the vertex
+  $M_i$
+  is the internal point of the linear segment of the contour
+  and the entire contour
+  $C_i$
+  is on one side of the that segment line
+  (which is the tangent from \thref{cond2};
+  otherwise there must be a better
+  $M'_i\in C_i$).
+  \item
+  If the vertex
+  $M_i$ is terminal
+  (belongs to two linear segments of the contour;
+  is also vertex of $C_i$),
+  and the entire contour is inside
+  the corner with the rays from the point
+  $M_i$ along these segments.
+  \item
+  If the region
+  $\tilde{C_i}$
+  bounded by the contour
+  $C_i$ is convex
+\end{enumerate}
+\end{condition}
 
 \section{Numerical experiments}
 
