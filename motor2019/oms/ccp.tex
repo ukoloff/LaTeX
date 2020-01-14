@@ -15,9 +15,12 @@
 \usepackage{enumitem}
 \usepackage{textcomp}
 \usepackage{amssymb,amsmath}
+\usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{patterns}
 \usepackage{theoremref}
+
+\graphicspath{{media/}}
 
 \theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
 \newtheorem{theorem}{Theorem}[section]
@@ -183,7 +186,8 @@ and the exhaustive search becomes exponential.
 Nevertheless, such problems can be successfully solved,
 for example, by the dynamic programming method,
 for small
-$N \approx 30$ even precisely (see, in particular ???).
+$N \approx 30$ even precisely
+(see, in particular \cite{bi15}).
 
 Tool path routing without using discretization (CCP)
 is further considered in this paper.
@@ -331,7 +335,8 @@ $$
 $$
 This generally leads to a reduction
 (in some cases significant)
-of the size of the problem,
+of the size of the problem
+(from $N$ to some $N'$),
 and thus reduces the calculation time
 in the second and especially the third stage.
 
@@ -555,7 +560,7 @@ observed.
 
 Note that the route obtained in the previous step
 \begin{equation}
-Route = \bigcup_{i=0}^{N'} M_i M_{i+1}
+Route = \{ M_0, M_1, M_2, \dots M_{N'}, M_{N'+1}\}
 \label{route0}
 \end{equation}
 intersects all the original contours
@@ -864,7 +869,7 @@ in the inner point of interval
 that is greater than its values
 at the ends.
 
-So our assumption is impossible.
+This makes our assumption impossible.
 
 The shift of two neighboring vertices is considered. For more vertices, the proof is similar.
 
@@ -1036,9 +1041,67 @@ $C_i$ but
 
 \section{Numerical experiments}
 
+The quality assessment of the solutions
+of the described algorithm was carried out on several
+cutting plans containing real parts.
+As a comparison base, we used an algorithm
+(see \cite{bi15})
+for solving the GTSP problem, which gives an exact solution for the number of circuits
+$N <33$.
+
+Fig. \ref{gtsp-path} shows the exact solution,
+possible positions of the pierce points are visible.
+Fig. \ref{ccp-path} shows the solution to the CCP problem
+for the same cutting plan.
+
+\begin{figure}
+  \begin{center}
+  \resizebox*{0.95\textwidth}{!}
+  {\includegraphics{3211-gtsp.png}}
+  \end{center}
+  \caption{Exact solution of GTSP, Job \#3211}
+  \label{gtsp-path}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \resizebox*{0.95\textwidth}{!}{\includegraphics{3211-ccp.png}}
+  \end{center}
+  \caption{Solution of CCP, Job \#3211}
+  \label{ccp-path}
+\end{figure}
+
+It can be seen that both algorithms
+genererated almost identical routes.
+The main difference is caused by the discretization process
+to obtain the GTSP task.
+Because of this,
+the segments of the route that are straight in the CCP solution
+turn out to be slightly broken in the GTSP solution,
+hence total air move length is slightly larger.
+Numerically, this is shown in table \ref{ccp-vs-gtsp}
+for several cutting plans.
+
+\begin{table}[h]
+  \begin{center}
+  \begin{tabular}{l|*{3}{r}}
+      Job & \#229 & \#464 & \#3211 \\
+      \hline
+      \# of parts & 11 & 14 & 17\\
+      \# of contours & 12 & 21 & 22 \\
+      Parts perimeter, m & 24.609 & 21.717 & 25.051 \\
+      \# of GTSP points & 491 & 429 & 493 \\
+      $\mathcal L_{GTSP}$, m & 7.729 & 4.743 & 4.557 \\
+      $\mathcal L_{CCP}$, m & 7.727 & 4.706 & 4.536 \\
+  \end{tabular}
+  \caption{Solution quality comparison}
+  \label{ccp-vs-gtsp}
+  \end{center}
+\end{table}
+
 \section{Conclusion}
 
-\section*{Acknowledgements}
+\section*{Funding}
 
 The work was supported by
 Act 211 Government of the Russian Federation,
