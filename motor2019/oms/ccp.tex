@@ -519,7 +519,7 @@ for instance:
   \item
   Exchange of two consecutive
   (but not adjacent)
-  circuit blocks
+  contour blocks
   \item
   Cyclic contour shift between
   several consecutive blocks of the same length
@@ -572,7 +572,7 @@ and it intersects all external contours
 because the start and end points
 $M_0$ and
 $M_{N + 1}$
-lie outside all the circuits
+lie outside all the contours
 $C_i$.
 
 Thus,
@@ -1046,7 +1046,7 @@ of the described algorithm was carried out on several
 cutting plans containing real parts.
 As a comparison base, we used an algorithm
 (see \cite{bi15})
-for solving the GTSP problem, which gives an exact solution for the number of circuits
+for solving the GTSP problem, which gives an exact solution for the number of contours
 $N <33$.
 
 Fig. \ref{gtsp-path} shows the exact solution,
@@ -1100,6 +1100,28 @@ for several cutting plans.
 \end{table}
 
 \section{Conclusion}
+
+\begin{enumerate}
+  \item
+  The problem of minimizing the air move tool of CNC sheet cutting machines
+  for the routing problem from the CCP class
+  is shown to be reduced
+  to a problem without precedence constraint,
+  which reduces the number of contours and the operating time of the algorithm
+  \item
+  A heuristic algorithm for solving the CCP problem is proposed that does not use contour discretization.
+  \item
+  For any fixed contour visit order,
+  an effective algorithm for obtaining a local extremum is developed
+  and the conditions under which
+  this local minimue is a global one.
+  are described.
+\end{enumerate}
+
+The direction of further research is the development of the algorithm
+for the general case where the pierce points lie
+outside the contours
+according to the technological requirements of sheet cutting.
 
 \section*{Funding}
 
