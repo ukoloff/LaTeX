@@ -16,6 +16,7 @@
 \usepackage{textcomp}
 \usepackage{amssymb,amsmath}
 \usepackage{tikz}
+\usetikzlibrary{patterns}
 \usepackage{theoremref}
 
 \theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
@@ -630,6 +631,34 @@ continuous optimization.
 It turns out to formulate some statements
 about the quality of the resulting solution.
 
+\begin{remark}
+Fig. \ref{counter-example} shows an example where a trajectory
+that is not improved by shifts of vertices individually
+may not deliver a global minimum.
+
+\begin{figure}
+  \begin{center}
+  \begin{tikzpicture}[scale=2.7]
+    \draw
+      (1,-0.2) node(M3){} circle(0.027) node[below] {$M_3$}
+      (-1,-0.2) node(M0){} circle(0.027) node[below] {$M_0$};
+    \draw [thick,pattern=north west lines]
+      (1.3,0) -- (2,0) -- (2,1) node[midway,left]{$C_2$} -- (1,1) node(M2x){} --
+      (1, 1.1) -- (2.1,1.1) -- (2.1,-0.1) -- (1.3, -0.1) node(M2) {} --cycle
+    % \draw [thick,pattern=north west lines]
+      (-1.3,0) -- (-2,0) -- (-2,1) node[midway,right]{$C_1$} -- (-1,1) node(M1x){} --
+      (-1, 1.1) -- (-2.1,1.1) -- (-2.1,-0.1) -- (-1.3, -0.1) node(M1){} --cycle;
+    \draw[dashed]
+      (M0) -- (M1) -- (M2) node[midway,above]{Global minimum} -- (M3);
+    \draw[dashed]
+      (M0) -- (M1x) -- (M2x) node[midway,below]{Local minimum} -- (M3);
+  \end{tikzpicture}
+  \end{center}
+  \caption{Two tool paths delivering local minimum}
+  \label{counter-example}
+  \end{figure}
+\end{remark}
+
 So,
 we consider the following problem,
 which has to be solved many times.
@@ -971,7 +1000,7 @@ the points of intersection with the contours.
 is easily verified programmatically,
 but it can be simplified
 so that in most practical cases
-it can be checked simply visually.
+to be checked simply visually.
 
 \begin{condition}
 When segment
