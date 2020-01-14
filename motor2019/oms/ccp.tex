@@ -17,6 +17,20 @@
 \usepackage{amssymb,amsmath}
 \usepackage{tikz}
 
+\theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
+
 \begin{document}
 
 \title{A novel algorithm for construction of the shortest path
@@ -597,6 +611,234 @@ This completes the execution of the algorithm
 for solving Continuous Cutting Problem.
 
 \section{Optimality of continuous optimization problem solution}
+
+From a practical point of view,
+the described algorithm turns out to be quite workable --
+it generates high-quality tool path routes in an acceptable time,
+but this is an empirical result.
+The theoretical justification of the properties
+of the resulting routes is interesting.
+The greatest difficulty is, of course,
+the third step of the algorithm --
+discrete optimization,
+both from a theoretical and a
+practical point of view.
+This work focuses the second step of the algorithm --
+continuous optimization.
+It turns out to formulate some statements
+about the quality of the resulting solution.
+
+So,
+we consider the following problem,
+which has to be solved many times.
+Contours consist only of linear segments.
+No nested contours.
+The order of the contours is fixed.
+It is necessary to find a broken line with vertices
+on the contours
+having the smallest length.
+
+We start from
+(arbitrary)
+broken line
+$L_1$.
+We repeat the following process:
+for every contour
+$C_i$
+we find shift its point
+$M_i \in C_i$
+to that position,
+that minimizes the total
+length of the broken line,
+assuming other points
+$M_j$ fixed
+($j \ne i$).
+This reduces to elementary task
+to find a point for which
+the sum of the distances to two given points is minimal.
+
+This gives us
+the sequence of broken lines
+$\{L_k\}$,
+The sequence of lengths of these broken lines
+decreases monotonously.
+Let
+$m = \inf |L_k|$
+(infium of these lengths),
+and
+$L_*$ be a polyline with length $m$,
+i.e. limit point of the sequence
+$\{L_k\}$.
+As a metric in the space of broken lines,
+one can take the sum of the distances
+between vertices with the same indices
+
+\begin{remark}
+While applying to real-world problems,
+stabilization occurred after a few iterations
+(no more than 10),
+that is, a broken line
+$L_*$ was obtained.
+\end{remark}
+
+By construction,
+the length of the broken line
+$L_*$
+cannot be reduced by shifting its vertices individually
+or by shifting several vertices,
+among which there are no neighbors.
+
+\begin{proposition}
+If we move several adjacent vertices of the broken line
+$L_*$
+so that they remain on the same segments of the contours,
+then the length of the resulting broken line will not decrease.
+\end{proposition}
+
+\begin{proof}
+Consider the shift of two adjacent vertices.
+Let four consecutive vertices of the broken line
+$L_*$
+be located at the points
+$M_{i-1}, M_i, M_{i+1}, M_{i+2}$.
+Let the points
+$M_i \in S_i,
+M_{i+1} \in S_{i+1}$
+belong to linear segments
+of rescpective contours
+$S_i \subset C_i,
+S_{i+1} \subset C_{i+1}$.
+Let us prove
+$
+\forall M'_i \in S_i,
+M'_{i+1} \in S_{i+1}
+$:
+$
+|M_{i-1} M'_i M'_{i+1} M_{i+2}|
+\ge
+|M_{i-1} M_i M_{i+1} M_{i+2}|
+$.
+
+For arbitrary
+$M'_i \in S_i$:
+$|M_{i-1} M'_i M_{i+1} M_{i+2}|$
+is minimal when $M'_i=M_i$,
+and
+for arbitrary
+$M'_{i+1} \in S_{i+1}$:
+$|M_{i-1} M_i M'_{i+1} M_{i+2}|$
+is minimal when $M'_{i+1}=M_{i+1}$.
+
+Suppose
+$
+\exists M'_i \in S_i,
+\exists M'_{i+1} \in S_{i+1}
+$:
+$
+|M_{i-1} M'_i M'_{i+1} M_{i+2}|
+<
+|M_{i-1} M_i M_{i+1} M_{i+2}|
+$.
+It's clear that
+$
+M'_i \ne M_i,
+M'_{i+1} \ne M_{i+1}
+$.
+
+Let
+$
+M_i(s)=M_i+s \cdot \overrightarrow{M_i M'_i}
+$,
+$
+ M_{i+1}(t)= M_{i+1}+t \cdot \overrightarrow{M_{i+1} M'_{i+1}}
+$
+($s,t \in[0,1]$),
+$f(s,t)=
+|M_{i-1} M_i(s) M_{i+1}(t) M_{i+2}|
+$.
+
+Due to positions of
+$M_i$ and $M_{i+1}$:
+\begin{equation}
+\frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)} \ge 0,
+\frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)} \ge 0
+\label{partials}
+\end{equation}
+If,
+for instance
+$\partial f(s,t) / \partial s \big|_{(0,0)} = 0$,
+that is possible only
+when
+points
+$M_{i-1}, M_i, M_{i+1}$
+lie on a straight line
+(when $M_{i-1}$ and $M_{i+1}$
+are on both sides of
+$S_i$;
+otherwise,
+one can replace
+$M_{i-1}$ with its reflection
+relative to
+$S_i$).
+So, when both
+$$
+\frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)}
+= 0 =
+\frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)}
+$$
+that means that all four points
+$M_{i-1}, M_i, M_{i+1}, M_{i+2}$
+lie on the same line
+and the broken line is already
+the shortest one.
+
+Now,
+suppose
+at least one derivative in
+(\ref{partials})
+is not equal to zero.
+Consider
+$\varphi(t)=f(t,t)$.
+
+$$
+\frac{d\varphi}{dt} \Big|_0 =
+\frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)}
++
+\frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)}
+>0
+$$
+
+That means
+$\exists \tau^* \in [0,1]$:
+$\varphi(\tau^*) > \varphi(0)$.
+But we assumed
+$\varphi(1)<\varphi(0)$,
+i.e.
+$\varphi(0)<\varphi(\tau^*)>\varphi(1)$.
+
+But note also
+that
+$\varphi(t)$ is a sum of three terms of a form
+$\sqrt{(a+b\cdot t)^2 + (c+d \cdot t)^2}$,
+all having positive second derivative,
+so
+$d^2\varphi(t)/dt^2 \ge 0$,
+function
+$\varphi(t)$ is convex at
+$[0,1]$
+and cannot take the value
+in the inner point of interval
+that is greater than its values
+at the ends.
+
+So our assumption is impossible.
+
+The shift of two neighboring vertices is considered. For more vertices, the proof is similar.
+
+So, the broken
+$L_*$
+delivers a local minimum.
+\end{proof}
 
 \section{Numerical experiments}
 
