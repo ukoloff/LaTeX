@@ -526,6 +526,76 @@ needs further investigation.
 
 \subsection{Recovery of removed contours}
 
+After the tool’s route
+to bypass contours
+that do not contain others inside,
+is constructed as described above,
+we extend it to the full route
+visiting all the original contours,
+and so that the precedence constraint is
+automatically
+observed.
+
+Note that the route obtained in the previous step
+\begin{equation}
+Route = \bigcup_{i=0}^{N'} M_i M_{i+1}
+\label{route0}
+\end{equation}
+intersects all the original contours
+$C_i$,
+because it visits the contours preserved in the first stage
+by construction of steps 2 and 3,
+and it intersects all external contours
+(removed earlier),
+because the start and end points
+$M_0$ and
+$M_{N + 1}$
+lie outside all the circuits
+$C_i$.
+
+Thus,
+for each (external) contour
+$C_i$
+that has not yet been included in the route,
+we find all the points of intersection
+with it of the route constructed
+(\ref{route0})
+and if there are several such points (ordinarily),
+then we choose the last one
+(visited by the route later then others).
+After adding these points,
+we get a complete route,
+which,
+visits all the original contours
+$C_i$,
+and the external contours are always visited later than
+the internal ones contained inside them.
+The length of the route, obviously, does not change.
+
+It is easy to understand
+that the route constructed in this way
+for the complete problem
+is also optimal.
+Indeed,
+if there was a shorter route
+that visits all the contours,
+we could simply remove from it
+the pierce points
+lying on the outer contours to get a route
+visiting only the internal contours
+that has the same, that is, shorter length.
+Thus, we would construct a shorter route
+for the subtask without any precedence constraints,
+which is not possible by assumption.
+
+Thus,
+we obey the precedence constraint
+almost automatically in linear time
+$O(N)$.
+
+This completes the execution of the algorithm
+for solving Continuous Cutting Problem.
+
 \section{Optimality of continuous optimization problem solution}
 
 \section{Numerical experiments}
