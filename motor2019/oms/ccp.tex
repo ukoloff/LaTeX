@@ -16,7 +16,7 @@
 \usepackage{amssymb,amsmath}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{patterns}
+\usetikzlibrary{patterns,intersections,arrows.meta}
 \usepackage{theoremref}
 
 \graphicspath{{media/}}
@@ -55,27 +55,44 @@ between a finite set of nonintersecting contours on the plane}
 \maketitle
 
 \begin{abstract}
-The article discusses one of the optimization problems
-that arise when modeling the tool path for CNC sheet metal
-cutting machines for the case when the boundary contours
-of the parts are defined by polygons and the pierce points
-are located on the boundary contours.
-Only closed-loop cutting is used,
-i.e. Continuous Cutting Problem (CCP),
-hence
-the task of minimizing the length of the tool path
-is reduced to the problem of finding the minimum air move length,
-which is shown to be equivalent to the problem of finding
-the shortest polyline with vertices on disjoint contours in the plane,
-while these contours do not contain internal contours.
-An algorithm for constructing minimal length broken line
-for a fixed order of cutting contours is described
-and is proved to provide local minimum.
-Sufficient conditions for this minimum to be global are given.
-Heuristic algorithm is suggested for finding the optimal order for cutting contours.
-The results of a computational experiment
-and a comparison of the results with an exact solution for the GTSP problem are presented.
-
+An optimization problem that arises during
+tool path routing for
+CNC sheet cutting machine
+is considered
+for the case when
+parts are bounded by
+line segments and circular arcs
+and pierce points lay
+on the bounds.
+Technique of
+continuous cutting is used,
+i.e.
+each contour is cut as a whole
+from any starting point.
+The task of
+tool path length minimization
+is reduced to the task
+of air move length minimization
+which is shown to be equivalent
+to finding the shortest broken line
+with vertices on
+non-nesting disjoint contours on the plane.
+The algorithm of building such
+a broken line
+for a fixed order of contour processing
+is devised
+and proved to deliver local minimum.
+Some sufficient conditions
+for this minimum to be global
+are discussed.
+A heuristic algorithm
+for finding the optimal contour cutting order
+is proposed
+based on
+Variable Neighborhood Search approach.
+Results of a computational experiment
+and a comparison with the exact solution
+of GTSP problem are presented.
 \end{abstract}
 
 \begin{keywords}
@@ -252,7 +269,7 @@ The contours
 $C_i$
 can have an arbitrary shape,
 but we will only consider the case
-when they consist of (a finite number)
+when they consist of (a finite number of)
 segments of lines and arcs of circles,
 which is determined by the existing technological equipment.
 In case when the contours consist only of line segments,
@@ -287,7 +304,7 @@ $$
 \mathcal{L} \to \min
 $$
 
-Where, for simplicity, we introduce the notation
+Where, for sake of simplicity, we introduce the notation
 $M_{i_0} = M_0$,
 $M_{i_{N + 1}} = M_{N + 1}$.
 
@@ -376,24 +393,58 @@ pierce point $M_i$ is the intersection with the segment:
 $M_i = M_{i-1} M_{i + 1} \cap C_i$
 (if such an intersection exists;
 otherwise,
-the solution will be one of the ends of the segment).
+the solution will be one of the ends of the segment),
+see. Fig. \ref{pierce-thru}.
 If the points are located on one side of the segment,
 then the solution can also be easily found using the
 \textit{Fermat principle},
 generating the famous rule
 ``the angle of incidence is angle of reflection''
 (or again one of the ends of the segment),
-see fig. \ref{fermat}.
+see Fig. \ref{pierce-fermat}.
 
 \begin{figure}
-  \begin{center}
-  \tikz[rotate=27,scale=1.3]{
+  \centering
+  \subfloat[On the linear segment]{
+    \label{pierce-thru}
+    \tikz[rotate=27]{
+        \draw[thick,name path=C1]
+            (0,5) node[above] {$C_{i-1}$}
+            to[bend right] (1,0);
+        \draw[thick,name path=C2]
+            (3,0) node[below] {$C_i$}
+            to[bend right] (3,2);
+        \draw[thick,name path=C3]
+            (4,3) node[above] {$C_{i+1}$}
+            to[bend right] (5,0);
+        \path[name path=L0]
+            (0,1.5) -- (6,2);
+        \path[name path=Lx]
+            (0,1) -- (6,1);
+        \fill[name intersections={of=C1 and Lx, name=X}]
+            (X-1) coordinate(M1) circle(3pt) node[below] {$M_{i-1}$};
+        \fill[name intersections={of=C2 and L0, name=X}]
+            (X-1) coordinate(M2) circle(3pt) node[below left]{$M_i$};
+        \draw[name intersections={of=C2 and Lx, name=X}]
+            (X-1) coordinate(M2x) circle(3pt) node[below right]{$M'_i$};
+        \fill[name intersections={of=C3 and Lx, name=X}]
+            (X-1) coordinate(M3) circle(3pt) node[right] {$M_{i+1}$};
+        \draw[dashed]
+            (M1) -- (M3);
+        \draw[thin,-{Latex[length=3mm]}]
+            (M2)
+            to[bend right] (M2x);
+    }
+  }
+  \subfloat[Reflection using \textit{Fermat principle}]{
+    \label{pierce-fermat}
+    \tikz[rotate=-12]{
       \draw[thick]
           (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
       \fill[black]
-          (1.5, 0) circle(0.1) coordinate(middle) node[below right]  {$M_i$}
-          (1, 1) circle(0.1) coordinate(from) node[above left] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
-          (4.5, 2) circle(0.1) coordinate(to) node[above] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
+          (1.5, 0) circle(0.1) coordinate(middle) node[below left]  {$M_i$}
+          (1, 1) circle(0.1) coordinate(from) node[above right] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
+          (4.5, 2) circle(0.1) coordinate(to) node[above right] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
       \begin{scope}
           \clip (from) circle(1);
           \draw[thick] (from) ++(0, 3) circle(3);
@@ -402,21 +453,22 @@ see fig. \ref{fermat}.
           \clip (to) circle(1.5);
           \draw[thick] (to) ++(3, 4) circle(5);
       \end{scope};
-      \draw[dashed] (from) -- (middle) -- (to);
+      % \draw[dashed] (from) -- (middle) -- (to);
       \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
       \coordinate (opt) at (intersection of zero--future and mirror--from);
       \draw[thin] (opt) circle(0.1);
       \draw[dotted]
           (mirror) -- (opt)
           (mirror) -- (to);
-      \draw[thin] (from) -- (opt) -- (to);
+      \draw[dashed] (from) -- (opt) -- (to);
 
-      \draw[->,>=latex,red,thick] (middle) to[bend right] (opt);
-
+      \draw[thin,-{Latex[length=3mm]}] (middle) to[bend right] (opt);
+    }
   }
-  \caption{Applying \textit{Fermat principle} to find piercing point} \label{fermat}
-  \end{center}
+  \caption{Optimal position for a pierce point}
+  \label{shift-pierce-point}
 \end{figure}
+
 
 The general optimization scheme at this stage looks like this:
 \begin{enumerate}
@@ -552,6 +604,52 @@ needs further investigation.
 
 \subsection{Recovery of removed contours}
 
+\begin{figure}
+  \centering
+  \tikz{
+      \path
+          (-2,0.5) coordinate(M1)
+          (-1,1) coordinate(M2)
+          (8,2) coordinate (M4)
+          (9,4) coordinate (M5);
+      ;
+      \filldraw[thick,pattern=north east lines]
+          (M2) -- +(80:2) -- +(140:2) -- cycle
+          (M4) -- +(260:2) -- +(320:2) -- cycle;
+      ;
+      \filldraw[thick,rounded corners,pattern=north east lines,name path=Ai]
+          (0,0) rectangle (7,4)
+          (2,2) circle(1)
+      ;
+      \path[name path=Lx]
+          (M2) -- (M4);
+      \path[name intersections={of=Ai and Lx, name=Mi}]
+          (Mi-3) coordinate (M3)
+          (Mi-2) coordinate (M3_5)
+      ;
+      \fill
+          \foreach \i in {1,...,5} {
+              (M\i) circle (2pt)
+          }
+      ;
+      \draw [ultra thick]
+          (M3_5) circle(3pt) node[above right] {$M_+$}
+      ;
+      \draw[thin,-{Latex[length=3mm]}]
+          (M1) node[below] {$M_1$} --
+          (M2) node[below] {$M_2$} --
+          (M3) node[above right] {$M_3$} --
+          (M4) node[right] {$M_4$} --
+          (M5) node[left] {$M_5$}
+      ;
+
+      % \fill [name intersections={of=Ai and Lx, name=i, total=\t}] [red]
+      %     \foreach \s in {1,...,\t} {(i-\s) circle (2pt) node[black,above right] {\s}};
+  }
+  \caption{Adding extra pierce point $M_+$}
+  \label{extra-pierce-point}
+\end{figure}
+
 After the tool’s route
 to bypass contours
 that do not contain others inside,
@@ -588,7 +686,8 @@ with it of the route constructed
 (\ref{route0})
 and if there are several such points (ordinarily),
 then we choose the last one
-(visited by the route later then others).
+(visited by the route later then others),
+see Fig. \ref{extra-pierce-point}.
 After adding these points,
 we get a complete route,
 which,
