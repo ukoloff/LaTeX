@@ -16,7 +16,7 @@
 \usepackage{amssymb,amsmath}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{patterns,intersections,arrows.meta}
+\usetikzlibrary{patterns,intersections}
 \usepackage{theoremref}
 
 \graphicspath{{media/}}
@@ -426,12 +426,12 @@ see Fig. \ref{pierce-fermat}.
         \fill[name intersections={of=C2 and L0, name=X}]
             (X-1) coordinate(M2) circle(3pt) node[below left]{$M_i$};
         \draw[name intersections={of=C2 and Lx, name=X}]
-            (X-1) coordinate(M2x) circle(3pt) node[below right]{$M'_i$};
+            (X-1) coordinate(M2x) node[below right]{$M'_i$};
         \fill[name intersections={of=C3 and Lx, name=X}]
             (X-1) coordinate(M3) circle(3pt) node[right] {$M_{i+1}$};
         \draw[dashed]
             (M1) -- (M3);
-        \draw[thin,-{Latex[length=3mm]}]
+        \draw[thin,-latex]
             (M2)
             to[bend right] (M2x);
     }
@@ -442,9 +442,9 @@ see Fig. \ref{pierce-fermat}.
       \draw[thick]
           (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
       \fill[black]
-          (1.5, 0) circle(0.1) coordinate(middle) node[below left]  {$M_i$}
-          (1, 1) circle(0.1) coordinate(from) node[above right] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
-          (4.5, 2) circle(0.1) coordinate(to) node[above right] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
+          (1.5, 0) circle(3pt) coordinate(middle) node[below left]  {$M_i$}
+          (1, 1) circle(3pt) coordinate(from) node[above right] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
+          (4.5, 2) circle(3pt) coordinate(to) node[above right] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
       \begin{scope}
           \clip (from) circle(1);
           \draw[thick] (from) ++(0, 3) circle(3);
@@ -456,13 +456,13 @@ see Fig. \ref{pierce-fermat}.
       % \draw[dashed] (from) -- (middle) -- (to);
       \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
       \coordinate (opt) at (intersection of zero--future and mirror--from);
-      \draw[thin] (opt) circle(0.1);
+      % \draw[thin] (opt) circle(3pt);
       \draw[dotted]
           (mirror) -- (opt)
           (mirror) -- (to);
       \draw[dashed] (from) -- (opt) -- (to);
 
-      \draw[thin,-{Latex[length=3mm]}] (middle) to[bend right] (opt);
+      \draw[thin,-latex] (middle) to[bend right] (opt) node[below] {$M'_i$};
     }
   }
   \caption{Optimal position for a pierce point}
@@ -635,7 +635,7 @@ needs further investigation.
       \draw [ultra thick]
           (M3_5) circle(3pt) node[above right] {$M_+$}
       ;
-      \draw[thin,-{Latex[length=3mm]}]
+      \draw[thin,-latex]
           (M1) node[below] {$M_1$} --
           (M2) node[below] {$M_2$} --
           (M3) node[above right] {$M_3$} --
