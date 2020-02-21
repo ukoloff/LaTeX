@@ -104,6 +104,77 @@ $x$ and $y$
 (so,
 $z=(x,y)$),
 by
+$\mathrm{pr}_1(z)$
+and
+$\mathrm{pr}_2(z)$
+are denoted the first and the second elements of
+$z$
+respectively:
+$\mathrm{pr}_1(z)=x$
+and
+$\mathrm{pr}_2(z)=y$.
+If
+$z \in \mathbf K$,
+then
+$\mathrm{pr}_1(z)$
+is called sender
+and
+$\mathrm{pr}_2(z)$
+is recepient of
+$z$
+respectively.
+And sender must be visited earlier than
+the corresponding recepient
+(these are the precedence conditions).
+Then,
 
+\begin{equation*}
+  \mathbf A \triangleq
+  \{ \alpha \in \mathbb P |
+  \forall t_1 \in \overline{1,N},
+  \forall t_2 \in \overline{1,N},
+  \big(
+    (\alpha(t_1), \alpha(t_2)) \in \mathbf K
+  \big)
+  \Rightarrow
+  \big(t_1 < t_2 \big)
+\}
+\end{equation*}
+
+We suppose that
+[101, Condition 2.2.1]  % TODO
+holds.
+Then
+$\mathbf A \neq \varnothing$.
+So,
+admissible by precedence routes exist
+(we consider a route as element of
+$\mathbb P$);
+in (\ref{eq-i.2}),
+only routes
+$\alpha \in \mathbf A$
+can be used.
+But, according to (\ref{eq-i.2}),
+the choice of
+$\alpha \in \mathbf A$
+not yet determined our process.
+It is required to determinate trajectories.
+But, at first,
+we introduce finite phase space
+(instead of $X$).
+
+Under
+$j \in \overline{1, N}$
+we suppose that
+$
+\mathfrak M_j \triangleq
+\{\mathrm{pr}_1(z): z \in \mathbb M_j \}
+$
+and
+$
+\mathbf M_j \triangleq
+\{ \mathrm{pr}_2(z): z \in \mathbb M_j \}
+$;
+of course
 
 \end{document}
