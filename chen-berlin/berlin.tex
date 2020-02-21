@@ -33,7 +33,7 @@ $\triangleq$
 is the equality by definition);
 suppose that
 $2 \leqslant N$.
-Fin nonempty sets
+Fix nonempty sets
 $M_1, \dots M_N$:
 
 \begin{equation}
@@ -175,6 +175,106 @@ $
 \mathbf M_j \triangleq
 \{ \mathrm{pr}_2(z): z \in \mathbb M_j \}
 $;
-of course
+of course,
+we obtain two nonempty subsets of
+$M_j$.
+By
+$\mathfrak M$
+we denote the union of all sets
+$\mathfrak M_j$,
+$j \in \overline{1,N}$.
+Analogously,
+by
+$\mathbf M$
+we denote the union of all sets
+$\mathbf M_j$,
+$j \in \overline{1,N}$.
+Let
+$\mathbb X \triangleq
+X^0 \bigcup \mathfrak M$
+and
+$
+\mathbf X \triangleq
+X^0 \bigcup \mathbf M
+$;
+we consider
+$\mathbb X \times \mathbf X$
+as phase space of our process.
+Let
+$\overline{0, N} \triangleq \{0\} \bigcup \overline{1,N}$
+($\{0\}$ is singleton containing 0).
+Then, by
+$\mathbb Z$
+we denote the set of all processions
+$(z_i)_{i\in\overline{0,N}}$,
+$z_j \in \mathbb X \times \mathbf X
+\; \forall j \in \overline{0,N}$.
+So, elements of
+$\mathbb Z$
+are mappings from
+$\overline{0,N}$
+into
+$\mathbb X \times \mathbf X$
+and only they.
+For
+$x \in X^0$
+and
+$\alpha \in \mathbf A$
+
+\begin{equation}
+  \label{eq-i.3}
+  \mathbb Z_\alpha[x] \triangleq
+  \{(z_i)_{i \in \overline{0,N}} \in \mathbb Z
+  |
+  (z_0 =(x,x))
+  \&
+  (z_t \in \mathbb M_{\alpha(t)}
+  \;\forall t \in \overline{1,N})
+  \}
+\end{equation}
+is a nonempty finite set.
+Elements of (\ref{eq-i.3})
+are trajectories starting from
+$(x,x)$
+and coordinated with route
+$\alpha$
+under
+$x \in X^0$,
+elements of nonempty finite set
+
+\begin{equation}
+  \label{eq-i.4}
+\tilde {\mathbf D}[x] \triangleq
+\{
+  (\alpha,\mathbf z) \in \mathbf A \times \mathbb Z
+|
+  \mathbf z \in \mathbb Z_\alpha[x]
+\}
+\end{equation}
+are admissible solutions for starting point
+$x$
+and only they.
+Moreover,
+we introduce the
+(nonempty finite)
+set
+
+\begin{equation}
+  \label{eq-i.5}
+  \mathbf D \triangleq
+  \{
+    (\alpha,\mathbf z, x) \in \mathbf A \times \mathbb Z \times X^0
+  |
+    (\alpha,\mathbf z) \in \tilde {\mathbf D}[x]
+  \}
+\end{equation}
+of ``complete'' solutions.
+Elements of (\ref{eq-i.5})
+are triplets
+$(\alpha,(z_t)_{t \in \overline{0,N}}, x)$,
+where
+$x \in X^0$
+and
+$(\alpha,(z_t)_{t \in \overline{0,N}}) \in \tilde {\mathbf D}[x]$.
 
 \end{document}
