@@ -349,6 +349,90 @@ connected with visiting to a megacity.
 
 In connection with employment of ordered pairs
 (OP),
-we note the known
+we note the known rule:
+under
+$x_1 \in X, x_2 \in X$
+and
+$K \in \mathfrak N$,
+we suppose that
+$(x_1, x_2, K) \triangleq \big( (x_1, x_2), K\big)$.
+If
+$j \in \overline{1,N}$,
+then
+$\mathbf M \subset X \times X$;
+therefore, under
+$\mathbf z \in mathbf M$
+and
+$K \in \mathfrak N$
+$(z_1,z_2, K)=(\mathbf z, K)$,
+where
+$z_1 \in \mathfrak M_j$
+and
+$z_ \in \mathbf M_j$
+are first and second elements of
+$\mathbf z$
+respectively.
+As a corollary,
+$\mathbf c_j(z_1, z_2, K) = \mathbf c_j(\mathbf z, K)$.
+Under
+$x \in X^0$,
+$\alpha \in \mathbf A$
+and
+$(z_t)_{t \in \overline{0,N}} \in \mathbb Z_\alpha[x]$,
+we suppose that
+
+\begin{multline}
+  \label{eq-i.7}
+  \mathfrak C_\alpha[(z_t)_{t \in \overline{0,N}}]
+  \triangleq \\
+  \sum_{t=1}^N
+  [
+    \mathbf c(
+      \mathrm{pr}_2(z_{t-1}),
+      \mathrm{pr}_1(z_t),
+      \{ \alpha(k) : k \in \overline{t, N} \}
+      +
+      \mathbf c_{\alpha(t)}(z_t, \{ \alpha(k) : k \in \overline{t,N}\})
+      )
+  ]
+  + \\
+  f(\mathrm{pr}_2(z_N)
+\end{multline}
+
+In fact,
+(\ref{eq-i.7})
+realizes the estimation of (\ref{eq-i.2})
+under
+$z_0 = (x,x)$
+and
+$z_t^{(1)} =(x_1^{(t)}, x_2^{(t)})
+\;
+\forall t \in \overline{1, N}$
+For
+$x \in X^0$,
+we consider the next
+$x$-problem
+
+\begin{equation}
+  \label{eq-i.8}
+  \mathfrak C_\alpha[(z_t)_{t \in \overline{0,N}}]
+  \to \min,
+  (\alpha, (z_t)_{t \in \overline{0,N}}) \in \tilde{\mathbf D}[x]
+\end{equation}
+
+with extremum
+$\tilde{V}[x]$
+and nonempty set
+
+\begin{equation}
+  \label{eq-i.9}
+  (sol)[x]
+  \triangleq
+  \{
+    (\alpha^0, (z_t^0)_{t \in \overline{0,N}}) \in \tilde{\mathbf D}[x]
+  |
+    \mathfrak C_{\alpha^0}[(z_t^0)_{t \in \overline{0,N}}] = \tilde{V}[x]
+  \}
+\end{equation}
 
 \end{document}
