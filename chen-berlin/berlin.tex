@@ -557,6 +557,69 @@ is essentially smaller than all position set.
 
 The relation
 [102, (4.9)]  % TODO
-shows that
+shows that in layers (\ref{eq-i.13}),
+can be saved.
+
+Having layers (\ref{eq-i.13}),
+we build layers of Bellman function denoted in
+[102, Section 4]  % TODO
+as
+
+\begin{equation}
+  \label{eq-i.14}
+  v_0, v_1, \dots , v_N
+\end{equation}
+
+Of course,
+$v_j \in \mathfrak R_+[D_j]$
+under
+$j \in \overline{1,N}$
+Construction of function-layers (\ref{eq-i.14})
+is realized recurrently;
+see
+[102. (4.10), Proposition 4.1].   % TODO
+We have the sequential procedure
+
+\begin{equation*}
+  v_0 \to v_1 \to \dots \to v_N
+\end{equation*}
+
+Similarly to
+[102, (4.12)], % TODO
+we obtain
+(see
+[109] % TODO
+),
+that
+
+\begin{equation}
+  \label{eq-i.15}
+  \tilde{V}[x] = v_N(x, \overline{1,N})
+  \;
+  \forall x \in X^0
+\end{equation}
+
+((\ref{eq-i.15})
+is analog of
+[102, (4.12)]   % TODO
+for the case when starting point can varied).
+Using \ref{eq-i.15},
+we choose
+$\mathbb V$
+and
+$x^0 \in X^0_{\mathrm{opt}}$.
+For this,
+we solve the problem
+
+\begin{equation}
+  \label{eq-i.16}
+  v_n(x, \overline{1,N}) \to \min,
+  x \in X^0
+\end{equation}
+
+This is very simple problem.
+So,
+$\mathbb V$
+is
 
 \end{document}
