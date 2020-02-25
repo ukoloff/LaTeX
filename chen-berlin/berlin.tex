@@ -54,7 +54,7 @@ for computing modelling).
 We call the sets
 (\ref{eq-i.1})
 megacities.
-Those sets are visiting objects
+These sets are visiting objects
 (this is a significant difference from TSP).
 Moreover,
 for
@@ -70,7 +70,7 @@ $(\mathbb M_j)_{j \in \overline{1,N}}$
 of nonempty sets connected with megacities.
 Suppose that
 $\mathbb P$
-is the set og all permutations of the set
+is the set of all permutations of the set
 $\overline{1,N}$.
 We consider processes
 
@@ -78,7 +78,7 @@ We consider processes
   (x\in X^0) \to
   (x_1^{(1)} \in M_{\alpha(1)} \rightsquigarrow x_2^{(1)} \in M_{\alpha(1)}) \to \\
   \dots \to \\
-  (x_1^{(N)} \in M_{\alpha(N)} \rightsquigarrow x_N^{(2)} \in M_{\alpha(N)})
+  (x_1^{(N)} \in M_{\alpha(N)} \rightsquigarrow x_2^{(N)} \in M_{\alpha(N)}),
 \end{align*}
 
 \begin{equation}
@@ -91,14 +91,14 @@ We consider processes
 
 The choice of
 $\alpha$
-restrict oneself to precedence conditions defined in terms of a set
+restricts oneself to precedence conditions defined in terms of a set
 $\mathbf K$,
 $\mathbf K \subset \overline{1,N} \times \overline{1,N}$,
 of so-called address pairs.
 For this,
 we suppose that,
 for ordered pair (OP)
-$Z$
+$z$
 of every objects
 $x$ and $y$
 (so,
@@ -123,7 +123,7 @@ $\mathrm{pr}_2(z)$
 is recepient of
 $z$
 respectively.
-And sender must be visited earlier than
+Any sender must be visited earlier than
 the corresponding recepient
 (these are the precedence conditions).
 Then,
@@ -296,7 +296,7 @@ and exterior contour with number $j$,
 the property
 $(i,j) \in \mathbf K$
 is realized
-(of course, in $\mathbf K$
+(of course, in $\mathbf K$,
 address pairs of a different nature
 may be contained).
 
@@ -326,7 +326,7 @@ We fix
 \mathbf c_1 \in \mathfrak R_+[\mathbb M_1 \times \mathfrak N],
 \dots ,
 \mathbf c_N \in \mathfrak R_+[\mathbb M_N \times \mathfrak N], \\
-f \in \mathfrak R_+[\mathbf M]
+f \in \mathfrak R_+[\mathbf M].
 \end{multline}
 
 The functions
@@ -351,7 +351,7 @@ In connection with employment of ordered pairs
 (OP),
 we note the known rule:
 under
-$x_1 \in X, x_2 \in X$
+$x_1 \in X, x_2 \in X$,
 and
 $K \in \mathfrak N$,
 we suppose that
@@ -359,16 +359,17 @@ $(x_1, x_2, K) \triangleq \big( (x_1, x_2), K\big)$.
 If
 $j \in \overline{1,N}$,
 then
-$\mathbf M \subset X \times X$;
+$\mathbb M_j \subset X \times X$;
 therefore, under
-$\mathbf z \in mathbf M$
+$\mathbf z \in \mathbb M_j$
 and
 $K \in \mathfrak N$
+$\;$
 $(z_1,z_2, K)=(\mathbf z, K)$,
 where
 $z_1 \in \mathfrak M_j$
 and
-$z_ \in \mathbf M_j$
+$z_2 \in \mathbf M_j$
 are first and second elements of
 $\mathbf z$
 respectively.
@@ -376,7 +377,7 @@ As a corollary,
 $\mathbf c_j(z_1, z_2, K) = \mathbf c_j(\mathbf z, K)$.
 Under
 $x \in X^0$,
-$\alpha \in \mathbf A$
+$\alpha \in \mathbf A$,
 and
 $(z_t)_{t \in \overline{0,N}} \in \mathbb Z_\alpha[x]$,
 we suppose that
@@ -386,15 +387,14 @@ we suppose that
   \mathfrak C_\alpha[(z_t)_{t \in \overline{0,N}}]
   \triangleq \\
   \sum_{t=1}^N
-  [
+  \big[
     \mathbf c(
       \mathrm{pr}_2(z_{t-1}),
       \mathrm{pr}_1(z_t),
-      \{ \alpha(k) : k \in \overline{t, N} \}
-      +
-      \mathbf c_{\alpha(t)}(z_t, \{ \alpha(k) : k \in \overline{t,N}\})
-      )
-  ]
+      \{ \alpha(k) : k \in \overline{t, N} \})
+    +
+    \mathbf c_{\alpha(t)}(z_t, \{ \alpha(k) : k \in \overline{t,N}\})
+  \big]
   + \\
   f(\mathrm{pr}_2(z_N))
 \end{multline}
@@ -405,9 +405,9 @@ realizes the estimation of (\ref{eq-i.2})
 under
 $z_0 = (x,x)$
 and
-$z_t^{(1)} =(x_1^{(t)}, x_2^{(t)})
+$z_t =(x_1^{(t)}, x_2^{(t)})
 \;
-\forall t \in \overline{1, N}$
+\forall t \in \overline{1, N}$.
 For
 $x \in X^0$,
 we consider the next
@@ -431,7 +431,7 @@ and nonempty set
     (\alpha^0, (z_t^0)_{t \in \overline{0,N}}) \in \tilde{\mathbf D}[x]
   |
     \mathfrak C_{\alpha^0}[(z_t^0)_{t \in \overline{0,N}}] = \tilde{V}[x]
-  \}
+  \}.
 \end{equation}
 
 Now, we consider tje next complete problem:
@@ -440,7 +440,7 @@ Now, we consider tje next complete problem:
   \label{eq-i.10}
   \mathfrak C_\alpha[(z_t)_{t \in \overline{0,N}}]
   \to \min,
-  (\alpha, (z_t)_{t \in \overline{0,N}}, x) \in \mathbf D
+  (\alpha, (z_t)_{t \in \overline{0,N}}, x) \in \mathbf D.
 \end{equation}
 
 This problem is characterized by extremum
@@ -458,7 +458,6 @@ and by the (nonempty) set
   \}
   \neq \varnothing
 \end{equation}
-
 of optimal solutions.
 Our goal consists in determination of
 $\mathbb V$
@@ -562,7 +561,7 @@ as
 
 \begin{equation}
   \label{eq-i.14}
-  v_0, v_1, \dots , v_N
+  v_0, v_1, \dots , v_N.
 \end{equation}
 
 Of course,
@@ -576,7 +575,7 @@ see
 We have the sequential procedure
 
 \begin{equation*}
-  v_0 \to v_1 \to \dots \to v_N
+  v_0 \to v_1 \to \dots \to v_N.
 \end{equation*}
 
 Similarly to
@@ -597,7 +596,7 @@ that
 is analog of
 [102, (4.12)]   % TODO
 for the case when starting point can varied).
-Using \ref{eq-i.15},
+Using (\ref{eq-i.15}),
 we choose
 $\mathbb V$
 and
@@ -607,8 +606,8 @@ we solve the problem
 
 \begin{equation}
   \label{eq-i.16}
-  v_n(x, \overline{1,N}) \to \min,
-  x \in X^0
+  v_N(x, \overline{1,N}) \to \min,
+  x \in X^0.
 \end{equation}
 
 This is very simple problem.
@@ -640,7 +639,7 @@ As a result,
 we obtain the optimal solution
 \begin{equation*}
   (\alpha^0, (z_t^0)_{t\in \overline{0,N}}, x^0)
-  \in \mathbf{SOL}
+  \in \mathbf{SOL}.
 \end{equation*}
 
 \end{document}
