@@ -3,6 +3,9 @@
 \documentclass[12pt]{report}
 %Large fonts
 %\usepackage[14pt]{extsizes}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
 \usepackage[active]{srcltx} %связь dvi and tex файлов
 \usepackage{amsmath,amsfonts,amssymb,amscd,euscript}
 \usepackage{mathtext}
@@ -32,14 +35,14 @@
      \oddsidemargin 0pt
      \evensidemargin 0pt
      \baselineskip 25pt
-     \linespread{1.15}
+     \linespread{1.5}
 %     \setcounter{page}{1}
 %\usepackage[cp866]{inputenc} % для статей на русском языке (DOS-кодировка)
 %\usepackage[cp1251]{inputenc} % для статей на русском языке (Windows-кодировка)
-\usepackage[utf8x]{inputenc} % для статей на русском языке (Windows-кодировка)
+% \usepackage[utf8x]{inputenc} % для статей на русском языке (Windows-кодировка)
 %\usepackage[T2A]{fontenc}
 %\usepackage[russian]{babel}
-\usepackage[english,russian]{babel}
+% \usepackage[english,russian]{babel}
 \usepackage{bbding}
 \newcommand{\bmp}{{\bf p}}
 \newcommand{\bmm}{{\bf m}}
@@ -289,6 +292,17 @@
  \begin{center}
 {\bf Оптимальная маршрутизация инструмента машин фигурной\\ листовой резки с числовым 
 программным управлением.\\ Математические модели и алгоритмы.}
+\footnote{
+Результаты исследований получены 
+при выполнении проекта создания и 
+развития научной лаборатории 
+<<Лаборатория оптимального раскроя промышленных материалов 
+и оптимальных маршрутных технологий>>
+в рамках Программы повышения конкурентоспособности 
+Уральского федерального университета 5-100-2020 
+и при поддержке Российского Фонда Фундаментальных Исследований 
+(гранты №17-08-01385, №20-08-00873)
+}
 
 \vspace{0.5cm}
 А.А. Петунин, А.Г. Ченцов, П.А. Ченцов
@@ -1163,8 +1177,9 @@ Modeling of tool path for the CNC sheet cutting machines
 
 \bibitem{intro36}
 {\bf Petunin, A.A.}
-(2019). General Model of Tool Path Problem for the CNC Sheet Cutting Machines.
-Ifac papersonline, V. 52, I. 13. - P. 2662 - 2667
+(2019). 
+General Model of Tool Path Problem for the CNC Sheet Cutting Machines.
+Ifac papersonline, 52(13), 2662-2667. https://doi.org/10.1016/j.ifacol.2019.11.609
 
 \bibitem{intro43}
 {\bf Petunin, A. A., Chentsov, A. G., \& Chentsov, P. A.}
@@ -1242,7 +1257,9 @@ downloaded in April 2016, http://www.math.uwaterloo.ca/tsp/concorde/downloads/do
 
 
 
-\part{Инженерные задачи}
+\part{Инженерные задачи 
+маршрутизации инструмента машин листовой резки. 
+Общие постановки и подходы к их решению}
 
 \chapter{МОДЕЛИРОВАНИЕ МАРШРУТА ИНСТРУМЕНТА ДЛЯ МАШИН ФИГУРНОЙ ЛИСТОВОЙ РЕЗКИ С 
 ЧИСЛОВЫМ ПРОГРАММНЫМ УПРАВЛЕНИЕМ. 
@@ -2910,7 +2927,7 @@ $CCP \subset SCCP \subset GSCCP \subset ICP$
     \includegraphics[width=0.4\textwidth]{gsccp-b.png}
     \label{gsccp-b}
   }
-  \caption{Optimal cutting path }
+  \caption{Пример задачи GSCCP с набором из двух комплектов базовых сегментов}
   \label{gsccp-both}
 \end{figure}
 
@@ -4179,7 +4196,8 @@ $L_{off} \approx 0$.
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{5-1.png}
-  \caption{Схема резки шести пятиугольных заготовок с мультиконтурной резки}
+  \caption{Схема резки шести пятиугольных заготовок 
+  с применением мультиконтурной резки}
   \label{5-1}
   \end{center}
 \end{figure}
@@ -9865,7 +9883,9 @@ $$
 Рассматриваемые в книге примеры связаны с машинами резки металла на станках с ЧПУ.
 Функции стоимости представляют из себя не расстояния, а времена движения инструмента.
 Все перемещения осуществляются либо на скорости холостого хода $V_i,V_i>0$,
-либо на скорости реза $V_с,V_с>0$. Скорость холостого хода превышает скорость
+либо на скорости реза 
+$V_c, V_c > 0$. 
+Скорость холостого хода превышает скорость
 реза в десятки и сотни раз. В примерах $V_i=500$ мм/с, а $V_c=10$ мм/с.
 Движение предполагается безинерционным. 
 Точка $x^0$ задается в виде начала координат: $x^0=(0,0)$.  
@@ -10675,7 +10695,7 @@ $N_1$ определяет общее количество итераций, $N_
 %\section*{Заключительные замечания}
 %\addcontentsline{toc}{section}{Заключительные замечания}
 
-\noindent{\Large {\bf Заключительные замечания}}
+\noindent{\Large {\bf Заключительные замечания к разделу II}}
 
 Задача управления инструментом при листовой резке на машинах с ЧПУ является весьма 
 трудной с точки зрения вычислительной реализации методов, развиваемых на основе 
@@ -10879,6 +10899,7 @@ $N_1$ определяет общее количество итераций, $N_
 {\bf Chentsov~A.G., Grigoryev~A.M., Chentsov~A.A.} Optimization "In Windows" for Routing Problems with Constraints // Springer Nature Switzerland AG 2019. MOTOR 2019, CCIS 1090, pp. 470-485, 2019
 
 \end{thebibliography}
+
 \end{document}
 
 %%%%%%%%%%%%%%%%%%%%
