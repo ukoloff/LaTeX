@@ -1,0 +1,49 @@
+%     Правильная ссылка на диапазон литературы, т.е.
+%     \mcite{LItem4}{LItem8} вместо \cite{LItem4}---\cite{Litem8}, чтобы
+%     получить общепринятую [4 - 8] вместо [4] - [8].
+%
+\def\mcite#1#2{{\rm [\csname b@#1\endcsname---\csname b@#2\endcsname]}}
+%
+%\renewcommand{\refname}{{\sc\footnotesize БИБЛИОГРАФИЧЕСКИЙ~~СПИСОК}}
+%
+%         Изменение стандартных внутреннех команд Latex'а, чтобы
+%         рисунки и таблицы были оформлены согласно требованиям
+\def\eofgrnum{.~}
+\def\fnum@figure{\figurename~\thefigure\eofgrnum}
+\def\fnum@table{\hfill\tablename~\thetable\\[1mm]}
+\def\cptnwd{0.9\textwidth}
+\def\cptnind{\hspace*{0pt}}
+\long\def\@makecaption#1#2{%
+   \vskip 10\p@
+   \setbox\@tempboxa\hbox{\cptnind#1#2}%
+   \ifdim \wd\@tempboxa >\cptnwd
+         \hfil\parbox{\cptnwd}{%
+         \cptnind#1#2}\hfil\par
+     \else
+         \hbox to\cptnwd{\hfil\box\@tempboxa\hfil}%
+   \fi}
+%
+%
+%          Изменение встроенной команды для оформления заголовков разделов
+%          с точкой между номером и текстом и абзацным отступом после
+%
+\def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+     \let\@svsec\@empty\else
+     \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname.\hskip 1em}\fi
+     \@tempskipa #5\relax
+      \ifdim \@tempskipa>\z@
+        \begingroup #6\relax
+          \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}%
+        \endgroup
+       \csname #1mark\endcsname{#7}\addcontentsline
+         {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                      \protect\numberline{\csname the#1\endcsname}\fi
+                    #7}\else
+        \def\@svsechd{#6\hskip #3\relax  %% \relax added 2 May 90
+                   \@svsec #8\csname #1mark\endcsname
+                      {#7}\addcontentsline
+                           {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                             \protect\numberline{\csname the#1\endcsname}\fi
+                       #7}}\fi
+     \@xsect{#5}\noindent\vspace{-2ex}}
+\def\@biblabel#1{#1.}
