@@ -1,0 +1,50 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage{geometry}
+
+\geometry{
+    a4paper,
+    top=2cm,
+    bottom=2cm,
+    left=2.5cm,
+    right=1cm,
+    nomarginpar,
+    % showframe
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{csquotes}
+
+\usepackage[%
+  parentracker=true,
+  style=gost-numeric,
+  defernumbers=true,
+  sorting=none,
+]{biblatex}
+
+\toggletrue{bbx:gostbibliography}
+
+\addbibresource{ccp.bib}
+
+\begin{document}
+
+\thispagestyle{empty}
+Доклад
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Превед}
+
+См. \cite{berlin2019} и \cite{bi07}.
+
+% \newrefcontext
+\printbibliography[heading=bibintoc]%[env=gostbibliography]
+\nocite{*}
+
+\end{document}
