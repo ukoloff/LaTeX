@@ -1,9 +1,9 @@
 %\documentclass[14pt]{article}
 %\input{ims2008.tex} % стилевой файл ims2008
-\documentclass[12pt]{report}
+\documentclass[12pt,twoside]{report}
 %Large fonts
 %\usepackage[14pt]{extsizes}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
 \usepackage[active]{srcltx} %связь dvi and tex файлов
@@ -27,7 +27,16 @@
 %%%\usepackage[pdftex, unicode]{hyperref}
 %%%\usepackage{literat}
 %%%\usepackage[dvips]{graphicx}
-\usepackage[a4paper, margin=1.5cm]{geometry}
+\usepackage{geometry}
+\geometry{
+  paperheight=240mm,
+  paperwidth=170mm,
+  top=12mm,
+  bottom=20mm,
+  left=18mm,
+  right=17mm,
+  nomarginpar,
+}
   %   \textwidth 16,5cm
   %  \textheight 24cm
   %    \topmargin -0.5cm
@@ -292,10 +301,10 @@
 
 \vspace{0pt plus2fill}
 {\bf
-Оптимальная маршрутизация инструмента машин фигурной\\
-листовой резки с числовым
+Оптимальная маршрутизация инструмента машин фигурной
+листовой резки с~числовым
 программным управлением.\\
-Математические модели и алгоритмы.}
+Математические модели и~алгоритмы.}
 
 \vspace{0pt plus6fill}
 Екатеринбург
