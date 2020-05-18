@@ -16,6 +16,30 @@
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
 
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{patterns,intersections}
+\usepackage{theoremref}
+
+\graphicspath{{media/}}
+
+\usepackage{amsthm}
+\theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
+\newtheorem{condition}{Condition}
+
 \usepackage{csquotes}
 
 \usepackage[%

@@ -48,7 +48,6 @@
   ],
   "latex-workshop.synctex.afterBuild.enabled": true,
   "latex-workshop.message.badbox.show": false,
-  "latex-workshop.latex.clean.enabled": true,
   "cSpell.enabledLanguageIds": [
     "asciidoc",
     "c",
