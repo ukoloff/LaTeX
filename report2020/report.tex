@@ -19,6 +19,7 @@
 
 \usepackage{amssymb,amsmath}
 \usepackage{graphicx}
+\usepackage[caption=false]{subfig}
 \usepackage{tikz}
 \usetikzlibrary{patterns,intersections}
 \usepackage{theoremref}
@@ -266,16 +267,167 @@ $I = (i_1, i_2, ... i_N)$.
 
 \subsection{Удаление <<внешних>> контуров}
 
-
 \subsection{Непрерывная оптимизация}
+
+\begin{figure}
+  \centering
+  \subfloat[На отрезке прямой]{
+    \label{pierce-thru}
+    \tikz[rotate=27]{
+        \draw[thick,name path=C1]
+            (0,5) node[above] {$C_{i-1}$}
+            to[bend right] (1,0);
+        \draw[thick,name path=C2]
+            (3,0) node[below] {$C_i$}
+            to[bend right] (3,2);
+        \draw[thick,name path=C3]
+            (4,3) node[above] {$C_{i+1}$}
+            to[bend right] (5,0);
+        \path[name path=L0]
+            (0,1.5) -- (6,2);
+        \path[name path=Lx]
+            (0,1) -- (6,1);
+        \fill[name intersections={of=C1 and Lx, name=X}]
+            (X-1) coordinate(M1) circle(3pt) node[below] {$M_{i-1}$};
+        \fill[name intersections={of=C2 and L0, name=X}]
+            (X-1) coordinate(M2) circle(3pt) node[below left]{$M_i$};
+        \draw[name intersections={of=C2 and Lx, name=X}]
+            (X-1) coordinate(M2x) node[below right]{$M'_i$};
+        \fill[name intersections={of=C3 and Lx, name=X}]
+            (X-1) coordinate(M3) circle(3pt) node[right] {$M_{i+1}$};
+        \draw[dashed]
+            (M1) -- (M3);
+        \draw[thin,-latex]
+            (M2)
+            to[bend right] (M2x);
+    }
+  }
+  \subfloat[Использование \textit{принципа Ферма}]{
+    \label{pierce-fermat}
+    \tikz[rotate=-12]{
+      \draw[thick]
+          (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
+      \fill[black]
+          (1.5, 0) circle(3pt) coordinate(middle) node[below left]  {$M_i$}
+          (1, 1) circle(3pt) coordinate(from) node[above right] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
+          (4.5, 2) circle(3pt) coordinate(to) node[above right] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
+      \begin{scope}
+          \clip (from) circle(1);
+          \draw[thick] (from) ++(0, 3) circle(3);
+      \end{scope};
+      \begin{scope}
+          \clip (to) circle(1.5);
+          \draw[thick] (to) ++(3, 4) circle(5);
+      \end{scope};
+      % \draw[dashed] (from) -- (middle) -- (to);
+      \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
+      \coordinate (opt) at (intersection of zero--future and mirror--from);
+      % \draw[thin] (opt) circle(3pt);
+      \draw[dotted]
+          (mirror) -- (opt)
+          (mirror) -- (to);
+      \draw[dashed] (from) -- (opt) -- (to);
+
+      \draw[thin,-latex] (middle) to[bend right] (opt) node[below] {$M'_i$};
+    }
+  }
+  \caption{Оптимальное положение точки врезки}
+  \label{shift-pierce-point}
+\end{figure}
+
 
 \subsection{Дискретная оптимизация}
 
 \subsection{Восстановление удалённых контуров}
 
+\begin{figure}
+  \centering
+  \tikz{
+      \path
+          (-2,0.5) coordinate(M1)
+          (-1,1) coordinate(M2)
+          (8,2) coordinate (M4)
+          (9,4) coordinate (M5);
+      ;
+      \filldraw[thick,pattern=north east lines]
+          (M2) -- +(80:2) -- +(140:2) -- cycle
+          (M4) -- +(260:2) -- +(320:2) -- cycle;
+      ;
+      \filldraw[thick,rounded corners,pattern=north east lines,name path=Ai]
+          (0,0) rectangle (7,4)
+          (2,2) circle(1)
+      ;
+      \path[name path=Lx]
+          (M2) -- (M4);
+      \path[name intersections={of=Ai and Lx, name=Mi}]
+          (Mi-3) coordinate (M3)
+          (Mi-2) coordinate (M3_5)
+      ;
+      \fill
+          \foreach \i in {1,...,5} {
+              (M\i) circle (2pt)
+          }
+      ;
+      \draw [ultra thick]
+          (M3_5) circle(3pt) node[above right] {$M_+$}
+      ;
+      \draw[thin,-latex]
+          (M1) node[below] {$M_1$} --
+          (M2) node[below] {$M_2$} --
+          (M3) node[above right] {$M_3$} --
+          (M4) node[right] {$M_4$} --
+          (M5) node[left] {$M_5$}
+      ;
+
+      % \fill [name intersections={of=Ai and Lx, name=i, total=\t}] [red]
+      %     \foreach \s in {1,...,\t} {(i-\s) circle (2pt) node[black,above right] {\s}};
+  }
+  \caption{Добавление точек врезки во <<внешние>> контура $M_+$}
+  \label{extra-pierce-point}
+\end{figure}
+
+
 \section{Условия оптимальности решения задачи непрерывной оптимизации}
 
+\begin{figure}
+  \begin{center}
+  \begin{tikzpicture}[scale=2.7]
+    \draw
+      (1,-0.2) node(M3){} circle(0.027) node[below] {$M_3$}
+      (-1,-0.2) node(M0){} circle(0.027) node[below] {$M_0$};
+    \draw [thick,pattern=north west lines]
+      (1.3,0) -- (2,0) -- (2,1) node[midway,left]{$C_2$} -- (1,1) node(M2x){} --
+      (1, 1.1) -- (2.1,1.1) -- (2.1,-0.1) -- (1.3, -0.1) node(M2) {} --cycle
+    % \draw [thick,pattern=north west lines]
+      (-1.3,0) -- (-2,0) -- (-2,1) node[midway,right]{$C_1$} -- (-1,1) node(M1x){} --
+      (-1, 1.1) -- (-2.1,1.1) -- (-2.1,-0.1) -- (-1.3, -0.1) node(M1){} --cycle;
+    \draw[dashed]
+      (M0) -- (M1) -- (M2) node[midway,above]{Глобальный минимум} -- (M3);
+    \draw[dashed]
+      (M0) -- (M1x) -- (M2x) node[midway,below]{Локальный минимум} -- (M3);
+  \end{tikzpicture}
+  \end{center}
+  \caption{Два маршрута резки, доставляющие локальный и глобальный минимум}
+  \label{counter-example}
+\end{figure}
+
 \section{Численные эксперименты}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{464-gtsp.png}
+  \end{center}
+  \caption{Точное решение задачи GTSP для задания № 464}
+  \label{gtsp-path}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{464-ccp.png}
+  \end{center}
+  \caption{Решение задачи непрерывной резки для задания № 464}
+  \label{ccp-path}
+\end{figure}
 
 \section{Заключение}
 
