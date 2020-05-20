@@ -41,7 +41,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Замечание}
 \newtheorem{notation}{Notation}
-\newtheorem{condition}{Condition}
+\newtheorem{condition}{Условие}
 
 \usepackage{csquotes}
 
@@ -892,7 +892,7 @@ $$
 M'_{i+1} \in S_{i+1}
 :
 |M_{i-1} M'_i M'_{i+1} M_{i+2}|
-\ge
+\geqslant
 |M_{i-1} M_i M_{i+1} M_{i+2}|
 $$
 
@@ -1032,6 +1032,128 @@ $L_*$
 представляет собой
 \textbf{локальный}
 минимум.
+\end{proof}
+
+\subsection{Глобальный минимум}
+
+Перейдём к \textit{достаточному}
+условию того,
+что ломаная
+$L_*$
+является глобальным минимумом.
+
+Пусть
+$M_i \in C_i$ --
+вершина ломаной
+$L_*$.
+Соседние вершины
+$M_{i-1}$
+и
+$M_{i+1}$
+находятся вне
+$C_i$,
+поскольку по условию задачи
+мы исключили вложенные контуры
+По построению
+$L_*$:
+$\forall M'_i \in C_i:
+|M_{i-1} M_i|+|M_i M_{i+1}|
+\leqslant
+|M_{i-1} M'_i|+|M'_i M_{i+1}|
+$.
+
+\begin{condition}
+  \thlabel{cond2}
+Пусть выполняется
+\textbf{одно}
+из следующих условий:
+\begin{enumerate}
+  \item
+  Сегмент
+  $M_{i-1} M_{i+1}$
+  пересекает контур
+  $C_i$,
+  то есть
+  $M_i \in M_{i-1} M_{i+1}$
+  \item
+  Касательная в точке
+  $M_i$
+  к эллипсу с фокусами
+  $M_{i-1}$
+  и
+  $M_{i+1}$
+  и проходящему через
+  $M_i$,
+  разделяет эллипс и контур
+  $C_i$.
+\end{enumerate}
+\end{condition}
+
+\begin{proposition}
+Если
+\thref{cond2}
+выполняется для
+(всех контуров)
+$L_*$,
+то
+при сдвиге нескольких соседних вершин ломаной
+$L_*$
+в рамках содержащих их контуров,
+полная длина ломаной не уменьшается,
+то есть ломаная
+$L_*$
+представляет собой глобальный минимум.
+\end{proposition}
+
+\begin{proof}
+Используя те же обозначения,
+рассмотрим четыре соседних вершины
+$M_{i-1}, M_i, M_{i+1}, M_{i+2} \in L_*$.
+$M_i \in  C_i,
+M_{i+1} \in C_{i+1}$.
+
+Предположим, что
+$$
+\exists M'_i \in C_i,
+\exists M'_{i+1} \in C_{i+1}:
+|M_{i-1} M'_i M'_{i+1} M_{i+2}|
+<
+|M_{i-1} M_i M_{i+1} M_{i+2}|
+$$
+
+Снова,
+$
+M'_i \ne M_i,
+M'_{i+1} \ne M_{i+1}
+$.
+
+Обозначим
+$
+M_i(s)=M_i+s \cdot \overrightarrow{M_i M'_i}
+$,
+$
+ M_{i+1}(t)= M_{i+1}+t \cdot \overrightarrow{M_{i+1} M'_{i+1}}
+$
+($s,t \in[0,1]$),
+$f(s,t)=
+|M_{i-1} M_i(s) M_{i+1}(t) M_{i+2}|
+$.
+
+Но теперь
+\thref{cond2}
+гарантирует, что
+$f(s,0)\geqslant f(0,0)$
+для
+$s\in[0,1]$,
+то есть снова
+\begin{equation}
+  \frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)} \geqslant 0,
+  \frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)} \geqslant 0
+  % \label{partials}
+\end{equation}
+
+Поэтому остальная часть предыдущего доказательства
+повторяется отсюда без изменений.
 \end{proof}
 
 \section{Численные эксперименты}
