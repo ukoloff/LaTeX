@@ -1,6 +1,6 @@
 %\documentclass[14pt]{article}
 %\input{ims2008.tex} % стилевой файл ims2008
-\documentclass[11pt,twoside]{report}
+\documentclass[11pt,twoside,openright]{report}
 %Large fonts
 %\usepackage[14pt]{extsizes}
 \usepackage[utf8x]{inputenc}
@@ -2932,8 +2932,10 @@ $\sum \varepsilon_n^2 \to 0$
 \end{figure}
 
 \begin{table}
-  \caption{Обобщенная таблица формул для вычисления рабочей скорости инструмента на лазерном комплексе ByStar3015}
+  \caption{Обобщённая таблица формул для вычисления рабочей скорости инструмента
+  на лазерном комплексе ByStar3015}
   \label{v-formulae}
+  \centering
   \begin{tabular}{lll}
     \hline
     Материал & Толщина, мм & Формула расчёта $V_{on}$ \\
@@ -3344,7 +3346,8 @@ $V_{on}$
 \begin{table}
   \caption{Значения основных стоимостных параметров при вычислении целевой функции для CO$_2$ лазерного комплекса ByStar3015}
   \label{c-table}
-  \begin{tabular}{crrrrr}
+  \centering
+  \begin{tabular}{c*{5}{r}}
     \hline
     Материал & Толщина, мм & $C_{on}^{max}$, руб & $C_{on}^{min}$, руб & $C_{off}$, руб & $C_{pt}$, руб \\
     \hline
@@ -4068,11 +4071,18 @@ $F_{cost}$
 сокращается эффективность предложенных специальных способов резки.
 
 \begin{table}
-  \caption{Результаты расчета стоимости резки раскройного плана для многоугольных заготовок}
+  \caption{Результаты расчёта стоимости резки раскройного плана
+    для многоугольных заготовок}
   \label{polygons}
-  \begin{tabular}{cccccccc}
+  \centering
+  \begin{tabular}{*{8}{c}}
     \hline
-    Марка & $\Delta$ & Резка & $L_{on}$, м & $L_{off}$, м & $N_{pt}$ & $F_{cost}$, руб & \% \\
+    Марка & $\Delta$ & Резка &
+      \shortstack{$L_{on}$, \\ м} &
+      \shortstack{$L_{off}$, \\ м} &
+      $N_{pt}$ &
+      \shortstack{$F_{cost}$, \\ руб} &
+      \% \\
     \hline
     \multirow{2}{*}{12Х18Н10Т} & \multirow{2}{*}{1 мм} & Стандартная & 101,85 & 26,92 & 163 & 2956,14 & \multirow{2}{*}{36} \\
     & & Специальная & 74,73 & 8,9 & 51 & 1901,4 \\
