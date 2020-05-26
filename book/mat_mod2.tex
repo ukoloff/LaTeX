@@ -3703,15 +3703,21 @@ $L_\text{доп}^\text{факт} \leqslant L_\text{доп}$.
 \end{figure}
 
 \begin{table}
-%Large fonts
-%\small
   \caption{Результаты расчета стоимость резки раскройного плана для круглых заготовок с применением специальных способов резки}
   \label{circles}
-  \begin{tabular}{cccccccccc}
+  \centering
+  \small
+  \begin{tabular}{*{10}{c}}
     \hline
-    Марка & $\Delta$ & Резка & $L_{on}$, м & $L_{off}$, м & $N_{pt}$ & $F_{cost}$, руб & \% & $L_\text{доп}^\text{факт}$, м \\
+    Марка & $\Delta$ & Резка
+      & \shortstack{$L_{on}$, \\ м}
+      & \shortstack{$L_{off}$, \\ м}
+      & $N_{pt}$
+      & \shortstack{$F_{cost}$,\\ руб}
+      & \%
+      & \shortstack{$L_\text{доп}^\text{факт}$,\\ м} \\
     \hline
-    \multirow{8}{*}{12Х18Н10Т} & \multirow{4}{*}{1 мм} & Стандартная & 54,7 &	43,07	& 69 & 1552,92 & \multirow{2}{*}{15,6} &	\multirow{2}{*}{-} \\
+    \multirow{8}{*}{\rotatebox{90}{12Х18Н10Т}} & \multirow{4}{*}{1 мм} & Стандартная & 54,7 &	43,07	& 69 & 1552,92 & \multirow{2}{*}{15,6} &	\multirow{2}{*}{-} \\
     & & Без доп. реза & 52,02 &	0,7 & 6 & 1310,05 \\
     & & Стандартная   & 46,14 & 18,78 & 58 & 1302,08 & \multirow{2}{*}{6,88} & \multirow{2}{*}{0,16} \\
     & & С доп. резом  & 46,3  & 5,43  & 23 & 1212,43 \\
@@ -3719,6 +3725,7 @@ $L_\text{доп}^\text{факт} \leqslant L_\text{доп}$.
     & & Без доп. реза & 52,02 &	0,7 & 6 & 10417,2 \\
     & & Стандартная   & 46,14 & 18,78 & 58 & 10241,6 & \multirow{2}{*}{6,2} & \multirow{2}{*}{0,16} \\
     & & С доп. резом  & 46,3  & 5,43  & 23 & 9607,08 \\
+    \hline
   \end{tabular}
 \end{table}
 
@@ -5396,7 +5403,7 @@ $K\in \mathfrak{N},$ то среди элементов множества $(\ma
 что
 \begin{eqnarray}
 &\mathbf{A}= \bigl\{\al\in \bbp\bigl|\,\al(m) \in \mathbf{I}\bigl(\{\al(t):\,
-t\in \ov{m,N}\}\bigl)\ \ \fa m\in \ov{1,N}\bigl\} = 
+t\in \ov{m,N}\}\bigl)\ \ \fa m\in \ov{1,N}\bigl\} =
 &\nonumber\\
 &=\Bigl\{\al\in \bbp\bigl|\,
 \bigl(\al(1) \in \mathbf{I}(\ov{1,N})\bigl)\,\&
@@ -5531,9 +5538,9 @@ $K\in \mathfrak{N}$ рассматриваем задачу
 &v(x,K) \df \min\limits_{\al\in (\mathbf{I} - \mathrm{bi})[K]}\
 \min\limits_{(z_i)_{i\in\ov{0,|K|}}\in\cz(x,K,\al)}
 \widehat{\mathfrak{C}}_\al[(z_i)_{i\in\ov{0,|K|}}\,|\,K]\in
-[0,\infty[\ \ 
+[0,\infty[\ \
 &\nonumber\\
-&\fa x\in \mathbf{X}\ \ 
+&\fa x\in \mathbf{X}\ \
 \fa K\in \mathfrak{N}.
 \label{3.4.24}
 \end{eqnarray}
@@ -5760,9 +5767,9 @@ K\sm\{j\}\bigl)\bigl]\ \ \fa (x,K) \in D_s.
 где $s\in \ov{1,N},$ указано в предложении~\ref{p3.5.1} (см. (\ref{3.5.21})). После
 выполнения всех преобразований (\ref{3.5.22}) мы получим, в частности, что (см. (\ref{3.4.27}))
  \begin{eqnarray}
-&V = v_N(x^o,\ov{1,N}) = v(x^o,\ov{1,N}) = 
+&V = v_N(x^o,\ov{1,N}) = v(x^o,\ov{1,N}) =
 \min\limits_{j\in \mathbf{I}(\overline{1,N})}\
-\min\limits_{z\in \bba_j(x^o)} \bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(z)\bigl) + 
+\min\limits_{z\in \bba_j(x^o)} \bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(z)\bigl) +
 &\nonumber\\
 &+c_j(z) +
 v_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\bigl].
@@ -5777,7 +5784,7 @@ v_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\bigl].
 с упомянутым допуском. Если
 \bfn\label{3.5.24}V \leqslant \mathbf{d},
 \efn
-то имеет смысл приступать к построению маршрута и трассы (см. (\ref{3.3.8`}), 
+то имеет смысл приступать к построению маршрута и трассы (см. (\ref{3.3.8`}),
 (\ref{3.3.8``})). Если же $V > \mathbf{d},$ то, по всей вероятности, такое построение
 окажется бессмысленным и следует изменить что-то в условиях задачи с целью последующего
 осуществления соотношения, подобного $(\ref{3.5.24}).$
@@ -6582,7 +6589,7 @@ $$
 \begin{eqnarray}
 &\mathbf{v}_s(x,K) =  \min\limits_{j\in \mathbf{I}(K)}\
 \min\limits_{z\in\bbm_j}\bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z),K\bigl) +
- c_j(z,K) + 
+ c_j(z,K) +
 &\nonumber\\
 &+\mathbf{v}_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\bigl]\ \
 \fa (x,K)\in  D_s.
@@ -6634,7 +6641,7 @@ c_{\mathbf{j}_1}(\mathbf{z}^{(1)},\ov{1,N}) + \mathbf{v}_{N-1}
 \begin{eqnarray}
 &\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{\mathbf{j}_1;j\}\bigl) =
 \bigl(\mathrm{pr}_2(z),(\ov{1,N}\sm
-\{\mathbf{j}_1\})\sm\{j\}\bigl)\in D_{N-2}\ \ 
+\{\mathbf{j}_1\})\sm\{j\}\bigl)\in D_{N-2}\ \
 &\nonumber\\
 &\fa j\in
 \mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\})\
@@ -7100,11 +7107,11 @@ $\mathrm{pr}_1(\tilde{z}_o)  \neq \mathrm{pr}_2(z)\ \ \fa z\in \mathbf{K}_o.$ \h
 Теперь (см. (\ref{3.3.24}), (\ref{3.3.25})) имеем, что
 \begin{eqnarray}
 &\mathbf{A}\df \{\al\in \bbp|\,\al^{-1}\bigl(\mathrm{pr}_1(z)\bigl) <
-\al^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\ \ \fa z\in \mathbf{K}\} = 
+\al^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\ \ \fa z\in \mathbf{K}\} =
 &\nonumber\\
 &=\{\al\in \bbp|\,
 \fa z\in \mathbf{K}\ \ \fa t_1\in \ov{1,N}
-\fa t_2\in \ov{1,N}\ \  
+\fa t_2\in \ov{1,N}\ \
 &\nonumber\\
 &\Bigl(\bigl(\al(t_1) =
 \mathrm{pr}_1(z)\bigl)\,\&\,\bigl(\al(t_2) = \mathrm{pr}_2(z)\bigl)\Bigl) \Longrightarrow
@@ -7729,7 +7736,7 @@ f\bigl(\mathrm{pr}_2(\tilde{\mathbf{h}}_N)\bigl) =
 $$
 $$
 = \bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{h}_{\nu+1}),\ov{1,N}\bigl) +
-c_1(\mathbf{h}_{\nu+1},\ov{1,N})\bigl] + 
+c_1(\mathbf{h}_{\nu+1},\ov{1,N})\bigl] +
 \sum\limits_{s=2}^N\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+s-1}),
 $$
 $$
@@ -7784,7 +7791,7 @@ $$
 &\mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]=
 \sum\limits_{s=1}^N \bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+s-1}),
 \mathrm{pr}_1(\mathbf{h}_{\nu+s}),
-\la^1(\ov{\nu+s,\mathbf{n}})\bigl) + 
+\la^1(\ov{\nu+s,\mathbf{n}})\bigl) +
 &\nonumber\\
 &+c_{\la(\nu+s)}^\natural(\mathbf{h}_{\nu+s},
 \la^1(\ov{\nu+s,\mathbf{n}})\bigl)\bigl] +
@@ -8327,7 +8334,7 @@ c_{\la(N+1)}^\natural\bigl(\mathbf{h}_{N+1},\la^1(\ov{N+1,\mathbf{n}})\bigl)  +
 &+ \sum\limits_{t=N+2}^\mathbf{n}\bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),
 \mathrm{pr}_1(\mathbf{h}_t),\la^1(\ov{t,\mathbf{n}})\bigl) +
 &\nonumber\\
-&+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\mathbf{n}})\bigl)\bigl] + 
+&+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\mathbf{n}})\bigl)\bigl] +
 f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\mathbf{n})\bigl)
 &\label{4.5.48}
 \end{eqnarray}
@@ -8507,7 +8514,7 @@ $$
 \widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
 \sum\limits_{t=1}^\nu \bigl[\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),
 \mathrm{pr}_1(\hat{\mathbf{h}}_t),
-\eta^1(\ov{t,\nn})\bigl) + 
+\eta^1(\ov{t,\nn})\bigl) +
 \\
 +c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl]
 +\mathbf{\Gamma} + \Omega +f^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_\nn)\bigl)
@@ -8656,7 +8663,7 @@ f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa.
 (\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl)+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
 &\nonumber\\
 &+\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N}),\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),
-\la^1(\ov{\nu+N+1,\nn})\bigl)+ 
+\la^1(\ov{\nu+N+1,\nn})\bigl)+
 &\nonumber\\
 &+\Om + f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa.
 &\label{4.6.13}
@@ -8735,7 +8742,7 @@ $2^o.$ Пусть теперь выполнено неравенство
 &\nonumber\\
 %%
 &=  \sum\limits_{t=\nu+N+2}^\nn    \zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t),
- \la^1(\ov{t,\nn})\bigl) +  
+ \la^1(\ov{t,\nn})\bigl) +
 &\nonumber\\
 &+\sum\limits_{t=\nu+N+1}^\nn c_{\la(t)}^\natural\bigl(\mathbf{h}_t, \la^1(\ov{t,\nn})\bigl).
 &\label{4.6.18}
@@ -8752,9 +8759,9 @@ $2^o.$ Пусть теперь выполнено неравенство
 \sum\limits_{t=\nu+N+2}^\nn\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),
 &\nonumber\\
 &\mathrm{pr}_1
-(\mathbf{h}_t), \la^1(\ov{t,\nn})\bigl) + \sum\limits_{t=\nu+N+1}^\nn 
+(\mathbf{h}_t), \la^1(\ov{t,\nn})\bigl) + \sum\limits_{t=\nu+N+1}^\nn
 c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)
-+f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) - \kappa = 
++f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) - \kappa =
 &\nonumber\\
 &=\sum\limits_{t=1}^{\nu+N}\bigl[\zc^\natural
 (\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t), \la^1(\ov{t,\nn})\bigl) +
@@ -8953,7 +8960,7 @@ $$
 &\widehat{\mathfrak{C}}_\eta[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}] =
 \sum\limits_{t=1}^\nn\bigl[
 \zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_t),
-\eta^1(\ov{t,\nn})\bigl)+ 
+\eta^1(\ov{t,\nn})\bigl)+
 &\nonumber\\
 &+c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,
 \eta^1(\ov{t,\nn})\bigl)\bigl] +f^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_\nn)\bigl)\in [0,\infty[.
@@ -8978,7 +8985,7 @@ $$
 &\nonumber\\
 &+ \sum\limits_{t=\nn-N+1}^\nn\bigl[
 c^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_t),
-\eta^1(\ov{t,\nn})\bigl)+ 
+\eta^1(\ov{t,\nn})\bigl)+
 &\nonumber\\
 &+c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl]
 +f^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_\nn)\bigl)
@@ -8996,7 +9003,7 @@ $$
 &\nonumber\\
 &+\sum\limits_{t=\nu+1}^\nn\bigl[
 \zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_t),
-\eta^1(\ov{t,\nn})\bigl)+ 
+\eta^1(\ov{t,\nn})\bigl)+
 &\nonumber\\
 &+c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl] +
 f^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_\nn)\bigl).
@@ -9019,7 +9026,7 @@ f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl)=
 &\nonumber\\
 &+\sum\limits_{t=\nu+1}^\nn\bigl[
 \zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t),
-\la^1(\ov{t,\nn})\bigl)+ 
+\la^1(\ov{t,\nn})\bigl)+
 &\nonumber\\
 &+c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
 f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl).
@@ -9183,7 +9190,7 @@ $$(\theta-\nn + N = 1)\,\&\,\bigl((\theta-\nn + N) - 1 =0\bigl).
 $$
 Поэтому из (\ref{4.7.1}) следует, в частности, что
 $$\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{\theta-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_\theta),
-\eta^1(\ov{\theta,\nn})\bigl) = 
+\eta^1(\ov{\theta,\nn})\bigl) =
 $$
 $$
 =\zc\bigl(\mathrm{pr}_2(z_{(\theta-\nn+N)-1}^o),
@@ -9210,7 +9217,7 @@ $$
 из (\ref{4.7.8}) следует также, что
 $$
 \eta^1(\ov{\theta,\nn}) = \{\eta(s):\,s\in \ov{\theta,\nn}\}= \{(\La\circ\,\al^o)(s-\nn+N):\,
-s\in \ov{\theta,\nn}\}=  
+s\in \ov{\theta,\nn}\}=
 $$
 $$
 =\{\La\bigl(\al^o(s-\nn+N)\bigl):\,s\in \ov{\theta,\nn}\}=
@@ -9287,7 +9294,7 @@ $$
 Поскольку выбор $\xi$ был произвольным, из (\ref{4.7.47}) следует, что
 \begin{eqnarray}
 &c_{\eta(j)}^\natural\bigl(\hat{\mathbf{h}}_j,\eta^1(\ov{j,\nn})\bigl) =
-c_{\al^o(j-\nn+N)} \bigl(z_{j-\nn+N}^o,\{\al^o(t):\,t\in \ov{j-\nn+N,N}\}\bigl)\ \ 
+c_{\al^o(j-\nn+N)} \bigl(z_{j-\nn+N}^o,\{\al^o(t):\,t\in \ov{j-\nn+N,N}\}\bigl)\ \
 &\nonumber\\
 &\fa j\in \ov{\nn-N+1,\nn}.
 \label{4.7.48}
@@ -9303,7 +9310,7 @@ c_{\al^o(j-\nn+N)} \bigl(z_{j-\nn+N}^o,\{\al^o(t):\,t\in \ov{j-\nn+N,N}\}\bigl)\
 &+ c_{\al^o(t-\nn+N)}\bigl(z_{t-\nn+N}^o,\{\al^o(s):\,s\in\ov{t-\nn+N,N}\}\bigl)\bigl]=
 &\nonumber\\
 &\hspace{-0.4cm}= \sum\limits_{j=1}^N\bigl[\zc\bigl(\mathrm{pr}_2(z_{j-1}^o),
-\mathrm{pr}_1(z_j^o),\{\al^o(s):\,s\in \ov{j,N}\}\bigl) + 
+\mathrm{pr}_1(z_j^o),\{\al^o(s):\,s\in \ov{j,N}\}\bigl) +
 &\nonumber\\
 &+c_{\al^o(j)}\bigl(z_j^o,\{\al^o(s):\,s\in \ov{j,N}\}\bigl)\bigl].
 &\label{4.7.49}
@@ -9324,11 +9331,11 @@ $$
 \la^1(\ov{t,\nn})\bigl)\bigl]+
 $$
 $$+\sum\limits_{t=1}^N \bigl[\zc\bigl(\mathrm{pr}_2(z_{t-1}^o),
-\mathrm{pr}_1(z_t^o),\{\al^o(s):\,s\in \ov{t,N}\}\bigl) + 
+\mathrm{pr}_1(z_t^o),\{\al^o(s):\,s\in \ov{t,N}\}\bigl) +
 $$
 $$
 +c_{\al^o(t)}\bigl(z_t^o,\{\al^o(s):\,
-s\in \ov{t,N}\}\bigl)\bigl]+ f\bigl(\mathrm{pr}_2(z_N^o)\bigl) = 
+s\in \ov{t,N}\}\bigl)\bigl]+ f\bigl(\mathrm{pr}_2(z_N^o)\bigl) =
 $$
 $$=\sum\limits_{t=1}^{\nn-N}
 \bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
@@ -9367,7 +9374,7 @@ c_1(\mathbf{h}_{1+\nn-N},\ov{1,N}) +
 &\nonumber\\
 &+f\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl)=
 \sum\limits_{t=1}^N\bigl[\zc\bigl(\mathrm{pr}_2(\mathbf{h}_{(t-1)+(\nn-N)}),\mathrm{pr}_1
-(\mathbf{h}_{t+\nn-N}),\ov{t,N})\bigl) + 
+(\mathbf{h}_{t+\nn-N}),\ov{t,N})\bigl) +
 &\nonumber\\
 &+c_t(\mathbf{h}_{t+\nn-N},\ov{t,N})\bigl]+
 f\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl)
@@ -9404,7 +9411,7 @@ f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl)=
 f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl)=
 &\nonumber\\
 &= \sum\limits_{j=\nn-N+1}^\nn\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{j-1}),\mathrm{pr}_1
-\mathbf{h}_j),\la^1(\ov{j,\nn})\bigl) + 
+\mathbf{h}_j),\la^1(\ov{j,\nn})\bigl) +
 &\nonumber\\
 &+c_{\la(j)}\bigl(\mathbf{h}_j,\la^1(\ov{j,\nn})\bigl)\bigl]+
 f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl).
@@ -9414,7 +9421,7 @@ f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl).
 \begin{eqnarray}
 &\widehat{\mathfrak{C}}_\eta[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}] =
 \sum\limits_{t=1}^\nn\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
-(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl) + 
+(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl) +
 &\nonumber\\
 &+c_{\la(t)}^\natural\bigl(\mathbf{h}_t,
 \la^1(\ov{t,\nn})\bigl)\bigl]+ f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl)- \kappa =
