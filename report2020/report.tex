@@ -26,7 +26,7 @@
 \usepackage{theoremref}
 
 \renewcommand{\arraystretch}{1.5}
-\usepackage{tabularx}
+\usepackage{tabu}
 \graphicspath{{media/}}
 
 \usepackage{amsthm}
@@ -92,7 +92,8 @@
 по результатам научно-квалификационной работы (диссертации)
 
 \vspace{0pt plus2fill}
-\begin{tabular}{l p{10cm}}
+{\small
+\begin{tabu}{X[-1]X}
   Направление подготовки: &
   09.06.01
   "---
@@ -102,7 +103,8 @@
   05.13.12
   "---
   <<Системы автоматизации проектирования (в промышленности)>>
-\end{tabular}
+\end{tabu}
+}
 
 \vspace{0pt plus4fill}
 \begin{flushright}
@@ -1830,7 +1832,7 @@ $N \leqslant 33$.
 
 \begin{table}[]
   \centering
-  \begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill} } l|*{3}{r}}
+  \begin{tabu} to 0.9\linewidth {X[2]|*{3}{X[r]}}
       Задание & № 229 & № 464 & № 3211 \\
       \hline
       Кол-во деталей & 11 & 14 & 17\\
@@ -1839,7 +1841,8 @@ $N \leqslant 33$.
       Кол-во точек GTSP & 491 & 429 & 493 \\
       $\mathcal L_{GTSP}$, м & 7.729 & 4.743 & 4.557 \\
       $\mathcal L_{CCP}$, м & 7.727 & 4.706 & 4.536 \\
-  \end{tabular*}
+      \hline
+  \end{tabu}
   \caption{Сравнение качества решений задач CCP и GTSP}
   \label{ccp-vs-gtsp}
 \end{table}
