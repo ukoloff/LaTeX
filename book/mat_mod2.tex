@@ -3,7 +3,7 @@
 \documentclass[11pt,twoside,openany]{report}
 %Large fonts
 %\usepackage[14pt]{extsizes}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
 \usepackage[active]{srcltx} %связь dvi and tex файлов
@@ -13,7 +13,7 @@
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
 \usepackage{latexsym}
-\usepackage{cite}
+% \usepackage{cite}
 \usepackage{graphicx}
 \graphicspath{{media/}}
 \usepackage{multirow}
@@ -45,7 +45,19 @@
   %    \oddsidemargin 0pt
   %    \evensidemargin 0pt
   %    \baselineskip 25pt
-     \linespread{1.2}
+\linespread{1.2}
+
+% Bibliography
+\usepackage{csquotes}
+\usepackage[%
+  parentracker=true,
+  style=gost-numeric,
+  defernumbers=true,
+  sorting=none,
+]{biblatex}
+
+\addbibresource{book.bib}
+
 %     \setcounter{page}{1}
 %\usepackage[cp866]{inputenc} % для статей на русском языке (DOS-кодировка)
 %\usepackage[cp1251]{inputenc} % для статей на русском языке (Windows-кодировка)
@@ -10630,401 +10642,8 @@ $N_1$ определяет общее количество итераций, $N_
 
 
 \newpage
-\addcontentsline{toc}{section}{ЛИТЕРАТУРА}
-\begin{thebibliography}{99}
-
-\bibitem{Cha4`}
-{\bf Беллман~Р.}
-Применение динамического программирования к задаче о коммивояжере
-// Кибернетический сборник. -.М.: Мир, 1964. Т.~9. С.~219--228.
-
-\bibitem{intro12}
-{\bf Верхотуров M.A., Тарасенко П.Ю.}
-Математическое обеспечение задачи оптимизации пути режущего инструмента при плоском фигурном раскрое на основе цепной резки.
-// Вестник УГАТУ. Управление, ВТиИТ. Уфа: Изд-во УГАТУ. 2008. Т.10. №2 (27). с.123-130.
-
-\bibitem{intro11}
-{\bf Ганелина Н.Д., Фроловский В.Д.}
-Исследование методов построения кратчайшего пути обхода отрезков на плоскости
-// Сибирский журнал вычислительной математики. №3, т. 9. 2006. с. 201-212.
-
-\bibitem{Cha7`}
-%6
-{\bf Кормен Т., Лейзерсон Ч., Ривест Р.}
-Алгоритмы: построение и анализ. М.: МЦНМО, 1999. 960~с.
-
-\bibitem{Cha2`}
-%2
-{\bf Коробкин В.В., Сесекин А.Н., Ташлыков О.Л., Ченцов А.Г.}
-Методы маршрутизации и их приложения в задачах повышения
-безопасности и эффективности эксплуатации атомных станций
-/ Под общ. ред. член-корр. РАН И.А. Каляева. --- М.: Новые технологии, 2012.  234~с.
-
-\bibitem{intro53}
-{\bf Кошелева М.С., Ченцов А.А., Ченцов А.Г.}
-О задаче маршрутизации с ограничениями, включающими зависимость от списка заданий
-// Труды Института математики и механики УрО РАН. 2015. Т. 21. № 4. С. 178-195.
-
-\bibitem{Cha6`}
-%5
-{\bf Куратовский К., Мостовский А.}
-Теория множеств.  М.: Мир, 1970. 416~c.
-
-\bibitem{Cha17`}
-{\bf Литл~Дж., Мурти К., Суини Д., Кэрел К.}
-Алгоритм для решения задачи о коммивояжере
-// Экономика и математические методы. 1965. Т. 1 (Вып. 1) С. 94--107.
-
-\bibitem{intro15}
-{\bf Меламед И.И., Сергеев С.И., Сигал И.Х.}
-Задача коммивояжера. Вопросы теории
-// Автоматика и телемеханика. 1989. № 9. С. 3-34.
-
-\bibitem{intro16}
-{\bf Меламед И.И., Сергеев С.И., Сигал И.Х.}
-Задача коммивояжера. Точные алгоритмы
-// Автоматика и телемеханика. 1989. № 10. С. 3-29.
-
-\bibitem{intro17}
-{\bf Меламед И.И., Сергеев С.И., Сигал И.Х.}
-Задача коммивояжера. Приближенные алгоритмы
-// Автоматика и телемеханика. 1989. № 11. С. 3-26.
-
-\bibitem{Cha9`}
-%8
-{\bf Мину М.}
-Математическое программирование. М.: Наука, 1990. 488~с.
-
-\bibitem{intro29}
-{\bf Петунии А.А.}
-О некоторых стратегиях формирования маршрута инструмента при разработке управляющих программ для машин термической резки материала
-// Вестник УГАТУ. Серия: Управление, вычислительная техника и информатика. 2009. Т. 13, № 2 (35). С. 280-286.
-
-\bibitem{intro31}
-{\bf Петунин, А.А.}
-Методологические и теоретические основы автоматизации проектирования раскроя листовых материалов на машинах с числовым программным управлением:
-дисс. на соиск. уч. ст. докт. техн. наук: 05.13.12/А.А. Петунин - Свердловск, 2009. -348 с.
-
-\bibitem{intro44}
-{\bf Петунин, А. А., Таваева, А. Ф.}
-(2015). ОБ ОПТИМИЗАЦИИ МАРШРУТА ИНСТРУМЕНТА ДЛЯ МАШИН ФИГУРНОЙ ЛИСТОВОЙ РЕЗКИ С ЧПУ ПРИ УСЛОВИИ НЕПОСТОЯНСТВА СКОРОСТИ РАБОЧЕГО ХОДА.
-Фундаментальные исследования, (6-1), 56-62.
-
-\bibitem{Cha18`}
-%18
-{\bf Петунин~А.А., Ченцов А.А., Ченцов~А.Г., Ченцов~П.А.}
-Об одной задаче маршрутизации с внутренними работами
-// Теория управления и математическое моделирование.
-Тезисы докладов Всероссийской конференции с международным
-участием  <<Теория управления и математическое моделирование>>, посвященной
-памяти профессора Н.В. Азбелева и профессора Е.Л. Тонкова. Ижевск, 2015.
-С. 289 -- 291.
-
-\bibitem{intro41}
-{\bf Петунин~А.А., Ченцов~А.А., Ченцов~А.Г., Ченцов~П.А}
-Элементы динамического программирования в конструкциях локального улучшения эвристических решений задач маршрутизации с ограничениями
-// Автоматика и телемеханика. 2017. № 4. С. 106-125.
-
-\bibitem{intro32}
-{\bf Петунин А.А., Ченцов А.Г., Ченцов П.А.}
-К вопросу о маршрутизации движения инструмента в машинах листовой резки с числовым программным управлением
-// Научно-технические ведомости СПбГПУ, № 2 (169), 2013, С. 103-111.
-
-\bibitem{Cha15`}
-{\bf Петунии А.А., Ченцов А.Г., Ченцов П.А.}
-Локальные вставки на основе динамического программирования в задаче маршрутизации с ограничениями
-// Вестник Удмуртского университета. Математика. Механика. Компьютерные науки. 2014. Вып. 2. С. 56-75
-
-\bibitem{intro22}
-{\bf Сигал И.Х.}
-Декомпозиционный подход к решению задачи коммивояжера большой размерности и некоторые его приложения
-// Изв. АН СССР. Техн. киберн. 1990. № 6. С. 143-155.
-
-\bibitem{intro47}
-{\bf Таваева, А. Ф., Петунин, А. А.}
-(2018). Точное вычисление стоимости резки заготовок из листового материала на машине лазерной резки с числовым программным управлением в задаче оптимизации маршрута перемещения режущего инструмента
-//Моделирование, оптимизация и информационные технологии, 6(4 (23)), 298-312.
-
-\bibitem{Cha10`}
-%9
-{\bf Фроловский В.Д.}
-Автоматизация проектирования управляющих программ
-тепловой резки металла на оборудовании с ЧПУ
-// Информационные технологииcв проектировании и производстве. 2005. №~4. C.~63--66.
-
-\bibitem{Cha16`}
-{\bf Хелд~М., Карп~Р.М.}
-Применение динамического программирования к задачам упорядочения
-// Кибернетический сборник. -.М.: Мир, 1964. Т.~9. С.~202--218.
-
-\bibitem{Cha14`}
-%13
-{\bf Ченцов А.А., Ченцов А.Г.}
-Задача последовательного обхода
-мегаполисов
-// Вестник Тамбовского университета.
-Серия <<Естественные и технические науки>>. 2014. Т.~19. Вып.~2. С.~454--475.
-
-\bibitem{intro56}
-{\bf Ченцов А.А., Ченцов А.Г.}
-К вопросу о нахождении значения маршрутной задачи с ограничениями
-// Проблемы управления и информатики. 2016. № 1. С.41-54
-
-\bibitem{Cha8`}
-%7
-{\bf Ченцов А.А., Ченцов А.Г., Ченцов П.А.}
-Экстремальная задача маршрутизации с внутренними потерями
-// Труды Института математики и механики УрО РАН, 2008. Т.~14, №~3, с.~183--201.
-
-\bibitem{Cha11`}
-%10
-{\bf Ченцов А.А., Ченцов А.Г., Ченцов П.А.}
-Элементы динамического программирования в экстремальных задачах маршрутизации
-// Проблемы управления.  2013. №~5. C.~12--21.
-
-\bibitem{Cha13`}
-%12
-{\bf Ченцов А.Г.}
-Беллмановские вставки в задаче маршрутизации с
-ограничениями и усложненными функциями стоимости
-// Вестник Удмуртского университета. Математика. Механика. Компьютерные науки.
-2014. Вып.~4.
-С.~122--141.
-
-\bibitem{Cha12`}
-%11
-{\bf Ченцов А.Г.}
-Задача последовательного обхода мегаполисов с условиями предшествования
-// АиТ.  2014. №~4. С.~170--190.
-
-\bibitem{Cha3`}
-%3
-{\bf Ченцов А.Г.}
-К вопросу о маршрутизации комплексов работ
-// Вестник Удмуртского университета. Математика. Механика. Компьютерные науки. 2013.
-Вып.~1. С.~59--82.
-
-\bibitem{intro51}
-{\bf Ченцов А.Г.}
-Об оптимальной маршрутизации в условиях ограничений
-// Доклады Академии Наук, 2008, Т. 423, № 3, с. 303-307.
-
-\bibitem{Cha5`}
-%4
-{\bf Ченцов А.Г.}
-Одна параллельная процедура построения функции Беллмана в
-обобщенной задаче курьера с внутренними работами
-// Вестник Южно-Уральского государственного университета.
-Серия: Математическое моделирование и
-программирование. 2012. №~18 (277). С.~53--76.
-
-\bibitem{15`}
-{\bf Ченцов А.Г.}
-Оптимизирующие вставки в задачах маршрутизации и их
-реализация на основе динамического программирования
-// Вестн. УдГУ. Сер. Математика. Механика. Компьютер. науки.
-2016. Т. 26, № 4. C.565-578.
-
-\bibitem{Cha1`}
-%1
-{\bf Ченцов А.Г.}
-Экстремальные задачи маршрутизации и распределения заданий: вопросы теории.
-М.-Ижевск: НИЦ <<Регулярная и хаотическая динамика>>. 2008. 238~с.
-
-\bibitem{ChenGrig}
-{\bf Ченцов~А.Г., Григорьев~А.М.}
-Оптимизирующие мультивставки в задачах маршрутизации
-// Вестн. Удмурт. ун-та. Сер. Математика. Механика. Компьютер. науки.
-2018. Т. 28, № 4. С. 513-530.
-
-\bibitem{intro01}
-{\bf Ченцов А.Г., Ченцов А.А.}
-Дискретно-непрерывная задача маршрутизации с условиями предшествования
-//Труды института  математики и механики УрО РАН. 2017. Т. 23. № 1. С. 275-292.
-
-\bibitem{intro52}
-{\bf Ченцов А.Г., Ченцов А.А.}
-Задача маршрутизации с ограничениями, зависящими от списка заданий
-// Доклады Академии Наук, 2015, т.465, № 2, с. 154-158.
-
-\bibitem{ChenChen}
-{\bf Ченцов~А.Г., Ченцов~А.А.}
-К вопросу о маршрутизации перемещений в задаче с динамическими ограничениями
-// Вестник Удмуртского университета. Математика. Механика. Компьютерные науки.
-2019. Т.~29. Вып.~3. С.~363-381.
-
-\bibitem{intro54}
-{\bf Ченцов А.Г., Ченцов П.А.}
-Маршрутизация перемещений с ограничениями и нестационарными функциями стоимости
-// Научно-технические ведомости СПбГПУ. Информатика. Телекоммуникации. Управление. 4(152)/2012, с. 88-93.
-
-\bibitem{StartFinishPoint}
-{\bf Ченцов~А.Г., Ченцов~П.А.}
-Об одной задаче маршрутизации с оптимизацией точки старта-финиша
-// Изв. Ин-та математики и информатики УдГУ. 2018. Т. 52. С. 103-115.
-
-\bibitem{intro55}
-{\bf Ченцов А.Г., Ченцов П.А.}
-Об одном нестационарном варианте обобщенной задачи курьера с внутренними работами
-/ А.Г.Ченцов, П.А.Ченцов // Вести. ЮУрГУ. 2013. Т.6, № 2. С.88-107.
-
-\bibitem{StartPoint}
-{\bf Ченцов~А.Г., Ченцов~П.А.}
-Оптимизация точки старта в задаче последовательного обхода мегаполисов
-при наличии условий предшествования
-// Вестн. ЮУрГУ. Сер. мат. моделирование и программирование. 2018. Т.~11, N~2. С.~83-95
-
-\bibitem{intro24}
-{\bf Ascheuer, N., Jünger, M., Reinelt, G.}
-(2000) A Branch \& Cut Algorithm for the Asymmetric Traveling Salesman Problem with Precedence Constraints.
-Computational Optimization and Applications. Volume 17, Issue 1, pp
-61-84.
-
-\bibitem{intro02}
-{\bf Chentsov A.A., Chentsov A.G.}
-Dynamic programming method in the generalized traveling salesman problem: the influence of inexact calculations
-// Mathematical and computing modelling. 2001. Vol. 33. P. 801-819.
-
-\bibitem{intro40}
-{\bf Chentsov~A.G., Chentsov~P.A., Petunin~A.A., Sesekin~A.N.}
-Routing problems: constraints and optimality
-// IFAC-PapersOnLine. - 2016. - V. 49, l. 12. - P. 640-644.
-
-\bibitem{intro42}
-{\bf Chentsov, A.G., Chentsov, P.A., Petunin, A.A., Sesekin, A.N.}
-(2018). Model of megalopolises in the tool path optimisation for CNC plate cutting machines.
-International Journal of Production Research, 56(14), 4819-4830.
-
-\bibitem{ChenChenGrig}
-{\bf Chentsov~A.G., Grigoryev~A.M., Chentsov~A.A.}
-Optimization "In Windows" for Routing Problems with Constraints
-// Springer Nature Switzerland AG 2019. MOTOR 2019, CCIS 1090, pp. 470-485, 2019
-
-\bibitem{intro37}
-{\bf Chentsov~P.A., Petunin~A.A.}
-Tool Routing Problem for CNC Plate Cutting Machines
-// IFAC-PapersOnLine. - 2016. - V. 49, l. 12. - P. 645-650.
-
-\bibitem{intro34}
-{\bf Chentsov~P.A., Petunin~A.A., Sesekin~A.N., Shipacheva~E.N., Sholohov A.E.}
-Heuristic algorithms for solving of the tool routing problem for CNC cutting machines // AIP Conference Proceedings. - 2015. - V. 1690, 030004-1 – 030004-6.
-
-\bibitem{intro08}
-{\bf Dewil, R., Vansteenwegen, P., Cattrysse, D.}
-(2014) Construction heuristics for generating tool paths for laser cutters.
-International Journal of Production Research, Mar. 2014, 1-20.
-
-\bibitem{intro13}
-{\bf Dewil, R., Vansteenwegen, P., Cattrysse, D.}
-(2016) A review of cutting path algorithms for laser cutters.
-Int J Adv. Manuf. Techno.l 87:1865–1884.
-
-\bibitem{intro09}
-{\bf Dewil, R., Vansteenwegen, P., Cattrysse, D., Laguna, M., Vossen, T.}
-(2015) An improvement heuristic framework for the laser cutting tool path problem.
-International Journal of Production Research., 53 (6) (2015), pp. 1761–1776.
-
-\bibitem{intro20}
-{\bf Gutin G., А.Р. Punnen А.Р.}
-(editors) The Traveling Salesman problem and its variations
-// Kluwer Academic Publishers, 2002. vol. 12, p. 585-607.
-
-\bibitem{intro03}
-{\bf Hoeft, J., Palekar, U. S.}
-(1997). Heuristics for the plate-cutting traveling salesman problem.
-IIE Transactions, 29, 719-731.
-
-\bibitem{intro06}
-{\bf Jing Y., Zhige C.}
-An Optimized Algorithm of Numerical Cutting-Path Control in Garment Manufacturing.
-— 2013. — Advanced Materials Research. 796. P.454-457.
-
-\bibitem{intro25}
-{\bf Karapetyan, D., Gutin G.}
-(2011) Lin-Kernighan Heuristic Adaptations for the Generalized Traveling Salesman Problem.
-European J. of Operational Research 208 (3): 221–232.
-
-\bibitem{intro26}
-{\bf Karapetyan. D., Gutin, G.}
-(2012) Efficient Local Search Algorithms for Known and New Neighborhoods for the Generalized Traveling Salesman Problem.
-Eur. J. Oper. Res, 219(2):234-251.
-
-\bibitem{intro04}
-{\bf Lee M.-K., Kwon K.-B.}
-Cutting path optimization in CNC cutting processes using a two-step genetic algorithm.
-Dec. 2006. International Journal of Production Research 44 (24), P.5307-5326.
-
-\bibitem{intro35}
-{\bf Petunin, A.A.}
-Modeling of tool path for the CNC sheet cutting machines
-// AIP Conference Proceedings. – 2015. V. 1690, 060002-1 – 060002-7.
-
-\bibitem{intro36}
-{\bf Petunin, A.A.}
-(2019).
-General Model of Tool Path Problem for the CNC Sheet Cutting Machines.
-Ifac papersonline, 52(13), 2662-2667. https://doi.org/10.1016/j.ifacol.2019.11.609
-
-\bibitem{intro43}
-{\bf Petunin, A. A., Chentsov, A. G., Chentsov, P. A.}
-(2019). Optimizing Insertions in a Constraint Routing Problem with Complicated Cost Functions
-// Journal of Computer and Systems Sciences International, 58(1), 113-125.
-
-\bibitem{intro38}
-{\bf Petunin, A. A., Polishuk, E. G., Chentsov, A. G., Chentsov, P. A., Ukolov, S. S.}
-(2016). About some types of constraints in problems of routing.
-Pasheva, N. Popivanov, \& G. Venkov (Edit.), APPLICATIONS OF MATHEMATICS IN ENGINEERING AND ECONOMICS (AMEE'16) (Vol 1789).
-[060002] (AIP Conference Proceedings; Vol.1789). American Institute of Physics Publising LLC.
-
-\bibitem{intro39}
-{\bf Petunin, A.A., Polyshuk, E.G., Chentsov, P.A., Ukolov, S.S., Krotov, V. I.}
-(2019). The termal deformation reducing in sheet metal at manufacturing parts by CNC cutting machines.
-IOP Conference Series: Materials Science and Ebgineering (MSE).
-
-\bibitem{intro30}
-{\bf Petunin, A. A., Stlios, C.}
-(2016). Optimization Models of Tool Path Problem for CNC Sheet Metal Cutting Machines. Ifac papersonline, 49(12), 23-28.
-
-\bibitem{intro14}
-{\bf Sherif S. U., Jawahar N., Balamurali M.}
-(2014) Sequential optimization approach for nesting and cutting sequence in laser cutting
-//Journal of Manufacturing Systems.  2014, V. 33, №. 4, pp. 624-638.
-
-\bibitem{intro45}
-{\bf Tavaeva, A. F., Petunin, A. A.}
-(2017). Investigation of Cutting Speed Influence on Optimality of the Tool Path Route for CNC Laser Cutting Machines.
-International Conference on Industrial Engineering, Applications and Manufacturing, ICIEAM 2017 - Proceedings [8076452] Institute of Electrical and Electronics Engineers Inc.
-
-\bibitem{intro46}
-{\bf Tavaeva A., Petunin A., Krotov V.}
-(2017) About effectiveness of special cutting techniques application during development of automatic methods of tool path optimization applied to CNC thermal cutting machines.
-Proceedings of the 19th international workshop on computer science and information technologies CSIT’2017, Germany, Baden-Baden, 2017, pp.221-226.
-
-\bibitem{intro21}
-{\bf William J. Cook.}
-In pursuit of the traveling salesman. Mathematics at the limits of computation.
-Princeton University Press, NJ, 2012. P.248.
-
-\bibitem{intro05}
-{\bf Yang, W. B., Zhao, Y. W., Jie, J., Wang, W. L.}
-(2010). An Effective Algorithm for Tool-Path Airtime. Optimization during Leather Cutting.
-Advanced Materials Research. 102, 373-377.
-
-\bibitem{intro28}
-{\bf Xie, S. Q., Gan, J., Wang, G. G., Vn, C.}
-(2009). Optimal process planning for compound laser cutting and punch using Genetic Algorithms.
-International Journal of Mechatronics and Manufacturing Systems. 2 (1/2), 20-38.
-
-\bibitem{intro07}
-{\bf Yu W, Lu L}
-(2014) A route planning strategy for the automatic garment cutter based on genetic algorithm.
-In: IEEE congress on evolutionary computation (CEC), pp. 379–386
-
-\bibitem{intro27}
-Concorde TSP Solver Lin–Kernighan heuristic software,
-downloaded in April 2016, http://www.math.uwaterloo.ca/tsp/concorde/downloads/downloads.htm
-
-\end{thebibliography}
+\toggletrue{bbx:gostbibliography}
+\printbibliography[heading=bibintoc]
 
 \end{document}
 
