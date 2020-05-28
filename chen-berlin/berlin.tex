@@ -1,0 +1,649 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+
+\usepackage{amssymb,amsmath}
+
+\begin{document}
+
+We note that,
+for problems of moderate dimension,
+it is possible to obtain optimal solution taking into account
+the essential part of real constraints
+(precedence conditions,
+dynamic constraints etc.)
+Now,
+we consider general scheme that can be used not only
+under control of sheet cutting on CNC machines.
+
+Fix nonempty sets
+$X$ and $X^0$
+for which
+$X^0 \subset X$
+(under sheet cutting,
+$X$ is a rectangle on the plane).
+Suppose that
+$X^0$ is a finite set.
+Let
+$N \in \mathbb N$,
+where
+$\mathbb N \triangleq \{1; 2; \dots \}$
+(here and below
+$\triangleq$
+is the equality by definition);
+suppose that
+$2 \leqslant N$.
+Fix nonempty sets
+$M_1, \dots M_N$:
+
+\begin{equation}
+  \label{eq-i.1}
+  M_1 \subset X,
+  \dots ,
+  M_N \subset X.
+\end{equation}
+
+Using results of
+[99],  % TODO
+we suppose that
+$M_1, \dots M_N$
+are finite sets
+(these sets can be obtained from
+continuous equidistants by digitization
+for computing modelling).
+We call the sets
+(\ref{eq-i.1})
+megacities.
+These sets are visiting objects
+(this is a significant difference from TSP).
+Moreover,
+for
+$j \in \overline{1, N}$,
+where
+$\overline{1,N} \triangleq \{k \in \mathbb N|k \leqslant N\}$,
+a nonempty relation
+$\mathbb M_j,
+\mathbb M_j \subset M_j \times M_j$
+is defined.
+So, we have procession
+$(\mathbb M_j)_{j \in \overline{1,N}}$
+of nonempty sets connected with megacities.
+Suppose that
+$\mathbb P$
+is the set of all permutations of the set
+$\overline{1,N}$.
+We consider processes
+
+\begin{align*}
+  (x\in X^0) \to
+  (x_1^{(1)} \in M_{\alpha(1)} \rightsquigarrow x_2^{(1)} \in M_{\alpha(1)}) \to \\
+  \dots \to \\
+  (x_1^{(N)} \in M_{\alpha(N)} \rightsquigarrow x_2^{(N)} \in M_{\alpha(N)}),
+\end{align*}
+
+\begin{equation}
+  \label{eq-i.2}
+  \alpha \in \mathbb P,
+  (x_1^{(1)}, x_2^{(1)}) \in \mathbb M_{\alpha(1)},
+  \dots ,
+  (x_1^{(N)}, x_2^{(N)}) \in \mathbb M_{\alpha(N)}
+\end{equation}
+
+The choice of
+$\alpha$
+restricts oneself to precedence conditions defined in terms of a set
+$\mathbf K$,
+$\mathbf K \subset \overline{1,N} \times \overline{1,N}$,
+of so-called address pairs.
+For this,
+we suppose that,
+for ordered pair (OP)
+$z$
+of every objects
+$x$ and $y$
+(so,
+$z=(x,y)$),
+by
+$\mathrm{pr}_1(z)$
+and
+$\mathrm{pr}_2(z)$
+are denoted the first and the second elements of
+$z$
+respectively:
+$\mathrm{pr}_1(z)=x$
+and
+$\mathrm{pr}_2(z)=y$.
+If
+$z \in \mathbf K$,
+then
+$\mathrm{pr}_1(z)$
+is called sender
+and
+$\mathrm{pr}_2(z)$
+is recepient of
+$z$
+respectively.
+Any sender must be visited earlier than
+the corresponding recepient
+(these are the precedence conditions).
+Then,
+
+\begin{equation*}
+  \mathbf A \triangleq
+  \big\{
+  \alpha \in \mathbb P
+  \big|
+  \forall t_1 \in \overline{1,N},
+  \forall t_2 \in \overline{1,N},
+  \big(
+    (\alpha(t_1), \alpha(t_2)) \in \mathbf K
+  \big)
+  \Rightarrow
+  \big(t_1 < t_2 \big)
+\big\}
+\end{equation*}
+
+We suppose that
+[101, Condition 2.2.1]  % TODO
+holds.
+Then
+$\mathbf A \neq \varnothing$.
+So,
+admissible by precedence routes exist
+(we consider a route as element of
+$\mathbb P$);
+in (\ref{eq-i.2}),
+only routes
+$\alpha \in \mathbf A$
+can be used.
+But, according to (\ref{eq-i.2}),
+the choice of
+$\alpha \in \mathbf A$
+not yet determined our process.
+It is required to determinate trajectories.
+But, at first,
+we introduce finite phase space
+(instead of $X$).
+
+Under
+$j \in \overline{1, N}$
+we suppose that
+$
+\mathfrak M_j \triangleq
+\{\mathrm{pr}_1(z): z \in \mathbb M_j \}
+$
+and
+$
+\mathbf M_j \triangleq
+\{ \mathrm{pr}_2(z): z \in \mathbb M_j \}
+$;
+of course,
+we obtain two nonempty subsets of
+$M_j$.
+By
+$\mathfrak M$
+we denote the union of all sets
+$\mathfrak M_j$,
+$j \in \overline{1,N}$.
+Analogously,
+by
+$\mathbf M$
+we denote the union of all sets
+$\mathbf M_j$,
+$j \in \overline{1,N}$.
+Let
+$\mathbb X \triangleq
+X^0 \bigcup \mathfrak M$
+and
+$
+\mathbf X \triangleq
+X^0 \bigcup \mathbf M
+$;
+we consider
+$\mathbb X \times \mathbf X$
+as phase space of our process.
+Let
+$\overline{0, N} \triangleq \{0\} \bigcup \overline{1,N}$
+($\{0\}$ is singleton containing 0).
+Then, by
+$\mathbb Z$
+we denote the set of all processions
+$(z_i)_{i\in\overline{0,N}}$,
+$z_j \in \mathbb X \times \mathbf X
+\; \forall j \in \overline{0,N}$.
+So, elements of
+$\mathbb Z$
+are mappings from
+$\overline{0,N}$
+into
+$\mathbb X \times \mathbf X$
+and only they.
+For
+$x \in X^0$
+and
+$\alpha \in \mathbf A$
+
+\begin{equation}
+  \label{eq-i.3}
+  \mathbb Z_\alpha[x] \triangleq
+  \big\{
+    (z_i)_{i \in \overline{0,N}} \in \mathbb Z
+  \big|
+  (z_0 =(x,x))
+  \&
+  (z_t \in \mathbb M_{\alpha(t)}
+  \;\forall t \in \overline{1,N})
+  \big\}
+\end{equation}
+is a nonempty finite set.
+Elements of (\ref{eq-i.3})
+are trajectories starting from
+$(x,x)$
+and coordinated with route
+$\alpha$
+under
+$x \in X^0$,
+elements of nonempty finite set
+
+\begin{equation}
+  \label{eq-i.4}
+\tilde {\mathbf D}[x] \triangleq
+\big\{
+  (\alpha,\mathbf z) \in \mathbf A \times \mathbb Z
+\big|
+  \mathbf z \in \mathbb Z_\alpha[x]
+\big\}
+\end{equation}
+are admissible solutions for starting point
+$x$
+and only they.
+Moreover,
+we introduce the
+(nonempty finite)
+set
+
+\begin{equation}
+  \label{eq-i.5}
+  \mathbf D \triangleq
+  \big\{
+    (\alpha,\mathbf z, x) \in \mathbf A \times \mathbb Z \times X^0
+  \big|
+    (\alpha,\mathbf z) \in \tilde {\mathbf D}[x]
+  \big\}
+\end{equation}
+of ``complete'' solutions.
+Elements of (\ref{eq-i.5})
+are triplets
+$(\alpha,(z_t)_{t \in \overline{0,N}}, x)$,
+where
+$x \in X^0$
+and
+$(\alpha,(z_t)_{t \in \overline{0,N}}) \in \tilde {\mathbf D}[x]$.
+
+Now, we discuss the interpretation of our constructions
+for the case of sheet cutting.
+Then, our megacities are realized as ``second''
+discrete equidistants of real detail contours to be cut.
+The relation
+$\mathbb M_j$,
+where
+$j \in \overline{1,N}$,
+is the set of all OP
+$z=(x,y)$,
+where
+$x$ is cut-in point and
+$y$ is cut-off point corresponding to $x$.
+Moreover,
+under every detail,
+for interior contour with number $i$
+and exterior contour with number $j$,
+the property
+$(i,j) \in \mathbf K$
+is realized
+(of course, in $\mathbf K$,
+address pairs of a different nature
+may be contained).
+
+\section*{Cost functions}
+
+Let
+$\mathbb R$
+be real line and
+$\mathbb R_+ \triangleq \{ \xi \in \mathbb R | 0 \leqslant \xi\}$.
+If $T$ is a nonempty set,
+then
+$\mathfrak R_+[T]$
+is the set of all functions from $T$
+into $\mathbb R_+$.
+So,
+$\mathfrak R_+[T]$
+is the set of all real-valued nonnegative functions on $T$.
+By
+$\mathfrak N$
+we denote the family of all nonempty subsets of
+$\overline{1,N}$.
+We fix
+
+\begin{multline}
+  \label{eq-i.6}
+\mathbf c \in \mathfrak R_+[\mathbf X \times \mathbb X \times \mathfrak N], \\
+\mathbf c_1 \in \mathfrak R_+[\mathbb M_1 \times \mathfrak N],
+\dots ,
+\mathbf c_N \in \mathfrak R_+[\mathbb M_N \times \mathfrak N], \\
+f \in \mathfrak R_+[\mathbf M].
+\end{multline}
+
+The functions
+$\mathbf c$
+is used for estimation of the exterior movements
+(movements between megacities and from $X^0$ to a megacity).
+In problem connected with sheet cutting,
+the values of
+$\mathbf c$
+can be time of the corresponding movement
+(the dependence from
+$K \in \mathfrak N$
+can be connected with penalty for violation of dynamic constraints;
+the analogous remark can be refered to functions
+$\mathbf c_1, \dots, \mathbf c_N$).
+The functions
+$\mathbf c_1, \dots, \mathbf c_N$
+are used for estimation of interior works
+connected with visiting to a megacity.
+
+In connection with employment of ordered pairs
+(OP),
+we note the known rule:
+under
+$x_1 \in X, x_2 \in X$,
+and
+$K \in \mathfrak N$,
+we suppose that
+$(x_1, x_2, K) \triangleq \big( (x_1, x_2), K\big)$.
+If
+$j \in \overline{1,N}$,
+then
+$\mathbb M_j \subset X \times X$;
+therefore, under
+$\mathbf z \in \mathbb M_j$
+and
+$K \in \mathfrak N$
+$\;$
+$(z_1,z_2, K)=(\mathbf z, K)$,
+where
+$z_1 \in \mathfrak M_j$
+and
+$z_2 \in \mathbf M_j$
+are first and second elements of
+$\mathbf z$
+respectively.
+As a corollary,
+$\mathbf c_j(z_1, z_2, K) = \mathbf c_j(\mathbf z, K)$.
+Under
+$x \in X^0$,
+$\alpha \in \mathbf A$,
+and
+$(z_t)_{t \in \overline{0,N}} \in \mathbb Z_\alpha[x]$,
+we suppose that
+
+\begin{multline}
+  \label{eq-i.7}
+  \mathfrak C_\alpha[(z_t)_{t \in \overline{0,N}}]
+  \triangleq \\
+  \sum_{t=1}^N
+  \big[
+    \mathbf c(
+      \mathrm{pr}_2(z_{t-1}),
+      \mathrm{pr}_1(z_t),
+      \{ \alpha(k) : k \in \overline{t, N} \})
+    +
+    \mathbf c_{\alpha(t)}(z_t, \{ \alpha(k) : k \in \overline{t,N}\})
+  \big]
+  + \\
+  f(\mathrm{pr}_2(z_N))
+\end{multline}
+
+In fact,
+(\ref{eq-i.7})
+realizes the estimation of (\ref{eq-i.2})
+under
+$z_0 = (x,x)$
+and
+$z_t =(x_1^{(t)}, x_2^{(t)})
+\;
+\forall t \in \overline{1, N}$.
+For
+$x \in X^0$,
+we consider the next
+$x$-problem
+
+\begin{equation}
+  \label{eq-i.8}
+  \mathfrak C_\alpha[(z_t)_{t \in \overline{0,N}}]
+  \to \min,
+  (\alpha, (z_t)_{t \in \overline{0,N}}) \in \tilde{\mathbf D}[x]
+\end{equation}
+with extremum
+$\tilde{V}[x]$
+and nonempty set
+
+\begin{equation}
+  \label{eq-i.9}
+  (sol)[x]
+  \triangleq
+  \big\{
+    (\alpha^0, (z_t^0)_{t \in \overline{0,N}}) \in \tilde{\mathbf D}[x]
+  \big|
+    \mathfrak C_{\alpha^0}[(z_t^0)_{t \in \overline{0,N}}] = \tilde{V}[x]
+  \big\}.
+\end{equation}
+
+Now, we consider tje next complete problem:
+
+\begin{equation}
+  \label{eq-i.10}
+  \mathfrak C_\alpha[(z_t)_{t \in \overline{0,N}}]
+  \to \min,
+  (\alpha, (z_t)_{t \in \overline{0,N}}, x) \in \mathbf D.
+\end{equation}
+
+This problem is characterized by extremum
+$\mathbb V \in \mathbb R_+$
+and by the (nonempty) set
+
+\begin{equation}
+  \label{eq-i.11}
+  \mathbf{SOL}
+  \triangleq
+  \big\{
+    (\alpha^0, (z_t^0)_{t \in \overline{0,N}}, x^0) \in \mathbf D
+  \big|
+    \mathfrak C_{\alpha^0}[(z_t^0)_{t \in \overline{0,N}}] = \mathbb V
+  \big\}
+  \neq \varnothing
+\end{equation}
+of optimal solutions.
+Our goal consists in determination of
+$\mathbb V$
+and some solution of the set (\ref{eq-i.11}).
+Finally, we consider the problem
+
+\begin{equation}
+  \label{eq-i.12}
+  \tilde{V}[x] \to \min,
+  x \in X^0
+\end{equation}
+for which
+(see (\ref{eq-i.8}) and (\ref{eq-i.10}))
+$\mathbb V$
+is extremum and
+\begin{equation*}
+  X^0_{\mathrm{opt}}
+  \triangleq
+  \big\{
+    x \in X^0
+  \big|
+    \tilde{V}[x] = \mathbb V
+  \big\}
+  \neq \varnothing
+\end{equation*}
+is the set of optimal starting points.
+Of course,
+(\ref{eq-i.12})
+is connected with problems
+(\ref{eq-i.8}), (\ref{eq-i.10}).
+Now, we note that determination of
+$\mathbb V$
+and
+$x^0 \in X^0_{\mathrm{opt}}$
+can be useful for the heuristics testing
+under big dimension of our problem.
+
+We note, that solution methods are considered in
+[100 - 105],       % TODO
+where along with theoretical constructions,
+algorithms and results of computing experiments are reduced.
+Therefore,
+we restrict oneself to consideration of investigation logic.
+
+At first,
+the main theoretical method is widely understood dynamic programming
+(DP).
+In addition,
+we use variant of DP that is a development of Bellman
+construction for TSP
+(see [106])   % TODO
+and not use the Help-Karp variant from
+[107].        % TODO
+As a result,
+we obtain the DP procedure universal with respect to
+a starting point; see
+[108, 109].   % TODO
+Therefore,
+we realize construction of layers of Bellman function at once
+for all possible starting points from the set
+$X^0$.
+Of course,
+at first,
+we establish the Bellman equation
+[102, (4.5)].  % TODO
+This equation defines the extremum evolution
+(we keep in mind extremums of partial routing problems).
+
+The next step connected with constructing the position set
+sufficient for realize solutions
+under precedence conditions;
+see
+[102, Section 4].  % TODO
+Namely,
+we construct layers of position space:
+the sets
+
+\begin{equation}
+  \label{eq-i.13}
+  D_0, D_1, \dots , D_N
+\end{equation}
+in
+[102, Section 4]  % TODO
+for consequent construction of the Bellman function layers.
+
+Under construction of these sets-layers,
+precedence conditions are indirectly used.
+As a result,
+the used position set defined as union of all sets (\ref{eq-i.13})
+is essentially smaller than all position set.
+
+The relation
+[102, (4.9)]  % TODO
+shows that in layers (\ref{eq-i.13}),
+can be saved.
+
+Having layers (\ref{eq-i.13}),
+we build layers of Bellman function denoted in
+[102, Section 4]  % TODO
+as
+
+\begin{equation}
+  \label{eq-i.14}
+  v_0, v_1, \dots , v_N.
+\end{equation}
+
+Of course,
+$v_j \in \mathfrak R_+[D_j]$
+under
+$j \in \overline{1,N}$.
+Construction of function-layers (\ref{eq-i.14})
+is realized recurrently;
+see
+[102. (4.10), Proposition 4.1].   % TODO
+We have the sequential procedure
+
+\begin{equation*}
+  v_0 \to v_1 \to \dots \to v_N.
+\end{equation*}
+
+Similarly to
+[102, (4.12)], % TODO
+we obtain
+(see
+[109] % TODO
+),
+that
+
+\begin{equation}
+  \label{eq-i.15}
+  \tilde{V}[x] = v_N(x, \overline{1,N})
+  \;
+  \forall x \in X^0
+\end{equation}
+((\ref{eq-i.15})
+is analog of
+[102, (4.12)]   % TODO
+for the case when starting point can varied).
+Using (\ref{eq-i.15}),
+we choose
+$\mathbb V$
+and
+$x^0 \in X^0_{\mathrm{opt}}$.
+For this,
+we solve the problem
+
+\begin{equation}
+  \label{eq-i.16}
+  v_N(x, \overline{1,N}) \to \min,
+  x \in X^0.
+\end{equation}
+
+This is very simple problem.
+So,
+$\mathbb V$
+is extremum of (\ref{eq-i.16}),
+and
+$x^0 \in X^0$
+such that
+$v_N(x^0, \overline{1,N}) = \mathbb V$.
+
+Now, for construction an element of (\ref{eq-i.11}),
+we consider the problem (\ref{eq-i.8})
+under
+$x=x^0$.
+Namely,
+we find
+
+\begin{equation*}
+  (\alpha^0, (z_t^0)_{t\in \overline{0,N}}) \in
+  (sol)[x^0]
+\end{equation*}
+using procedure
+[102, Section 4]  % TODO
+(see
+[102, (4.13), (4.14)] % TODO
+).
+As a result,
+we obtain the optimal solution
+\begin{equation*}
+  (\alpha^0, (z_t^0)_{t\in \overline{0,N}}, x^0)
+  \in \mathbf{SOL}.
+\end{equation*}
+
+\end{document}
