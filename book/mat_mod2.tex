@@ -9,6 +9,8 @@
 \usepackage[active]{srcltx} %связь dvi and tex файлов
 \usepackage{amsmath,amsfonts,amssymb,amscd,euscript}
 \usepackage{mathtext}
+\usepackage{caption}
+
 %\renewcommand{\renfname}{{\sc\footnotesize Библиографический~~список}}
 %\usepackage{amsfonts}
 %\usepackage{amssymb}
@@ -57,6 +59,13 @@
 \makeatletter
   \renewcommand{\@tocrmarg}{\@pnumwidth plus1fil}
 \makeatother
+
+% Надписи рисунков и таблиц
+\captionsetup{
+  font=small,
+  labelsep=period,
+  justification=centering,
+}
 
 % Bibliography
 \usepackage{csquotes}
@@ -2035,8 +2044,11 @@ $(s = 0)$.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.9\textwidth]{pierce-area.png}
-  \caption{Пример двух геометрических областей на раскройной карте (указаны стрелками),
-допустимых для задания точек врезки }
+  \caption{
+    Пример двух геометрических областей на раскройной карте
+    (указаны~стрелками),
+    допустимых для задания точек врезки
+  }
   \label{pierce-area}
   \end{center}
 \end{figure}
@@ -3739,7 +3751,10 @@ $F_{cost}$.
 \begin{figure}[h]
   \begin{center}
   \includegraphics[width=0.9\textwidth]{3-3.png}
-  \caption{Пример схемы резки трех круглых заготовок <<по замкнутому>> контуру}
+  \caption{
+    Пример схемы резки трех круглых заготовок
+    <<по замкнутому контуру>>
+    }
   \label{3-3}
   \end{center}
 \end{figure}
@@ -3916,7 +3931,11 @@ $\Delta$ = 1 и 5 мм.
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{circles-a.png}
-  \caption{Пример маршрута резки круглых заготовок c применением резки <<по замкнутому контуру>>}
+  \caption{
+    Пример маршрута резки круглых заготовок
+    c~применением резки
+    <<по~замкнутому контуру>>
+  }
   \label{circles-a}
   \end{center}
 \end{figure}
@@ -3924,7 +3943,10 @@ $\Delta$ = 1 и 5 мм.
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{circles-b.png}
-  \caption{Пример маршрута резки круглых заготовок c применением метода резки без дополнительного реза}
+  \caption{
+    Пример маршрута резки круглых заготовок
+    c~применением метода резки
+    без~дополнительного реза}
   \label{circles-b}
   \end{center}
 \end{figure}
@@ -3949,7 +3971,11 @@ $\Delta$ = 1 и 5 мм.
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{circles-c.png}
-  \caption{Пример маршрута резки круглых заготовок разного размера c применением резки <<по замкнутому контуру>>}
+  \caption{
+    Пример маршрута резки круглых заготовок разного размера
+    c~применением резки
+    <<по~замкнутому контуру>>
+    }
   \label{circles-c}
   \end{center}
 \end{figure}
@@ -3957,13 +3983,20 @@ $\Delta$ = 1 и 5 мм.
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{circles-d.png}
-  \caption{Пример маршрута резки круглых заготовок разного размера c применением специальной техники резки}
+  \caption{
+    Пример маршрута резки круглых заготовок разного размера
+    c~применением специальной техники резки
+    }
   \label{circles-d}
   \end{center}
 \end{figure}
 
 \begin{table}
-  \caption{Результаты расчета стоимость резки раскройного плана для круглых заготовок с применением специальных способов резки}
+  \caption{
+    Результаты расчета стоимость резки раскройного плана
+    для~круглых заготовок
+    с~применением специальных способов резки
+    }
   \label{circles}
   \centering
   \small
