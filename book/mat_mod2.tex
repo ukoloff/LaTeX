@@ -1,37 +1,16 @@
 \documentclass[11pt,twoside,openany]{report}
+
 \input{control/ru.tex}
-
-\usepackage[active]{srcltx} %связь dvi and tex файлов
-\usepackage{amsmath,amsfonts,amssymb,amscd,euscript}
-\usepackage{mathtext}
-
-%\renewcommand{\renfname}{{\sc\footnotesize Библиографический~~список}}
-%\usepackage{amsfonts}
-%\usepackage{amssymb}
-\usepackage{latexsym}
-% \usepackage{cite}
-\usepackage{graphicx}
-\graphicspath{{media/}}
-\usepackage{multirow}
-\usepackage{subfigure}
-%\usepackage{my}
-\usepackage{multicol}
-%\usepackage[nottoc,numbib]{tocbibind}
-%\usepackage[dvips,unicode]{hyperref}
-%%%\usepackage[pdftex, unicode]{hyperref}
-%%%\usepackage{literat}
-%%%\usepackage[dvips]{graphicx}
-
+\input{control/packages.tex}
 \input{control/sizes.tex}
 \input{control/gost.tex}
 \input{control/biblio.tex}
 \input{control/greek.tex}
-
-\usepackage{bbding}
-
 \input{control/the.tex}
 \input{control/theorem.tex}
 \input{control/shorten.tex}
+
+\graphicspath{{media/}}
 
 %\nofiles
 \begin{document}
@@ -43,9 +22,7 @@
 \tableofcontents
 
 \input{txt/intro.tex}
-
 \input{txt/i.tex}
-
 
 %Part2
 \part{
