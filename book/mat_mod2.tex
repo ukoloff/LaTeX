@@ -71,19 +71,7 @@
   justification=centering,
 }
 
-% Bibliography
-\usepackage{csquotes}
-\usepackage[%
-  parentracker=true,
-  style=gost-numeric,
-  defernumbers=true,
-  isbn=false,
-  doi=false,
-  sorting=none,
-]{biblatex}
-
-\addbibresource{book.bib}
-
+\input{control/biblio.tex}
 \input{control/greek.tex}
 
 %     \setcounter{page}{1}
@@ -12401,7 +12389,6 @@ $(\alpha,(z_t)_{t\in \overline{0,N}},x)$,
 но и в многочисленных приложениях.
 
 \newpage
-\toggletrue{bbx:gostbibliography}
 \printbibliography[heading=bibintoc,title=Список используемых источников]
 
 % https://tex.stackexchange.com/a/365249
