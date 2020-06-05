@@ -3,13 +3,11 @@
 \documentclass[11pt,twoside,openany]{report}
 %Large fonts
 %\usepackage[14pt]{extsizes}
-\usepackage[utf8]{inputenc}
-\usepackage[T2A]{fontenc}
-\usepackage[english,russian]{babel}
+\input{control/ru.tex}
+
 \usepackage[active]{srcltx} %связь dvi and tex файлов
 \usepackage{amsmath,amsfonts,amssymb,amscd,euscript}
 \usepackage{mathtext}
-\usepackage{caption}
 
 %\renewcommand{\renfname}{{\sc\footnotesize Библиографический~~список}}
 %\usepackage{amsfonts}
@@ -29,48 +27,9 @@
 %%%\usepackage[pdftex, unicode]{hyperref}
 %%%\usepackage{literat}
 %%%\usepackage[dvips]{graphicx}
-\usepackage{geometry}
-\geometry{
-  paperheight=240mm,
-  paperwidth=170mm,
-  top=12mm,
-  bottom=20mm,
-  left=18mm,
-  right=17mm,
-  nomarginpar,
-}
-  %   \textwidth 16,5cm
-  %  \textheight 24cm
-  %    \topmargin -0.5cm
-  %    \headheight 0pt
-  %    \headsep 0pt
-  %    \oddsidemargin 0pt
-  %    \evensidemargin 0pt
-  %    \baselineskip 25pt
-\linespread{1.2}
-\usepackage{indentfirst}
-\setlength{\parindent}{2.5em}
-\clubpenalty=10000
-\widowpenalty=10000
-\brokenpenalty=4991
 
-% Короткое тире для ненумерованых списков
-% ГОСТ 2.105-95, пункт 4.1.7, требует дефиса, но так лучше смотрится
-\renewcommand{\labelitemi}{\normalfont\bfseries{--}}
-
-% Грязный трюк для уменьшения кол-ва переносов в Оглавлении
-% https://tex.stackexchange.com/a/217902
-\makeatletter
-  \renewcommand{\@tocrmarg}{\@pnumwidth plus1fil}
-\makeatother
-
-% Надписи рисунков и таблиц
-\captionsetup{
-  font=small,
-  labelsep=period,
-  justification=centering,
-}
-
+\input{control/sizes.tex}
+\input{control/gost.tex}
 \input{control/biblio.tex}
 \input{control/greek.tex}
 
