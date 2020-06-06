@@ -10,3 +10,7 @@
 \makeatletter
   \def\@seccntformat#1{\csname the#1\endcsname.\,}
 \makeatother
+
+% Точки после номера в Оглавлении. Кроме \part
+\let \savenumberline \numberline
+\def \numberline#1{\savenumberline{#1.}}
