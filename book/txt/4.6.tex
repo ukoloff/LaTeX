@@ -1,0 +1,358 @@
+% !TeX root = ../mat_mod2.tex
+
+\section{
+  Алгоритм на функциональном уровне, 2
+}
+\label{sect:4.6}
+\setcounter{equation}{0}
+
+В настоящем разделе обсуждается случай построения оптимизирующей вставки при  $\nu \neq 0.$
+Итак, ниже предполагается, что
+\bfn\label{4.6.1}\nu\in \ov{1,\mathbf{n}-(N+1)}.
+\efn
+Из (\ref{4.6.1}) вытекают очевидные свойства
+\bfn\label{4.6.2}(\ov{1,\nu}\neq \emp)\,\&\,(\ov{\nu+N+1,\mathbf{n}}\neq \emp).
+\efn
+Итак, по построению вставка, рассматриваемая в настоящем разделе, является <<средней>>.
+Напомним, что $\eta\in \ca$ имеет следующий вид:
+\begin{eqnarray}
+&\bigl(\eta(t) = \la(t)\ \ \fa t\in \ov{1,\nu}\bigl)\,\&\,\bigl(\eta(t) =
+\la(\nu+ \al^o(t-\nu)\bigl)\ \ \fa t\in \ov{\nu+1,\nu+N}\bigl)\,\&
+&\nonumber\\
+&\&\,\bigl(\eta(t)= \la(t)\ \ \fa t\in \ov{\nu+N+1,\mathbf{n}}\bigl).
+&\label{4.6.3}
+\end{eqnarray}
+Из (\ref{4.6.2}) и (\ref{4.6.3}) видно, что склеенный маршрут $\eta$ имеет три
+характерных невырожденных фрагмента.
+
+Напомним предложения~\ref{p4.5.1}, \ref{p4.5.2} и следствие~\ref{c4.5.1}. В частности,
+из предложения~\ref{p4.5.2}  по свойствам операции взятия образа следует, что
+\begin{eqnarray}
+&\eta^1(\ov{t,\mathbf{n}}) = \la^1\bigl(\{\nu+\al^o(s):\,s\in \ov{t-\nu,N}\}\,\cup\,
+\ov{\nu+N+1,\nn}\bigl) =
+&\nonumber\\
+&= (\La \circ\al^o)^1(\ov{t-\nu,N})\,\cup\, \la^1(\ov{\nu+N+1,\nn})\ \ \fa t\in \ov{\nu+1,\nu+N}.
+&\label{4.6.3`}
+\end{eqnarray}
+Кроме того, полезно иметь в виду, что при $s\in \ov{1,N}$
+$$\bigl(M_{\al^o(s)} = \mathbf{L}_{(\La\circ \al^o)(s)}\bigl)\,\&\,\bigl(\bbm_{\al^o(s)} =
+\bbl_{(\La\circ \al^o)(s)}\bigl).
+$$
+Полагаем теперь, что \cite[(5.10), (5.11)]{Cha13`}
+\begin{eqnarray}
+&\mathbf{\Gamma}\df \sum\limits_{t=\nu+1}^{\nu+N}
+\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_t),
+\eta^1(\ov{t,\nn})\bigl) + c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl] +
+&\nonumber\\
+&+\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{\nu+N}),\mathrm{pr}_1
+(\hat{\mathbf{h}}_{\nu+N+1}),\eta^1(\ov{\nu+N+1,\nn})\bigl),
+&\label{4.6.4}
+\end{eqnarray}
+%%
+\begin{eqnarray}
+&\Omega\df \sum\limits_{t=\nu+N+1}^\nn \bigl[\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),
+\mathrm{pr}_1(\hat{\mathbf{h}}_t),
+\eta^1(\ov{t,\nn})\bigl) + c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl] -
+&\nonumber\\
+&- \zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{\nu+N}),\mathrm{pr}_1
+(\hat{\mathbf{h}}_{\nu+N+1}),\eta^1(\ov{\nu+N+1,\nn})\bigl).
+&\label{4.6.5`}
+\end{eqnarray}
+Тогда, как легко видеть (см. (\ref{4.4.11})), справедливо равенство
+$$
+\begin{array}{c}
+\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
+\sum\limits_{t=1}^\nu \bigl[\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),
+\mathrm{pr}_1(\hat{\mathbf{h}}_t),
+\eta^1(\ov{t,\nn})\bigl) +
+\\
++c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl]
++\mathbf{\Gamma} + \Omega +f^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_\nn)\bigl)
+\end{array}
+$$
+(учли (\ref{4.6.4}), (\ref{4.6.5`})). Ясно, что в силу (\ref{4.5.32}), (\ref{4.6.3}) и (\ref{4.6.3`}))
+\begin{eqnarray}
+&\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
+\sum\limits_{t=1}^\nu \bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t),
+\la^1(\ov{t,\nn})\bigl) +
+&\nonumber\\
+&+c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +\mathbf{\Gamma} +
+\Omega + f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl).
+&\label{4.6.5``}
+\end{eqnarray}
+Отметим, что согласно (\ref{4.5.32}) справедливо равенство
+$$
+\hat{\mathbf{h}}_\nu = \mathbf{h}_\nu.
+$$
+Как следствие, $\mathrm{pr}_2(\hat{\mathbf{h}}_\nu) = \mathrm{pr}_2(\mathbf{h}_\nu) = x^o = \mathrm{pr}_2(z_o^o).$ Кроме того,
+$$
+\hat{\mathbf{h}}_{\nu+1} = z_1^o.
+$$
+Поэтому имеем следующее очевидное равенство
+\begin{eqnarray}
+&\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_\nu),\mathrm{pr}_1
+(\hat{\mathbf{h}}_{\nu+1}),\eta^1(\ov{\nu+1,\nn})\bigl)= \zc^\natural\bigl(\mathrm{pr}_2(z_o^o),
+&\nonumber\\
+&\mathrm{pr}_1 (z_1^o),\eta^1(\ov{\nu+1,\nn})\bigl)= \zc^\natural\bigl(x^o,\mathrm{pr}_1(z_1^o),
+\eta^1(\ov{\nu+1,\nn})\bigl).
+&\label{4.6.5}
+\end{eqnarray}
+С другой стороны, из (\ref{4.5.32}) получаем  при $t\in\ov{\nu+2,\nu+N},$ что $t-1 \in \ov{\nu+1,(\nu+N)- 1}$ и
+$$
+\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_t),
+\eta^1(\ov{t,\nn})\bigl) = \zc^\natural\bigl(\mathrm{pr}_2(z_{(t-1)-\nu}^o),\mathrm{pr}_1(z_{t-\nu}^o),
+\eta^1(\ov{t,\nn})\bigl).
+$$
+Комбинируя последнее свойство с (\ref{4.6.5}), имеем, что
+\begin{eqnarray}
+&\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{s-1}),\mathrm{pr}_1
+(\hat{\mathbf{h}}_s), \eta^1(\ov{s,\nn})\bigl)=
+&\nonumber\\
+&=\zc^\natural\bigl(\mathrm{pr}_2(z_{(s-1)-\nu}^o),\mathrm{pr}_1(z_{s-\nu}^o),
+\eta^1(\ov{s,\nn})\bigl)\ \ \fa s\in \ov{\nu+1,\nu+N}.
+\label{4.6.6}
+\end{eqnarray}
+В свою очередь, из (\ref{4.6.3`}) и (\ref{4.6.6}) вытекает, что при $t\in\ov{\nu+1,\nu+N}$
+\begin{eqnarray}
+&\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1
+(\hat{\mathbf{h}}_t), \eta^1(\ov{t,\nn})\bigl)=
+\zc^\natural\bigl(\mathrm{pr}_2(z_{(t-1)-\nu}^o),\mathrm{pr}_1(z_{t-\nu}^o),
+&\nonumber\\
+&(\La \circ \al^o)^1(\ov{t-\nu,N})\,\cup
+\la^1(\ov{\nu+N+1,\nn})\bigl)=
+\zc^\natural\bigl(\mathrm{pr}_2(z_{(t-1)-\nu}^o),\mathrm{pr}_1(z_{t-\nu}^o),
+&\nonumber\\
+&\La^1\bigl(\{\al^o(j):\,j\in\ov{t-\nu,N}\})\,\cup
+\la^1(\ov{\nu+N+1,\nn})\bigl)=
+&\nonumber\\
+&=\zc\bigl(\mathrm{pr}_2(z_{(t-1)-\nu}^o),\mathrm{pr}_1(z_{t-\nu}^o),
+\{\al^o(j):\,j\in\ov{t-\nu,N}\}\bigl).
+&\label{4.6.7}
+\end{eqnarray}
+Аналогичным образом получаем, что при $t\in \ov{\nu+1,\nu+N}$
+\begin{eqnarray}
+&c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl) =
+c_{(\La\circ \al^o)(t-\nu)}^\natural\bigl(z_{t-\nu}^o,(\La\circ
+\al^o)^1(\ov{t-\nu,N})\,\cup\,\la^1(\ov{\nu+N+1,\nn})\bigl) =
+&\nonumber\\
+&= c_{\La(\al^o(t-\nu))}^\natural\Bigl(
+z_{t-\nu}^o,\La^1\bigl(\{\al^o(j):\,j\in\ov{t-\nu,N}\}\bigl)
+\cup\,\la^1(\ov{\nu+N+1,\nn})\Bigl) =
+&\nonumber\\
+&= c_{\al^o(t-\nu)}\bigl(z_{t-\nu}^o,\{\al^o(j):\,j\in\ov{t-\nu,N}\}\bigl),
+&\label{4.6.8}
+\end{eqnarray}
+где $t -\nu\in\ov{1,N}.$ Рассмотрим теперь первую сумму в (\ref{4.6.4}).
+Тогда с учетом   (\ref{4.6.7}), (\ref{4.6.8})  получаем, что
+\begin{eqnarray}
+&\sum\limits_{t=\nu+1}^{\nu+N}\bigl[\zc^\natural\bigl(\mathrm{pr}_2
+(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_t),\eta^1(\ov{t,\nn})\bigl) +
+c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl] =
+&\nonumber\\
+&=\sum\limits_{t=\nu+1}^{\nu+N}\bigl[\zc\bigl(\mathrm{pr}_2
+(z_{(t-1)-\nu}^o),\mathrm{pr}_1(z_{t-\nu}^o),\{\al^o(j):\,j\in\ov{t-\nu,N}\}\bigl) +
+&\nonumber\\
+&+ c_{\al^o(t-\nu)}\bigl(z_{t-\nu}^o,\{\al^o(j):\,j\in\ov{t-\nu,N}\}\bigl)\bigl] =
+&\nonumber\\
+&\hspace{-0.3cm}=\sum\limits_{s=1}^N\bigl[\zc\bigl(\mathrm{pr}_2
+(z_{s-1}^o),\mathrm{pr}_1(z_s^o),\{\al^o(j):j\in\ov{s,N}\}\bigl) +
+&\nonumber\\
+&+c_{\al^o(s)}\bigl(z_s^o,\{\al^o(j):j\in\ov{s,N}\}\bigl)\bigl].
+&\label{4.6.9}
+\end{eqnarray}
+Заметим, наконец, что с учетом (\ref{4.5.32})
+\begin{eqnarray}
+&\zc^\natural\bigl(\mathrm{pr}_2
+(\hat{\mathbf{h}}_{\nu+N}),\mathrm{pr}_1(\hat{\mathbf{h}}_{\nu+N+1}),\eta^1(\ov{\nu+N+1,\nn})\bigl)=
+&\nonumber\\
+&=\zc^\natural\bigl(\mathrm{pr}_2(z_N^o),\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),\la^1(\ov{\nu+N+1,\nn})
+\bigl) = f\bigl(\mathrm{pr}_2(z_N^o)\bigl).
+&\label{4.6.10}
+\end{eqnarray}
+В итоге из (\ref{4.6.4}), (\ref{4.6.9}) и  (\ref{4.6.10}) получаем равенство
+$$
+\begin{array}{c}
+\mathbf{\Gamma} = \sum\limits_{s=1}^N\bigl[\zc\bigl(\mathrm{pr}_2(z_{s-1}^o),
+\mathrm{pr}_1(z_s^o),\{\al^o(j):
+\,j\in\ov{s,N}\}\bigl)+
+\\
++c_{\al^o(s)}\bigl(z_s^o,\{\al^o(j):\,j\in\ov{s,N}\}\bigl)\bigl]
++f\bigl(\mathrm{pr}_2(z_N^o)\bigl).
+\end{array}
+$$
+С учетом (\ref{4.2.4}) получаем следующее представление
+\bfn\label{4.6.11}
+\mathbf{\Gamma}= \mathfrak{B}_{\al^o}[(z_i^o)_{i\in\ov{0,N}}] =\mathbb{V}=
+\mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}] - \kappa.
+\efn
+Из (\ref{4.6.5``}) и (\ref{4.6.11}) вытекает, что
+\begin{eqnarray}
+&\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
+\sum\limits_{t=1}^\nu\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),
+\mathrm{pr}_1(\mathbf{h}_t),
+\la^1(\ov{t,\nn})\bigl) + c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+&\nonumber\\
+&+ \mathfrak{B}_\mathbf{e}
+[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}] + \Om +
+f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa.
+&\label{4.6.12}
+\end{eqnarray}
+Учтем теперь (\ref{4.4.72}). Тогда из (\ref{4.6.12}) следует, что
+\begin{eqnarray}
+&\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
+\sum\limits_{t=1}^\nu\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t),
+ \la^1(\ov{t,\nn})\bigl) + c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+&\nonumber\\
+&+\sum\limits_{t=\nu+1}^{\nu+N}\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
+(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl)+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+&\nonumber\\
+&+ \zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N}),\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),
+\la^1(\ov{\nu+N+1,\nn})\bigl)+ \Om + f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa =
+&\nonumber\\
+&= \sum\limits_{t=1}^{\nu+N}\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
+(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl)+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+&\nonumber\\
+&+\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N}),\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),
+\la^1(\ov{\nu+N+1,\nn})\bigl)+
+&\nonumber\\
+&+\Om + f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa.
+&\label{4.6.13}
+\end{eqnarray}
+ Рассмотрим теперь два возможных варианта представления $\Om$ (\ref{4.6.5`}), имея в виду случаи
+ \bfn\label{4.6.14}(\nu+N+1 = \nn)\,\vee\,(\nu+N+ 1< \nn).
+ \efn
+ По выбору $\nu$ имеем, что один из случаев (\ref{4.6.14}) непременно имеет место.
+
+ $1^o.$ Пусть $\nu+N+1 = \nn.$ Тогда из (\ref{4.6.5`}) вытекает, что
+ \begin{eqnarray}
+&\Om = \zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{\nn-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_\nn),
+ \eta^1(\{\nn\})\bigl) + c_{\eta(\nn)}^\natural\bigl(\hat{\mathbf{h}}_\nn,\eta^1(\{\nn\})\bigl)
+&\nonumber\\
+&- \zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{\nn-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_\nn),
+ \eta^1(\{\nn\})\bigl)=
+ c_{\eta(\nn)}^\natural\bigl(\hat{\mathbf{h}}_\nn,\eta^1(\{\nn\})\bigl).
+&\label{4.6.15}
+\end{eqnarray}
+При этом $\nn\in \ov{0,\nn}\setminus \ov{\nu+1,\nu+N},$ так как $\nu+N < \nn.$ Поэтому
+согласно (\ref{4.5.32}) $\hat{\mathbf{h}}_\nn =\mathbf{h}_\nn$ и в силу (\ref{4.6.3})
+$\eta(\nn) = \la(\nn).$ Из (\ref{4.6.15}) имеем поэтому, что (при $\nu+N+1 = \nn)$
+$$\Om = c_{\la(\nn)}^\natural\bigl(\mathbf{h}_\nn,\la^1(\{\nn\})\bigl),
+$$
+где учтено, что $\eta^1(\{\nn\}) = \{\eta(\nn)\} = \{\la(\nn)\} = \la^1(\{\nn\}).$ Теперь из
+(\ref{4.6.13}) имеем в рассматриваемом сейчас случае, что (см.(\ref{4.4.22}))
+$$\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
+\sum\limits_{t=1}^{\nn-1}\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
+(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl)+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+$$
+$$+ \zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nn-1}),\mathrm{pr}_1
+(\mathbf{h}_\nn),\la^1(\{\nn\})\bigl)+ c_{\la(\nn)}^\natural\bigl(\mathbf{h}_\nn,\la^1(\{\nn\})\bigl) +
+f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa = $$
+$$= \sum\limits_{t=1}^{\nn-1}\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
+(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl)+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+$$
+$$
++\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nn-1}),\mathrm{pr}_1(\mathbf{h}_\nn),\la^1(\ov{\nn,\nn})
+\bigl)+c_{\la(\nn)}^\natural\bigl(\mathbf{h}_\nn,\la^1(\ov{\nn,\nn})\bigl)\bigl] +
+$$
+$$
++f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa =
+\sum\limits_{t=1}^\nn\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
+(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl)+
+$$
+$$+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) -\kappa =
+\widehat{\mathfrak{C}}_\lambda^\natural[(\mathbf{h}_i)_{i\in\ov{0,\nn}}]-\kappa.
+$$
+Итак, установлена следующая импликация:
+\bfn\label{4.6.16}
+(\nu+N+1 =\nn)\Longrightarrow \bigl(\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
+\widehat{\mathfrak{C}}_\la^\natural[(\mathbf{h}_i)_{i\in\ov{0,\nn}}]-\kappa\bigl).
+\efn
+
+$2^o.$ Пусть теперь выполнено неравенство
+\bfn\label{4.6.17}\nu+N+1 < \nn.
+\efn
+Из (\ref{4.6.17}) вытекает, в частности, что $\nu+N+2 \leqslant \nn.$ Возвращаясь к (\ref{4.6.5`}), отметим, что
+\begin{eqnarray}
+&\Om = \bigl[\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{\nu+N}),\mathrm{pr}_1(\hat{\mathbf{h}}_{\nu+N+1}),
+ \eta^1(\ov{\nu+N+1,\nn})\bigl) + c_{\eta(\nu+N+1)}^\natural\bigl(\hat{\mathbf{h}}_{\nu+N+1},
+&\nonumber\\
+&\eta^1(\ov{\nu+N+1,\nn})\bigl)\bigl] + \sum\limits_{t=\nu+N+2}^\nn\bigl[
+\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),\mathrm{pr}_1(\hat{\mathbf{h}}_t),
+ \eta^1(\ov{t,\nn})\bigl) +
+&\nonumber\\
+&+ c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,\eta^1(\ov{t,\nn})\bigl)\bigl]-
+\zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{\nu+N}),\mathrm{pr}_1(\hat{\mathbf{h}}_{\nu+N+1}),
+\eta^1(\ov{\nu+N+1,\nn})\bigl) =
+&\nonumber\\
+&= \sum\limits_{t=\nu+N+2}^\nn    \zc^\natural\bigl(\mathrm{pr}_2(\hat{\mathbf{h}}_{t-1}),
+\mathrm{pr}_1(\hat{\mathbf{h}}_t),
+\eta^1(\ov{t,\nn})\bigl) + \sum\limits_{t=\nu+N+1}^\nn c_{\eta(t)}^\natural\bigl(\hat{\mathbf{h}}_t,
+\eta^1(\ov{t,\nn})\bigl) =
+&\nonumber\\
+%%
+&=  \sum\limits_{t=\nu+N+2}^\nn    \zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t),
+ \la^1(\ov{t,\nn})\bigl) +
+&\nonumber\\
+&+\sum\limits_{t=\nu+N+1}^\nn c_{\la(t)}^\natural\bigl(\mathbf{h}_t, \la^1(\ov{t,\nn})\bigl).
+&\label{4.6.18}
+\end{eqnarray}
+
+Рассмотрим теперь естественную комбинацию (\ref{4.6.13}) и (\ref{4.6.18}):
+\begin{eqnarray}
+&\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}]=
+ \sum\limits_{t=1}^{\nu+N}\bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
+ (\mathbf{h}_t), \la^1(\ov{t,\nn})\bigl) + c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+&\nonumber\\
+&\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N}),
+\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}), \la^1(\ov{\nu+N+1,\nn})\bigl)+
+\sum\limits_{t=\nu+N+2}^\nn\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),
+&\nonumber\\
+&\mathrm{pr}_1
+(\mathbf{h}_t), \la^1(\ov{t,\nn})\bigl) + \sum\limits_{t=\nu+N+1}^\nn
+c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)
++f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) - \kappa =
+&\nonumber\\
+&=\sum\limits_{t=1}^{\nu+N}\bigl[\zc^\natural
+(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t), \la^1(\ov{t,\nn})\bigl) +
+&\nonumber\\
+&+c_{\la(t)}^{\natural}\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl]
++\sum\limits_{t=\nu+N+1}^\nn\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1
+(\mathbf{h}_t),\la^1(\ov{t,\nn})\bigl) +
+&\nonumber\\
+&+\sum\limits_{t=\nu+N+1}^\nn c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)
++f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) - \kappa  =
+&\nonumber\\
+&=\sum\limits_{t=1}^\nn \bigl[\zc^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),\mathrm{pr}_1(\mathbf{h}_t),
+\la^1(\ov{t,\nn})\bigl) + c_{\la(t)}^\natural(\mathbf{h}_t,\la^1(\ov{t,\nn})\bigl)\bigl] +
+f^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_\nn)\bigl) - \kappa=
+&\nonumber\\
+&= \widehat{\mathfrak{C}}_\la^\natural[(\mathbf{h}_i)_{i\in\ov{0,\nn}}]
+ - \kappa.
+&\label{4.6.19}
+\end{eqnarray}
+Итак (см. (\ref{4.6.18}), (\ref{4.6.19})), установлена импликация
+\bfn\label{4.6.20}
+(\nu+N+1 < \nn)\Longrightarrow \bigl(\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}] =
+\widehat{\mathfrak{C}}_\la^\natural[(\mathbf{h}_i)_{i\in\ov{0,\nn}}]  - \kappa\bigl).
+\efn
+Из (\ref{4.6.14}), (\ref{4.6.16}) и (\ref{4.6.20}) вытекает, в свою очередь, следующая импликация
+\bfn\label{4.6.21}(\nu\neq 0) \Longrightarrow
+\bigl(\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}] =
+\widehat{\mathfrak{C}}_\la^\natural[(\mathbf{h}_i)_{i\in\ov{0,\nn}}]  - \kappa\bigl)
+\efn
+(учитываем, что (\ref{4.6.16}) и (\ref{4.6.19}) установлены при условии $\nu \neq 0).$
+Теперь из (\ref{4.5.52}) и (\ref{4.6.21}) получаем весьма важное общее положение.
+
+\begin{theo}\label{t4.6.1}{\TL} Значение $\kappa, \kappa \geqslant 0,$ характеризует изменение
+критерия, реализуемое оптимизирующей вставкой, посредством следующего соотношения
+$$
+\widehat{\mathfrak{C}}_\eta^\natural[(\hat{\mathbf{h}}_t)_{t\in\ov{0,\nn}}] =
+\widehat{\mathfrak{C}}_\la^\natural[(\mathbf{h}_i)_{i\in\ov{0,\nn}}]  - \kappa \leqslant
+\widehat{\mathfrak{C}}_\la^\natural[(\mathbf{h}_i)_{i\in\ov{0,\nn}}].
+$$
+\end{theo}
+
+Подчеркнем, что данная теорема справедлива при любом выборе $\nu\in \ov{0,\nn-(N+1)}.$
+В следующем разделе рассмотрим случай $\nu= \nn-N,$ для которого соответствующая вставка
+будет конструироваться особым, хотя и более простым способом.
