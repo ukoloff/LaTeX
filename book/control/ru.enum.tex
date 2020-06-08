@@ -1,0 +1,27 @@
+% !TeX root = ../mat_mod2.tex
+
+\usepackage{enumitem}
+
+%%% Правильная нумерация приложений, рисунков и формул %%%
+%% По ГОСТ 2.105, п. 4.3.8 Приложения обозначают заглавными буквами русского алфавита,
+%% начиная с А, за исключением букв Ё, З, Й, О, Ч, Ь, Ы, Ъ.
+%% Здесь также переделаны все нумерации русскими буквами.
+\makeatletter
+  \def\russian@Alph#1{\ifcase#1\or
+    А\or Б\or В\or Г\or Д\or Е\or Ж\or
+    И\or К\or Л\or М\or Н\or
+    П\or Р\or С\or Т\or У\or Ф\or Х\or
+    Ц\or Ш\or Щ\or Э\or Ю\or Я\else\@ctrerr\fi}
+  \def\russian@alph#1{\ifcase#1\or
+    а\or б\or в\or г\or д\or е\or ж\or
+    и\or к\or л\or м\or н\or
+    п\or р\or с\or т\or у\or ф\or х\or
+    ц\or ш\or щ\or э\or ю\or я\else\@ctrerr\fi}
+\makeatother
+
+% Перечисление строчными буквами русского алфавита (ГОСТ 2.105-95, 4.1.7)
+\makeatletter
+  \AddEnumerateCounter{\asbuk}{\russian@alph}{щ}      % Управляем списками/перечислениями через пакет enumitem, а он 'не знает' про asbuk, потому 'учим' его
+\makeatother
+
+\renewcommand{\thesubfigure}{\asbuk{subfigure})}           % Буквенные номера подрисунков
