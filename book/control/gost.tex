@@ -26,3 +26,11 @@
   labelsep=period,
   justification=centering,
 }
+
+% Рецепт от Павла
+% Добавление точек заполнителей в Оглавлении для \part & \chapter
+\usepackage[subfigure]{tocloft}
+\makeatletter
+  \renewcommand{\cftpartleader}{\cftdotfill{\cftsecdotsep}}% dot leaders in bold
+  \renewcommand{\cftchapleader}{\cftdotfill{\cftsecdotsep}}% dot leaders in bold
+\makeatother
