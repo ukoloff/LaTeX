@@ -1,271 +1,427 @@
 % !TeX root = ../mat_mod2.tex
 
 \section{
-  Динамическое программирование при усложненных функциях стоимости
+  Динамическое программирование
+  при~усложненных функциях стоимости
 }
 \label{sect:4.3}
 \setcounter{equation}{0}
 
-Мы без  дополнительных пояснений используем построения главы 3, касающиеся
-маршрутов и трасс (траекторий). В частности, используем конструкции
-раздела 3.4, связанные с редукцией системы ограничений (замена допустимости
-по предшествованию допустимостью по вычеркиванию). В этой связи, действуя
+Мы без  дополнительных пояснений используем построения главы 3,
+касающиеся маршрутов и трасс
+(траекторий).
+В частности, используем конструкции
+\ref{sect:3.4},
+связанные с редукцией системы ограничений
+(замена допустимости по предшествованию допустимостью по вычеркиванию).
+В этой связи, действуя
 в духе (\ref{3.4.20}),
-полагаем при $x\in \bx,\,K\in \mathfrak{N},\,\al\in (\mathrm{bi})[K]$ и
-$(z_i)_{i\in\ov{0,|K|}} \in \mathbf{Z}(x,K,\al),$ что
+полагаем при
+$x\in \bx,\,K\in \mathfrak{N},\,\al\in (\mathrm{bi})[K]$ и
+$(z_i)_{i\in\ov{0,|K|}} \in \mathbf{Z}(x,K,\al),$
+что
 \begin{eqnarray}
-&\widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,|K|}}\,\bigl|\,K]  \df
-\sum\limits_{t=1}^{|K|}\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(z_{t-1}),\mathrm{pr}_1(z_t),\{\al(j):\,
-j\in \ov{t,|K|}\}\bigl) +
-&\nonumber\\
-&+ c_{\al(t)}\bigl(z_t, \{\al(j):\, j\in \ov{t,|K|}\}\bigl)\bigl] +
-f\bigl(\mathrm{pr}_2(z_{|K|})\bigl).
-&\label{4.3.1}
+  &\widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,|K|}}\,\bigl|\,K]  \df
+  \sum\limits_{t=1}^{|K|}\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(z_{t-1}),\mathrm{pr}_1(z_t),\{\al(j):\,
+  j\in \ov{t,|K|}\}\bigl) +
+  &\nonumber\\
+  &+ c_{\al(t)}\bigl(z_t, \{\al(j):\, j\in \ov{t,|K|}\}\bigl)\bigl] +
+  f\bigl(\mathrm{pr}_2(z_{|K|})\bigl)
+  .
+  &
+  \label{4.3.1}
 \end{eqnarray}
-Разумеется, (\ref{4.3.1}) можно, в частности, рассматривать при
+
+Разумеется,
+(\ref{4.3.1}) можно, в частности, рассматривать при
 $x=x^o,\,K= \ov{1,N},\,\al\in \bbp$ и
-$(z_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\al$ (учитываем (\ref{3.4.15})).
-Легко видеть, что в этом случае
-мы приходим к (\ref{4.2.4}):
-\bfn\label{4.3.2}
-\widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,N}}|\,\ov{1,N}] = \mathfrak{B}_\al
-[(z_i)_{i\in\ov{0,N}}]
-\ \ \fa\al\in \bbp\ \ \fa (z_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\al.
+$(z_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\al$
+(учитываем (\ref{3.4.15})).
+В этом случае мы приходим к
+(\ref{4.2.4}):
+\bfn
+  \label{4.3.2}
+  \widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,N}}|\,\ov{1,N}] = \mathfrak{B}_\al
+  [(z_i)_{i\in\ov{0,N}}]
+  \ \ \fa\al\in \bbp\ \ \fa (z_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\al
+  .
 \efn
-Учитывая свойства, отмеченные в разделе 3.4   (см., в частности,
-(\ref{3.4.6})), при $x\in \bx$ и $K\in \mathfrak{N}$ мы в виде
-\bfn\label{4.3.3} \widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,|K|}}|\,K]
-\longrightarrow \min,\ \al\in (\mathbf{I}-\mathrm{bi})[K],\,
-(z_i)_{i\in\ov{0,|K|}}\in \mathbf{Z}(x,K,\al)
+
+Учитывая свойства, отмеченные в \ref{sect:3.4}
+(\ref{3.4.6}),
+при
+$x\in \bx$ и $K\in \mathfrak{N}$
+имеем экстремальную задачу
+\bfn
+  \label{4.3.3}
+  \widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,|K|}}|\,K]
+  \longrightarrow \min,\ \al\in (\mathbf{I}-\mathrm{bi})[K],\,
+  (z_i)_{i\in\ov{0,|K|}}\in \mathbf{Z}(x,K,\al)
+  ,
 \efn
-имеем экстремальную задачу, у которой ограничения совместны, а
-пространство решений составляет непустое конечное множество; поэтому
-определено значение (экстремум)
-\bfn\label{4.3.4}\mathbf{v}(x,K) \df \min\limits_{\al\in (\mathbf{I}-
-\mathrm{bi})[K]}\ \min\limits_{(z_i)_{i\in\ov{0,|K|}}\in
-\mathbf{Z}(x,K,\al)}\widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,|K|}}|\,K]
-\in [0,\infty[
+у которой ограничения совместны, а
+пространство решений составляет непустое конечное множество.
+Поэтому определено значение
+(экстремум)
+\bfn
+  \label{4.3.4}
+  \mathbf{v}(x,K) \df \min\limits_{\al\in (\mathbf{I}-
+  \mathrm{bi})[K]}\ \min\limits_{(z_i)_{i\in\ov{0,|K|}}\in
+  \mathbf{Z}(x,K,\al)}\widehat{\mathfrak{B}}_\al[(z_i)_{i\in\ov{0,|K|}}|\,K]
+  \in [0,\infty[
 \efn
-и непустое (конечное) множество оптимальных решений данной задачи
-(\ref{4.3.3}). В частности, задачу (\ref{4.3.3}) можно рассматривать
-при $x=x^o$ и $K=\ov{1,N};$ соответственно, для этого случая определено
-значение (\ref{4.3.4}), то есть величина $\mathbf{v}(x^o,\ov{1,N}).$ С
-учетом (\ref{3.4.8}), (\ref{3.4.13}), (\ref{4.2.6}) и (\ref{4.3.4}) имеем
-равенство
-\bfn\label{4.3.5}
-\mathbb{V} = \mathbf{v}(x^o,\ov{1,N}),
+и непустое (конечное)
+множество оптимальных решений данной задачи
+(\ref{4.3.3}).
+В частности, задачу (\ref{4.3.3})
+можно рассматривать при
+$x=x^o$ и $K=\ov{1,N}$ соответственно,
+для этого случая определено значение (\ref{4.3.4}),
+то есть величина
+$\mathbf{v}(x^o,\ov{1,N}).$
+С учетом (\ref{3.4.8}), (\ref{3.4.13}), (\ref{4.2.6}) и (\ref{4.3.4})
+получим равенство
+\bfn
+  \label{4.3.5}
+  \mathbb{V} = \mathbf{v}(x^o,\ov{1,N})
+  ,
 \efn
-показывающее по сути дела, что задачи (\ref{4.3.3}) в своей совокупности
-образуют расширение базовой задачи (\ref{4.2.5}). Полагаем, наконец, что
-\bfn\label{4.3.6}\mathbf{v}(x,\emp) \df f(x)\ \ \fa x\in \mathbf{X},
+показывающее, что задачи (\ref{4.3.3})
+в своей совокупности образуют расширение базовой задачи (\ref{4.2.5}).
+Полагаем, наконец, что
+\bfn
+  \label{4.3.6}
+  \mathbf{v}(x,\emp) \df f(x)\ \ \fa x\in \mathbf{X}
+  ,
 \efn
-определяя тем самым краевое условие в схеме  построения функции Беллмана
-(с учетом (\ref{3.4.25}) и (\ref{4.3.6}) имеем, в частности, что $v(x,\emp) =
-\mathbf{v}(x,\emp)$ при $x\in \mathbf{X}).$ Таким образом,  в новых (усложненных)
+определяя тем самым краевое условие в схеме
+построения функции Беллмана
+(с учетом (\ref{3.4.25}) и (\ref{4.3.6}) имеем,
+в частности, что
+$v(x,\emp) = \mathbf{v}(x,\emp)$
+при $x\in \mathbf{X}$).
+Таким образом,
+в новых (усложненных)
 условиях определена функция
 $$
-\mathbf{v}:\ \bx \times \cp(\ov{1,N}) \longrightarrow [0,\infty[;
+  \mathbf{v}:\ \bx \times \cp(\ov{1,N}) \longrightarrow [0,\infty[
+  .
 $$
-иными словами, имеем в силу (\ref{4.3.4}) и (\ref{4.3.6}), что
-$\mathbf{v}\in \car_+[\bx \times \cp(\ov{1,N})].$ Из
-\cite[теорема~5.1]{Cha3`} вытекает, в частности, следующее
-\begin{pred}\label{p4.3.1}{\TL} Если $x\in \bx$ и $K\in \mathfrak{N},$ то
+
+Иными словами, в силу (\ref{4.3.4}) и (\ref{4.3.6})
+имеем, что
+$\mathbf{v}\in \car_+[\bx \times \cp(\ov{1,N})].$
+Из
+\cite[теорема~5.1]{Cha3`}
+вытекает, в частности, следующее
+
+\begin{pred}
+\label{p4.3.1}{\TL}
+Если
+$x\in \bx$ и $K\in \mathfrak{N},$
+то
 $$
-\mathbf{v}(x,K) = \min\limits_{j\in\mathbf{I}(K)}\ \min\limits_{z\in
-\bbm_j}\bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z),K\bigl) + c_j(z,K) +
-\mathbf{v}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\bigl].
+  \mathbf{v}(x,K) = \min\limits_{j\in\mathbf{I}(K)}\ \min\limits_{z\in
+  \bbm_j}\bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z),K\bigl) + c_j(z,K) +
+  \mathbf{v}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\bigl]
+  .
 $$
 \end{pred}
 
-С учетом (\ref{4.3.5}) и предложения~\ref{p4.3.1} получаем (см.
-\cite[следствие~5.1]{Cha3`}) очевидное
+С учетом (\ref{4.3.5}) и предложения~\ref{p4.3.1} получаем
+\cite[следствие~5.1]{Cha3`} очевидное
 
-\begin{cor}\label{p4.3.1}{\TL} Справедливо равенство
-$$\mathbb{V} = \min\limits_{j\in\mathbf{I}(\ov{1,N})}\ \min\limits_{z\in
-\bbm_j}\bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(z),\ov{1,N}\bigl) +
-c_j(z,\ov{1,N}) + \mathbf{v}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\bigl].
+\begin{cor}
+\label{p4.3.1}{\TL}
+Справедливо равенство
+$$
+  \mathbb{V} = \min\limits_{j\in\mathbf{I}(\ov{1,N})}\ \min\limits_{z\in
+  \bbm_j}\bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(z),\ov{1,N}\bigl) +
+  c_j(z,\ov{1,N}) + \mathbf{v}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\bigl]
+  .
 $$
 \end{cor}
 
-Теперь, как и в более простой идейно задаче раздела~3.5, мы рассмотрим
-слои функции Беллмана, следуя в части определения слоев пространства
-позиций обозначениям упомянутого  раздела. В этой связи полезно иметь
-в виду также пояснения раздела~3.6.
+Теперь, как и в более идейно простой задаче \ref{sect:3.5},
+мы рассмотрим слои функции Беллмана,
+следуя в части определения слоев пространства
+позиций обозначениям упомянутого  раздела.
+В этой связи полезно иметь
+в виду также пояснения \ref{sect:3.6}.
 
-Итак, учитывая (\ref{3.5.13}), мы полагаем, что, как и в \cite[(6.12)]{Cha3`}, при
+Итак, учитывая (\ref{3.5.13}),
+предположим, что, как и в
+\cite[(6.12)]{Cha3`},
+при
 $s\in \ov{0,N}$ функция
-\bfn\label{4.3.6`}\mathbf{v}_s\in \car_+ [D_s]
+\bfn
+  \label{4.3.6`}
+  \mathbf{v}_s\in \car_+ [D_s]
 \efn
 определяется следующим условием:
-\bfn\label{4.3.7}\mathbf{v}_s(x,K) \df \mathbf{v}(x,K)\ \ \fa (x,K)\in D_s.
+\bfn
+  \label{4.3.7}
+  \mathbf{v}_s(x,K) \df \mathbf{v}(x,K)\ \ \fa (x,K)\in D_s
+  .
 \efn
-Таким образом, определены (см. (\ref{4.3.6}), (\ref{4.3.7})) следующие функции
+
+Таким образом, определены
+(см. (\ref{4.3.6}), (\ref{4.3.7}))
+следующие функции
 $$
-\mathbf{v}_o\in \car_+[D_o],\,\mathbf{v}_1\in \car_+[D_1],\cdots,
-\mathbf{v}_N\in \car_+[D_N],
+  \mathbf{v}_o\in \car_+[D_o],\,\mathbf{v}_1\in \car_+[D_1],\,\cdots,
+  \mathbf{v}_N\in \car_+[D_N]
+  ,
 $$
-роль которых подобна той роли, которую играли функции (\ref{3.5.19}) в
-построениях предыдущей главы. Отметим, что из (\ref{4.3.6}) и (\ref{4.3.7})
-следует, в частности, что функция
-\bfn\label{4.3.8}
-\mathbf{v}_o\in \car_+[D_o],
+роль которых подобна той роли,
+которую играли функции (\ref{3.5.19})
+в построениях 3 главы.
+Отметим, что из (\ref{4.3.6}) и (\ref{4.3.7})
+следует, что функция
+\bfn
+  \label{4.3.8}
+  \mathbf{v}_o\in \car_+[D_o]
+  ,
 \efn
 однозначно определяется правилом
-\bfn\label{4.3.9}\mathbf{v}_o(x,\emp) = f(x)\ \ \fa x\in
-\bigcup\limits_{i\in\ov{1,N}\sm \mathbf{K}_1}\mathbf{M}_i
+\bfn
+  \label{4.3.9}
+  \mathbf{v}_o(x,\emp) = f(x)\ \ \fa x\in
+  \bigcup\limits_{i\in\ov{1,N}\sm \mathbf{K}_1}\mathbf{M}_i
 \efn
-(мы используем здесь (\ref{3.5.9})). Из (\ref{3.5.20}) и (\ref{4.3.9})
-имеем равенство $v_o = \mathbf{v}_o,$ что и следовало ожидать, поскольку
-<<терминальная>> функция $f$ не изменялась
-(см. (\ref{4.2.1})). Далее, из определений раздела 3.5 и (\ref{4.3.7})
+(мы используем здесь (\ref{3.5.9})).
+Из (\ref{3.5.20}) и (\ref{4.3.9})
+имеем равенство $v_o = \mathbf{v}_o,$
+что и следовало ожидать,
+поскольку <<терминальная>> функция $f$ не изменялась,
+см. (\ref{4.2.1}).
+Далее, из определений раздела 3.5 и (\ref{4.3.7})
 следует, что
 $$
-\mathbf{v}_N(x^o,\ov{1,N}) = \mathbf{v}(x^o,\ov{1,N}).
+  \mathbf{v}_N(x^o,\ov{1,N}) = \mathbf{v}(x^o,\ov{1,N})
+  .
 $$
+
 С учетом (\ref{4.3.5}) получаем важное равенство
-\bfn\label{4.3.10}\mathbf{v}_N(x^o,\ov{1,N})= \mathbb{V}.
+\bfn
+  \label{4.3.10}
+  \mathbf{v}_N(x^o,\ov{1,N})= \mathbb{V}
+  .
 \efn
-Посредством (\ref{4.3.9}) и (\ref{4.3.10}) определены крайние слои
-функции Беллмана. При построении
-промежуточных слоев следует учитывать (\ref{3.6.13}):  если $s\in\ov{1,N},\,
-(x,K)\in D_s,\,j\in \mathbf{I}(K)$ и $z\in \bbm_j,$ то определено значение
+
+Посредством (\ref{4.3.9}) и (\ref{4.3.10})
+определены крайние слои функции Беллмана.
+При построении
+промежуточных слоев следует учитывать (\ref{3.6.13}):
+если
+$s\in\ov{1,N},\, (x,K)\in D_s,\,j\in \mathbf{I}(K)$ и
+$z\in \bbm_j,$
+то определено значение
 $$
-\mathbf{v}_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\in [0,\infty[.
+  \mathbf{v}_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\in [0,\infty[
+  .
 $$
-Поэтому при $s\in\ov{1,N}$ и $(x,K)\in D_s$ у нас определены значения
+
+Поэтому при
+$s\in\ov{1,N}$ и $(x,K)\in D_s$
+у нас определены значения
 $\mathbf{v}_s(x,K)\in [0,\infty[$ и
 $$
-\min\limits_{j\in \mathbf{I}(K)}\ \min\limits_{z\in\bbm_j}
-\bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z),K\bigl) +
-c_j(z,K) + \mathbf{v}_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)
-\bigl]\in [0,\infty[.
+  \min\limits_{j\in \mathbf{I}(K)}\ \min\limits_{z\in\bbm_j}
+  \bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z),K\bigl) +
+  c_j(z,K) + \mathbf{v}_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)
+  \bigl]\in [0,\infty[
+  .
 $$
-С учетом предложения~\ref{p4.3.1}  получаем теперь частный
-случай \cite[предложение~6.1]{Cha3`}:
-если $s\in\ov{1,N},$ то преобразование
-\bfn\label{4.3.11}
-\mathbf{v}_{s-1}\longrightarrow \mathbf{v}_s
+
+С учетом предложения~\ref{p4.3.1}
+получаем частный случай \cite[предложение~6.1]{Cha3`}:
+если $s\in\ov{1,N},$
+то преобразование
+\bfn
+  \label{4.3.11}
+  \mathbf{v}_{s-1}\longrightarrow \mathbf{v}_s
 \efn
 определяется правилом
 \begin{eqnarray}
-&\mathbf{v}_s(x,K) =  \min\limits_{j\in \mathbf{I}(K)}\
-\min\limits_{z\in\bbm_j}\bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z),K\bigl) +
- c_j(z,K) +
-&\nonumber\\
-&+\mathbf{v}_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\bigl]\ \
-\fa (x,K)\in  D_s.
-\label{4.3.12}
+  &\mathbf{v}_s(x,K) =  \min\limits_{j\in \mathbf{I}(K)}\
+  \min\limits_{z\in\bbm_j}\bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z),K\bigl) +
+  c_j(z,K) +
+  &\nonumber\\
+  &+\mathbf{v}_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\bigl]\ \
+  \fa (x,K)\in  D_s
+  .
+  \label{4.3.12}
 \end{eqnarray}
-Итак, мы получаем рекуррентную процедуру построения функций (\ref{4.3.8}):
-\bfn\label{4.3.13}
-\mathbf{v}_o\longrightarrow  \mathbf{v}_1\longrightarrow\cdots
-\longrightarrow \mathbf{v}_{N-1}\longrightarrow \mathbf{v}_N;
-\efn
-при этом функция $\mathbf{v}_o$ в (\ref{4.3.13}) известна
-(см. (\ref{4.3.9})), а каждый регулярный
-шаг данной процедуры реализуется посредством  (\ref{4.3.12}).
 
-В заключении раздела совсем кратко рассмотрим построение оптимального
-решения в виде соответствующей пары маршрут-трасса. Однако сначала
-отметим, что согласно (\ref{4.3.10}) и (\ref{4.3.12})
-\bfn\label{4.3.14}
-\mathbb{V} = \min\limits_{j\in \mathbf{I}(\ov{1,N})}\
-\min\limits_{z\in\bbm_j}\bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(z),\ov{1,N}\bigl) +
- c_j(z,\ov{1,N}) + \mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\bigl]
+Итак, мы получаем рекуррентную процедуру построения функций (\ref{4.3.8}):
+\bfn
+  \label{4.3.13}
+  \mathbf{v}_o\longrightarrow  \mathbf{v}_1\longrightarrow\cdots
+  \longrightarrow \mathbf{v}_{N-1}\longrightarrow \mathbf{v}_N
+  ;
 \efn
-(полезно напомнить, что согласно (\ref{3.6.13})
+при этом функция
+$\mathbf{v}_o$ в (\ref{4.3.13}) известна
+(см. (\ref{4.3.9})),
+а каждый регулярный шаг данной процедуры реализуется посредством
+(\ref{4.3.12}).
+
+В заключение раздела совсем кратко рассмотрим построение оптимального
+решения в виде соответствующей пары маршрут-трасса.
+Однако сначала отметим,
+что согласно (\ref{4.3.10}) и (\ref{4.3.12})
+\bfn
+  \label{4.3.14}
+  \mathbb{V} = \min\limits_{j\in \mathbf{I}(\ov{1,N})}\
+  \min\limits_{z\in\bbm_j}\bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(z),\ov{1,N}\bigl) +
+  c_j(z,\ov{1,N}) + \mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\bigl]
+  .
+\efn
+
+Напомним, что согласно (\ref{3.6.13})
 $$
-\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\in D_{N-1}
+  \bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\in D_{N-1}
 $$
-при $j\in\mathbf{I}(\ov{1,N})$ и $z\in\bbm_j,$ что позволяет в силу
+при
+$j\in\mathbf{I}(\ov{1,N})$ и $z\in\bbm_j,$
+что позволяет в силу
 (\ref{4.3.6`}) определять и использовать
 $$
-\mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\in[0,\infty[;
+  \mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\in[0,\infty[
+  ,
 $$
-это и было сделано в (\ref{4.3.14})). Полагаем, как и в разделе~3.5,
-$\mathbf{z}^{(o)}\df (x^o,x^o),$ получая, в частности, что
+что и было сделано в (\ref{4.3.14}).
+Полагаем, как и в \ref{sect:3.5}, что
+$\mathbf{z}^{(o)}\df (x^o,x^o),$
+получая, в частности
 $\mathbf{z}^{(0)}\in \bbx\times \mathbf{X}.$
 
-С учетом (\ref{4.3.14}) выбираем $\mathbf{j}_1\in \mathbf{I}(\ov{1,N})$ и
-$\mathbf{z}^{(1)}\in \bbm_{\mathbf{j}_1}$ из условия
-\bfn\label{4.3.15}
-\mathbb{V}= \mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{z}^{(1)}),\ov{1,N}\bigl) +
-c_{\mathbf{j}_1}(\mathbf{z}^{(1)},\ov{1,N}) + \mathbf{v}_{N-1}
-\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}\bigl)
+С учетом (\ref{4.3.14})
+выбираем
+$\mathbf{j}_1\in \mathbf{I}(\ov{1,N})$ и
+$\mathbf{z}^{(1)}\in \bbm_{\mathbf{j}_1}$
+из условия
+\bfn
+  \label{4.3.15}
+  \mathbb{V}= \mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{z}^{(1)}),\ov{1,N}\bigl) +
+  c_{\mathbf{j}_1}(\mathbf{z}^{(1)},\ov{1,N}) + \mathbf{v}_{N-1}
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}\bigl)
 \efn
-(решаем локальную экстремальную задачу, связанную с (\ref{4.3.14})),
-получая, кроме того, включение
-\bfn\label{4.3.16}
-\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}\bigl)\in D_{N-1}.
+(решая локальную экстремальную задачу, связанную с (\ref{4.3.14})),
+получаем включение
+\bfn
+  \label{4.3.16}
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}\bigl)\in D_{N-1}
+  .
 \efn
-Из (\ref{3.6.13}) и (\ref{4.3.16}) имеем, конечно, свойство
+
+Из (\ref{3.6.13}) и (\ref{4.3.16})
+имеем, свойство
 \begin{eqnarray}
-&\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{\mathbf{j}_1;j\}\bigl) =
-\bigl(\mathrm{pr}_2(z),(\ov{1,N}\sm
-\{\mathbf{j}_1\})\sm\{j\}\bigl)\in D_{N-2}\ \
-&\nonumber\\
-&\fa j\in
-\mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\})\
-\ \fa z\in \bbm_j.
+  &\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{\mathbf{j}_1;j\}\bigl) =
+  \bigl(\mathrm{pr}_2(z),(\ov{1,N}\sm
+  \{\mathbf{j}_1\})\sm\{j\}\bigl)\in D_{N-2}\ \
+  &\nonumber\\
+  &\fa j\in
+  \mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\})\
+  \ \fa z\in \bbm_j
+  .
 \end{eqnarray}
-%\end{document}
-Согласно (\ref{4.3.12}) и (\ref{4.3.16}) получаем теперь следующее равенство:
+
+Согласно (\ref{4.3.12}) и (\ref{4.3.16})
+получаем теперь следующее равенство:
 \begin{eqnarray}
-&\mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}
-\bigl)=
-&\nonumber\\
-&=\min\limits_{j\in\mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\})}\
-\min\limits_{z\in\bbm_j}\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\mathrm{pr}_1(z),
-\ov{1,N}\sm \{\mathbf{j}_1\}\bigl) +
-&\nonumber\\
-&+ c_j(z,\ov{1,N}\sm\{\mathbf{j}_1\}) +
-\mathbf{v}_{N-2}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{\mathbf{j}_1;j\}\bigl)\bigl].
-&\label{4.3.17}
+  &\mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}
+  \bigl)=
+  &\nonumber\\
+  &=\min\limits_{j\in\mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\})}\
+  \min\limits_{z\in\bbm_j}\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\mathrm{pr}_1(z),
+  \ov{1,N}\sm \{\mathbf{j}_1\}\bigl) +
+  &\nonumber\\
+  &+ c_j(z,\ov{1,N}\sm\{\mathbf{j}_1\}) +
+  \mathbf{v}_{N-2}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{\mathbf{j}_1;j\}\bigl)\bigl]
+  .
+  &
+  \label{4.3.17}
 \end{eqnarray}
-С учетом (\ref{4.3.17}) выбираем $\mathbf{j}_2\in \mathbf{I}(\ov{1,N}\sm
-\{\mathbf{j}_1\})$ и $\mathbf{z}^{(2)}\in \bbm_{\mathbf{j}_2}$ из условия
+
+С учетом (\ref{4.3.17}) выбираем
+$\mathbf{j}_2\in \mathbf{I}(\ov{1,N}\sm
+\{\mathbf{j}_1\})$ и $\mathbf{z}^{(2)}\in \bbm_{\mathbf{j}_2}$
+из условия
 \begin{eqnarray}
-&\mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}
-\bigl) = \mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}, \mathrm{pr}_1(\mathbf{z}^{(2)},\ov{1,N}\sm
-\{\mathbf{j}_1\}\bigl) +
-&\nonumber\\
-&+ c_{\mathbf{j}_2}(\mathbf{z}^{(2)}, \ov{1,N}\sm\{\mathbf{j}_1\}) +
-\mathbf{v}_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl);
-&\label{4.3.18}
+  &\mathbf{v}_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}
+  \bigl) = \mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}, \mathrm{pr}_1(\mathbf{z}^{(2)},\ov{1,N}\sm
+  \{\mathbf{j}_1\}\bigl) +
+  &\nonumber\\
+  &+ c_{\mathbf{j}_2}(\mathbf{z}^{(2)}, \ov{1,N}\sm\{\mathbf{j}_1\}) +
+  \mathbf{v}_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl)
+  .
+  &
+  \label{4.3.18}
 \end{eqnarray}
-отметим в этой связи, что согласно (\ref{3.6.13})
-$$\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl)\in D_{N-2}.
+
+Отметим, что согласно (\ref{3.6.13})
 $$
-Данное построение следует продолжать вплоть до исчерпывания $\ov{1,N}.$ При этом должны
-последовательно выбираться упорядоченные пары $(\mathbf{j}_t,\mathbf{z}^{(t)}), t\in \ov{1,N},$
-в соответствии с требованиями, подобными (\ref{4.3.15}) и (\ref{4.3.18}). В результате будут
-сформированы кортежи
-$$\eta\df (\mathbf{j}_t)_{t\in\ov{1,N}}\in \mathbf{A},\ \ (\mathbf{z}^{(t)})_{t\in \ov{0,N}}\in \mathbf{Z}_\eta,
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl)\in D_{N-2}
+  .
+$$
+
+Данное построение следует продолжать вплоть до исчерпывания $\ov{1,N}.$
+При этом должны последовательно выбираться упорядоченные пары
+$(\mathbf{j}_t,\mathbf{z}^{(t)})$,
+$t\in \ov{1,N}$
+в соответствии с требованиями, подобными
+(\ref{4.3.15}) и (\ref{4.3.18}).
+В результате будут сформированы кортежи
+$$
+  \eta\df (\mathbf{j}_t)_{t\in\ov{1,N}}\in \mathbf{A},
+  \ \ (\mathbf{z}^{(t)})_{t\in \ov{0,N}}\in \mathbf{Z}_\eta
+  ,
 $$
 образующие в совокупности ДР
-$$\bigl(\eta, (\mathbf{z}^{(t)})_{t\in \ov{0,N}}\bigl)\in \widetilde{\mathbf{D}},
+$$
+  \bigl(\eta, (\mathbf{z}^{(t)})_{t\in \ov{0,N}}\bigl)\in \widetilde{\mathbf{D}}
+  ,
 $$
 для которого
-\bfn\label{4.3.19} \mathbb{V}= \mathfrak{B}_\eta[(\mathbf{z}^{(t)})_{t\in \ov{0,N}}].
+\bfn
+  \label{4.3.19}
+  \mathbb{V}= \mathfrak{B}_\eta[(\mathbf{z}^{(t)})_{t\in \ov{0,N}}]
+  .
 \efn
-\begin{zam}\label{z4.3.1}{\TL}
- В связи с $(\ref{4.3.19})$ отметим, что из $(\ref{4.3.15})$ и $(\ref{4.3.18})$ вытекает, что
-\begin{eqnarray}
-& \mathbb{V}=\mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{z}^{(1)}),\ov{1,N}\bigl) +
-\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}), \mathrm{pr}_1(\mathbf{z}^{(2)}),\ov{1,N}\sm
-\{\mathbf{j}_1\}) +
-&\nonumber\\
-&+  c_{\mathbf{j}_1}(\mathbf{z}^{(1)},\ov{1,N}) +
-c_{\mathbf{j}_2}(\mathbf{z}^{(2)},
-\ov{1,N}\sm\{\mathbf{j}_1 \}) +
-\mathbf{v}_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl).
-&\label{4.3.20}
-\end{eqnarray}
- Из $(\ref{4.3.20})$ при $N=2$ равенство $(\ref{4.3.19})$ следует непосредственно (см.
-определение $\mathbf{v}_o$ и $(\ref{4.3.9})).$
- \hfill $\Box$
- \end{zam}
 
-Таким образом, оптимальное ДР задачи (\ref{4.2.5}) построено. Характерной его особенностью является
-<<синхронное>> построение элементов маршрута и трассы (см. (\ref{4.3.15}), (\ref{4.3.18})) при
-последовательном решении локальных задач на основе ДП.
+\begin{zam}
+\label{z4.3.1}{\TL}
+В связи с $(\ref{4.3.19})$ отметим,
+что из $(\ref{4.3.15})$ и $(\ref{4.3.18})$
+вытекает, что
+\begin{eqnarray}
+  & \mathbb{V}=\mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{z}^{(1)}),\ov{1,N}\bigl) +
+  \mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}), \mathrm{pr}_1(\mathbf{z}^{(2)}),\ov{1,N}\sm
+  \{\mathbf{j}_1\}) +
+  &\nonumber\\
+  &+  c_{\mathbf{j}_1}(\mathbf{z}^{(1)},\ov{1,N}) +
+  c_{\mathbf{j}_2}(\mathbf{z}^{(2)},
+  \ov{1,N}\sm\{\mathbf{j}_1 \}) +
+  \mathbf{v}_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl)
+  .
+  &
+  \label{4.3.20}
+\end{eqnarray}
+
+Из $(\ref{4.3.20})$
+при $N=2$
+непосредственно следует равенство $(\ref{4.3.19})$,
+см.
+определение $\mathbf{v}_o$ и $(\ref{4.3.9})$.
+\hfill $\Box$
+\end{zam}
+
+Таким образом,
+оптимальное ДР задачи (\ref{4.2.5}) построено.
+Характерной его особенностью является
+<<синхронное>> построение элементов маршрута и трассы
+(см. (\ref{4.3.15}), (\ref{4.3.18}))
+при последовательном решении локальных задач на основе ДП.
