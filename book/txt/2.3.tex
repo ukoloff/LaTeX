@@ -49,18 +49,6 @@
 На~рис.~\ref{hardness-area}
 эти зоны выделены желтым цветом.
 
-\begin{figure}[h]
- \begin{center}
-  \includegraphics[width=0.9\textwidth]{hardness-area.png}
-  \caption{
-    Формализация правила <<жесткости детали>>
-    на основе понятия
-    <<зоны~жесткости>>
-    }
-  \label{hardness-area}
-  \end{center}
-\end{figure}
-
 Тогда в оптимизационных процедурах машрутизации
 для задачи GTSP  и дискретных моделей задач {\it CCP, SCCP, GSCCP}
 выбор точки врезки $M$
@@ -71,6 +59,17 @@
 Для тех точек врезки, для которых это условие не выполнено,
 значение целевых функций  увеличивается на некоторую величину
 <<штрафа>>.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{hardness-area.png}
+  \caption{
+    Формализация правила <<жесткости детали>>
+    на основе понятия
+    <<зоны~жесткости>>
+  }
+  \label{hardness-area}
+\end{figure}
 
 Как нетрудно видеть,
 сформулированное правило выбора <<хороших>> точек врезки
@@ -246,55 +245,71 @@ $\Omega_{i+1}$.
 На рис.~\ref{thermal-5} показано температурное поле
 на одной из стадий процесса резки пятого контура.
 
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.6\textwidth]{thermal-plan.png}
+  \caption{
+    Места точек врезки и порядок резки для восьми контуров
+  }
+  \label{thermal-plan}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.7\textwidth]{thermal-5.png}
+  \caption{
+      Пример распределения тепловых полей в процессе резки пятого контура
+    }
+  \label{thermal-5}
+\end{figure}
+
 {\bf Замечание}.
-Рис. \ref{thrm-high} и~\ref{thrm-low}
-иллюстрирую справедливость гипотезы.
-Эти процессы отличаются только выбором точки врезки.
+Рис. \ref{thermal-field}
+иллюстрирует справедливость гипотезы.
+Два процессы отличаются только выбором точки врезки.
 На рис.~\ref{thrm-high}
 точка врезки вблизи кромки пластины.
 Средняя температура в выделенном окне
 вокруг точки завершения резки контура 480 $^\circ$С.
-На рис.~\ref{thrm-low} точка врезки далеко от кромки.
+На рис.~\ref{thrm-low} точка врезки далеко от кромки
+(и границ вырезанных заготовок).
 Средняя температура в выделенном окне  362 $^\circ$С.
 
-\begin{figure}
+\begin{figure}[p]
   \centering
-  \includegraphics[width=0.6\textwidth]{thermal-plan.png}
-  \caption{Места точек врезки и порядок резки для восьми контуров}
-  \label{thermal-plan}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.7\textwidth]{thermal-5.png}
-  \caption{Пример распределения тепловых полей в процессе резки пятого контура}
-  \label{thermal-5}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\textwidth]{thermal-high.png}
-  \caption{Температурное поле при выборе точки врезки вблизи края пластины}
-  \label{thrm-high}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\textwidth]{thermal-low.png}
-  \caption{Температурное поле при выборе точки врезки вдали от края пластины и~границ вырезанных заготовок}
-  \label{thrm-low}
+  \subfigure[]{
+    \includegraphics[width=0.6\textwidth]{thermal-high.png}
+    \label{thrm-high}
+  }
+  \subfigure[]{
+    \includegraphics[width=0.6\textwidth]{thermal-low.png}
+    \label{thrm-low}
+  }
+  \caption{
+    Пример расчета температурного поля при выборе точки врезки: \\
+    {\it а} -- вблизи края пластины;
+    {\it б} -- вдали от края пластины
+  }
+  \label{thermal-field}
 \end{figure}
 
 Другие проведенные вычислительные эксперименты
 также показали уменьшение температуры материала
 в <<хороших>> зонах в среднем на 63 \%.
-Ниже приведены еще два примера расчета температурных полей
-(с нарушением правил жесткости на рис.~\ref{thermal-309}
+На рис.~\ref{thermal-309-120}
+и \ref{thermal-550-130}
+приведены еще два примера расчета температурных полей.
+Правила жесткости на рис.~\ref{thermal-309}
 и рис.~\ref{thermal-550}
-и их соблюдением на рис.~\ref{thermal-120}
-и рис.~\ref{thermal-130}).
+нарушены,
+а на
+рис.~\ref{thermal-120}
+и рис.~\ref{thermal-130}
+соблюдены,
+что приводит к заметному снижению
+температуры.
 
-\begin{figure}
+\begin{figure}[p]
   \centering
   \subfigure[]{
     \includegraphics[width=0.9\textwidth]{thermal-309.png}
@@ -306,11 +321,9 @@ $\Omega_{i+1}$.
   }
   \caption{
     Уменьшение температуры металла в зоне жесткости: \\
-    {\it а} -- 309 $^\circ$C
-      (точка выключения инструмента не удовлетворят правилу <<жесткости~детали>>);
+    {\it а} -- 309 $^\circ$C;
     {\it б} -- 120 $^\circ$C
-      (точка выключения удовлетворят данному правилу)
-    }
+  }
   \label{thermal-309-120}
 \end{figure}
 
@@ -322,7 +335,7 @@ $\Omega_{i+1}$.
 (при условии разработки быстродействующих систем температурного анализа)
 может сам служить средством для выбора точек начала и конца сегментов резки.
 
-\begin{figure}
+\begin{figure}[p]
   \centering
   \subfigure[]{
     \includegraphics[width=0.9\textwidth]{thermal-550.png}
@@ -340,7 +353,9 @@ $\Omega_{i+1}$.
   \label{thermal-550-130}
 \end{figure}
 
-Рассмотрим далее один из простых способ учета правила жесткости листа,
+\subsubsection*{Зонирование}
+
+Рассмотрим один из простых способ учета правила жесткости листа,
 описанного в \ref{sect:1.3},
 основанный на делении области листа на
 последовательный набор подобластей (зон):
@@ -372,9 +387,9 @@ $$
 формирования подобластей.
 Число подобластей в данном примере -- пять.
 
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{zones-a.png}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{zones-a.png}
   \caption{
     Пример моделирования траектории инструмента машины листовой резки с~ЧПУ
     с~учетом правила <<жесткости листа>>
@@ -382,7 +397,6 @@ $$
     (20~контуров, задача $GTSP$)
     }
   \label{zones-a}
-  \end{center}
 \end{figure}
 
 На рис.~\ref{zones-b}
@@ -399,12 +413,13 @@ $$
 При этом в маршруте резки
 длина холостого хода инструмента уменьшилась на 26 \%.
 
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{zones-b.png}
-  \caption{Схема оптимального маршрута резки для предыдущего примера}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{zones-b.png}
+  \caption{
+    Схема оптимального маршрута резки для предыдущего примера
+  }
   \label{zones-b}
-  \end{center}
 \end{figure}
 
 \subsubsection*{Заключительные замечания}
