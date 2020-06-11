@@ -1,0 +1,96 @@
+% !TeX root = ..
+
+% https://tex.stackexchange.com/a/365249
+\makeatletter
+\newcommand*{\cleartoleftpage}{%
+  \clearpage
+    \if@twoside
+    \ifodd\c@page
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn
+        \hbox{}\newpage
+      \fi
+    \fi
+  \fi
+}
+\makeatother
+\cleartoleftpage
+
+\thispagestyle{empty}
+\centering
+
+\vspace{0pt plus2fill}
+{\small\it
+Научное издание
+}
+
+\vspace{0pt plus2fill}
+
+Петунин Александр Александрович,
+Ченцов Александр Георгиевич,
+Ченцов~Павел~Александрович
+
+\vspace{0pt plus1fill}
+
+{\bf
+Оптимальная маршрутизация инструмента машин фигурной
+листовой резки с~числовым
+программным управлением.
+Математические модели и~алгоритмы
+}
+
+\vspace{0pt plus2fill}
+
+Редактор {\it
+И. О. Фамилия
+}
+
+Корректор {\it
+И. О. Фамилия
+}
+
+Компьютерная верстка {\it
+% В форме родительного падежа
+С. С. Уколова
+}
+
+\vspace{0pt plus1fill}
+
+{\small
+Подписано в печать \underline{\hspace{1cm}}.
+Формат 70$\times$100/64.
+
+Бумага офсетная.
+Цифровая печать.
+Усл. печ. л. \underline{\hspace{1cm}}.
+
+Уч.-изд. л. \underline{\hspace{1cm}}.
+Тираж \underline{\hspace{1cm}} экз.
+Заказ \underline{\hspace{1cm}}
+
+\vspace{0pt plus1fill}
+
+Издательство Уральского университета
+
+Редакционно-издательский отдел ИПЦ УрФУ
+
+620049, Екатеринбург, ул. С. Ковалевской, 5
+
+Тел.: +7 (343) 375-48-25, 375-46-85, 374-19-41
+
+E-mail: rio@urfu.ru
+
+\vspace{0pt plus1fill}
+
+Отпечатано в Издательско-полиграфическом центре УрФУ
+
+620075, Екатеринбург, ул. Тургенева, 4
+
+Тел.: +7 (343) 358-93-06, 350-58-20, 350-90-13
+
+Факс: +7 (343) 358-93-06
+
+http://print.urfu.ru
+}
+
+\vspace{0pt plus1fill}

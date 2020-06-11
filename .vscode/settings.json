@@ -47,7 +47,6 @@
     }
   ],
   "latex-workshop.synctex.afterBuild.enabled": true,
-  "latex-workshop.message.badbox.show": false,
   "cSpell.enabledLanguageIds": [
     "asciidoc",
     "c",
@@ -82,5 +81,6 @@
     "SCCP"
   ],
   "latex-workshop.latex.autoClean.run": "onBuilt",
-  "latex-workshop.intellisense.package.enabled": true
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.latex.recipe.default": "lastUsed"
 }

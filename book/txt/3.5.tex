@@ -1,0 +1,711 @@
+% !TeX root = ..
+
+\section{
+  Экономичная версия метода
+  динамического~программирования
+}
+\label{sect:3.5}
+\setcounter{equation}{0}
+
+В настоящем разделе мы стремимся к организации вычислений значений функции $v$
+(\ref{3.4.26}) на меньшем,
+в сравнении с $\mathbf{X}\times \cp(\ov{1,N}),$
+множестве позиций.
+Напомним, что позицией мы называем всякую упорядоченную пару $(x,K),$
+где
+$x\in \mathbf{X}$ и $K$ --- список заданий.
+Итак, приведем схему \cite[\S\,4.9]{Cha1`},
+полагая, что
+\bfn
+  \label{3.5.1}
+  \cg\df \{K\in \mathfrak{N} |\,\fa z\in \mathbf{K}\ \ \bigl(\mathrm{pr}_1(z)\in K\bigl)
+  \Longrightarrow \bigl(\mathrm{pr}_2(z) \in K\bigl)\}
+  .
+\efn
+
+В (\ref{3.5.1}) определено семейство непустых п/м $\ov{1,N},$
+обладающих одним специальным свойством,
+которое на содержательном уровне имеет следующий смысл:
+если $K\in \mathfrak{N},$
+то
+(в соответствии с (\ref{3.5.1}))
+имеем, что
+$K\in \cg$
+тогда и только  тогда,
+когда при всяком выборе адресной пары
+$(m,n)\in \mathbf{K}$
+из того, что $m\in K,$ следует включение $n\in K$
+(если отправитель адресной пары содержится в списке $K,$
+то и получатель также <<обязан>> быть элементом $K).$
+
+{\bf Пример.}
+Пусть $N=3,\, \mathbf{K}= \{(1,3)\}$
+(имеется единственная адресная пара с отправителем 1 и получателем 3).
+Тогда
+(см. (\ref{3.5.1}))
+$\{1;3\}\in \cg,$
+а $\{1;2\}\notin \cg.$\hfill $\Box$
+
+Множества --- элементы семейства $\cg$ --- ранжируем по мощности.
+В этой связи полагаем, что
+\bfn
+  \label{3.5.2}
+  \cg_s \df \{K\in \cg |\,s= |K|\}\ \ \fa s\in \ov{1,N}
+  .
+\efn
+
+При этом согласно (\ref{3.5.1})
+$|K| \in \ov{1,N}\ \ \fa K\in \cg.$
+Поэтому
+(см. (\ref{3.5.1}), (\ref{3.5.2}))
+\bfn
+  \label{3.5.3}
+  \cg =
+  \bigcup\limits_{s=1}^N\cg_s
+  .
+\efn
+
+Кроме того, из (\ref{3.5.2}) имеем,
+что
+$\cg_{s_1}\cap\,\cg_{s_2} =
+\emp\ \ \fa s_1\in\ov{1,N}\ \ \fa s_2\in \ov{1,N}\sm \{s_1\}.$
+Поэтому
+(см. (\ref{3.5.3}))
+в виде
+$$
+  (\cg_s)_{s\in\ov{1,N}}:\ \ov{1,N} \longrightarrow \cp(\cg)
+$$
+мы имеем разбиение $\cg$ в сумму $N$ п/м.
+
+Элементы $\cg$ называем в дальнейшем существенными списками (заданий).
+Соответственно, при $s\in \ov{1,N}$
+элементы $\cg_s$ --- суть $s$-элементные
+существенные списки.
+Отметим, что
+каждое из семейств
+(\ref{3.5.2}) непусто,
+см. \cite[\S\,4.9]{Cha1`}.
+Ясно, что
+\bfn
+  \label{3.5.4}
+  \cg_N = \{\ov{1,N}\}
+\efn
+($N$-элементный существенный список является единственным и совпадает с $\ov{1,N}).$
+Так же просто определяются одноэлементные существенные списки:
+при
+\bfn
+  \label{3.5.5}
+  \mathbf{K}_1\df \{\mathrm{pr}_1(z):\,z\in \mathbf{K}\}
+\efn
+очевидно, что
+\bfn
+  \label{3.5.6}
+  \cg_1 = \bigl\{\{t\}:\,t\in \ov{1,N}\sm \mathbf{K}_1\bigl\}
+\efn
+(в связи с (\ref{3.5.6}) см. (\ref{3.3.21})).
+В итоге имеем, что
+(см. \cite{Cha3`})
+\bfn
+  \label{3.5.7}
+  \cg_{s-1} = \{K\sm\{t\}:\,K\in \cg_s,\ t\in \mathbf{I}(K)\}\ \ \fa s\in \ov{2,N}.
+\efn
+
+Итак, семейства (\ref{3.5.2})
+реализуются посредством рекуррентной процедуры
+\bfn
+  \label{3.5.8}
+  \cg_N \longrightarrow\cg_{N-1}\longrightarrow \ldots \longrightarrow\cg_1
+\efn
+(в (\ref{3.5.8}) подразумевается, что $N >2),$
+использующей (\ref{3.5.7}):
+$\cg_N$ известно,
+а далее <<включается>> рекуррентная процедура на основе (\ref{3.5.7});
+финалом является семейство
+$\cg_1,$
+определяемое посредством (\ref{3.5.6}).
+
+С каждым из семейств $\cg_s, s\in\ov{1,N},$
+связывается множество в пространстве позиций,
+называемое далее слоем;
+кроме того, определяется особый нулевой слой
+\bfn
+  \label{3.5.9}
+  D_o \df \bigl\{(x,\emp):\,x\in \bigcup\limits_{i\in \ov{1,N}\sm\mathbf{K}_1}\mathbf{M}_i\bigl\}
+  .
+\efn
+
+Очень просто определяется слой
+$D_N \df \{(x^o,\ov{1,N})\},$
+содержащий ровно одну позицию
+$(x^o,\ov{1,N}).$
+Тем самым
+определены два крайних слоя пространства позиций,
+см. (\ref{3.5.9}).
+
+Для определения промежуточных слоев
+при $s\in \ov{1,N-1}$ и $K\in \cg_s$
+введем множество
+\bfn
+  \label{3.5.10}
+  J_s(K) \df \{t\in \ov{1,N}\sm K\,|\,\{t\} \cup\,K\in \cg_{s+1}\}
+  .
+\efn
+
+В \cite[предложение~2]{Cha5`} установлено,
+что $J_s(K) \neq \emp,$ тогда
+\bfn
+  \label{3.5.11}
+  \clm_s[K] \df \bigcup\limits_{j\in J_s(K)}\mathbf{M}_j\in \cp^\prime(\mathbf{X})
+  ,
+\efn
+и как следствие, получаем, что
+\bfn
+  \label{3.5.12}
+  \bbd_s[K] \df \{(x,K):\,x\in \clm_s[K]\}\in \cp^\prime(\mathbf{X}\times \mathfrak{N})
+  .
+\efn
+
+Заметим, что (\ref{3.5.12})
+получается несущественным преобразованием множества (\ref{3.5.11}):
+данное преобразование, однако, весьма полезно, поскольку посредством (\ref{3.5.12})
+реализуется соответствующая клетка пространства позиций
+(это обстоятельство рассмотрим далее).
+Теперь при
+$s \in\ov{1,N-1}$ слой $D_s$
+определяем следующим правилом:
+\bfn
+  \label{3.5.13}
+  D_s \df \bigcup\limits_{K\in \cg_s}\bbd_s[K]\in \cp^\prime(\mathbf{X}\times \mathfrak{N})
+  .
+\efn
+
+Отметим, что семейство
+\bfn
+  \label{3.5.14}
+  \mathfrak{D}_s \df \{\bbd_s[K]:\,K\in \cg_s\}\in
+  \cp^\prime\bigl(\cp^\prime(\mathbf{X}\times \mathfrak{N})\bigl)
+\efn
+является
+разбиением слоя $D_s:$
+\bfn
+  \label{3.5.14-too}
+  \bigl(D_s = \bigcup\limits_{H\in \mathfrak{D}_s}H\bigl)\,\&\,
+  \bigl(\fa H_1\in \mathfrak{D}_s\ \ \fa H_2\in \mathfrak{D}_s\ \ (H_1 \cap H_2\neq \emp)
+  \Longrightarrow (H_1 = H_2)\bigl)
+  .
+\efn
+
+Посредством (\ref{3.5.14})
+реализуется клеточная структура промежуточных слоев:
+каждый такой слой
+разбивается в сумму клеток  вида (\ref{3.5.12}).
+В свою очередь, сами слои
+$D_o, D_1,\,\ldots,D_N$
+являются в силу (\ref{3.5.13}) непустыми множествами в пространстве позиций.
+Отметим одно важное свойство \cite[(6.9)]{Cha3`}
+\bfn
+  \label{3.5.15}
+  (y,K\sm\{k\})\in D_{s-1}\ \ \fa s\in \ov{1,N}\ \ \fa K\in \cg_s\ \ \fa k\in \mathbf{I}(K)\ \
+  \fa y\in \mathbf{M}_k
+  .
+\efn
+
+Свойство (\ref{3.5.15})
+дополняется следующим простым фактом,
+непосредственно вытекающим из
+(\ref{3.5.12}):
+если $s\in \ov{1,N}$ и $(x,K) \in D_s,$
+то непременно $K\in \cg_s.$
+Поэтому из
+(\ref{3.5.15}) получаем, что
+\bfn
+  \label{3.5.16}
+  \bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\in D_{s-1}\ \ \fa s\in \ov{1,N}\ \ \fa (x,K)\in D_s\ \
+  \fa j\in \mathbf{I}(K)\ \ \fa z\in \bba_j(x)
+  ;
+\efn
+см. \cite[(6.11)]{Cha3`}.
+Свойство (\ref{3.5.16}) означает, что,
+придерживаясь правила вычеркивания,
+при произвольном выборе элементов множеств (\ref{3.3.13})
+мы можем сохраняться в системе слоев
+вплоть до исчерпывания всех индексов из
+$\ov{1,N}.$
+
+Используя (\ref{3.5.13}),
+легкопроверяемое свойство
+$D_o\neq \emp$ и (\ref{3.4.26}),
+введем в рассмотрение слои функции Беллмана:
+если $s\in \ov{0,N},$
+то полагаем, что функция
+\bfn
+  \label{3.5.17}
+  v_s \in \clr_+[D_s]
+\efn
+определяется следующим условием:
+\bfn
+  \label{3.5.18}
+  v_s(x,K) \df v(x,K)\ \ \fa (x,K)\in D_s
+  .
+\efn
+
+Иными словами,
+слои (\ref{3.5.17}), (\ref{3.5.18}) отождествляются с сужениями  функции
+Беллмана на соответствующие слои пространства позиций.
+В итоге мы получим следующие функции:
+\bfn
+  \label{3.5.19}
+  v_o\in \clr_+[D_o], v_1\in \clr_+[D_1],\ldots,v_N\in \clr_+[D_N]
+  ,
+\efn
+где каждая из функций неотрицательна и определена на непустом множестве.
+В связи с (\ref{3.5.19}) отметим,
+что функция $v_N$ определена на одноточечном множестве,
+а потому полностью определяется одним своим значением
+$$
+  v_N(x^o,\ov{1,N})= v(x^o,\ov{1,N}) = V\in [0,\infty[
+  .
+$$
+
+С учетом (\ref{3.5.9}) и (\ref{3.5.18})
+определяем значения функции $v_o$:
+$$
+  v_o(x,\emp) = v(x,\emp)\ \ \fa x\in \bigcup\limits_{i\in \ov{1,N}\sm \mathbf{K}_1}\mathbf{M}_i
+  .
+$$
+
+Поэтому согласно (\ref{3.4.25}) получаем, что
+\bfn
+  \label{3.5.20}
+  v_o(x,\emp) = f(x)\ \ \fa x\in \bigcup\limits_{i\in \ov{1,N}\sm
+  \mathbf{K}_1}\mathbf{M}_i
+  .
+\efn
+
+Итак
+$v_o$ является  по сути дела <<частью>> терминальной функции $f$,
+см. (\ref{3.5.20}).
+
+Возвращаясь к (\ref{3.5.16}),
+отметим, что определены значения
+$$
+  v_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\in [0,\infty[\ \ \fa s \in \ov{1,N}\ \ \fa
+  (x,K)\in D_s\ \ \fa j\in \mathbf{I}(K)\ \ \fa z\in \bba_j(x)
+  .
+$$
+
+Как следствие,
+при $s\in \ov{1,N}$ и $(x,K)\in D_s$
+определено значение
+$$
+  \min\limits_{j\in\mathbf{I}(K)}\ \min\limits_{z\in \bba_j(x)}\bigl[\mathbf{c}\bigl(x,
+  \mathrm{pr}_1(z)\bigl) + c_j(z) + v_{s-1}\bigl(\mathrm{pr}_2(z),K\sm\{j\}\bigl)\bigl]\in [0,\infty[
+  .
+$$
+
+\begin{pred}
+  \label{p3.5.1}
+Если $s\in \ov{1,N},$ то преобразование функции
+$v_{s-1}$ в $v_s$
+имеет следующий вид:
+\bfn
+  \label{3.5.21}
+  v_s(x,K) = \min\limits_{j\in \mathbf{I}(K)}\ \min\limits_{z\in \bba_j(x)}
+  \bigl[\mathbf{c}\bigl(x,\mathrm{pr}_1(z)\bigl) + c_j(z) + v_{s-1}\bigl(\mathrm{pr}_2(z),
+  K\sm\{j\}\bigl)\bigl]\ \ \fa (x,K) \in D_s
+  .
+\efn
+\end{pred}
+
+Доказательство очевидным образом следует из теоремы~\ref{t3.4.1}
+с учетом
+(\ref{3.5.16}) и (\ref{3.5.18}).
+
+Таким образом, мы располагаем рекуррентной процедурой
+\bfn
+  \label{3.5.22}
+  v_o \longrightarrow v_1 \longrightarrow \ldots \longrightarrow v_N
+  ;
+\efn
+здесь функция $v_o$ определена в (\ref{3.5.20})
+и преобразование $v_{s-1}$ в $v_s,$
+(где $s\in \ov{1,N}$)
+указано в предложении~\ref{p3.5.1} (см. (\ref{3.5.21})).
+После выполнения всех преобразований (\ref{3.5.22})
+мы получим, в частности, что (см. (\ref{3.4.27}))
+\begin{eqnarray}
+  &V = v_N(x^o,\ov{1,N}) = v(x^o,\ov{1,N}) =
+  \min\limits_{j\in \mathbf{I}(\overline{1,N})}\
+  \min\limits_{z\in \bba_j(x^o)} \bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(z)\bigl) +
+  &\nonumber\\
+  &+c_j(z) +
+  v_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{j\}\bigl)\bigl]
+  .
+  \label{3.5.23}
+\end{eqnarray}
+
+\begin{zam}
+\label{z3.5.1}
+Располагая значением $V,$ определяемым в $(\ref{3.5.23}),$
+мы можем оценить свои возможности в части затрат на реализацию процедур $(\ref{3.3.8`}),
+(\ref{3.3.8``}),$
+не занимаясь еще непосредственным построением маршрута и трассы.
+Если при
+этом мы располагаем некоторым допуском $\mathbf{d}, \mathbf{d}\geqslant 0$
+на величину
+совокупных затрат, то после построения функций-слоев
+$(\ref{3.5.22})$ мы можем сравнить $V$
+с упомянутым допуском.
+Если
+\bfn
+  \label{3.5.24}
+  V \leqslant \mathbf{d}
+  ,
+\efn
+то имеет смысл приступать к построению маршрута и трассы,
+см. $(\ref{3.3.8`})$, $(\ref{3.3.8``})$.
+Если же $V > \mathbf{d},$
+то, по всей вероятности, такое построение
+окажется бессмысленным и следует изменить что-то в условиях задачи с целью последующего
+осуществления соотношения,
+подобного $(\ref{3.5.24})$.
+\hfill $\Box$
+\end{zam}
+
+{\bf Построение оптимального решения.}
+Рассмотрим теперь процедуру построения оптимального ДР,
+используя для этого слои функции Беллмана,
+конструируемые посредством (\ref{3.5.21}), (\ref{3.5.22}).
+
+Полагаем при этом
+$\mathbf{z}^{(o)} \df (x^o,x^o).$
+Учитываем, что согласно (\ref{3.5.16})
+и определению $D_N$ при
+$j\in \mathbf{I}(\ov{1,N})$ и $z\in \bba_j(x^o)$
+$$
+  \bigl(\mathrm{pr}_2(z),\ov{1,N}\sm \{j\}\bigl) \in D_{N-1}
+  ,
+$$
+что позволяет определять значение
+$$
+  v_{N-1}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm \{j\}\bigl)\in [0,\infty[
+    .
+$$
+
+Используя теперь (\ref{3.5.23}),
+мы выбираем
+$\mathbf{j}_1\in \mathbf{I}(\ov{1,N})$ и $\mathbf{z}^{(1)}\in \bba_{\mathbf{j}_1}(x^o)$
+так, что при этом
+\bfn
+  \label{3.5.25}
+  V = \mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{z}^{(1)})\bigl) +
+  c_{\mathbf{j}_1}(\mathbf{z}^{(1)}) + v_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),
+  \ov{1,N}\sm \{\mathbf{j}_1\}\bigl)
+  .
+\efn
+
+Иными словами, мы решаем задачу
+$$
+  \mathbf{c}\bigl(x^o,\mathrm{pr}_1(z)\bigl) + c_j(z) + v_{N-1}\bigl(\mathrm{pr}_2(z),
+  \ov{1,N}\sm\{j\}\bigl) \longrightarrow \min, j\in \mathbf{I}(\ov{1,N}), z\in \bba_j(x^o)
+  ,
+$$
+оптимальное решение которой соответствует (\ref{3.5.25}).
+Тогда
+\bfn
+  \label{3.5.26}
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm \{\mathbf{j}_1\}\bigl) \in D_{N-1}
+\efn
+и мы располагаем величиной
+$v_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm
+\{\mathbf{j}_1\}\bigl) \in [0,\infty[,$
+для представления которой можно воспользоваться
+соответствующим вариантом (\ref{3.5.21}).
+Действительно, из (\ref{3.5.16}) и (\ref{3.5.26})
+при $j\in \mathbf{I}(\ov{1,N}\sm \{\mathbf{j}_1\})$
+и $z\in \bba_j\bigl(\mathrm{pr}_2 (\mathbf{z}^{(1)})\bigl)$
+имеем
+\bfn
+  \label{3.5.26`}
+  \bigl(\mathrm{pr}_2(z),\ov{1,N}\sm
+  \{\mathbf{j}_1;j\}\bigl) = \bigl(\mathrm{pr}_2(z),(\ov{1,N}\sm\{\mathbf{j}_1\})\sm\{j\}
+  \bigl)\in D_{N-2}
+  ,
+\efn
+а потому определена величина
+$$
+  v_{N-2}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{\mathbf{j}_1;j\}\bigl)\in [0,\infty[
+  .
+$$
+
+Более того, из предложения~\ref{p3.5.1} следует
+(см. (\ref{3.5.21}), (\ref{3.5.26})),
+что
+\begin{eqnarray}
+  &v_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}\bigl) =
+  \min\limits_{j\in \mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\})}\ \min\limits_{z\in
+  \bba_j\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)})\bigl)}\bigl[\mathbf{c}
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),
+  \mathrm{pr}_1(z)\bigl) +
+  &\nonumber\\
+  &+ c_j(z) + v_{N-2}\bigl(\mathrm{pr}_2(z),\ov{1,N}\sm\{\mathbf{j}_1;j\}\bigl)\bigl].
+  &
+  \label{3.5.27}
+\end{eqnarray}
+
+С учетом (\ref{3.5.27})
+выбираем
+$\mathbf{j}_2\in \mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\})$
+и $\mathbf{z}^{(2)}\in \bba_{\mathbf{j}_2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)})\bigl)$
+так, что при этом
+\begin{eqnarray}
+  &v_{N-1}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\ov{1,N}\sm\{\mathbf{j}_1\}\bigl) =
+  \mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\mathrm{pr}_1(\mathbf{z}^{(2)})) +
+  &\nonumber\\
+  &+c_{\mathbf{j}_2}(\mathbf{z}^{(2)}) + v_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),
+  \ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl)
+  .
+  \label{3.5.28}
+\end{eqnarray}
+
+При этом согласно (\ref{3.5.26`}) получаем включение
+\bfn
+  \label{3.5.28-too}
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl)\in D_{N-2}
+  .
+\efn
+
+С другой стороны,
+подставляя (\ref{3.5.28}) в (\ref{3.5.25}),
+получаем равенство
+\begin{eqnarray}
+  &V = \mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{z}^{(1)})\bigl) +
+  c_{\mathbf{j}_1}(\mathbf{z}^{(1)}) + \mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),
+  \mathrm{pr}_1(\mathbf{z}^{(2)})\bigl) + c_{\mathbf{j}_2}(\mathbf{z}^{(2)}) +
+  &\nonumber\\
+  &+v_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)},\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl) =
+  \mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(o)}),\mathrm{pr}_1(\mathbf{z}^{(1)})\bigl) +
+  &\nonumber\\
+  &+ \mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)}),\mathrm{pr}_1(\mathbf{z}^{(2)})\bigl) +
+  c_{\mathbf{j}_1}(\mathbf{z}^{(1)}) + c_{\mathbf{j}_2}(\mathbf{z}^{(2)}) +
+  v_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl) =
+  &\nonumber\\
+  &= \sum\limits_{t=1}^2 \bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{z}^{(t-1)}),
+  \mathrm{pr}_1(\mathbf{z}^{(t)})\bigl) + c_{\mathbf{j}_t}(\mathbf{z}^{(t)})\bigl] +
+  &\nonumber\\
+  &+v_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl).
+  &
+  \label{3.5.30}
+\end{eqnarray}
+
+По выбору $\mathbf{j}_2$
+имеем, что
+\bfn
+  \label{3.5.31`}
+  \mathbf{j}_2 \in \ov{1,N}\sm\{\mathbf{j}_1\}
+  ,
+\efn
+то есть
+$\mathbf{j}_1\in \ov{1,N}, \mathbf{j}_2\in \ov{1,N}$ и
+$\mathbf{j}_1 \neq \mathbf{j}_2$,
+см. (\ref{3.4.2}).
+
+\begin{zam}
+\label{z3.5.2}
+В связи с $(\ref{3.5.30})$
+допустим
+(в пределах настоящего замечания),
+что $N = 2.$
+Тогда согласно $(\ref{3.5.31`})$
+мы в виде
+$$
+  (\mathbf{j}_s)_{s\in\ov{1,2}} = (\mathbf{j}_s)_{s\in\ov{1,N}}
+$$
+имеем маршрут:
+$(\mathbf{j}_s)_{s\in\ov{1,2}} \in \bbp.$
+Отметим, что
+$\mathbf{j}_1\in \mathbf{I}(\ov{1,N}),$ где $\mathbf{I}(\ov{1,N}) = \mathbf{I}(\ov{1,2});\,
+\mathbf{j}_2\in \mathbf{I}(\ov{1,N}\sm\{\mathbf{j}_1\}),$
+где
+$\ov{1,N} \sm\{\mathbf{j}_1\} =
+\ov{1,N}\sm\{\mathbf{j}_t:\,t\in \ov{1,1}\}.$
+Поскольку
+$\ov{2,N} = \ov{2,2} = \{2\},$
+получаем, что
+$$
+  \mathbf{j}_s \in \mathbf{I} \left(\ov{1,N}\sm\{\mathbf{j}_t:\,t\in \ov{1,s-1}\}\right)\ \ \fa
+  s\in \ov{2,N}
+  .
+$$
+
+Из $(\ref{3.4.8})$
+выводим теперь следующее свойство допустимости:
+\bfn
+  \label{3.5.31}
+  \cj \df (\mathbf{j}_s)_{s\in \ov{1,2}} = (\mathbf{j}_s)_{s\in \ov{1,N}}\in
+  \mathbf{A}
+  .
+\efn
+
+Далее, отметим, что
+$\bba_{\mathbf{j}_1}(x^o) = \bba_{\mathbf{j}_1}\bigl(\mathrm{pr}_2(
+\mathbf{z}^{(o)})\bigl) \subset \bbm_{\mathbf{j}_1}$
+(учитываем, что $x^o\in \mathbf{X}),$ а потому
+\bfn
+  \label{3.5.32}
+  \mathbf{z}^{(1)} \in \bbm_{\mathbf{j}_1}
+  .
+\efn
+
+Тогда $($см. $(\ref{3.3.3}))$,
+в частности,
+$\mathrm{pr}_2(\mathbf{z}^{(1)})\in \mathbf{X}$
+$($см. $(\ref{3.3.5}))$.
+Поэтому, согласно $(\ref{3.3.12})$,
+\bfn
+  \label{3.5.33}
+  \bba_{\mathbf{j}_2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(1)})\bigl)\subset
+  \bbm_{\mathbf{j}_2}
+  .
+\efn
+Из $(\ref{3.5.33})$
+имеем по выбору
+$\mathbf{z}^{(2)},$ что
+\bfn
+  \label{3.5.34}
+  \mathbf{z}^{(2)} \in \bbm_{\mathbf{j}_2}
+  ,
+\efn
+а тогда, в частности,
+$\mathrm{pr}_2(\mathbf{z}^{(2)})\in \mathbf{M}_{\mathbf{j}_2}$
+и, как следствие,
+$\mathrm{pr}_2(\mathbf{z}^{(2)})\in \mathbf{X}.$
+
+Теперь с учетом $(\ref{3.3.2}), (\ref{3.3.3}), (\ref{3.5.32}), (\ref{3.5.34})$ и
+определения $\mathbf{z}^{(o)}$ получаем, что $($см. $(\ref{3.3.14}))$
+\bfn
+  \label{3.5.35}
+  (\mathbf{z}^{(s)})_{s\in\ov{0,2}} =
+  (\mathbf{z}^{(s)})_{s\in\ov{0,N}}\in \bbz
+  .
+\efn
+
+Из $(\ref{3.3.15}), (\ref{3.5.32}), (\ref{3.5.34})$ и $(\ref{3.5.35})$ следует, что
+\bfn
+  \label{3.5.36}
+  (\mathbf{z}^{(s)})_{s\in\ov{0,2}} = (\mathbf{z}^{(s)})_{s\in\ov{0,N}}
+ \in \mathbf{Z}_\cj
+ .
+\efn
+
+Далее, из $(\ref{3.5.31})$ имеем, что
+$\cj(1) = \mathbf{j}_1$ и $\cj(2) = \mathbf{j}_2,$
+а потому по выбору
+$\mathbf{z}^{(1)}$ и $\mathbf{z}^{(2)}$
+получаем
+\bfn
+  \label{3.5.37}
+  \mathbf{z}^{(1)} \in \bba_{\cj(1)} \bigl(\mathrm{pr}_2(\mathbf{z}^{(o)})\bigl),
+  \ \mathbf{z}^{(2)} \in \bba_{\cj(2)} \bigl(\mathrm{pr}_2(\mathbf{z}^{(1)})\bigl)
+  .
+\efn
+
+С учетом $(\ref{3.3.16}), (\ref{3.5.36})$ и $(\ref{3.5.37})$
+находим
+(в рассматриваемом случае $N = 2$),
+что
+$$
+  (\mathbf{z}^{(s)})_{s\in\ov{0,2}} = (\mathbf{z}^{(s)})_{s\in\ov{0,N}} \in \cz_\cj
+  ,
+$$
+а тогда, согласно
+$(\ref{3.3.26})$ и $(\ref{3.5.31})$
+\bfn
+  \label{3.5.38}
+  \bigl(\cj,(\mathbf{z}^{(s)})_{s\in\ov{0,2}} \bigl) =
+  \bigl((\mathbf{j}_s)_{s\in\ov{1,2}},(\mathbf{z}^{(s)})_{s\in\ov{0,2}} \bigl) \in \mathbf{D}
+  .
+\efn
+
+Итак, в $(\ref{3.5.38})$
+имеем упорядоченную пару, являющуюся ДР основной задачи.
+При этом,
+согласно
+$(\ref{3.3.30})$ и $(\ref{3.5.30})$,
+получаем, что в нашем случае
+\begin{eqnarray}
+  &V = \mathfrak{C}_\cj[(\mathbf{z}^{(s)})_{s\in\ov{0,N}}] +
+  v_{N-2}\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl) -
+  f\bigl(\mathrm{pr}_2(\mathbf{z}^{(N)})\bigl) =
+  &\nonumber\\
+  &= \mathfrak{C}_\cj[(\mathbf{z}^{(s)})_{s\in\ov{0,2}}] + v_o\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),
+  \ov{1,2}\sm \{\mathbf{j}_1;\mathbf{j}_2\}\bigl) - f\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)})\bigl)
+  ,
+  &
+  \label{3.5.39}
+\end{eqnarray}
+где $($см. $(\ref{3.5.9}))$
+имеет место включение
+\bfn
+  \label{3.5.40}
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,N}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl) =
+  \bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\emp\bigl) \in D_o
+  .
+\efn
+Напомним, что
+$\mathbf{j}_1\neq \mathbf{j}_2.$
+Из $(\ref{3.5.9})$
+и
+$(\ref{3.5.40})$ вытекает, что
+$$
+  \mathrm{pr}_2(\mathbf{z}^{(2)})\in \bigcup\limits_{i\in\ov{1,N}\sm \mathbf{K}_1}\mathbf{M}_i
+  ,
+$$
+а тогда из $(\ref{3.5.20})$ получаем
+при помощи
+$(\ref{3.5.40})$
+$$
+  v_o\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)}),\ov{1,2}\sm\{\mathbf{j}_1;\mathbf{j}_2\}\bigl) =
+  f\bigl(\mathrm{pr}_2(\mathbf{z}^{(2)})\bigl)
+  .
+$$
+
+В итоге из $(\ref{3.5.39})$
+получаем, что
+\bfn
+  \label{3.5.40`}
+  \mathfrak{C}_\cj[(\mathbf{z}^{(s)})_{s\in\ov{0,2}}]=
+  \mathfrak{C}_\cj[(\mathbf{z}^{(s)})_{s\in\ov{0,N}}] = V
+  .
+\efn
+
+Итак, ДР $(\ref{3.5.38})$
+оптимально в основной задаче маршрутизации перемещений.
+\hfill $\Box$
+\end{zam}
+
+Возвращаясь к общему случаю $N\geqslant 2,$
+отметим, что процедуру, намеченную
+в (\ref{3.5.25})--(\ref{3.5.30}),
+следует
+(при $N \neq 2)$
+продолжать далее,
+вплоть до исчерпывания всего индексного множества $\ov{1,N}$
+(см. в этой связи
+\cite[раздел~7]{Cha3`}).
+В итоге будет построено оптимальное ДР
+\bfn
+  \label{3.5.41}
+  \bigl(\eta,(\mathbf{z}^{(k)})_{k\in\ov{0,N}}\bigl)\in \mathbf{D}
+  ,
+\efn
+где
+$\eta = (\mathbf{j}_k)_{k\in\ov{1,N}}\in \mathbf{A}$
+и
+$(\mathbf{z}^{(k)})_{k\in\ov{0,N}}\in \cz_\eta;\
+\mathfrak{C}_\eta[(\mathbf{z}^{(k)})_{k\in\ov{0,N}}] = V.$
+Данное построение, приводящее к ДР (\ref{3.5.41})
+со свойством
+оптимальности, на идейном уровне соответствует рассуждению в
+замечании~\ref{z3.5.2},
+где рассмотрен случай $N = 2.$

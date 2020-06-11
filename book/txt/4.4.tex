@@ -1,0 +1,1894 @@
+% !TeX root = ..
+
+
+\section{
+  Локальное улучшение допустимых решений
+}
+\label{sect:4.4}
+\setcounter{equation}{0}
+
+В настоящем разделе рассматривается конструкция, связанная с применением вставок,
+организованных на основе ДП
+(в принципе можно было бы задействовать при построении
+вставок тот или иной вариант метода ветвей и границ;
+возникают, однако, затруднения,
+связанные с учетом ограничений и использованием функций стоимости, включающих
+зависимость от списка заданий).
+Упомянутая конструкция соответствует \cite{Cha13`},
+где рассматривается общий случай, соответствующий постановке задачи (\ref{4.2.5});
+в этой связи отметим также работы
+\cite{Cha14`,Cha15`}.
+
+Итак, рассмотрим случай,
+когда размерность исходной маршрутной задачи (\ref{4.2.5})
+оказывается достаточно большой,
+что не позволяет организовать вычисления на основе ДП.
+В то же время, располагая эффективными эвристическими алгоритмами,
+мы можем задействовать схему на основе ДП для целей локального улучшения ДР;
+данное улучшение достигается посредством  вставок.
+Следует, иметь в виду условия предшествования и то,
+что функции стоимости,
+см. (\ref{4.2.1}),
+определяющие критерий задачи (\ref{4.2.5}),
+допускают зависимость от списка заданий,
+не выполненных на момент перемещения.
+Последние два обстоятельства требуют учета при соответствующем построении вставок.
+В полной мере это было сделано в \cite{Cha13`, 15`}.
+В настоящем разделе мы рассмотрим
+вопрос об <<однократном>> построении соответствующей (беллмановской) вставки,
+опуская соответствующие доказательства,
+которые приведены в \cite{Cha13`, 15`}.
+При этом нам потребуются новые обозначения.
+При построении вставки будем применять
+символику, используемую в
+\ref{sect:4.2} и \ref{sect:4.3},
+
+Рассмотрим в общих построениях непустое множество $X$
+произвольной природы.
+В конкретных построениях, связанных с задачей
+управления инструментом при листовой резке на станках с ЧПУ,
+в качестве $X$
+естественно использовать прямоугольник на плоскости.
+
+Фиксируем в качестве базы процесса точку
+$\mathbf{x}_o\in X$ и число
+$\mathbf{n}\in \bbn, \mathbf{n}\geqslant 2,$
+определяющее количество мегаполисов.
+По самому смыслу
+предлагаемой далее конструкции логично полагать
+$\mathbf{n}$ достаточно
+большим;
+во всяком случае естественно ориентироваться на такой случай.
+Фиксируем $\mathbf{n}$ непустых конечных множеств
+$\mathbf{L}_1,\,\cdots,\mathbf{L}_\mathbf{n}:$
+\bfn
+  \label{4.4.1}
+  \mathbf{L}_1\in \mathrm{Fin}(X),\,\cdots,\mathbf{L}_\mathbf{n}\in \mathrm{Fin}(X)
+  ,
+\efn
+именуемые далее мегаполисами,
+а точнее --
+мегаполисами <<большой>> задачи.
+Кроме того, фиксируем отношения
+\bfn
+  \label{4.4.2}
+  \bbl_1\in \cp^\prime(\mathbf{L}_1 \times \mathbf{L}_1).\cdots,
+  \bbl_\mathbf{n}\in \cp^\prime(\mathbf{L}_\mathbf{n}\times \mathbf{L}_\mathbf{n})
+  .
+\efn
+
+Если $j\in \ov{1,\mathbf{n}},$
+то отношение $\bbl_j,$
+$$
+  \bbl_j\subset \mathbf{L}_j \times \mathbf{L}_j
+$$
+характеризует возможности исполнителя в части выполнения работ,
+связанных с посещением $\mathbf{L}_j$.
+В случае листовой резки $\bbl_j$
+является множеством всех упорядоченных пар,
+у каждой из которых первый элемент является точкой врезки,
+а второй --- точкой выключения инструмента.
+По аналогии с (\ref{3.3.4}) полагаем, что
+\bfn
+  \label{4.4.3}
+  (\mathbf{x}_o\notin \mathbf{L}_j\ \fa j\in \ov{1,\mathbf{n}})\,\&\,(\mathbf{L}_p
+  \cap \mathbf{L}_q = \emp\ \ \fa p\in \ov{1,\mathbf{n}}\ \ \fa q\in \ov{1,\mathbf{n}}\sm \{p\})
+  .
+\efn
+
+Далее занимаемся организацией перемещений следующего вида:
+\bfn
+  \label{4.4.4}
+  \mathbf{x}_o\longrightarrow (z_1\in \bbl_{\beta(1)}) \longrightarrow\ldots
+  \longrightarrow (z_\mathbf{n}\in \bbl_{\beta(\mathbf{n})})
+  ,
+\efn
+где
+$\beta\in \mathbf{P},$
+здесь и далее
+$\mathbf{P}\df (\mathrm{bi})[\ov{1,\mathbf{n}}].$
+Выбор  $\beta,z_1,\,\ldots,z_\mathbf{n}$
+находится в нашем распоряжении.
+Правда на выбор $\beta$ могут накладываться
+условия предшествования, подобные рассматриваемым в предыдущей главе.
+Итак,
+$\mathbf{P}$ --- множество всех полных маршрутов исходной <<большой>> задачи.
+
+Введем в рассмотрение множество
+$\mathfrak{K}\in \cp(\ov{1,\mathbf{n}}\times \ov{1,\mathbf{n}}),$
+элементами которого являются упорядоченные пары индексов, выбираемых из
+$\ov{1,\mathbf{n}}$
+(случай $\mathfrak{K}= \emp$
+из рассмотрения не исключается и отвечает случаю
+отсутствия условий предшествования).
+Как и в предыдущей главе, именуем элементы $\mathfrak{K}$ адресными парами.
+При $z\in \mathfrak{K}$
+индекс $\mathrm{pr}_1(z)\in \ov{1,\mathbf{n}}$
+играет роль отправителя
+(сообщения, груза и т. д.),
+а индекс $\mathrm{pr}_2(z)\in \ov{1,\mathbf{n}}$ ---
+роль соответствующего получателя.
+Разумеется, в задаче,
+связанной с листовой резкой на машинах с ЧПУ, содержательный смысл
+$\mathrm{pr}_1(z)$ и $\mathrm{pr}_2(z)$
+будет иным,
+но мы иногда будем все же использовать вышеупомянутую общую интерпретацию,
+поскольку это позволяет в ряде случаев
+сокращать рассуждения,
+сохраняя требуемый смысл.
+
+Мы постулируем, что
+\bfn
+  \label{4.4.5}
+  \fa  \mathfrak{K}_o
+  \in \cp^\prime(\mathfrak{K})\ \exists\,z_o\in \mathfrak{K}_o:\,\mathrm{pr}_1(z_o)
+  \neq \mathrm{pr}_2(z)\ \ \fa z\in \mathfrak{K}_o
+  ,
+\efn
+учитывая, что (\ref{4.4.5}) --- аналог (\ref{3.3.21}) --- условие,
+исключающее зацикливание маршрутов.
+Тогда при условии (\ref{4.4.5})
+имеем в виде
+\bfn
+  \label{4.4.6}
+  \ca \df \{\al\in \mathbf{P}|\,\al^{-1}\bigl(\mathrm{pr}_1(z)\bigl) <
+  \al^{-1}\bigl(\mathrm{pr}_2(z)\bigl) \ \ \fa z\in \mathfrak{K}\}\in \cp^\prime(\mathbf{P})
+\efn
+множество всех $\mathfrak{K}$-допустимых (по предшествованию) маршрутов
+формулируемой ниже <<большой>> задачи.
+В дальнейшем предполагаем, что в (\ref{4.4.4})
+допустимо использовать только маршруты из
+$\ca$ (\ref{4.4.6}).
+
+Сократим
+$X$  до естественного и достаточного для всех наших целей
+конечного п/м,
+полагая
+\bfn
+  \label{4.4.7}
+  \mathfrak{X}\df \{\mathbf{x}_o\} \cup \Bigl(\bigcup\limits_{i=1}^\mathbf{n}
+  \mathbf{L}_i\Bigl) \in \mathrm{Fin}(X)
+  .
+\efn
+
+Видно, что $\mathbf{x}_o$
+и элементы упорядоченных пар
+$z_1,\,\ldots,z_\mathbf{n}$
+в (\ref{4.4.4}) --- суть точки $\mathfrak{X}$ (\ref{4.4.7}).
+Иными словами (\ref{4.4.7})
+можно рассматривать как фазовое пространство процессов типа (\ref{4.4.4}),
+которые пока были введены нестрого.
+Уточним соответствующие понятия.
+
+Полагаем, что $\widetilde{\mathfrak{Z}}$
+есть $def$ множество всех кортежей
+$$
+  (z_i)_{i\in\ov{0,\mathbf{n}}}:\,\ov{0,\mathbf{n}} \longrightarrow \mathfrak{X}\times \mathfrak{X}
+  .
+$$
+
+Среди таких кортежей выделяем трассы
+(траектории),
+согласованные с тем или иным маршрутом.
+Итак, если $\beta\in \mathbf{P},$
+то полагаем, что
+\bfn
+  \label{4.4.8}
+  \mathfrak{Z}_\beta \df \{(z_i)_{i\in\ov{0,\mathbf{n}}}\in
+  \widetilde{\mathfrak{Z}}\bigl|\,\bigl(z_o = (\mathbf{x}_o,\mathbf{x}_o)\bigl)
+  \&\,(z_t\in \bbl_{\beta(t)}\ \ \fa t \in \ov{1,\mathbf{n}})\}\in \mathrm{Fin}
+  (\widetilde{\mathfrak{Z}})
+  ,
+\efn
+получая множество всех трасс,
+согласованных с маршрутом $\beta$.
+Уточним, что имеются в виду маршруты и трассы <<большой>> задачи.
+Каждую упорядоченную пару
+$$
+  \bigl(\beta,(z_i)_{i\in\ov{0,\mathbf{n}}}\bigl),\beta\in \ca,
+  (z_i)_{i\in\ov{0,\mathbf{n}}}\in \mathfrak{Z}_\beta
+$$
+рассматриваем как ДР <<большой>> задачи.
+Тогда
+\bfn
+  \label{4.4.9}
+  \mathrm{SOL}\df \{(\beta,\mathbf{z})\in \ca \times
+  \widetilde{\mathfrak{Z}}|\,\mathbf{z}\in \mathfrak{Z}_\beta\}\in
+  \mathrm{Fin}(\ca \times \widetilde{\mathfrak{Z}})
+\efn
+есть
+(непустое конечное)
+множество всех ДР <<большой>> задачи.
+Как и в \ref{sect:4.2}
+для формулировки последней потребуется
+ввести соответствующие функции стоимости,
+роль которых вполне аналогична функциям  (\ref{4.2.1}).
+Предположим далее, что
+$$
+  \mathbf{N}\df \cp^\prime(\ov{1,\mathbf{n}})
+$$
+(семейство всех непустых
+(и неупорядоченных) списков заданий),
+после чего введем
+  \bfn
+  \label{4.4.10}
+  \mathbf{c}^\natural\in \car_+[\mathfrak{X}\times \mathfrak{X}\times \mathbf{N}],
+  c_1^\natural\in \car_+[\mathfrak{X}\times \mathfrak{X}\times \mathbf{N}],\ldots,c_\mathbf{n}
+  ^\natural\in \car_+[\mathfrak{X}\times \mathfrak{X}\times \mathbf{N}],
+  f^\natural\in \car_+[\mathfrak{X}]
+  .
+\efn
+
+Как и в (\ref{4.2.1}),
+мы полагаем функции стоимости <<максимально>> продолженными.
+Отметим, что значения $\mathbf{c}^\natural$
+будут использоваться для оценивания
+внешних перемещений.
+Итак,
+$\mathbf{c}^\natural$ играет ту же роль, что и $\mathbf{c}$
+в \ref{sect:4.2}.
+Аналогичным образом при
+$j\in \ov{1,\mathbf{n}}$ значения $c_j^\natural$
+будут использоваться при оценивании работ,
+связанных с посещением мегаполиса $\mathbf{L}_j.$
+Наконец, значения $f^\natural$
+используются для оценивания терминального состояния
+(точка $\mathrm{pr}_2(z_\mathbf{n}$)
+в (\ref{4.4.4})).
+В связи с существенностью тех или иных значений функций (\ref{4.4.10})
+можно практически полностью повторить рассуждения (\ref{4.2.1})
+при очевидных изменениях  обозначений.
+
+\begin{zam}
+\label{z4.4.1}
+Поясним, каким именно образом функции $(\ref{4.4.10})$
+будут участвовать в формировании аддитивного критерия.
+Пусть
+$\beta\in \mathbf{P}$,
+$t\in \ov{1,\mathbf{n}}$
+и
+$(z_i)_{i\in\ov{0,\mathbf{n}}} \in \mathfrak{Z}_\beta$.
+Тогда перемещение
+$$
+  \mathrm{pr}_2(z_{t-1}) \longrightarrow \mathrm{pr}_1(z_t)
+  ,
+$$
+где $\mathrm{pr}_2(z_{t-1}) = \mathbf{x}_o$
+при $t=1$ и
+$\mathrm{pr}_2(z_{t-1})\in \mathbf{L}_{\beta(t-1)}$
+в случае $t> 1,$ оценивается следующим значением потерь (затрат)
+$$
+  \mathbf{c}^\natural\bigl(\mathrm{pr}_2(z_{t-1}),\mathrm{pr}_1(z_t),
+  \{\beta(l):\,l\in \ov{t,\mathbf{n}} \}\bigl)\in [0,\infty[
+  .
+$$
+
+Соответственно проведение работ,
+связанных  с посещением мегаполиса $\mathbf{L}_{\beta(t)},$
+оценивается значением потерь
+$$
+  c_{\beta(t)}^\natural\bigl(z_t,\{\beta(l):\,l\in \ov{t,\mathbf{n}}\}\bigl)\in [0,\infty[
+    .
+$$
+
+Наконец, при $t = \mathbf{n}$
+определено значение
+$f^\natural\bigl(\mathrm{pr}_2(z_t)\bigl)\in [0,\infty[,$
+характеризующее  терминальное состояние с точки
+зрения качества последнего.
+\hfill $\Box$
+\end{zam}
+
+С учетом замечания~4.4.1
+естественным представляется следующее определение критерия:
+если
+$\beta\in \mathbf{P}$ и $(z_i)_{i\in\ov{0,\mathbf{n}}}\in \mathfrak{Z}_\beta,$
+то полагаем
+\begin{eqnarray}
+  &\widehat{\mathfrak{C}}_\beta[(z_i)_{i\in\ov{0,\mathbf{n}}}]\df
+  \sum\limits_{t=1}^\mathbf{n}
+  \bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(z_{t-1}),\mathrm{pr}_1(z_t),\{\beta(l):\,l\in
+  \ov{t,\mathbf{n}}\}\bigl) +
+  &\nonumber\\
+  &+ c_{\beta(t)}^\natural\bigl(z_t, \{\beta(l):\,l\in
+  \ov{t,\mathbf{n}}\}\bigl)\bigl] + f^\natural\bigl(\mathrm{pr}_2(z_\mathbf{n})\bigl)
+  ,
+  &
+  \label{4.4.11}
+\end{eqnarray}
+получая неотрицательную величину.
+Разумеется (\ref{4.4.11})
+нас будет интересовать в случае
+\bfn
+  \label{4.4.11`}
+  \bigl(\beta,(z_i)_{i\in\ov{0,\mathbf{n}}}\bigl)\in \mathrm{SOL}
+  ,
+\efn
+то есть в ситуации, когда оценивается ДР <<большой>> задачи.
+Последняя с учетом
+(\ref{4.4.11})
+примет следующий вид:
+\bfn
+  \label{4.4.12}
+  \widehat{\mathfrak{C}}_\beta [(z_i)_{i\in \ov{0,\mathbf{n}}}] \longrightarrow
+  \min,\ \beta \in \mathcal{A},\ (z_i)_{i\in \ov{0,\mathbf{n}}}\in \mathfrak{Z}_\beta
+  .
+\efn
+
+Предположим, что по соображениям сложности вычислений
+(число $\mathbf{n}$ достаточно велико)
+решить задачу (\ref{4.4.12}) точно не удается:
+мы не можем указать явно оптимальное
+(в смысле (\ref{4.4.12}))
+ДР, хотя структура его нам известна
+(имеется в виду представление в терминах соответствующего варианта ДП; см. \ref{sect:4.3}).
+Однако с использованием эвристических алгоритмов мы можем за приемлемое время определить
+некоторое ДР (\ref{4.4.11`})
+нашей <<большой>> задачи (\ref{4.4.12}).
+Будем в настоящем разделе полагать
+некоторое такое ДР уже найденным.
+Рассмотрим вариант его улучшения на основе оптимизирующей вставки.
+
+Итак, пусть
+$\bigl(\la, (\mathbf{h}_i)_{i\in\ov{0,\mathbf{n}}}\bigl)\in \mathrm{SOL}$.
+Тогда
+\bfn
+  \label{4.4.13}
+  \la\in \ca
+  ,
+\efn
+где $\la$ --- допустимый по предшествованию маршрут в <<большой>> задаче
+\bfn
+  \label{4.4.14}
+  (\mathbf{h}_i)_{i\in\ov{0,\mathbf{n}}}\in \mathfrak{Z}_\la
+  ,
+\efn
+где $(\mathbf{h}_i)_{i\in\ov{0,\mathbf{n}}}$ --- трасса, согласованная с маршрутом
+$\la$ (\ref{4.4.13}).
+Отметим, что из (\ref{4.4.13}) следует, в частности, свойство
+$$
+  \la \in \mathbf{P}
+  ,
+$$
+означающее, что
+$\la:\,\ov{1,\mathbf{n}}{\stackrel{\mbox{\footnotesize{на}}}{\longrightarrow}}\,
+\ov{1,\mathbf{n}}$
+и при этом
+$\fa i_1\in \ov{1,\mathbf{n}}\ \ \fa i_2\in \ov{1,\mathbf{n}}$
+$$
+  \bigl(\la(i_1) = \la(i_2)\bigl) \Longrightarrow (i_1 = i_2)
+  .
+$$
+
+Кроме того,
+из (\ref{4.4.13}) имеем (см. (\ref{4.4.6})), что
+\bfn
+  \label{4.4.15}
+  \la^{-1}\bigl(\mathrm{pr}_1(z)\bigl) < \la^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\ \
+  \fa z\in \mathfrak{K}
+  .
+\efn
+
+Здесь $\la^{-1}\in \mathbf{P}$
+есть перестановка, обратная к $\la$.
+В частности
+$$
+  \la^{-1}:\ \ov{1,\mathbf{n}} {\stackrel{\mbox{\footnotesize{на}}}{\longrightarrow}}\,
+  \ov{1,\mathbf{n}}
+  ,
+$$
+при этом
+$\fa k\in\ov{1,\mathbf{n}}$
+\bfn
+  \label{4.4.16}
+  \la\bigl(\la^{-1}(k)\bigl) = \la^{-1}\bigl(\la(k)\bigl) = k
+\efn
+(свойство (\ref{4.4.16}) легко извлекается из (\ref{3.1.4})).
+Свойство (\ref{4.4.15})
+характеризует соблюдение условий предшествования.
+
+В отношении кортежа (\ref{4.4.14}) заметим, что
+$$
+  \mathbf{h}_o\in \mathfrak{X}\times \mathfrak{X}, \mathbf{h}_1\in \mathfrak{X}\times
+  \mathfrak{X}, \,\ldots,\mathbf{h}_\mathbf{n}\in \mathfrak{X}\times \mathfrak{X}
+  .
+$$
+
+В виде (\ref{4.4.14}) имеем кортеж упорядоченных пар.
+При этом (см. (\ref{4.4.8}))
+\bfn
+  \label{4.4.17}
+  \mathbf{h}_o = (\mathbf{x}_o,\mathbf{x}_o)
+\efn
+и справедливо свойство
+\bfn
+  \label{4.4.18}
+  \mathbf{h}_t \in \bbl_{\la(t)}\ \ \fa t\in \ov{1,\mathbf{n}}
+  .
+\efn
+
+Свойства (\ref{4.4.17}), (\ref{4.4.18})
+характеризуют (\ref{4.4.14})
+в терминах (\ref{4.4.8})
+исчерпывающим образом.
+Согласно (\ref{4.4.11}), (\ref{4.4.13}) и (\ref{4.4.14})
+получим
+\begin{eqnarray}
+  &\widehat{\mathfrak{C}}_\la[(\mathbf{h}_i)_{i\in \ov{o,\mathbf{n}}}] =
+  \sum\limits_{t=1}^\mathbf{n} \bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),
+  \mathrm{pr}_1(\mathbf{h}_t),\{\la(l):\,l\in\ov{t,\mathbf{n}}\}\bigl) +
+  &\nonumber\\
+  &+c_{\la(t)}^\natural\bigl(\mathbf{h}_t, \{\la(l):\,l\in\ov{t,\mathbf{n}}\}\bigl)\bigl] + f^\natural
+  \bigl(\mathrm{pr}_2(\mathbf{h}_\mathbf{n})\bigl)
+  .
+  &
+  \label{4.4.19}
+\end{eqnarray}
+
+Разумеется (\ref{4.4.19}) определяет стоимость ДР
+$\bigl(\la,(\mathbf{h}_i)_{i\in\ov{0,\mathbf{n}}}\bigl)$
+<<большой>> задачи (\ref{4.4.12}).
+
+В связи с (\ref{4.4.19})
+условимся о следующем соглашении:
+если $X$ и $Y$ --- непустые множества,
+отвечающие условию
+$$
+  g: X \longrightarrow Y
+  ,
+$$
+и $A\in \cp(X),$
+то через $g^1(A)$
+обозначаем образ множества $A$ при действии отображения $g$:
+$$
+  g^1(A) \df \{g(a):\,a\in A\}\in \cp(Y)
+  .
+$$
+
+Отметим:
+если $A \neq \emp,$ то и $g^1(A) \neq \emp.$
+Среди прочих свойств операции
+\bfn
+  \label{4.4.20}
+  A \longmapsto g^1(A):\,\cp(X) \longrightarrow\cp(Y)
+\efn
+(взятия образа) отметим следующее
+\bfn
+  \label{4.4.21}
+  g^1(A_1 \cup A_2) = g^1(A_1) \cup g^1(A_2)\ \ \fa A_1\in \cp(X)\ \ \fa A_2\in \cp(X)
+  .
+\efn
+
+Полезно также напомнить, что
+$$
+  g^1(B_1 \cap B_2) \subset g^1(B_1) \cap g^1(B_2)
+  ,
+$$
+где $B_1\in \cp(X)$
+и $B_2\in \cp(X)$.
+Причем возможен случай, когда
+$$
+  g^1(B_1 \cap B_2) \neq g^1(B_1) \cap g^1(B_2)
+  ;
+$$
+в этой части операция (\ref{4.4.20})
+отличается от операции взятия прообраза.
+Поскольку $\mathbf{P}$
+содержится в множестве всех отображений,
+действующих в $\ov{1,\mathbf{n}},$
+то (\ref{4.4.20}) можно использовать при
+$g=\lambda\in \mathbf{P}$,
+$X= Y = \ov{1,\mathbf{n}}$, а потому из
+(\ref{4.4.19}) имеем, что
+\begin{eqnarray}
+  &\widehat{\mathfrak{C}}_\la[(\mathbf{h}_i)_{i\in \ov{o,\mathbf{n}}}] =
+  \sum\limits_{t=1}^\mathbf{n} \bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),
+  \mathrm{pr}_1(\mathbf{h}_t),\la^1(\ov{t,\mathbf{n}})\bigl) +
+  &\nonumber\\
+  &+ c_{\la(t)}^\natural\bigl(\mathbf{h}_t, \la^1(\ov{t,\mathbf{n}})\bigl)\bigl] + f^\natural
+  \bigl(\mathrm{pr}_2(\mathbf{h}_\mathbf{n})\bigl)
+  .
+  &
+  \label{4.4.22}
+\end{eqnarray}
+
+В дальнейшем выражения типа (\ref{4.4.22})
+будут, в частности, использоваться в связи со свойством
+(\ref{4.4.21}).
+
+Приступим к изложению конструкции оптимизирующей вставки,
+для чего вначале обсудим схему
+\cite{Cha12`,Cha13`,Cha14`},
+связанную с преобразованием условий предшествования.
+Фиксируем
+\bfn
+  \label{4.4.23}
+  N \in\ov{2,\mathbf{n}}
+  ,
+\efn
+в котором число $N$ определяет <<размер окна>> вставки.
+Кроме того, пусть
+\bfn
+  \label{4.4.24}
+  \nu\in \ov{0,\mathbf{n}-N}
+\efn
+есть <<момент>> начала вставки.
+Тогда
+$$
+  \La \df \bigl(\la(\nu + s)\bigl)_{s\in\ov{1,N}}
+$$
+есть отображение из
+$\ov{1,N}$ в $\ov{1,\mathbf{n}},$
+то есть
+$$
+  \La:\,\ov{1,N} \longrightarrow \ov{1,\mathbf{n}}
+  .
+$$
+
+Полагая
+$\Gamma \df \La^1(\ov{1,N}),$
+получаем непустое п/м
+$\ov{1,\mathbf{n}},$ то есть
+$$
+  \Gamma\in \cp^\prime(\ov{1,\mathbf{n}})
+  ,
+$$
+для которого определена мощность $|\Gamma|\in \bbn$
+(действительно, $\Gamma$ --- непустое конечное множество).
+Более того, из определения $\Gamma$ следует, что
+$$
+  |\Gamma| = N
+$$
+и, кроме того,
+$\La\in (\mathrm{bi})[\Gamma].$
+Итак,
+$$
+  \Gamma = \{\La(s):\,s\in\ov{1,N}\} = \{\la(\nu+ s):\,s\in \ov{1,N}\} = \la^1(\ov{\nu+1,\nu+N})
+$$
+играет далее роль <<окна>> в маршруте $\la.$
+В этой связи полагаем, что
+\bfn
+  \label{4.4.25}
+  Q \df \{z\in \mathfrak{K}|\,\bigl(\mathrm{pr}_1(z)\in \Gamma\bigl)\,\&\,
+  \bigl(\mathrm{pr}_2(z)\in \Gamma\bigl)\}
+  ,
+\efn
+получая соответствующее <<окно>> в множестве адресных пар.
+
+Теперь конструируем нужный вариант множества $\mathbf{K}$ из \ref{sect:3.3}.
+Учитываем при этом тот очевидный факт,
+что при $z\in Q$ в виде $\mathrm{pr}_1(z)$
+и $\mathrm{pr}_2(z)$ имеем  элементы $\Gamma,$
+а потому для биекции $\La^{-1},$
+обратной к $\La,$ получаем, что
+$$
+  \Bigl(\La^{-1}\bigl(\mathrm{pr}_1(z)\bigl)\in \ov{1,N}\Bigl)\,\&\,
+  \Bigl(\La^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\in \ov{1,N}\Bigl)
+  .
+$$
+
+С учетом этого полагаем далее, что
+\bfn
+  \label{4.4.26}
+  \mathbf{K}\df \Bigl\{\Bigl(\La^{-1}\bigl(\mathrm{pr}_1(z)\bigl),\La^{-1}
+  \bigl(\mathrm{pr}_2(z)\bigl)\Bigl):\,z\in Q\Bigl\}
+  ,
+\efn
+получая множество, для которого
+$$
+  \mathbf{K}\subset \ov{1,N} \times \ov{1,N}
+  ,
+$$
+что соответствует \ref{sect:3.3}.
+Отметим, что для множества $\mathbf{K}$
+(\ref{4.4.26}) выполняется условие (\ref{3.3.21}).
+
+\begin{zam}
+\label{z4.4.1`}
+Проверим условие $(\ref{3.3.21})$, фиксируя
+$\mathbf{K}_o\in \cp^\prime(\mathbf{K}).$
+Тогда $\mathbf{K}_o\neq \emp$ и
+$\mathbf{K}_o\subset \mathbf{K}.$
+При этом
+\bfn
+  \label{4.4.27}
+  Q_o \df \Bigl\{z\in Q \bigl|\,\Bigl(\La^{-1}\bigl(\mathrm{pr}_1(z)\bigl),
+  \La^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\Bigl)\in \mathbf{K}_o\Bigl\}\in \cp^\prime(Q)
+  .
+\efn
+
+Из $(\ref{4.4.25})$ и $(\ref{4.4.27})$
+получаем, в частности, что
+$Q_o\in \cp^\prime(\mathfrak{K})$.
+При этом $\fa z\in Q_o$
+$$
+  \bigl(\mathrm{pr}_1(z) \in \Gamma\bigl)\,\&\,\bigl(\mathrm{pr}_2(z) \in \Gamma\bigl)
+  .
+$$
+
+С учетом $(\ref{4.4.5})$
+можно указать $z_o\in Q_o$ со свойством
+\bfn
+  \label{4.4.28}
+  \mathrm{pr}_1(z_o)\neq \mathrm{pr}_2(z)\ \ \fa z\in Q_o
+  .
+\efn
+
+Тогда $z_o\in Q$ и
+$\tilde{z}_o \df \Bigl(\La^{-1}\bigl(\mathrm{pr}_1(z_o)
+\bigl),\La^{-1}\bigl(\mathrm{pr}_2(z_o)\bigl)\Bigl)\in \mathbf{K}_o$
+согласно
+$(\ref{4.4.27}).$
+Выберем произвольно $z^o\in \mathbf{K}_o.$
+Тогда, в
+частности, $z^o\in \mathbf{K},$
+а потому для некоторого $\tilde{z}^o\in Q$
+$$
+  z^o = \Bigl(\La^{-1}\bigl(\mathrm{pr}_1(\tilde{z}^o)\bigl), \La^{-1}\bigl(\mathrm{pr}_2(\tilde{z}^o)
+  \bigl)\Bigl)
+  .
+$$
+
+Тогда
+$\Bigl(\La^{-1}\bigl(\mathrm{pr}_1(\tilde{z}^o)\bigl),\La^{-1}
+\bigl(\mathrm{pr}_2(\tilde{z}^o)\bigl)
+\Bigl)\in \mathbf{K}_o$
+и с учетом $(\ref{4.4.27})$
+$\tilde{z}^o\in Q_o,$ а потому, согласно
+$(\ref{4.4.28})$,
+$$
+ \mathrm{pr}_1(z_o) \neq \mathrm{pr}_2(\tilde{z}^o)
+ .
+$$
+
+В силу биективности $\La^{-1}$ получаем как следствие, что
+$$
+  \mathrm{pr}_1(\tilde{z}_o) = \La^{-1}\bigl(\mathrm{pr}_1(z_o)\bigl)
+  \neq \La^{-1}\bigl(\mathrm{pr}_2(\tilde{z}^o)\bigl)= \mathrm{pr}_2(z^o)
+  .
+$$
+
+Поскольку выбор $z^o$ был произвольным,
+установлено, что $\tilde{z}_o\in \mathbf{K}_o$
+таково, что
+$\mathrm{pr}_1(\tilde{z}_o)  \neq \mathrm{pr}_2(z)\ \ \fa z\in \mathbf{K}_o.$
+\hfill $\Box$
+\end{zam}
+
+Учитывая (\ref{3.3.24}), (\ref{3.3.25}), имеем, что
+\begin{eqnarray}
+  &\mathbf{A}\df \{\al\in \bbp|\,\al^{-1}\bigl(\mathrm{pr}_1(z)\bigl) <
+  \al^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\ \ \fa z\in \mathbf{K}\} =
+  &\nonumber\\
+  &=\{\al\in \bbp|\,
+  \fa z\in \mathbf{K}\ \ \fa t_1\in \ov{1,N}
+  \ \ \fa t_2\in \ov{1,N}\ \
+  &\nonumber\\
+  &\Bigl(\bigl(\al(t_1) =
+  \mathrm{pr}_1(z)\bigl)\,\&\,\bigl(\al(t_2) = \mathrm{pr}_2(z)\bigl)\Bigl) \Longrightarrow
+  (t_1 < t_2)\}\in \cp^\prime(\bbp)
+  .
+  &
+  \label{4.4.29}
+\end{eqnarray}
+
+Итак, $\mathbf{A}$ --- непустое п/м $\bbp$.
+Видно, что при $\al\in \bbp$
+\bfn
+  \label{4.4.30}
+  \La\circ \al = \Bigl(\la\bigl(\nu + \al(s)\bigl)\Bigl)_{s\in\ov{1,N}}\in (\mathrm{bi})[\Gamma]
+\efn
+и, в частности,
+$$
+  \La \circ \al:\ov{1,N}{\stackrel{\mbox{\footnotesize{на}}}{\longrightarrow}} \Gamma
+  .
+$$
+При этом
+$(\La\circ \al)(s)  = \La\bigl(\al(s)\bigl) = \la\bigl(\nu + \al(s)\bigl)
+\ \ \fa s\in \ov{1,N}.$
+Вместе с тем
+$$
+  t-\nu\in \ov{1,N}\ \ \fa t\in \ov{\nu+1,\nu+ N}
+  ,
+$$
+поэтому при $\tau\in \ov{\nu+1,\nu+ N}$ определен индекс
+$$
+  (\La\circ \al)(\tau - \nu) = \la\bigl(\nu + \al(\tau - \nu)\bigl)\in \Gamma
+  .
+$$
+
+С учетом этого введем естественное правило преобразования маршрута
+$\la$
+\cite{Cha13`}.
+
+\begin{opred}
+\label{o4.4.1}
+Если $\al\in \bbp,$ то отображение
+$$
+  (\al - \mathrm{sew})[\la;\nu]:\,\ov{1,\mathbf{n}}\longrightarrow \ov{1,\mathbf{n}}
+$$
+определяем следующими правилами
+\begin{eqnarray}
+  &\bigl((\al - \mathrm{sew})[\la;\nu](t) \df \la(t)\ \ \fa t\in \ov{1,\mathbf{n}}
+  \setminus  \ov{\nu+1,\nu + N}\bigl)\,\&\,\Bigl((\al - \mathrm{sew})[\la;\nu](t) \df
+  &\nonumber\\
+  &\df (\La\circ \al)(t - \nu)\ \ \fa t \in \ov{\nu +1,\nu +N}\bigl)
+  .
+  &
+  \label{4.4.31}
+\end{eqnarray}
+\end{opred}
+
+\begin{pred}
+\label{p4.4.1}
+Если
+$\al\in \bbp,$
+то
+$(\al - \mathrm{sew})[\la;\nu]\in \mathbf{P}.$
+\end{pred}
+
+{Д о к а з а т е л ь с т в о}.
+Покажем сначала, что (при $\al\in \bbp)$
+$\mu \df (\al - \mathrm{sew})[\la;\nu]$
+есть сюръективное отображение.
+Пусть $\theta \in \ov{1,\mathbf{n}}.$
+Тогда по выбору $\la$ имеем,
+что $\theta = \la(\tau),$
+где $\tau\in \ov{1,\mathbf{n}}.$
+При этом, согласно (\ref{4.4.31}),
+$$
+  (\tau \notin \ov{\nu + 1,\nu+ N}) \Longrightarrow \bigl(\mu(\tau) = \la(\tau)\bigl)
+  .
+$$
+
+Как следствие получили импликацию
+\bfn
+  \label{4.4.32}
+  (\tau \notin \ov{\nu + 1,\nu+ N}) \Longrightarrow \bigl(\exists\,t\in
+  \ov{1,\mathbf{n}}:\,\theta = \mu(t)\bigl).
+\efn
+
+Допустим, что $\tau \in \ov{\nu + 1,\nu+ N}.$
+В этом случае
+$$
+  \la^{-1}(\theta) \in \ov{\nu+1,\nu+ N}
+  ,
+$$
+так как по выбору $\tau$ имеем равенство $\tau = \la^{-1}(\theta).$
+Заметим,
+что по определению $\La$
+$$
+  \theta = \la(\tau) = \la\bigl(\nu +(\tau - \nu)\bigl) = \La(\tau-\nu) \in \Gamma
+  ,
+$$
+где $\tau-\nu\in \ov{1,N}.$
+С учетом (\ref{4.4.30}) имеем, что для
+некоторого $j\in \ov{1,N}$
+\bfn
+  \label{4.4.33}
+  \theta = (\La \circ \al)(j) = \la\bigl(\nu + \al(j)\bigl)
+  ,
+\efn
+где
+$\nu+\alpha(j)\in \ov{\nu+1,\nu+N}.$
+Видно, что
+$$
+  j=(\La \circ \al)^{-1}(\theta)
+  ,
+$$
+а потому из (\ref{4.4.31}) вытекает, что
+$$
+  \mu(\nu +j) = (\La\circ \al)(j) = \theta
+  .
+$$
+
+Поскольку, в частности, $\nu+j \in \ov{1,\mathbf{n}},$
+то установлено,
+что в рассматриваемом случае
+$\tau\in \ov{\nu+1,\nu+N}\ \ \exists\, t\in
+\ov{1,\mathbf{n}}:\,\theta = \mu(t).$
+Итак,
+\bfn
+  \label{4.4.34}
+  (\tau\in \ov{\nu+1,\nu+N})\Longrightarrow \bigl(\exists\, t\in
+  \ov{1,\mathbf{n}}:\,\theta = \mu(t)\bigl)
+  .
+\efn
+
+Из (\ref{4.4.32}) и (\ref{4.4.34}) получаем, что
+$\theta\in \mu^1(\ov{1,\mathbf{n}}).$
+Поскольку выбор $\theta$ был произвольным,
+установлено, что $\ov{1,\mathbf{n}}\subset
+\mu^1(\ov{1,\mathbf{n}})$
+и, как следствие,
+$\mu^1(\ov{1,\mathbf{n}}) = \ov{1,\mathbf{n}},$
+то есть
+$$
+  \mu:\,\ov{1,\mathbf{n}}{\stackrel{\mbox{\footnotesize{на}}}{\longrightarrow}}{\ov{1,\mathbf{n}}}
+  .
+$$
+
+Осталось проверить инъективность $\mu.$
+Пусть $p\in \ov{1,\mathbf{n}}$ и $q\in \ov{1,\mathbf{n}}$
+таковы, что
+\bfn
+  \label{4.4.34`}
+  \mu(p) = \mu(q)
+  .
+\efn
+
+Для краткости полагаем $u\df\mu(p),$
+получая в силу (\ref{4.4.34`}),
+что и $\mu(q) = u.$
+Заметим, что
+\bfn
+  \label{4.4.35}
+  (p\in \ov{\nu+1,\nu+N}) \vee (p\in \ov{1,\mathbf{n}}\setminus  \ov{\nu+1,\nu+ N})
+  .
+\efn
+
+Оба случая в (\ref{4.4.35}) рассмотрим отдельно.
+
+а) Пусть сначала $p\in \ov{\nu+1,\nu+N}.$ Тогда
+$$
+  p-\nu \in \ov{1,N}
+$$
+и, согласно (\ref{4.4.31}),
+$u = (\La\circ \al)(p- \nu)\in \Gamma.$ В этом случае
+\bfn
+  \label{4.4.35`}
+  q\in \ov{\nu+1,\nu+N}
+  ,
+\efn
+поскольку в противном случае, то есть при
+\bfn
+  \label{4.4.36}
+  q \notin \ov{\nu+1,\nu+N}
+  ,
+\efn
+имеет место,
+(\ref{4.4.31})
+$u\notin \Gamma$.
+Действительно, пусть истинно (\ref{4.4.36}),
+тогда $u=\mu(q) = \la(q),$
+где в силу инъективности $\la$
+$$
+  \la(q) \notin \Gamma
+  ,
+$$
+то есть $u\notin \Gamma$.
+При условии (\ref{4.4.36})
+получаем очевидное противоречие, доказывающее
+(\ref{4.4.35`}).
+Итак,
+$$
+  (p\in\ov{\nu+1,\nu+N})\,\&\,(q\in \ov{\nu+1,\nu+N})
+  ,
+$$
+тогда в силу (\ref{4.4.31}) и (\ref{4.4.34`})
+$$
+  (\La\circ \al)(p-\nu) = (\La\circ \al)(q - \nu)
+  .
+$$
+
+С учетом (\ref{4.4.30}) получаем равенство
+$$
+  p-\nu =q -\nu
+  ,
+$$
+то есть $p = q.$
+Итак, установлена импликация
+\bfn
+  \label{4.4.37}
+  (p\in \ov{\nu+1,\nu+N}) \Longrightarrow (p= q)
+  .
+\efn
+
+б) Пусть теперь
+$p\notin \ov{\nu+1,\nu+N}.$
+Тогда в силу (\ref{4.4.31}) $\mu(p) = \la(p) \notin \Gamma,$
+то есть $u\notin \Gamma$
+(учитываем инъективность $\la).$
+Поэтому $\mu(q) \notin \Gamma,$ что означает
+$$
+  q\notin \ov{\nu+1,\nu+N}
+  .
+$$
+
+В самом деле, при
+$q\in \ov{\nu+1,\nu+N}$ в силу (\ref{4.4.31})
+имеем, что
+$\mu(q) = (\La \circ \al)
+(q - \nu)\in \Gamma,$
+а это исключено.
+Тогда $\mu(q) =\la(q),$
+а потому (см. (\ref{4.4.34`}))
+$$
+  \la(p) = \la(q)
+$$
+и, как следствие, $p=q$ при $p\notin \ov{\nu+1,\nu+N}.$
+Итак,
+$$
+  (p\notin \ov{\nu+1,\nu+N}) \Longrightarrow (p = q)
+  .
+$$
+
+С учетом (\ref{4.4.35}) и (\ref{4.4.37})
+при условии (\ref{4.4.34`})
+получаем во всех возможных случаях требуемое равенство $p =q,$
+чем и завершается проверка импликации
+$$
+  \bigl(\mu(p) = \mu(q)\bigl) \Longrightarrow (p= q)
+  .
+$$
+
+Поскольку выбор $p$ и $q$ был произвольным,
+установлено, что
+$\fa i_1\in \ov{1,\mathbf{n}}$
+$\fa i_2\in \ov{1,\mathbf{n}}$
+$$
+  \bigl(\mu(i_1) = \mu(i_2)\bigl) \Longrightarrow (i_1 = i_2)
+  .
+$$
+
+\begin{pred}
+  \label{p4.4.2}
+  Если $\al\in \mathbf{A},$ то
+  $(\al - \mathrm{sew})[\la;\nu]\in \ca$.
+\end{pred}
+
+Д о к а з а т е л ь с т в о.
+Пусть $\al\in \mathbf{A}.$
+Тогда, в частности, $\al\in \bbp,$ то
+есть $\al$ --- перестановка множества $\ov{1,N}.$
+В силу предложения~\ref{p4.4.1}
+имеем, что
+\bfn
+  \label{4.4.38}
+  \mu \df (\al - \mathrm{sew}))[\la;\nu]\in \mathbf{P}
+  .
+\efn
+
+Кроме того, по определению множества $\mathbf{A}$
+имеем, что (см. (\ref{4.4.29}))
+\bfn
+  \label{4.4.39}
+  \al^{-1}\bigl(\mathrm{pr}_1(z)\bigl) <  \al^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\ \
+  \fa z\in \mathbf{K}
+  .
+\efn
+
+Покажем, что свойством, подобным (\ref{4.4.39}),
+обладает и маршрут $\mu.$
+Для проверки данного
+свойства выберем и зафиксируем адресную пару
+<<большой>> задачи
+\bfn
+  \label{4.4.40}
+  \theta\in \mathfrak{K}
+  .
+\efn
+
+Тогда,  в частности,
+$\theta\in \ov{1,\mathbf{n}}\times \ov{1,\mathbf{n}},$
+а потому
+\bfn
+  \label{4.4.41}
+  \bigl(\mathrm{pr}_1(\theta)\in\ov{1,\mathbf{n}}\bigl)\,\&\,
+  \bigl(\mathrm{pr}_2(\theta)\in\ov{1,\mathbf{n}}\bigl)
+  .
+\efn
+
+По выбору $\la$
+имеем из (\ref{4.4.15}), (\ref{4.4.40}) и (\ref{4.4.41}), что
+\bfn
+  \label{4.4.42}
+  \la^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) < \la^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)
+  ,
+\efn
+где $\mathrm{pr}_1(\theta)$ --- <<отправитель>>,
+а $\mathrm{pr}_2(\theta)$ --- <<получатель>>
+адресной пары $\theta$.
+При этом
+\bfn
+  \label{4.4.43}
+  (\theta \in Q) \vee (\theta\in \mathfrak{K}\setminus Q)
+  .
+\efn
+
+Рассмотрим отдельно оба случая, упомянутых в (\ref{4.4.43}),
+имея в виду (\ref{4.4.25}), (\ref{4.4.26}).
+
+1) Пусть $\theta\in Q.$
+Поэтому, согласно (\ref{4.4.25}),
+\bfn
+  \label{4.4.43`}
+  \bigl(\mathrm{pr}_1(\theta)\in \Gamma\bigl)\,\&\,\bigl(\mathrm{pr}_2(\theta)\in \Gamma\bigl)
+\efn
+и, как следствие,
+при (\ref{4.4.26})
+реализуется включение
+$$
+  \Bigl(\La^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl),\La^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl)\in \mathbf{K}
+  .
+$$
+
+Из (\ref{4.4.39}) имеем, что
+$$
+  \al^{-1}\Bigl(\La^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl) <
+  \al^{-1}\Bigl(\La^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl)
+  .
+$$
+
+Иными словами, справедливо неравенство
+\bfn
+  \label{4.4.44}
+  (\La \circ \al)^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) <
+  (\La \circ \al)^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)
+  .
+\efn
+
+В (\ref{4.4.44}) учтено очевидное свойство
+$$
+  (\La \circ \al)^{-1}(t) = \al^{-1}\bigl(\La^{-1}(t)\bigl) \ \ \fa t\in \Gamma
+  .
+$$
+
+В этой связи полезно иметь в виду (\ref{4.4.30}).
+Отметим, что
+(см. (\ref{4.4.38}), (\ref{4.4.41}))
+$$
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) \in \ov{1,\mathbf{n}}\Bigl)\,\&\,
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl) \in \ov{1,\mathbf{n}}\Bigl)
+  .
+$$
+
+При этом справедливы очевидные равенства
+$$
+  \biggl(\mu\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl) = \mathrm{pr}_1 (\theta)\biggl)\,\&\,
+  \biggl(\mu\Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl) = \mathrm{pr}_2(\theta)\biggl)
+  .
+$$
+
+Отметим здесь же, что по определению $\mu$
+имеем из (\ref{4.4.31}) следующие импликации
+$$
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\notin \ov{\nu+1,\nu+N}\Bigl) \Longrightarrow
+  \biggl(\la\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl) = \mathrm{pr}_1(\theta)\biggl),
+$$
+$$
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\notin \ov{\nu+1,\nu+N}\Bigl) \Longrightarrow
+  \biggl(\la\Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl) = \mathrm{pr}_2(\theta)\biggl)
+  .
+$$
+
+Тогда с учетом (\ref{4.4.43`})
+получаем, как следствие, что
+\bfn
+  \label{4.4.45}
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\notin \ov{\nu+1,\nu+N}\Bigl)
+  \Longrightarrow
+  \biggl(\la\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl) \in \Gamma\biggl)
+  ,
+\efn
+\bfn
+  \label{4.4.46}
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\notin \ov{\nu+1,\nu+N}\Bigl)
+  \Longrightarrow
+  \biggl(\la\Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl) \in \Gamma\biggl)
+  .
+\efn
+
+Вместе с тем по определению $\Gamma$
+с учетом инъективности  $\la$
+имеем, что
+$$
+  \biggl(\la\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl) \in \Gamma\biggl)\Longrightarrow
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\in \ov{\nu+1,\nu+N}\Bigl)
+  ,
+$$
+$$
+  \biggl(\la\Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl) \in \Gamma\biggl)\Longrightarrow
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\in \ov{\nu+1,\nu+N}\Bigl)
+  .
+$$
+
+Комбинируя две последние импликации с (\ref{4.4.45}) и (\ref{4.4.46}),
+получаем, что
+$$
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\in \ov{\nu+1,\nu+N}\Bigl)\,\&\,
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\in \ov{\nu+1,\nu+N}\Bigl)
+  .
+$$
+
+Последнее в силу (\ref{4.4.31})
+и определения $\mu$ означает, что
+$$
+  \mathrm{pr}_1(\theta) = \mu\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl) =
+  (\La\circ \al)\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) - \nu\Bigl)
+  ,
+$$
+$$
+  \mathrm{pr}_2(\theta) = \mu\Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl) =
+  (\La\circ \al)\Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl) - \nu\Bigl)
+  .
+$$
+
+Учитывая (\ref{4.4.44})
+и свойства обратной биекции,
+получаем, что
+$$
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) - \nu  = (\La\circ \al)^{-1}\biggl((\La\circ\,\al)\Bigl(
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) - \nu\Bigl)\biggl)= (\La\circ\,\al)^{-1}\bigl(\mathrm{pr}_1
+  (\theta)\bigl) <
+$$
+$$
+  < (\La\circ\, \al)^{-1}\bigl(\mathrm{pr}_2 (\theta)\bigl)
+  = (\La\circ\, \al)^{-1}\biggl((\La\circ\, \al)\Bigl(\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl) -
+  \nu\Bigl)\biggl)= \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl) - \nu
+  .
+$$
+
+В итоге
+$\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) < \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)$
+в рассматриваемом сейчас случае 1).
+Итак,
+\bfn
+  \label{4.4.47}
+  (\theta \in Q) \Longrightarrow \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)<
+  \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl)
+  .
+\efn
+
+2) Пусть теперь $\theta\in \mathfrak{K}\setminus Q.$
+В силу (\ref{4.4.25}) имеем, что
+\bfn
+  \label{4.4.48}
+  \bigl(\mathrm{pr}_1(\theta)\notin \Gamma\bigl) \vee
+  \bigl(\mathrm{pr}_2(\theta)\notin \Gamma\bigl)
+  .
+\efn
+
+С учетом определения $\Gamma$
+имеем следующие две импликации
+\bfn
+  \label{4.4.49}
+  \bigl(\mathrm{pr}_1(\theta)\notin \Gamma\bigl)\Longrightarrow \bigl(\la(k) \neq
+  \mathrm{pr}_1(\theta)\ \ \fa  k\in \ov{\nu+1,\nu+ N}\bigl)
+  ,
+\efn
+\bfn
+  \label{4.4.50}
+  \bigl(\mathrm{pr}_2(\theta)\notin \Gamma\bigl)\Longrightarrow \bigl(\la(k) \neq
+  \mathrm{pr}_2(\theta)\ \ \fa  k\in \ov{\nu+1,\nu+ N}\bigl)
+  .
+\efn
+
+Рассмотрим отдельно случаи, упомянутые в (\ref{4.4.48}).
+
+2.1) Пусть $\mathrm{pr}_1(\theta) \notin \Gamma.$
+Тогда в силу (\ref{4.4.49})
+$$
+  \la(k) \neq \mathrm{pr}_1(\theta)\ \ \fa k\in \ov{\nu+1,\nu+ N}
+  .
+$$
+
+Если же $s\in \ov{1,N},$
+то $\al(s) \in \ov{1,N}$
+и $\nu +\al(s) \in \ov{\nu +1,\nu+N},$
+а потому
+$$
+  \la\bigl(\nu +\al(s)\bigl) \neq \mathrm{pr}_1(\theta)
+  .
+$$
+
+Как следствие
+$(\La\circ \al)(s) \neq \mathrm{pr}_1(\theta).$
+Поскольку выбор $s$ был
+произвольным, установлено, что
+$$
+  (\La \circ \al)(k) \neq \mathrm{pr}_1(\theta)\ \ \fa k\in \ov{1,N}
+  .
+$$
+
+С учетом (\ref{4.4.31})
+и определения $\mu$ получаем теперь, что
+$$
+  \mu(j) \neq \mathrm{pr}_1(\theta)\ \ \fa j\in \ov{\nu+1,\nu+N}
+  .
+$$
+
+Используя инъективность $\mu^{-1}$ получаем, что
+$$
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\notin \ov{\nu+1,\nu+N}
+  .
+$$
+
+Последнее означает, что
+\bfn
+  \label{4.4.51}
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\in \ov{1,\nu}\Bigl)  \vee
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\in \ov{\nu +  N+1,\mathbf{n}}\Bigl)
+  .
+\efn
+
+Вновь используя (\ref{4.4.31}),
+получаем следующее положение:
+$$
+  \la\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl) = \mu\Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl)= \mathrm{pr}_1(\theta)
+  .
+$$
+
+Как следствие реализуется цепочка равенств
+\bfn
+  \label{4.4.51`}
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)= \la^{-1}\biggl(\la\Bigl(\mu^{-1}
+  \bigl(\mathrm{pr}_1(\theta)\bigl)\Bigl)\biggl) =
+  \la^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)
+  ,
+\efn
+откуда с учетом (\ref{4.4.42})
+получаем неравенство
+\bfn
+  \label{4.4.52}
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) < \la^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)
+  .
+\efn
+
+Пусть в случае 2.1,
+(то есть при $\mathrm{pr}_1(\theta) \notin \Gamma$)
+$\mathrm{pr}_2(\theta) \notin \Gamma$,
+тогда подобно обоснованию (\ref{4.4.51`}) проверяется, что
+$$
+  \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl) = \la^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)
+  ,
+$$
+а из (\ref{4.4.52})
+следует неравенство
+$\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) <
+\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl).$
+Итак в рассматриваемом случае 2.1,
+то есть при
+$\mathrm{pr}_1(\theta) \notin \Gamma$,
+истинна импликация
+\bfn
+  \label{4.4.53}
+  \bigl(\mathrm{pr}_2(\theta) \notin \Gamma) \Longrightarrow
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) <
+  \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl)
+  .
+\efn
+
+Допустим теперь, что (при условии $\mathrm{pr}_1(\theta) \notin \Gamma)$
+$\mathrm{pr}_2(\theta) \in \Gamma.$
+Тогда определен индекс
+$s_\theta \df \La^{-1}\bigl(\mathrm{pr}_2(\theta) \bigl)\in \ov{1,N},$
+а потому
+$$
+  \La(s_\theta) = \la(\nu +s_\theta) = \mathrm{pr}_2(\theta)
+  .
+$$
+
+Как следствие,
+$\nu + s_\theta = \la^{-1}\bigl(\la(\nu+ s_\theta)\bigl) =
+\la^{-1}\bigl(\mathrm{pr}_2(\theta) \bigl).$
+С учетом (\ref{4.4.52}) имеем, что
+$$
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) < \nu + s_\theta \leqslant \nu+ N
+  ,
+$$
+а потому в силу (\ref{4.4.51})
+\bfn
+  \label{4.4.54}
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl)\in \ov{1,\nu}
+  .
+\efn
+
+С другой стороны, с учетом (\ref{4.4.31})
+и определения $\mu$ имеем, что
+$$
+  \al^{-1}(s_\theta) = \al^{-1}\Bigl(\La^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl) =
+  (\La\circ \al)^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\in \ov{1,N}
+  ,
+$$
+следовательно, имеем цепочку равенств
+$$
+  \mu\bigl(\nu + \al^{-1}(s_\theta)\bigl) = (\La\circ \al)\bigl(\al^{-1}(s_\theta)\bigl) =
+  \mathrm{pr}_2(\theta)
+  ,
+$$
+из которой вытекает, что
+$$
+  \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl) = \nu + \al^{-1}(s_\theta)
+  .
+$$
+
+В итоге
+$\nu +1 \leqslant \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl),$
+учитывая (\ref{4.4.54}),
+$\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) <
+\mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl),$
+чем и завершается (в случае
+$\mathrm{pr}_1(\theta)\notin \Gamma)$
+проверка импликации
+$$
+  \bigl(\mathrm{pr}_2(\theta)\in \Gamma\bigl) \Longrightarrow
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) <
+  \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl)
+  .
+$$
+
+С учетом (\ref{4.4.53})
+в рассматриваемом сейчас случае  2.1
+получаем неравенство
+\bfn
+  \label{4.4.54`}
+  \mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) < \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)
+  .
+\efn
+
+Итак, установлена следующая импликация:
+\bfn
+  \label{4.4.55}
+  \bigl(\mathrm{pr}_1(\theta)\notin \Gamma\bigl) \Longrightarrow
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) < \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl)
+  .
+\efn
+
+Проверка импликации
+$$
+  \bigl(\mathrm{pr}_2(\theta)\notin \Gamma\bigl) \Longrightarrow
+  \Bigl(\mu^{-1}\bigl(\mathrm{pr}_1(\theta)\bigl) <
+  \mu^{-1}\bigl(\mathrm{pr}_2(\theta)\bigl)\Bigl)
+$$
+осуществляется по аналогичной схеме
+\cite[предложение~7.2]{Cha14`}.
+С учетом (\ref{4.4.48}) и (\ref{4.4.55})
+получаем требуемое неравенство
+(\ref{4.4.54`}) во всех возможных случаях,
+если только
+$\theta \in \mathfrak{K}\setminus Q.$
+Учитывая (\ref{4.4.43}) и (\ref{4.4.47}),
+имеем окончательно (\ref{4.4.54`}).
+Поскольку выбор $\theta$ был произвольным,
+установлено, что (см. (\ref{4.4.40}))
+$$
+  \mu^{-1}\bigl(\mathrm{pr}_1(z)\bigl) < \mu^{-1}\bigl(\mathrm{pr}_2(z)\bigl)\ \ \fa z\in \mathfrak{K}
+  .
+$$
+
+С учетом (\ref{4.4.38}) и (\ref{4.4.6}) получаем, что
+$\mu\in \ca.$ \hfill $\Box$  \smallskip
+
+Введем в рассмотрение тождественную перестановку
+$\mathbf{e}\in \bbp$:
+$\mathbf{e}(s) \df s$
+$\fa s\in \ov{1,N}$.
+
+\begin{pred}\label{p4.4.3}
+Маршрут $\mathbf{e}$
+допустим в смысле условий предшествования оптимизирующей вставки:
+$\mathbf{e}\in \mathbf{A}$.
+\end{pred}
+
+Д о к а з а т е л ь с т в о.
+Выберем произвольно $\zeta \in \mathbf{K},$
+получая в силу (\ref{4.4.26}) представление
+$$
+  \zeta = \Bigl(\La^{-1}\bigl(\mathrm{pr}_1(q)\bigl), \La^{-1}\bigl(\mathrm{pr}_2(q)\bigl)\Bigl)
+$$
+для некоторого $q\in Q.$
+Ясно, что
+\bfn
+  \label{4.4.56}
+  \Bigl(\mathrm{pr}_1(\zeta) = \La^{-1}\bigl(\mathrm{pr}_1(q)\bigl)\Bigl)\,\&\,
+  \Bigl(\mathrm{pr}_2(\zeta) = \La^{-1}\bigl(\mathrm{pr}_2(q)\bigl)\Bigl)
+  .
+\efn
+
+При этом $q\in \mathfrak{K}$
+обладает свойствами
+$$
+  \bigl(\mathrm{pr}_1(q) \in \Gamma\bigl) \,\&\,\bigl(\mathrm{pr}_2(q) \in \Gamma\bigl)
+  .
+$$
+
+С учетом
+$\mathfrak{K}$-допустимости маршрута $\la$
+(см. (\ref{4.4.15})) имеем, что
+\bfn
+  \label{4.4.57}
+  \la^{-1}\bigl(\mathrm{pr}_1(q)\bigl) < \la^{-1}\bigl(\mathrm{pr}_2(q)\bigl)
+  .
+\efn
+
+Из (\ref{4.4.56})
+получаем очевидные равенства
+$$
+  \Bigl(\La\bigl(\mathrm{pr}_1(\zeta)\bigl) = \mathrm{pr}_1(q)\Bigl)\,\&\,
+  \Bigl(\La\bigl(\mathrm{pr}_2(\zeta)\bigl) = \mathrm{pr}_2(q)\Bigl)
+  .
+$$
+
+Иными словами,
+$$
+  \Bigl(\la\bigl(\nu + \mathrm{pr}_1(\zeta)\bigl) = \mathrm{pr}_1(q)\Bigl)\,\&\,
+  \Bigl(\la\bigl(\nu + \mathrm{pr}_2(\zeta)\bigl) = \mathrm{pr}_2(q)\Bigl)
+  ,
+$$
+поэтому получаем, что
+$$
+  \Bigl(\la^{-1}\bigl(\mathrm{pr}_1(q)\bigl) = \nu +\mathrm{pr}_1(\zeta)\Bigl)\,\&\,
+  \Bigl(\la^{-1}\bigl(\mathrm{pr}_2(q)\bigl) = \nu +\mathrm{pr}_2(\zeta)\Bigl)
+  .
+$$
+
+С учетом  (\ref{4.4.57}) имеем неравенство
+$$
+  \nu +\mathrm{pr}_1(\zeta) < \nu +\mathrm{pr}_2(\zeta)
+  ,
+$$
+тогда
+$\mathrm{pr}_1(\zeta) < \mathrm{pr}_2(\zeta),$
+то есть
+$\mathbf{e}\bigl(\mathrm{pr}_1(\zeta) \bigl) < \mathbf{e}\bigl(\mathrm{pr}_2(\zeta)\bigl).$
+Поскольку выбор $\zeta$
+был произвольным,
+то установлено, что
+$\mathbf{e}\in \mathbf{A}.$
+\hfill $\Box$
+
+\begin{pred}
+\label{p4.4.4}
+Справедливо равенство
+$(\mathbf{e}- \mathrm{sew})[\la;\nu] = \la$.
+\end{pred}
+
+Д о к а з а т е л ь с т в о.
+Полагаем для краткости, что
+$$
+  \mu \df (\mathbf{e}- \mathrm{sew})[\la;\nu]
+  .
+$$
+
+Тогда из двух последних предложений следует, что $\mu \in \ca,$
+причем
+$$
+  \mu(t) = (\La \circ \mathbf{e})(t -\nu) = \la\Bigl(\nu + \bigl(\mathbf{e}(t) - \nu\bigl)\Bigl) =
+  \la\bigl(\nu + (t-\nu)\bigl) = \la(t)\ \ \fa t\in \ov{\nu+1,\nu+N}
+  .
+$$
+
+С учетом определения $\mu$
+получаем теперь, что
+$\mu(t) = \la(t)\ \ \fa t\in \ov{1,\mathbf{n}}.$
+Иными словами,
+$\mu = \la.$
+\hfill $\Box$
+
+\subsubsection*{Построение локальной задачи}
+
+Полагаем до конца настоящего раздела, что
+\bfn
+  \label{4.4.58}
+  x^o \df \mathrm{pr}_2(\mathbf{h}_\nu)
+  ,
+\efn
+получая включение $x^o\in \mathfrak{X}.$
+Обозначение (\ref{4.4.58}) сохраняем и в
+следующем разделе.
+Кроме  того,
+установим в данном и последующих разделах главы, что
+$\fa s\in \ov{1,N}$
+\bfn
+  \label{4.4.59}
+  (M_s \df \mathbf{L}_{\La(s)})\,\&\,(\bbm_s \df \bbl_{\La(s)})
+  .
+\efn
+
+Ясно, что
+$\bbm_t\in \cp^\prime(M_t \times M_t)$
+$\fa t\in \ov{1,N}.$
+Итак,
+$$
+  \bbm_1\subset M_1 \times M_1,\,\ldots,\bbm_N\subset M_N \times M_N
+  .
+$$
+
+Напомним, что (см. (\ref{3.3.3}))
+$$
+  \mathbf{M}_1 = \{\mathrm{pr}_2(z):\,z\in \bbm_1\},\,\ldots,\mathbf{M}_N = \{\mathrm{pr}_2(z):\,z\in \bbm_N\}
+$$
+суть непустые конечные множества,
+$$
+  \mathbf{M}_1\subset M_1,\,\ldots,\mathbf{M}_N\subset M_N
+  .
+$$
+
+Действуя в соответствии с символикой, принятой в \ref{sect:4.2}, \ref{sect:4.3},
+введем в рассмотрение множества $\bbx$ и $\mathbf{X}$,
+см. (\ref{3.3.5}), (\ref{3.3.28}).
+Напомним, что
+$\bbx\in \mathrm{Fin}(X)$,
+$\mathbf{X}\in \mathrm{Fin}(\bbx)$ и
+$x^o\in \mathbf{X}$.
+Кроме того, из
+(\ref{4.4.59}) следует, что в нашем случае
+$$
+  \bbx = \{x^o\} \cup \Bigl(\bigcup\limits_{s=1}^N M_s\Bigl)\in \mathrm{Fin}(\mathfrak{X})
+  ,
+$$
+$$
+  \mathbf{X}= \{x^o\} \cup \Bigl(\bigcup\limits_{s=1}^N \mathbf{M}_s\Bigl)\in \mathrm{Fin}(\mathfrak{X})
+  ,
+$$
+$\mathbf{X}\subset \bbx$
+и, как следствие,
+$$
+  \bbx \times \mathbf{X}\subset \bbx \times \bbx \subset \mathfrak{X}\times \mathfrak{X}
+  .
+$$
+
+Теперь следуем (\ref{3.3.15})
+в части определения трасс,
+согласованных с тем или иным маршрутом,
+используя конкретизацию (\ref{4.4.59}).
+Таким образом, а частности,
+каждому маршруту $\al\in \mathbf{A}$
+сопоставляется непустое конечное множество
+$\mathbf{Z}_\al$
+(\ref{3.3.15}) всех трасс,
+согласованных с данным маршрутом.
+Поэтому в
+виде $\widetilde{\mathbf{D}}$
+(\ref{3.3.27})
+получаем требуемое множество ДР, реализуемых
+в рамках оптимизирующей вставки.
+
+\subsubsection*{Функции стоимости локальной задачи}
+
+Напомним, что $\mathfrak{N}$
+есть семейство всех непустых п/м $\ov{1,N}.$
+Если $K\in \mathfrak{N},$
+то определено множество
+$$
+  \La^1(K) = \{\la(\nu+s):\,s\in K\}\in \cp^\prime(\Gamma)
+  ,
+$$
+для которого, в частности, имеем, что
+$$
+  \La^1(K) \subset \ov{1,\mathbf{n}}
+  .
+$$
+
+Всюду в дальнейшем полагаем, если не оговорено противное, что
+\bfn
+  \label{4.4.60}
+  \nu + N + 1 \leqslant \mathbf{n}
+\efn
+(мы несколько усилили требование к выбору $\nu).$
+Тогда
+$$
+  \ov{\nu+N+1,\mathbf{n}}\in \mathbf{N}
+  ,
+$$
+то есть
+$\ov{\nu+N+1,\mathbf{n}}$
+есть непустое п/м $\ov{1,\mathbf{n}}.$
+Как следствие,
+имеем при
+$K\in \mathfrak{N},$ что
+$$
+  \La^1(K) \cup \la^1(\ov{\nu+N+1,\mathbf{n}})\in \mathbf{N}
+  .
+$$
+
+Если к тому же
+$z\in \bbx \times \bbx,$ то определены значения
+\begin{eqnarray}
+  &\mathbf{c}^\natural\bigl(z,\La^1(K) \cup \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl)\in
+  &\nonumber\\
+  &\in[0,\infty[,\,c_1^\natural\bigl(z,\La^1(K) \cup \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl)\in [0,\infty[,
+  \,\ldots,
+  &\nonumber\\
+  &c_N^\natural\bigl(z,\La^1(K) \cup \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl)\in [0,\infty[
+  .
+  &
+  \label{4.4.61}
+\end{eqnarray}
+
+Упорядоченная пара $z$ может конкретизироваться по-разному:
+при рассмотрении значения функции $\mathbf{c}^\natural$
+в качестве  $z$ используем,
+как правило, пару $(x,y),$ где
+$x= x^o$ или $x\in \mathbf{M}_j$ для некоторого
+$j\in\ov{1,N}$
+(а $y\in M_s$ при $s\in \ov{1,N})$;
+если же рассматривается значение той или иной функции $c_s^\natural,$ где
+$s\in \ov{1,N},$
+то в качестве $z$ обычно используется элемент $\bbm_s,$
+что в конкретной задаче управления инструментом соответствует случаю, когда
+$\mathrm{pr}_1(z)$ --- точка врезки, а
+$\mathrm{pr}_2(z)$ --- точка выключения инструмента.
+
+С учетом (\ref{4.4.61})
+конкретизируем значения локальных функций стоимости (\ref{4.2.1}).
+
+Итак, предположим, что функция
+$\mathbf{c}\in \car_+[\bbx \times \bbx \times \mathfrak{N}]$
+определяется по следующему правилу:
+\bfn
+  \label{4.4.62}
+  \mathbf{c}(z,K) \df \mathbf{c}^\natural\bigl(z,\La^1(K) \cup \la^1(\ov{\nu+N+1,
+  \mathbf{n}})\bigl)\ \ \fa z\in \bbx \times \bbx\ \ \fa K\in \mathfrak{N}
+  .
+\efn
+
+Если $j\in \ov{1,N},$
+то определяем функцию
+$c_j\in \car_+[\bbx \times \bbx \times \mathfrak{N}]$
+условиями
+\bfn
+  \label{4.4.63}
+  c_j(z,K) \df c_{\La(j)}^\natural\bigl(z,\La^1(K) \cup \la^1(\ov{\nu+N+1,
+  \mathbf{n}})\bigl)\ \ \fa z\in \bbx \times \bbx\ \ \fa K\in \mathfrak{N}
+  .
+\efn
+
+Наконец, терминальную функцию $f\in \car_+[\bbx]$
+определяем в виде
+\bfn
+  \label{4.4.64}
+  f(x) \df \mathbf{c}^\natural\bigl(x,\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),
+  \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl)\ \ \fa x\in \bbx
+  .
+\efn
+
+Итак, все функции затрат для оптимизирующей вставки построены и
+можно ввести соответствующий аддитивный критерий, используя (\ref{4.2.4}):
+каждому ДР
+$\bigl(\al,(z_i)_{i\in\ov{0,N}}\bigl)\in \widetilde{\mathbf{D}}$
+(это означает, что
+$\al\in \mathbf{A}$ и $(z_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\al$)
+сопоставляем число
+$$
+  \mathfrak{B}_\al [(z_i)_{i\in\ov{0,N}}]\in [0,\infty[
+  .
+$$
+
+В итоге получаем нужный вариант задачи (\ref{4.2.5}),
+для решения которой можно использовать схему \ref{sect:4.2}
+на основе широко понимаемого ДП.
+Мы предположим,
+что значение $N$ <<умеренно>> в том смысле,
+что упомянутая схема позволяет провести все
+необходимые вычисления и получить значение
+$\mathbb{V}$ (\ref{4.2.6}),
+а также определить оптимальное ДР
+$\bigl(\al^o,(z_i^o)_{i\in\ov{0,N}}\bigl)$
+(\ref{4.2.7}).
+Итак, полагаем, что маршрут
+\bfn
+  \label{4.4.65}
+  \al^o\in \mathbf{A}
+\efn
+и трасса (траектория)
+\bfn
+  \label{4.4.66}
+  (z_i^o)_{i\in\ov{0,N}}\in \mathbf{Z}_{\al^o}
+\efn
+таковы, что при этом
+\bfn
+  \label{4.4.67}
+  \mathfrak{B}_{\al^o}[(z_i^o)_{i\in\ov{0,N}}] = \mathbb{V}
+  .
+\efn
+
+Последнее означает, что справедливы неравенства
+$$
+  \mathfrak{B}_{\al^o}[(z_i^o)_{i\in\ov{0,N}}] \leqslant \mathfrak{B}_\al[(z_i)_{i\in\ov{0,N}}]\ \
+  \fa \al\in \mathbf{A}\ \ \fa (z_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\al
+  .
+$$
+
+Отметим простое следствие последнего положения:
+с учетом предложения~\ref{p4.4.3} получаем, что
+\bfn
+  \label{4.4.68}
+  \mathfrak{B}_{\al^o}[(z_i^o)_{i\in\ov{0,N}}]\leqslant
+  \mathfrak{B}_\mathbf{e}[(z_i)_{i\in\ov{0,N}}]\ \ \fa
+  (z_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\mathbf{e}
+  .
+\efn
+
+С целью последующего использования (\ref{4.4.68})
+введем в рассмотрение кортеж
+$(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}\in \bbz,$
+для которого
+$$
+  \bigl(\tilde{\mathbf{h}}_o \df (x^o,x^o)\bigl)\,\&\,(\tilde{\mathbf{h}}_t \df
+  \mathbf{h}_{\nu+t}\ \ \fa t\in \ov{1,N})
+  .
+$$
+
+\begin{pred}
+\label{p4.4.5}
+Кортеж $(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}$
+является трассой, согласованной с маршрутом $\mathbf{e}:$
+$$
+  (\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}\in \mathbf{Z}_\mathbf{e}
+  .
+$$
+\end{pred}
+
+Д о к а з а т е л ь с т в о.
+Если $t\in \ov{1,N},$
+то
+$\tilde{\mathbf{h}}_t = \mathbf{h}_{\nu +t}\in \bbl_{\La(t)},$
+а потому
+$$
+  \tilde{\mathbf{h}}_t \in \bbm_{\mathbf{e}(t)}
+  ,
+$$
+так как $(\La \circ \mathbf{e})(t) = \La(t).$
+Дальнейшее рассуждение очевидно
+(см. (\ref{3.3.15})).
+\hfill $\Box$
+
+Из (\ref{4.4.68}) и предложения~{\ref{p4.4.5} получаем неравенство
+$$
+  \mathfrak{B}_{\al^o}[(z_i^o)_{i\in\ov{0,N}}]\leqslant
+  \mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]
+  .
+$$
+
+Как следствие, с учетом (\ref{4.4.67}), имеем, что
+\bfn
+  \label{4.4.69}
+  \mathbb{V} \leqslant \mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]
+  .
+\efn
+
+Учитывая (\ref{4.4.69}), получаем, что
+\bfn
+  \label{4.4.70}
+  \kappa \df \mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}] -
+  \mathbb{V} = \mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]-
+  \mathfrak{B}_{\al^o}[(z_i^o)_{i\in\ov{0,N}}]\in [0,\infty[
+  .
+\efn
+
+Заметим, что величина (\ref{4.4.70})
+<<привязана>> к исходному ДР
+$\bigl(\la,(\mathbf{h}_i)_{i\in\ov{0,N}}\bigl)$
+<<большой>> задачи.
+В этой связи полезно заметить, что
+(см. (\ref{4.4.58}))
+$$
+  \mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]=
+  \sum\limits_{s=1}^N\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\tilde{\mathbf{h}}_{s-1}),\mathrm{pr}_1
+  (\tilde{\mathbf{h}}_s),\{\mathbf{e}(t):\,t\in\ov{s,N}\}\bigl) +
+$$
+$$
+  + c_{\mathbf{e}(s)}\bigl(\tilde{\mathbf{h}}_s,\{\mathbf{e}(t):\,t\in\ov{s,N}\}\bigl)\bigl] +
+  f\bigl(\mathrm{pr}_2(\tilde{\mathbf{h}}_N)\bigl) = \bigl[\mathbf{c}\bigl(\mathrm{pr}_2
+  (\tilde{\mathbf{h}}_o),\mathrm{pr}_1(\tilde{\mathbf{h}}_1),\ov{1,N}) +
+$$
+$$
+  + c_1(\tilde{\mathbf{h}}_1,\ov{1,N})\bigl] +
+  \sum\limits_{s=2}^N\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\tilde{\mathbf{h}}_{s-1}),
+  \mathrm{pr}_1(\tilde{\mathbf{h}}_s),\ov{s,N}\bigl) +
+  c_s(\tilde{\mathbf{h}}_s,\ov{s,N})\bigl] +
+  f\bigl(\mathrm{pr}_2(\tilde{\mathbf{h}}_N)\bigl) =
+$$
+$$
+  = \bigl[\mathbf{c}\bigl(x^o,\mathrm{pr}_1(\mathbf{h}_{\nu+1}),\ov{1,N}\bigl) +
+  c_1(\mathbf{h}_{\nu+1},\ov{1,N})\bigl] +
+  \sum\limits_{s=2}^N\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+s-1}),
+$$
+$$
+  \mathrm{pr}_1(\mathbf{h}_{\nu+s}),\ov{s,N}\bigl) + c_s(\mathbf{h}_{\nu+s},\ov{s,N})\bigl] +
+  f\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N})\bigl) =
+$$
+$$
+  =\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{h}_\nu),\mathrm{pr}_1(\mathbf{h}_{\nu+1}),
+  \ov{1,N}\bigl) + c_1(\mathbf{h}_{\nu+1},\ov{1,N})\bigl] +
+$$
+$$
+  + \sum\limits_{s=2}^N\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+s-1}),\mathrm{pr}_1
+  (\mathbf{h}_{\nu+s}),\ov{s,N}\bigl) + c_s(\mathbf{h}_{\nu+s},\ov{s,N})\bigl] +
+$$
+$$
+  +f\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N})\bigl) =
+  \sum\limits_{s=1}^N\bigl[\mathbf{c}\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+s-1}),\mathrm{pr}_1
+  (\mathbf{h}_{\nu+s}),\ov{s,N}\bigl)+
+$$
+  $$+ c_s(\mathbf{h}_{\nu+s},\ov{s,N})\bigl] + f\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N})\bigl).
+$$
+
+Учтем теперь (\ref{4.4.62}) -- (\ref{4.4.64}).
+Тогда последнее выражение сводится к следующему
+\begin{eqnarray}
+  &\mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]=
+  \sum\limits_{s=1}^N \bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+s-1}),
+  \mathrm{pr}_1(\mathbf{h}_{\nu+s}),
+  \La^1(\ov{s,N})\cup \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl) +
+  &\nonumber\\
+  &+ c_{\La(s)}^\natural\bigl(\mathbf{h}_{\nu+s},\La^1(\ov{s,N}) \cup \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl)\bigl]+
+  &\nonumber\\
+  &+ \mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N}),\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),
+  \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl)
+  .
+  &
+  \label{4.4.71}
+\end{eqnarray}
+
+С учетом определения $\La$
+получим, что при
+$s\in\ov{1,N}$
+$$
+  \La^1(\ov{s,N}) \cup \la^1(\ov{\nu+N+1,\mathbf{n}}) = \{\la(\nu+t):\,t\in \ov{s,N}\} \cup
+  \la^1(\ov{\nu+N+1,\mathbf{n}}) =
+$$
+$$
+  =\{\la(k):\,k\in\ov{\nu+s,\nu+N}\} \cup \la^1(\ov{\nu+N+1,\mathbf{n}})=
+$$
+$$
+  =\la^1(\ov{\nu+s,\nu+N}) \cup \la^1(\ov{\nu+N+1,\mathbf{n}}) =
+$$
+$$
+  = \la^1(\ov{\nu+s,\nu+N} \cup\, \ov{\nu+N+1,\mathbf{n}}) = \la^1(\ov{\nu+s,
+  \mathbf{n}})
+  .
+$$
+
+Используем следующее простое свойство:
+образ объединения двух множеств равен объединению их образов.
+Тогда из (\ref{4.4.71}) получаем, что
+\begin{eqnarray}
+  &\mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]=
+  \sum\limits_{s=1}^N \bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+s-1}),
+  \mathrm{pr}_1(\mathbf{h}_{\nu+s}),
+  \la^1(\ov{\nu+s,\mathbf{n}})\bigl) +
+  &\nonumber\\
+  &+c_{\la(\nu+s)}^\natural(\mathbf{h}_{\nu+s},
+  \la^1(\ov{\nu+s,\mathbf{n}})\bigl)\bigl] +
+  \mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N}),\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),
+  \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl) =
+  &\nonumber\\
+  &=\sum\limits_{t=\nu+1}^{\nu+N}\bigl[\mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{t-1}),
+  \mathrm{pr}_1(\mathbf{h}_t),\la^1(\ov{t,\mathbf{n}})\bigl)+
+  c_{\la(t)}^\natural\bigl(\mathbf{h}_t,\la^1(\ov{t,\mathbf{n}})\bigl)\bigl] +
+  &\nonumber\\
+  &+ \mathbf{c}^\natural\bigl(\mathrm{pr}_2(\mathbf{h}_{\nu+N}),\mathrm{pr}_1(\mathbf{h}_{\nu+N+1}),
+  \la^1(\ov{\nu+N+1,\mathbf{n}})\bigl)
+  .
+  &
+  \label{4.4.72}
+\end{eqnarray}
+
+Из (\ref{4.4.11}) и (\ref{4.4.72}) видно, что
+$\mathfrak{B}_\mathbf{e}[(\tilde{\mathbf{h}}_i)_{i\in\ov{0,N}}]$
+является <<частью>>
+$\widehat{\mathfrak{C}}_\la[(\mathbf{h}_i)_{i\in\ov{0,\mathbf{n}}}],$
+а точнее, слагаемым в сумме, определяющей последнее значение.

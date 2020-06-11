@@ -1,0 +1,16 @@
+% !TeX root = ..
+
+\usepackage{sectsty}
+
+\allsectionsfont{\raggedright}
+\chapterfont{\Large}
+\partfont{\centering\thispagestyle{empty}}
+
+% Точка после номера параграфа (не в Оглавлении)
+\makeatletter
+  \def\@seccntformat#1{\csname the#1\endcsname.\,}
+\makeatother
+
+% Точки после номера в Оглавлении. Кроме \part
+\let \savenumberline \numberline
+\def \numberline#1{\savenumberline{#1.}}
