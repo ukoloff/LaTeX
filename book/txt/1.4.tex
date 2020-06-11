@@ -1,6 +1,5 @@
 % !TeX root = ..
 
-
 \section{
   Классификация оптимизационных задач
   маршрутизации инструмента
@@ -56,12 +55,14 @@
 
 \end{itemize}
 
-\begin{figure}[h]
-  \begin{center}
+\begin{figure}[H]
+  \centering
   \includegraphics[width=0.9\textwidth]{dewil.png}
-  \caption{Основные классы задач маршрутизации инструмента для машин фигурной листовой резки }
+  \caption{
+    Основные классы задач маршрутизации инструмента
+    для машин фигурной листовой резки
+  }
   \label{dewil}
-  \end{center}
 \end{figure}
 
 Обычно предполагается также,
@@ -146,31 +147,30 @@ $r=\overline{1, |L(B^{S_t})|}$.
 два базовых сегмента выделены пунктирными
 желтой и коричневой линиями
 (использована мультиконтурная техника резки).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{cut2-1.png}
+  \caption{
+    Пример схемы резки трех замкнутых контуров
+    с использованием двух~сегментов резки
+  }
+  \label{cut2-1}
+\end{figure}
+
 Пример сегмента резки, в котором использована техника совмещенного реза,
 и базового сегмента, содержащего четыре контура,
 приведен на рис.~\ref{cut4-3}.
 Стрелками отмечено направление резки контуров.
 
-\begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{cut2-1.png}
-  \caption{
-    Пример схемы резки трех замкнутых контуров
-    с использованием двух~сегментов резки
-    }
-  \label{cut2-1}
-  \end{center}
-\end{figure}
-
-\begin{figure}[h]
-  \begin{center}
+\begin{figure}[H]
+  \centering
   \includegraphics[width=0.7\textwidth]{cut4-3.png}
   \caption{
     Сегмент резки, включающий базовый сегмент
     с использованием техники~резки <<совмещенный рез>>
-    }
+  }
   \label{cut4-3}
-  \end{center}
 \end{figure}
 
 На основе концепции базового сегмента введем еще
@@ -226,14 +226,6 @@ $CCP \subset SCCP \subset GSCCP \subset ICP$.
 из которых выбираются точки входа в контуры
 (точки врезки).
 
-\begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{x-classify.png}
-  \caption{Расширенная классификация задач маршрутизации инструмента машин листовой резки }
-  \label{x-classify}
-  \end{center}
-\end{figure}
-
 Далее рассмотрим подход,
 основанный на  дискретизации трех клаcсов задач маршрутизации
 первой группы ({\it CCP, SCCP, GSCCP})
@@ -241,6 +233,16 @@ $CCP \subset SCCP \subset GSCCP \subset ICP$.
 в которой  используется математическая модель А. Г. Ченцова,
 описанная подробно во второй части настоящей монографии
 (главы 3 -- 5).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{x-classify.png}
+  \caption{
+    Расширенная классификация задач
+    маршрутизации инструмента машин листовой резки
+  }
+  \label{x-classify}
+\end{figure}
 
 Эта модель может быть интерпретирована
 как математическая модель обобщенной задачи коммивояжера ($GTSP$)
@@ -266,24 +268,6 @@ $CCP \subset SCCP \subset GSCCP \subset ICP$.
 (21 базовый сегмент -- \ref{gsccp-a}
 и 18 -- \ref{gsccp-b} соответственно).
 
-\begin{figure}[h]
-  \centering
-  \subfigure[]{
-    \includegraphics[width=0.9\textwidth]{gsccp-a.png}
-    \label{gsccp-a}
-  }
-  \subfigure[]{
-    \includegraphics[width=0.9\textwidth]{gsccp-b.png}
-    \label{gsccp-b}
-  }
-  \caption{
-    Пример задачи GSCCP с набором из двух комплектов базовых~сегментов: \\
-    {\it а} -- 21 базовый сегмент;
-    {\it б} -- 18 базовых сегментов
-    }
-  \label{gsccp-both}
-\end{figure}
-
 Первый набор базовых сегментов,
 рис.~\ref{gsccp-a},
 задан всеми граничными контурами деталей, т. е.
@@ -301,6 +285,25 @@ $C_j = B^{S_j}, j=\overline{1,N}, N=K=21$.
 В целом, в этом случае мы имеем набор из восемнадцати
 базовых сегментов.
 Все они выделены цветом.
+
+\begin{figure}[H]
+  \centering
+  \subfigure[]{
+    \includegraphics[width=0.9\textwidth]{gsccp-a.png}
+    \label{gsccp-a}
+  }
+  \subfigure[]{
+    \includegraphics[width=0.9\textwidth]{gsccp-b.png}
+    \label{gsccp-b}
+  }
+  \caption{
+    Пример задачи GSCCP с набором из двух комплектов базовых~сегментов: \\
+    {\it а} -- 21 базовый сегмент;
+    {\it б} -- 18 базовых сегментов
+    }
+  \label{gsccp-both}
+\end{figure}
+
 В качестве целевой функции для данного примера было выбрано
 время процесса резки~(\ref{cutting-time}):
 $$
@@ -338,40 +341,37 @@ $$
 использующий специальную схему Беллмана,
 которая описана во второй части монографии.
 
-\begin{figure}[h]
-  \begin{center}
+\begin{figure}[H]
+  \centering
   \includegraphics[width=0.9\textwidth]{discrete21.png}
-  \caption{Дискретизация задачи CCP, приведенная на рисунке \ref{gsccp-a}}
+  \caption{
+    Дискретизация задачи CCP
+    для случая 21 базового сегмента
+  }
   \label{discrete21}
-  \end{center}
 \end{figure}
 
-На рис. ~\ref{path21}
-и~\ref{path18}
+На рис. \ref{gsccp.paths}
 показаны оптимальные маршруты резки для двух задач SCCP
 с двацать одним и восемнадцатью
 базовыми сегментами соответственно.
 
-\begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{path21.png}
+\begin{figure}[H]
+  \centering
+  \subfigure[]{
+    \includegraphics[width=0.9\textwidth]{path21.png}
+    \label{path21}
+  }
+  \subfigure[]{
+    \includegraphics[width=0.9\textwidth]{path18.png}
+    \label{path18}
+  }
   \caption{
-    Схема оптимальной траектории инструмента
-    для 21 базового сегмента
-    }
-  \label{path21}
-  \end{center}
-\end{figure}
-
-\begin{figure}[h]
-  \begin{center}
-  \includegraphics[width=0.9\textwidth]{path18.png}
-  \caption{
-    Схема оптимальной траектории инструмента
-    для 18 базовых сегментов
-    }
-  \label{path18}
-  \end{center}
+    Схема оптимальной траектории инструмента: \\
+    {\it а} -- 21 базовый сегмент;
+    {\it б} -- 18 базовых сегментов
+  }
+  \label{gsccp.paths}
 \end{figure}
 
 В первом случае время процесса резки
