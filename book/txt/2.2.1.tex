@@ -132,7 +132,7 @@ $N_{pt}=n$.
 рис.~\ref{3-extra}.
 Здесь аналогично
 {\it O} -- начальная точка,
-{it 1--5} -- ход реза.
+{\it 1--5} -- ход реза.
 
 \begin{figure}[H]
   \centering
@@ -208,7 +208,11 @@ $L_\text{доп}^\text{факт} \leqslant L_\text{доп}$.
 методами на машине лазерной листовой резки
 {\it ByStar 3015} с ЧПУ.
 Для этого были разработаны две раскройные карты,
-на которых размещены 69 и 58 заготовок,
+на которых размещены 69
+(рис. \ref{circles-a} и \ref{circles-b})
+и 58
+(рис. \ref{circles-c} и \ref{circles-d})
+заготовок,
 имеющих круглый наружный контур.
 
 На рис.~\ref{circles-a}
@@ -228,16 +232,11 @@ $L_\text{доп}^\text{факт} \leqslant L_\text{доп}$.
 {\it 12Х18Н10Т}
 $\Delta$ = 1 и 5 мм.
 
-На рис. \ref{circles-d}
-разными цветами обозначены блоки деталей,
-для которых реализована резка без дополнительного реза.
-В частности, в нижней  части раскройной карты
-может быть выделена
-группа из 10 круглых заготовок и одного кольца.
+\clearpage
 
-\begin{figure}[H]
+\begin{figure}[p]
   \centering
-  \includegraphics[width=0.9\textwidth]{circles-a.png}
+  \includegraphics[width=0.95\textwidth]{circles-a.png}
   \caption{
     Пример маршрута резки круглых заготовок
     c~применением резки
@@ -246,9 +245,9 @@ $\Delta$ = 1 и 5 мм.
   \label{circles-a}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[p]
   \centering
-  \includegraphics[width=0.9\textwidth]{circles-b.png}
+  \includegraphics[width=0.95\textwidth]{circles-b.png}
   \caption{
     Пример маршрута резки круглых заготовок
     c~применением метода резки
@@ -256,6 +255,36 @@ $\Delta$ = 1 и 5 мм.
   }
   \label{circles-b}
 \end{figure}
+
+\clearpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{circles-c.png}
+  \caption{
+    Пример маршрута резки круглых заготовок разного размера
+    c~применением резки
+    <<по~замкнутому контуру>>
+    }
+  \label{circles-c}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{circles-d.png}
+  \caption{
+    Пример маршрута резки круглых заготовок разного размера
+    c~применением специальной техники резки
+    }
+  \label{circles-d}
+\end{figure}
+
+На рис. \ref{circles-d}
+разными цветами обозначены блоки деталей,
+для которых реализована резка без дополнительного реза.
+В частности, в нижней  части раскройной карты
+может быть выделена
+группа из 10 круглых заготовок и одного кольца.
 
 Размеры заготовок отличаются незначительно,
 поэтому есть возможность реализовать резку блока из 11 деталей с
@@ -271,7 +300,7 @@ $\Delta$ = 1 и 5 мм.
 
 \begin{table}[H]
   \caption{
-    Результаты расчета стоимость резки раскройного плана
+    Результаты расчета стоимости резки раскройного плана
     для~круглых заготовок
     с~применением специальных способов резки
     }
@@ -307,27 +336,6 @@ $\Delta$ = 1 и 5 мм.
     \hline
   \end{tabular}
 \end{table}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.9\textwidth]{circles-c.png}
-  \caption{
-    Пример маршрута резки круглых заготовок разного размера
-    c~применением резки
-    <<по~замкнутому контуру>>
-    }
-  \label{circles-c}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.9\textwidth]{circles-d.png}
-  \caption{
-    Пример маршрута резки круглых заготовок разного размера
-    c~применением специальной техники резки
-    }
-  \label{circles-d}
-\end{figure}
 
 По результатам анализа приведенных
 в~табл.~\ref{circles}
