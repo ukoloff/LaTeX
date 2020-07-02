@@ -249,26 +249,8 @@ $\Omega_{(i+1)}$.
 мощность $w$ = 1000 Вт,
 скорость $v$ = 10 м/с.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{thermal-plan.png}
-  \caption{
-    Места точек врезки и порядок резки для восьми контуров
-  }
-  \label{thermal-plan}
-\end{figure}
-
 На рис.~\ref{thermal-5} показано температурное поле
 на одной из стадий процесса резки пятого контура.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{thermal-5.png}
-  \caption{
-      Пример распределения тепловых полей в процессе резки пятого контура
-    }
-  \label{thermal-5}
-\end{figure}
 
 {\bf Замечание}.
 Рисунок \ref{thermal-field}
@@ -281,24 +263,6 @@ $\Omega_{(i+1)}$.
 На рис.~\ref{thermal-field}, {\it б} точка врезки далеко от кромки
 (и границ вырезанных заготовок).
 Средняя температура в выделенном окне  362 $^\circ$С.
-
-\begin{figure}[p]
-  \centering
-  \subfigure[]{
-    \includegraphics[width=0.6\textwidth]{thermal-high.png}
-    \label{thrm-high}
-  }
-  \subfigure[]{
-    \includegraphics[width=0.6\textwidth]{thermal-low.png}
-    \label{thrm-low}
-  }
-  \caption{
-    Пример расчета температурного поля при выборе точки врезки: \\
-    {\it а} -- вблизи края пластины;
-    {\it б} -- вдали от края пластины
-  }
-  \label{thermal-field}
-\end{figure}
 
 Другие проведенные вычислительные эксперименты
 также показали уменьшение температуры материала
@@ -318,6 +282,42 @@ $\Omega_{(i+1)}$.
 
 \begin{figure}[p]
   \centering
+  \includegraphics[width=0.6\textwidth]{thermal-plan.png}
+  \caption{
+    Места точек врезки и порядок резки для восьми контуров
+  }
+  \label{thermal-plan}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.7\textwidth]{thermal-5.png}
+  \caption{
+      Пример распределения тепловых полей в процессе резки пятого контура
+    }
+  \label{thermal-5}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \subfigure[]{
+    \includegraphics[width=0.6\textwidth]{thermal-high.png}
+    \label{thrm-high}
+  }
+  \subfigure[]{
+    \includegraphics[width=0.6\textwidth]{thermal-low.png}
+    \label{thrm-low}
+  }
+  \caption{
+    Пример расчета температурного поля при выборе точки врезки: \\
+    {\it а} -- вблизи края пластины;
+    {\it б} -- вдали от края пластины
+  }
+  \label{thermal-field}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
   \subfigure[]{
     \includegraphics[width=0.9\textwidth]{thermal-309.png}
     \label{thermal-309}
@@ -333,14 +333,6 @@ $\Omega_{(i+1)}$.
   }
   \label{thermal-309-120}
 \end{figure}
-
-Таким образом,
-анализ температурных полей подтверждает
-геометрические правила выбора точек врезки
-и точек выключения инструмента машин термической
-резки материала и в будущем
-(при условии разработки быстродействующих систем температурного анализа)
-может сам служить средством для выбора точек начала и конца сегментов резки.
 
 \begin{figure}[p]
   \centering
@@ -359,6 +351,16 @@ $\Omega_{(i+1)}$.
     }
   \label{thermal-550-130}
 \end{figure}
+
+\clearpage
+
+Таким образом,
+анализ температурных полей подтверждает
+геометрические правила выбора точек врезки
+и точек выключения инструмента машин термической
+резки материала и в будущем
+(при условии разработки быстродействующих систем температурного анализа)
+может сам служить средством для выбора точек начала и конца сегментов резки.
 
 Рассмотрим один из простых способов учета правила жесткости листа,
 описанного в \ref{sect:1.3},
@@ -394,18 +396,6 @@ $$
 Маршрут резки начинается в левом нижнем углу листа,
 возможные точки врезки обозначены маленькими квадратиками.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{zones-a.png}
-  \caption{
-    Пример моделирования траектории инструмента машины листовой резки с~ЧПУ
-    с~учетом правила <<жесткости листа>>
-    и~с~использованием зон
-    (20~контуров, задача $GTSP$)
-    }
-  \label{zones-a}
-\end{figure}
-
 На рис.~\ref{zones-b}
 эта же задача решена без учета
 <<динамических>> ограничений
@@ -419,6 +409,18 @@ $$
 т. е. решение является глобальным экстремумом.
 При этом в маршруте резки
 длина холостого хода инструмента уменьшилась на 26 \%.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{zones-a.png}
+  \caption{
+    Пример моделирования траектории инструмента машины листовой резки с~ЧПУ
+    с~учетом правила <<жесткости листа>>
+    и~с~использованием зон
+    (20~контуров, задача $GTSP$)
+    }
+  \label{zones-a}
+\end{figure}
 
 \begin{figure}[H]
   \centering
