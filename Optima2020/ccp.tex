@@ -1,56 +1,50 @@
-% https://www.tandfonline.com/toc/goms20/current
-\documentclass[]{interact}
-
-\usepackage[caption=false]{subfig}% Support for small, `sub' figures and tables
-%\usepackage[nolists,tablesfirst]{endfloat}% To `separate' figures and tables from text if required
-
-%\usepackage[doublespacing]{setspace}% To produce a `double spaced' document if required
-%\setlength\parindent{24pt}% To increase paragraph indentation when line spacing is doubled
-%\setlength\bibindent{2em}% To increase hanging indent in bibliography when line spacing is doubled
-
-\usepackage[numbers,sort&compress]{natbib}% Citation support using natbib.sty
-\bibpunct[, ]{[}{]}{,}{n}{,}{,}% Citation support using natbib.sty
-\renewcommand\bibfont{\fontsize{10}{12}\selectfont}% Bibliography support using natbib.sty
+\documentclass[]{llncs}
 
 \usepackage{enumitem}
 \usepackage{amssymb,amsmath}
 \usepackage{graphicx}
+\usepackage{subfig}
 \usepackage{tikz}
 \usetikzlibrary{patterns,intersections}
 \usepackage{theoremref}
 
 \graphicspath{{media/}}
 
-\theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
+% \theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{proposition}[theorem]{Proposition}
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
+% \theoremstyle{definition}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{example}[theorem]{Example}
 
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}
-\newtheorem{notation}{Notation}
+% \theoremstyle{remark}
+% \newtheorem{remark}{Remark}
+% \newtheorem{notation}{Notation}
 \newtheorem{condition}{Condition}
 
 \begin{document}
 
-\title{A novel algorithm for construction of the shortest path
-between a finite set of nonintersecting contours on the plane}
+\title{A novel algorithm for construction of~the~shortest path
+between a finite set of~nonintersecting contours on the plane}
+
+\titlerunning{Algorithm for shortest path}
 
 \author{
-\name{
-  A.~A. Petunin\textsuperscript{a}\textsuperscript{b},
-  E.~G. Polishchuk\textsuperscript{a}
-  and
-  S.~S. Ukolov\textsuperscript{a}\thanks{CONTACT S.~S. Ukolov. Email: s.s.ukolov@urfu.ru}}
-\affil{
-  \textsuperscript{a}Ural Federal University, Yekaterinburg, Russia
-  \textsuperscript{b}Institute of Mathematics and Mechanics, UBr RAS, Yekaterinburg, Russia
-}}
+  Alexander	Petunin \inst{1,2} \orcidID{0000-0003-2540-1305}
+  \and
+  Efim Polishchuk \inst{1}
+  \and
+  Stanislav	Ukolov \inst{1} \orcidID{0000-0002-9946-6446}
+}
+
+\institute{
+  Ural Federal University, Yekaterinburg, Russia \url{https://urfu.ru/}
+  \and
+  Institute of Mathematics and Mechanics, UBr RAS, Yekaterinburg, Russia \url{https://www.imm.uran.ru/}
+}
 
 \maketitle
 
@@ -92,19 +86,19 @@ based on
 Variable Neighborhood Search approach.
 Results of a computational experiment
 and a comparison with the exact solution
-of GTSP problem are presented.
-\end{abstract}
+of GTSP problem are presented
 
-\begin{keywords}
-  tool path problem;
-  continuous cutting problem;
-  local search;
-  sufficient conditions of global extremum;
-  heuristic;
-  discrete optimization;
-  variable neighborhood search;
+\keywords{
+  tool path problem \and
+  continuous cutting problem \and
+  local search \and
+  sufficient conditions of global extremum \and
+  heuristic \and
+  discrete optimization \and
+  variable neighborhood search \and
   GTSP
-\end{keywords}
+}
+\end{abstract}
 
 \section{Introduction}
 
@@ -291,7 +285,7 @@ Continuous Cutting Problem is to find:
 \end{enumerate}
 
 The result of solving the problem will be the route
-$\{M_0, M_{i_1}, M_{i_2}, \dots M_{i_N}, M_{N + 1}\}$.
+$\{M_0, M_{i_1}, M_{i_2}, \ \dots M_{i_N}, \allowbreak M_{N + 1}\}$.
 The objective function in this case is greatly simplified
 in comparison with the general cutting problem
 and is reduced to minimizing the air move length.
@@ -407,7 +401,7 @@ see Fig. \ref{pierce-fermat}.
   \centering
   \subfloat[On the linear segment]{
     \label{pierce-thru}
-    \tikz[rotate=27]{
+    \tikz[rotate=27,scale=0.68]{
         \draw[thick,name path=C1]
             (0,5) node[above] {$C_{i-1}$}
             to[bend right] (1,0);
@@ -438,7 +432,7 @@ see Fig. \ref{pierce-fermat}.
   }
   \subfloat[Reflection using \textit{Fermat principle}]{
     \label{pierce-fermat}
-    \tikz[rotate=-12]{
+    \tikz[rotate=-12,scale=0.68]{
       \draw[thick]
           (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
       \fill[black]
@@ -580,7 +574,7 @@ for instance:
   Cyclic contour shift between
   several consecutive blocks of the same length
   \item
-  And about ten different recipes for constructing ``close'' permutations
+  And about dozen different recipes for constructing ``close'' permutations
 \end{itemize}
 
 If the size of the neighborhood
@@ -606,7 +600,7 @@ needs further investigation.
 
 \begin{figure}
   \centering
-  \tikz{
+  \tikz[scale=0.85]{
       \path
           (-2,0.5) coordinate(M1)
           (-1,1) coordinate(M2)
@@ -871,15 +865,15 @@ $|M_{i-1} M_i M'_{i+1} M_{i+2}|$
 is minimal when $M'_{i+1}=M_{i+1}$.
 
 Suppose
-$
+$$
 \exists M'_i \in S_i,
 \exists M'_{i+1} \in S_{i+1}
-$:
-$
+:
 |M_{i-1} M'_i M'_{i+1} M_{i+2}|
 <
 |M_{i-1} M_i M_{i+1} M_{i+2}|
-$.
+$$
+
 It's clear that
 $
 M'_i \ne M_i,
@@ -911,7 +905,7 @@ $\partial f(s,t) / \partial s \big|_{(0,0)} = 0$,
 that is possible only
 when
 points
-$M_{i-1}, M_i, M_{i+1}$
+$M_{i-1}$, $M_i$ and $M_{i+1}$
 lie on a straight line
 (when $M_{i-1}$ and $M_{i+1}$
 are on both sides of
@@ -959,7 +953,8 @@ $\varphi(0)<\varphi(\tau^*)>\varphi(1)$.
 
 But note also
 that
-$\varphi(t)$ is a sum of three terms of a form
+$\varphi(t)$ is a sum of three
+Euclidean distances of a form
 $\sqrt{(a+b\cdot t)^2 + (c+d \cdot t)^2}$,
 all having positive second derivative,
 so
@@ -979,6 +974,7 @@ The shift of two neighboring vertices is considered. For more vertices, the proo
 So, the broken
 $L_*$
 delivers a local minimum.
+\qed
 \end{proof}
 
 \subsection{Global minimum}
@@ -1046,20 +1042,20 @@ Let \textbf{one} of the following requirements be satisfied:
 \begin{proof}
 Use the same notations:
 consider four adjacent vertices
-$M_{i-1}, M_i, M_{i+1}, M_{i+2} \in L_*$.
+$M_{i-1}$, $M_i$, $M_{i+1}$, $M_{i+2} \in L_*$.
 $M_i \in  C_i,
 M_{i+1} \in C_{i+1}$.
 
 Suppose
-$
+$$
 \exists M'_i \in C_i,
 \exists M'_{i+1} \in C_{i+1}
-$:
-$
+:
 |M_{i-1} M'_i M'_{i+1} M_{i+2}|
 <
 |M_{i-1} M_i M_{i+1} M_{i+2}|
-$.
+$$
+
 Again,
 $
 M'_i \ne M_i,
@@ -1091,6 +1087,7 @@ i.e. again
   % \label{partials}
 \end{equation}
 This allows us to repeat the rest of the previous proof verbatim.
+\qed
 \end{proof}
 
 \begin{remark}
@@ -1186,15 +1183,21 @@ for several cutting plans.
 
 \begin{table}[h]
   \begin{center}
-  \begin{tabular}{l|*{3}{r}}
+  \begin{tabular}{l*{3}{|r}}
       Job & \#229 & \#464 & \#3211 \\
-      \hline
+      \hline \hline
       \# of parts & 11 & 14 & 17\\
+      \hline
       \# of contours & 12 & 21 & 22 \\
+      \hline
       Parts perimeter, m & 24.609 & 21.717 & 25.051 \\
+      \hline
       \# of GTSP points & 491 & 429 & 493 \\
+      \hline
       $\mathcal L_{GTSP}$, m & 7.729 & 4.743 & 4.557 \\
+      \hline
       $\mathcal L_{CCP}$, m & 7.727 & 4.706 & 4.536 \\
+      \hline
   \end{tabular}
   \caption{Solution quality comparison}
   \label{ccp-vs-gtsp}
@@ -1233,7 +1236,7 @@ Russian Foundation for Basic Research
 under Grant
 20-08-00873.
 
-\bibliographystyle{tfs}
+\bibliographystyle{splncs04}
 \bibliography{ccp}
 % \nocite{*}
 
