@@ -198,7 +198,9 @@ so the total number of points on the contour grows
 (as $O (N)$)
 and the exhaustive search becomes exponential.
 Nevertheless, such problems can be successfully solved,
-for example, by the dynamic programming method,
+for example, by the dynamic programming
+(DP)
+method,
 for small
 $N \approx 30$ even precisely
 (see, in particular \cite{bi15}).
@@ -1144,10 +1146,11 @@ $C_i$ but
 The quality assessment of the solutions
 of the described algorithm was carried out on several
 cutting plans containing real parts.
-As a comparison base, we used an algorithm
+As a comparison base, we used DP algorithm
 (see \cite{bi15})
-for solving the GTSP problem, which gives an exact solution for the number of contours
-$N <33$.
+for solving the GTSP problem,
+which gives an exact solution for small number of contours
+and special version of GNLS heuristic \cite{GLNS}.
 
 Fig. \ref{gtsp-path} shows the exact solution,
 possible positions of the pierce points are visible.
@@ -1171,7 +1174,7 @@ for the same cutting plan.
 \end{figure}
 
 It can be seen that both algorithms
-genererated almost identical routes.
+generated almost identical routes.
 The main difference is caused by the discretization process
 to obtain the GTSP task.
 Because of this,
@@ -1183,20 +1186,18 @@ for several cutting plans.
 
 \begin{table}[h]
   \begin{center}
-  \begin{tabular}{l*{3}{|r}}
-      Job & \#229 & \#464 & \#3211 \\
+  \begin{tabular}{l*{4}{|r}}
+      Job & \#229 & \#464 & \#3211 & \#20205 \\
       \hline \hline
-      \# of parts & 11 & 14 & 17\\
+      \# of parts & 11 & 14 & 17 & 115 \\
       \hline
-      \# of contours & 12 & 21 & 22 \\
+      \# of contours & 12 & 21 & 22 & 198 \\
       \hline
-      Parts perimeter, m & 24.609 & 21.717 & 25.051 \\
+      \# of GTSP points & 491 & 429 & 493 & 3917 \\
       \hline
-      \# of GTSP points & 491 & 429 & 493 \\
+      $\mathcal L_{GTSP}$, m & 7.729 & 4.743 & 4.557 & 26.098 \\
       \hline
-      $\mathcal L_{GTSP}$, m & 7.729 & 4.743 & 4.557 \\
-      \hline
-      $\mathcal L_{CCP}$, m & 7.727 & 4.706 & 4.536 \\
+      $\mathcal L_{CCP}$, m & 7.727 & 4.706 & 4.536 & 25.987 \\
       \hline
   \end{tabular}
   \caption{Solution quality comparison}
@@ -1204,23 +1205,52 @@ for several cutting plans.
   \end{center}
 \end{table}
 
-See also: \cite{GLNS,KhachaiI,KhachayII,ChentsovIII}...
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=0.95\textwidth]{test5-pcgtsp.png}
-  \end{center}
-  \caption{Nesting plan for large problem...}
-  \label{gtsp-path}
-\end{figure}
-
+% See also: \cite{GLNS,KhachaiI,KhachayII,ChentsovIII}...
+Fig. \ref{large-path}
+shows the solution to the CCP problem for large dimension
+(198 contours).
+Unlike the previous example,
+for large-dimensional problems
+it is much more difficult to evaluate
+the accuracy of the obtained solution.
+Nevertheless,
+a comparison with the results of solving
+the corresponding task GTSP
+can also serve as a way of estimation.
+GTSP is known to be NP-hard even on the Euclidean plane \cite{bib:x103}.
+Although it is clear that
+the bigger the predefined partial order,
+the simpler the appropriate GTSP task,
+dependence of theoretical complexity bounds
+on the properties of the precedence constraints
+has not yet been insufficiently investigated.
+In this regard, we note two papers \cite{bib:x104,bib:x105}.
+There are two special types of the precedence constraints,
+for which polynomial time complexity of the GTSP is proven theoretically.
+The first type of constraints was introduced by E. Balas \cite{bib:x100}
+for the classic TSP.
+Efficient exact algorithms for the GTSP with precedence constraints
+of this type are proposed in recent papers
+\cite{bib:x102,ChentsovIII}.
+Tours that fulfill constraints of the second type
+are referred to as quasi- and pseudo-pyramidal.
+Efficient parameterized algorithms for the GTSP
+with such precedence constraints are proposed in \cite{KhachaiI,KhachayII}.
+In view of the above,
+we can summarize that in the field of algorithmic analysis,
+the GTSP still remains weakly explored.
+In particular,
+the absence of efficient Mixed Integer Linear Program (MILP)
+models for the GTSP makes it impossible to use modern optimizers like Gurobi \cite{bib:x101}
+for construction lower and upper bounds and examining the heuristic solutions.
+This issue is also pending.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.95\textwidth]{test5-ccp.png}
   \end{center}
-  \caption{Example of large problem solution...}
-  \label{gtsp-path}
+  \caption{Example of large problem solution, Job \#20205}
+  \label{large-path}
 \end{figure}
 
 \section{Conclusion}
@@ -1236,10 +1266,10 @@ See also: \cite{GLNS,KhachaiI,KhachayII,ChentsovIII}...
   A heuristic algorithm for solving the CCP problem is proposed that does not use contour discretization.
   \item
   For any fixed contour visit order,
-  an effective algorithm for obtaining a local extremum is developed
+  an effective algorithm for obtaining a local extremum was developed
   and the conditions under which
-  this local minimum is a global one.
-  are described.
+  this local minimum is a global one
+  were described.
 \end{enumerate}
 
 The direction of further research is the development of the algorithm
