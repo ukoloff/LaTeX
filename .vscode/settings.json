@@ -82,5 +82,6 @@
   ],
   "latex-workshop.latex.autoClean.run": "onBuilt",
   "latex-workshop.intellisense.package.enabled": true,
-  "latex-workshop.latex.recipe.default": "lastUsed"
+  "latex-workshop.latex.recipe.default": "lastUsed",
+  "cSpell.language": ",ru"
 }
