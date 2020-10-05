@@ -344,7 +344,7 @@ in the permutation
 $I = (i_1, i_2, ... i_N)$.
 Thus, not all permutation of the contours are feasible.
 
-\section{Algorithm to solve Continuous Cutting Problem}
+\section{CCP-Relax Algorithm to solve Continuous Cutting Problem}
 
 The proposed solution algorithm
 (see \cite{berlin2019})
@@ -727,6 +727,7 @@ This completes the execution of the algorithm
 for solving Continuous Cutting Problem.
 
 \section{Optimality of continuous optimization problem solution}
+\label{sec:math}
 
 From a practical point of view,
 the described algorithm turns out to be quite workable --
@@ -1150,7 +1151,34 @@ $C_i$ but
 \end{enumerate}
 \end{condition}
 
+\section{Generalization of ideas of CCP-Relax algorithm}
+
+In practice,
+the described heuristic algorithm demonstrates
+good performance with high quality of the obtained solutions,
+at least for practical cutting tasks
+for CNC machines,
+this is described in more detail in section \ref{sec:calc}.
+
+\subsection{Using other methods of discrete optimization}
+
+\subsection{Approach to ICP}
+
+Intermittent Cutting Problem
+is the most complex and general
+of all varieties of cutting problems.
+
+Using complex cutting segments as seen at Fig.~\ref{fig:6x5}...
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{pentagons.png}
+  \label{fig:6x5}
+  \caption{Example of complex cutting segment for six parts / contours}
+\end{figure}
+
 \section{Numerical experiments}
+\label{sec:calc}
 
 The quality assessment of the solutions
 of the described algorithm was carried out on several
@@ -1263,6 +1291,7 @@ This issue is also pending.
 \end{figure}
 
 \section{Conclusion}
+\label{sec:conclude}
 
 \begin{enumerate}
   \item
