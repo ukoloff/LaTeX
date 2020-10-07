@@ -1151,24 +1151,29 @@ $C_i$ but
 \end{enumerate}
 \end{condition}
 
-\section{Generalization of ideas of CCP-Relax algorithm}
-
-In practice,
-the described heuristic algorithm demonstrates
-good performance with high quality of the obtained solutions,
-at least for practical cutting tasks
-for CNC machines,
-this is described in more detail in section \ref{sec:calc}.
-
-\subsection{Using other methods of discrete optimization}
-
-\subsection{Approach to ICP}
+\section{New Approach to Intermittent Cutting Problem}
 
 Intermittent Cutting Problem
 is the most complex and general
 of all varieties of cutting problems.
+It can be approached to
+both from theoretical positions
+as well as by using some practical techniques.
 
-Using complex cutting segments as seen at Fig.~\ref{fig:6x5}...
+In addition to standard cutting technique
+(which in fact leads to
+Continuous Cutting Problem),
+some others are often used,
+for instance,
+``multi-segment'' and
+``multi-contour'' cutting.
+The former cuts single contour of a part
+in several passes,
+using several piercing points.
+The latter cuts a few contours
+at once,
+as seen at
+Fig.~\ref{fig:6x5}.
 
 \begin{figure}
   \centering
@@ -1176,6 +1181,22 @@ Using complex cutting segments as seen at Fig.~\ref{fig:6x5}...
   \caption{Example of complex cutting segment for six parts / contours}
   \label{fig:6x5}
 \end{figure}
+
+In order to apply those techniquewe introduce a notion
+(see \cite{bib:petunin-2019}):
+
+{\it Cutting Segment}
+$S = \overrightarrow{M M^*}$
+is a tool trajectory from piercing point $M$
+up to point of switching tool off $M^*$.
+
+Cutting segment is used to contain single contour,
+but this is not the case any more.
+It also can be a part of contour
+(for multi-segment cutting)
+as well as several contours at once
+(i.e. multi-contour cutting).
+
 
 \section{Numerical experiments}
 \label{sec:calc}
@@ -1303,11 +1324,19 @@ This issue is also pending.
   \item
   A heuristic algorithm for solving the CCP problem is proposed that does not use contour discretization.
   \item
-  For any fixed contour visit order,
-  an effective algorithm for obtaining a local extremum was developed
-  and the conditions under which
-  this local minimum is a global one
-  were described.
+  It was proved that the CCP-Relax
+  algorithm for finding piercing points for a fixed order of traversing the contours
+  delivers a local minimum.
+  \item
+  Several easily verified sufficient conditions are formulated and proved
+  for the specified algorithm to deliver global minimum of air move length.
+  \item
+  CCP-Relax
+  algorithm can be applied to solving more general problems
+  SCCP (Segment Cutting) and
+  GSCCP (Generalized Segment Cutting),
+  thus approaches to solving general
+  ICP cutting problem can be developed on its basis.
 \end{enumerate}
 
 The direction of further research is the development of the algorithm
