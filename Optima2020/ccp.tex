@@ -1182,7 +1182,8 @@ Fig.~\ref{fig:6x5}.
   \label{fig:6x5}
 \end{figure}
 
-In order to apply those techniquewe introduce a notion
+In order to apply those technique
+we introduce a notion
 (see \cite{bib:petunin-2019}):
 
 {\it Cutting Segment}
@@ -1197,6 +1198,68 @@ It also can be a part of contour
 as well as several contours at once
 (i.e. multi-contour cutting).
 
+In fact,
+multi-contour cutting example
+at Fig.~\ref{fig:6x5}
+can also represent a single
+cutting segment
+in some bigger cutting problem instance.
+
+Since the cutting direction is defined for the cutting segment,
+we need a more general concept:
+
+{\it Basic Segment}
+$B^S$
+is a part of cutting segment
+$S = \overrightarrow{M M^*}$
+without lead-in  and lead-out trajectory
+(the very beginning and ending parts of segment,
+where tool approaches contour of a part
+and leaves it).
+Basic segment has no direction and
+contains only geometry of contours to cut.
+
+Using the concept of basic segment,
+we can now formulate a generalization of CCP:
+
+{\it Segment Continuous Cutting Problem}
+($SCCP$)
+is a cutting problem with fixed set
+(as well as number of)
+basic cutting segments:
+$SCCP = \left\{B^S_i\right\}$.
+
+CCP-Relax algorithm described above
+can be applied to solve SCCP problem
+in the same way as for problem
+CCP for which it was originally designed.
+
+And now,
+note that
+for predefined nesting
+(i.e. fixed positioning of
+parts' contours on the plain),
+the whole {\it ensemble} of basic segments
+can be generated
+by combining and dividing
+contours into different segments.
+This leads us to even more general:
+
+{\it Generalized Segment Continuous Cutting Problem}
+($GSCCP$)
+is that {\it ensemble} of several $SCCP$
+problems for the same nesting:
+$GSCCP = \left\{ SCCP_i \right\}$.
+
+By introducing the class of $GSCCP$,
+we have significantly expanded the existing
+classification of tool path problem for CNC sheet cutting machines.
+Actually $SCCP$ and $GSCCP$ are $ICP$
+subclasses containing all tasks with finite sets of basic cutting segments,
+i.e.
+$ CCP \subset SCCP \subset GSCCP \subset ICP$.
+
+\subsection*{General scheme for GSCCP solving}
 
 \section{Numerical experiments}
 \label{sec:calc}
