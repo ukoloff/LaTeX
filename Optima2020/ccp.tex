@@ -345,6 +345,7 @@ $I = (i_1, i_2, ... i_N)$.
 Thus, not all permutation of the contours are feasible.
 
 \section{CCP-Relax Algorithm to solve Continuous Cutting Problem}
+\label{sec:ccp-relax}
 
 The proposed solution algorithm
 (see \cite{berlin2019})
@@ -1227,7 +1228,7 @@ we can now formulate a generalization of CCP:
 is a cutting problem with fixed set
 (as well as number of)
 basic cutting segments:
-$SCCP = \left\{B^S_i\right\}$.
+$SCCP = \left\{B^{S_i}\right\}$.
 
 CCP-Relax algorithm described above
 can be applied to solve SCCP problem
@@ -1278,16 +1279,74 @@ $ CCP \subset SCCP \subset GSCCP \subset ICP$.
 
 \subsection*{General scheme for GSCCP solving}
 
+Assuming an ensemble
+$\left\{ SCCP_i \right\}$
+of base segment sets
+$SCCP_i = \left\{B^{S_j}\right\}$,
+$
+i \in \overline{1, T},
+j \in \overline{1, K_i}
+$
+to be known,
+the following scheme for GSCCP solving
+is presented:
+
+\begin{itemize}
+  \item
+  Each task $SCCP_i$ is solved independently
+  with one of existing algorithms, for instance:
+  \begin{enumerate}
+    \item
+    {\it CCP-Relax}, heuristic described above in section~\ref{sec:ccp-relax}.
+    \item
+    {\it DP-GTSP}, exact algorithm based on Dymaic programming
+    for the case of relatively small problem dimensions,
+    see \cite{bi15}
+    \item
+    {\it Greedy-GTSP}, iterative greedy heuristic algorithm,
+    see \cite{bib:greedy}
+  \end{enumerate}
+  For discrete algorithm to use,
+  cutting segments can be pre-sampled as shown
+  at Fig.~\ref{fig:gtsp425}.
+
+  \item
+  The best solution is selected
+  according to objective function (\ref{air-move-length}).
+\end{itemize}
 
 \begin{figure}
   \centering
-  \subfloat[Standard cutting, 45 segments]{
+  \includegraphics[width=0.5\columnwidth]{gtsp425.png}
+  \caption{
+    Corresponding GTSP problem for (S)CCP problem of Fig.~\ref{fig:gsccp},\\
+    425 points
+  }
+  \label{fig:gtsp425}
+\end{figure}
+
+For example,
+Fig.~\ref{fig:gsccp-cut}
+shows two solutions
+of $SCCP$ problems from Fig.~\ref{fig:gsccp}
+given by {\it CCP-Relax} algorithm.
+It is easy to see that the two routes are indeed different.
+Furthermore,
+the difference can be even more significant in a practical sense
+due to different numbers of piercing points,
+since that operation
+is rather expensive
+both in terms of time and cost.
+
+\begin{figure}
+  \centering
+  \subfloat[Standard cutting]{
     \includegraphics[width=0.45\columnwidth]{cut45.png}
   }
-  \subfloat[Multi-contour cutting, 39 segments]{
+  \subfloat[Multi-contour cutting]{
     \includegraphics[width=0.47\columnwidth]{cut39.png}
   }
-  \caption{Solution of GSCCP Problem}
+  \caption{Solution of GSCCP Problem at Fig.~\ref{fig:gsccp}}
   \label{fig:gsccp-cut}
 \end{figure}
 
