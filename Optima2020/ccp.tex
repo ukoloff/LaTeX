@@ -1231,8 +1231,8 @@ $SCCP = \left\{B^S_i\right\}$.
 
 CCP-Relax algorithm described above
 can be applied to solve SCCP problem
-in the same way as for problem
-CCP for which it was originally designed.
+in the same way as for CCP problem
+for which it was originally designed.
 
 And now,
 note that
@@ -1243,7 +1243,24 @@ the whole {\it ensemble} of basic segments
 can be generated
 by combining and dividing
 contours into different segments.
+See, for instance,
+Fig.~\ref{fig:gsccp},
+where multi-contour segments
+are filled with black color.
 This leads us to even more general:
+
+\begin{figure}
+  \centering
+  \subfloat[Standard cutting, 45 segments]{
+    \includegraphics[width=0.45\columnwidth]{nest45.png}
+  }
+  \subfloat[Multi-contour cutting, 39 segments]{
+    \includegraphics[width=0.47\columnwidth]{nest39.png}
+  }
+  \caption{{\it Ensemble} of Segment Cutting Problems}
+  \label{fig:gsccp}
+\end{figure}
+
 
 {\it Generalized Segment Continuous Cutting Problem}
 ($GSCCP$)
