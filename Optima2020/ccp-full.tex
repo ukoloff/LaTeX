@@ -348,89 +348,331 @@ Thus, not all permutation of the contours are feasible.
 \label{sec:ccp-relax}
 
 The proposed solution algorithm
+(see \cite{berlin2019})
 consists of several stages,
-easily associated with the nature of the problem being solved:
+naturally associated with the nature of the problem being solved.
 
+\subsection{Removal of external contours}
+
+To automatically comply with the precedence constraint,
+the first step removes all contours containing nested ones,
+that is, only contours remain that satisfy the condition:
+$$
+\{C_i | \forall j \ne i: C_j \cap \tilde{C_i} = \varnothing \}
+$$
+This generally leads to a reduction
+(in some cases significant)
+of the size of the problem
+(from $N$ to some $N'$),
+and thus reduces the calculation time
+in the second and especially the third stage.
+
+\subsection{Continuous optimization}
+
+At this stage,
+we assume the bypass sequence
+$I = (i_1, i_2, ... i_N)$
+given and look for the coordinates of the pierce points
+in each contour
+$M_i \in C_i$,
+minimizing the total air move length (\ref{air-move-length}).
+To do this, the initial positions of the points are somehow selected
+(randomly, for instance)
+and the position of each pierce point $M_i$
+changes under the assumption that others are fixed:
+$\mathcal{L}(M_i) \to \min$.
+Most terms in the objective function
+(\ref{air-move-length})
+are constant, therefore it simplifies to
+$$
+|M_{i-1}M_i|+|M_iM_{i+1}| \to \min_{M_i \in C_i}
+$$
+
+Moreover,
+if the points
+$M_{i-1}$,
+$M_{i + 1}$
+are located on opposite sides of the segment of the contour
+$C_i$,
+then the optimal position of the
+pierce point $M_i$ is the intersection with the segment:
+$M_i = M_{i-1} M_{i + 1} \cap C_i$
+(if such an intersection exists;
+otherwise,
+the solution will be one of the ends of the segment),
+see. Fig. \ref{pierce-thru}.
+If the points are located on one side of the segment,
+then the solution can also be easily found using the
+\textit{Fermat principle},
+generating the famous rule
+``the angle of incidence is angle of reflection''
+(or again one of the ends of the segment),
+see Fig. \ref{pierce-fermat}.
+
+\begin{figure}
+  \centering
+  \subfloat[On the linear segment]{
+    \label{pierce-thru}
+    \tikz[rotate=27,scale=0.68]{
+        \draw[thick,name path=C1]
+            (0,5) node[above] {$C_{i-1}$}
+            to[bend right] (1,0);
+        \draw[thick,name path=C2]
+            (3,0) node[below] {$C_i$}
+            to[bend right] (3,2);
+        \draw[thick,name path=C3]
+            (4,3) node[above] {$C_{i+1}$}
+            to[bend right] (5,0);
+        \path[name path=L0]
+            (0,1.5) -- (6,2);
+        \path[name path=Lx]
+            (0,1) -- (6,1);
+        \fill[name intersections={of=C1 and Lx, name=X}]
+            (X-1) coordinate(M1) circle(3pt) node[below] {$M_{i-1}$};
+        \fill[name intersections={of=C2 and L0, name=X}]
+            (X-1) coordinate(M2) circle(3pt) node[below left]{$M_i$};
+        \draw[name intersections={of=C2 and Lx, name=X}]
+            (X-1) coordinate(M2x) node[below right]{$M'_i$};
+        \fill[name intersections={of=C3 and Lx, name=X}]
+            (X-1) coordinate(M3) circle(3pt) node[right] {$M_{i+1}$};
+        \draw[dashed]
+            (M1) -- (M3);
+        \draw[thin,-latex]
+            (M2)
+            to[bend right] (M2x);
+    }
+  }
+  \subfloat[Reflection using \textit{Fermat principle}]{
+    \label{pierce-fermat}
+    \tikz[rotate=-12,scale=0.68]{
+      \draw[thick]
+          (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
+      \fill[black]
+          (1.5, 0) circle(3pt) coordinate(middle) node[below left]  {$M_i$}
+          (1, 1) circle(3pt) coordinate(from) node[above right] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
+          (4.5, 2) circle(3pt) coordinate(to) node[above right] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
+      \begin{scope}
+          \clip (from) circle(1);
+          \draw[thick] (from) ++(0, 3) circle(3);
+      \end{scope};
+      \begin{scope}
+          \clip (to) circle(1.5);
+          \draw[thick] (to) ++(3, 4) circle(5);
+      \end{scope};
+      % \draw[dashed] (from) -- (middle) -- (to);
+      \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
+      \coordinate (opt) at (intersection of zero--future and mirror--from);
+      % \draw[thin] (opt) circle(3pt);
+      \draw[dotted]
+          (mirror) -- (opt)
+          (mirror) -- (to);
+      \draw[dashed] (from) -- (opt) -- (to);
+
+      \draw[thin,-latex] (middle) to[bend right] (opt) node[below] {$M'_i$};
+    }
+  }
+  \caption{Optimal position for a pierce point}
+  \label{shift-pierce-point}
+\end{figure}
+
+
+The general optimization scheme at this stage looks like this:
 \begin{enumerate}
-
-  \item {\bf Removal of external contours}.
-  To automatically comply with the precedence constraint,
-  we start by removing all contours containing nested ones.
-
-  This generally leads to a reduction
-  (significant in some cases)
-  of the size of the problem
-  (from $N$ to some $N'$),
-  and thus reduces the calculation time
-  in the second and especially the third stage.
-
-  \item {\bf Continuous optimization}.
-  Assuming the order of contours processing
-  $I = (i_1, i_2, ... i_N)$
-  fixed we look for the coordinates of the pierce points
-  $M_i \in C_i$,
-  minimizing the total air move length (\ref{air-move-length}).
-
-  For every pierce point $M_i$
-  we find it's optimal position,
-  while others remain motionless.
-  This relaxation is repeated a few times
-  until converged.
-  In practice,
-  it happens very fast in
-  $O(N)$
-  time and is therefore used
-  as a subroutine in the next step.
-
-  \item{\bf Discrete optimization}.
-  We use
-  Variable Neighborhood Search
-  (VNS, see \cite{bi14})
-  to find contours processing order
-  $I = (i_1, i_2, ... i_N)$.
-
-  This step in fact solves famous
-  {\it Travelling Salesman Problem}
-  with special distance function,
-  calculated at the previous step:
-  $$
-  \mathcal L (I') = \min_{M_1, M_2 \dots M_N}
-    \mathcal L (M_1, M_2 \dots M_N | I')
-  $$
-
-  Note, that other heuristics
-  for discrete optimization
-  may be used at this step as well.
-  For instance,
-  one can use modern solvers
-  to first solve GTSP problem,
-  associated with CCP,
-  and then apply continuous relaxation
-  (previous step)
-  to convert solution of GTSP to
-  that of CCP.
-  This idea deserves further investigation.
-
-  \item{\bf Recovery of removed contours}.
-  Having got the tool path that visits ``inner''
-  contours
-  (remained after first step),
-  we find piercing points for other contours
-  by simple intersecting them with the tool path.
-  Of multiple points we select one
-  (for each contour)
-  so as to meet precedence constraint.
-
-  This is straightforward step of linear
-  time complexity.
-
+  \item
+  We choose arbitrary initial positions of the inset points
+  $M_i \in C_i, \forall i$.
+  \item
+  $\forall i \in \overline{1,N}$
+  we find the optimal position
+  $M_i$ as described above in constant time $O(1)$.
+  \item
+  We repeat the previous step
+  until the air move length
+  (\ref{air-move-length})
+  stabilizes (with some predetermined accuracy $\delta$).
 \end{enumerate}
 
-For detailed explanation of the CCP-Relax algorithm steps
-refer to
+In practice,
+the whole process converges well in
+$O(N)$
+time and therefore is repeatedly used
+as a subroutine in the next step.
+
+\subsection{Discrete optimization}
+
+The most computationally difficult step
+is to find a permutation
+$I = (i_1, i_2, ... i_N)$
+that minimizes the idle length
+$\mathcal{L} \to \min$,
+that is, in fact,
+solves the Traveling Salesman Problem (TSP)
+with a distance function
+calculated using continuous optimization
+as described in the previous step.
+
+The approach of
+Variable Neighborhood Search
+(VNS, see \cite{bi14}) is applied
+as follows:
+
+\begin{enumerate}[label*=\arabic*.]
+  \item The initial permutation
+  $I = (i_1, i_2, ... i_N)$
+  is selected arbitrary
+  (random)
+  \item $k=1$
+  \item While $k < k_{max}$:
+  \begin{enumerate}[label*=\arabic*.]
+    \item Choose permutation $I' \in \mathcal N^k(I)$
+    from neighborhood $\mathcal N^k(I)$,
+    giving minimal $\mathcal L(I')$
+    \item if $\mathcal L(I')< \mathcal L(I)$:
+    \begin{enumerate}[label*=\arabic*.]
+      \item $I \gets I'$
+      \item $k \gets 1$
+    \end{enumerate}
+    \item else
+    \begin{enumerate}[label*=\arabic*.]
+      \item $k \gets k+1$
+    \end{enumerate}
+  \end{enumerate}
+  \item Done.
+\end{enumerate}
+
+At step 3.1,
+the continuous optimization step is repeatedly applied:
+$$
+\mathcal L (I') = \min_{M_1, M_2 \dots M_N}
+  \mathcal L (M_1, M_2 \dots M_N | I')
+$$
+
+The description of the structure of the neighborhoods
+$\mathcal N^k(I)$
+is not given here for brevity,
+since it has already been described in
 \cite{berlin2019}.
 
-\subsection{Optimality of continuous optimization problem solution}
+\subsection{Recovery of removed contours}
+
+\begin{figure}
+  \centering
+  \tikz[scale=0.85]{
+      \path
+          (-2,0.5) coordinate(M1)
+          (-1,1) coordinate(M2)
+          (8,2) coordinate (M4)
+          (9,4) coordinate (M5);
+      ;
+      \filldraw[thick,pattern=north east lines]
+          (M2) -- +(80:2) -- +(140:2) -- cycle
+          (M4) -- +(260:2) -- +(320:2) -- cycle;
+      ;
+      \filldraw[thick,rounded corners,pattern=north east lines,name path=Ai]
+          (0,0) rectangle (7,4)
+          (2,2) circle(1)
+      ;
+      \path[name path=Lx]
+          (M2) -- (M4);
+      \path[name intersections={of=Ai and Lx, name=Mi}]
+          (Mi-3) coordinate (M3)
+          (Mi-2) coordinate (M3_5)
+      ;
+      \fill
+          \foreach \i in {1,...,5} {
+              (M\i) circle (2pt)
+          }
+      ;
+      \draw [ultra thick]
+          (M3_5) circle(3pt) node[above right] {$M_+$}
+      ;
+      \draw[thin,-latex]
+          (M1) node[below] {$M_1$} --
+          (M2) node[below] {$M_2$} --
+          (M3) node[above right] {$M_3$} --
+          (M4) node[right] {$M_4$} --
+          (M5) node[left] {$M_5$}
+      ;
+
+      % \fill [name intersections={of=Ai and Lx, name=i, total=\t}] [red]
+      %     \foreach \s in {1,...,\t} {(i-\s) circle (2pt) node[black,above right] {\s}};
+  }
+  \caption{Adding extra pierce point $M_+$}
+  \label{extra-pierce-point}
+\end{figure}
+
+After the tool’s route
+to bypass contours
+that do not contain others inside,
+is constructed as described above,
+we extend it to the full route
+visiting all the original contours,
+and so that the precedence constraint is
+automatically
+observed.
+
+Note that the route obtained in the previous step
+\begin{equation}
+Route = \{ M_0, M_1, M_2, \dots M_{N'}, M_{N'+1}\}
+\label{route0}
+\end{equation}
+intersects all the original contours
+$C_i$,
+because it visits the contours preserved in the first stage
+by construction of steps 2 and 3,
+and it intersects all external contours
+(removed earlier),
+because the start and end points
+$M_0$ and
+$M_{N + 1}$
+lie outside all the contours
+$C_i$.
+
+Thus,
+for each (external) contour
+$C_i$
+that has not yet been included in the route,
+we find all the points of intersection
+with it of the route constructed
+(\ref{route0})
+and if there are several such points (ordinarily),
+then we choose the last one
+(visited by the route later then others),
+see Fig. \ref{extra-pierce-point}.
+After adding these points,
+we get a complete route,
+which,
+visits all the original contours
+$C_i$,
+and the external contours are always visited later than
+the internal ones contained inside them.
+The length of the route, obviously, does not change.
+
+It is easy to understand
+that the route constructed in this way
+for the complete problem
+is also optimal.
+Indeed,
+if there was a shorter route
+that visits all the contours,
+we could simply remove from it
+the pierce points
+lying on the outer contours to get a route
+visiting only the internal contours
+that has the same, that is, shorter length.
+Thus, we would construct a shorter route
+for the subtask without any precedence constraints,
+which is not possible by assumption.
+
+Thus,
+we obey the precedence constraint
+almost automatically in linear time
+$O(N)$.
+
+This completes the execution of the algorithm
+for solving Continuous Cutting Problem.
+
+\section{Optimality of continuous optimization problem solution}
 \label{sec:math}
 
 From a practical point of view,
@@ -446,6 +688,8 @@ both from a theoretical and a
 practical point of view.
 This work focuses the second step of the algorithm --
 continuous optimization.
+It turns out to formulate some statements
+about the quality of the resulting solution.
 
 \begin{remark}
 Fig. \ref{counter-example} shows an example where a trajectory
@@ -475,20 +719,67 @@ may not deliver a global minimum.
   \end{figure}
 \end{remark}
 
-We were able to formulate some statements
-regarding the quality of continuous optimization
-solutions at Step 2 of CCP-Relax algorithm.
-We present them here without proof,
-which will be published in a separate paper.
+So,
+we consider the following problem,
+which has to be solved many times.
+Contours consist only of linear segments.
+No nested contours.
+The order of the contours is fixed.
+It is necessary to find a broken line with vertices
+on the contours
+having the smallest length.
 
-We consider the case of fixed order
-of contours processing
-$I = (i_1, i_2, ... i_N)$.
-and apply Step 2 of CCP-Relax algorithm
-to get broken line
-$L_*$,
-visiting all the contours $C_i$
-in the said order.
+We start from
+(arbitrary)
+broken line
+$L_1$.
+We repeat the following process:
+for every contour
+$C_i$
+we find shift its point
+$M_i \in C_i$
+to that position,
+that minimizes the total
+length of the broken line,
+assuming other points
+$M_j$ fixed
+($j \ne i$).
+This reduces to elementary task
+to find a point for which
+the sum of the distances to two given points is minimal.
+
+This gives us
+the sequence of broken lines
+$\{L_k\}$,
+The sequence of lengths of these broken lines
+decreases monotonously.
+Let
+$m = \inf |L_k|$
+(infium of these lengths),
+and
+$L_*$ be a polyline with length $m$,
+i.e. limit point of the sequence
+$\{L_k\}$.
+As a metric in the space of broken lines,
+one can take the sum of the distances
+between vertices with the same indices
+
+\begin{remark}
+While applying to real-world problems,
+stabilization occurred after a few iterations
+(no more than 10),
+that is, a broken line
+$L_*$ was obtained.
+\end{remark}
+
+By construction,
+the length of the broken line
+$L_*$
+cannot be reduced by shifting its vertices individually
+or by shifting several vertices,
+among which there are no neighbors.
+
+\subsection{Local minimum}
 
 \begin{proposition}
 If we move several adjacent vertices of the broken line
@@ -497,19 +788,182 @@ so that they remain on the same segments of the contours,
 then the length of the resulting broken line will not decrease.
 \end{proposition}
 
-This statement means that the algorithm always delivers a local minimum,
-however not yet global,
-as for example in
-Fig.~\ref{counter-example}.
+\begin{proof}
+Consider the shift of two adjacent vertices.
+Let four consecutive vertices of the broken line
+$L_*$
+be located at the points
+$M_{i-1}, M_i, M_{i+1}, M_{i+2}$.
+Let the points
+$M_i \in S_i,
+M_{i+1} \in S_{i+1}$
+belong to linear segments
+of rescpective contours
+$S_i \subset C_i,
+S_{i+1} \subset C_{i+1}$.
+Let us prove
+$
+\forall M'_i \in S_i,
+M'_{i+1} \in S_{i+1}
+$:
+$
+|M_{i-1} M'_i M'_{i+1} M_{i+2}|
+\ge
+|M_{i-1} M_i M_{i+1} M_{i+2}|
+$.
 
-To guarantee the latter,
-the following sufficient condition may be required:
+For arbitrary
+$M'_i \in S_i$:
+$|M_{i-1} M'_i M_{i+1} M_{i+2}|$
+is minimal when $M'_i=M_i$,
+and
+for arbitrary
+$M'_{i+1} \in S_{i+1}$:
+$|M_{i-1} M_i M'_{i+1} M_{i+2}|$
+is minimal when $M'_{i+1}=M_{i+1}$.
+
+Suppose
+$$
+\exists M'_i \in S_i,
+\exists M'_{i+1} \in S_{i+1}
+:
+|M_{i-1} M'_i M'_{i+1} M_{i+2}|
+<
+|M_{i-1} M_i M_{i+1} M_{i+2}|
+$$
+
+It's clear that
+$
+M'_i \ne M_i,
+M'_{i+1} \ne M_{i+1}
+$.
+
+Let
+$
+M_i(s)=M_i+s \cdot \overrightarrow{M_i M'_i}
+$,
+$
+ M_{i+1}(t)= M_{i+1}+t \cdot \overrightarrow{M_{i+1} M'_{i+1}}
+$
+($s,t \in[0,1]$),
+$f(s,t)=
+|M_{i-1} M_i(s) M_{i+1}(t) M_{i+2}|
+$.
+
+Due to positions of
+$M_i$ and $M_{i+1}$:
+\begin{equation}
+\frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)} \ge 0,
+\frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)} \ge 0
+\label{partials}
+\end{equation}
+If,
+for instance
+$\partial f(s,t) / \partial s \big|_{(0,0)} = 0$,
+that is possible only
+when
+points
+$M_{i-1}$, $M_i$ and $M_{i+1}$
+lie on a straight line
+(when $M_{i-1}$ and $M_{i+1}$
+are on both sides of
+$S_i$;
+otherwise,
+one can replace
+$M_{i-1}$ with its reflection
+relative to
+$S_i$).
+So, when both
+$$
+\frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)}
+= 0 =
+\frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)}
+$$
+that means that all four points
+$M_{i-1}, M_i, M_{i+1}, M_{i+2}$
+lie on the same line
+and the broken line is already
+the shortest one.
+
+Now,
+suppose
+at least one derivative in
+(\ref{partials})
+is not equal to zero.
+Consider
+$\varphi(t)=f(t,t)$.
+
+$$
+\frac{d\varphi}{dt} \Big|_0 =
+\frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)}
++
+\frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)}
+>0
+$$
+
+That means
+$\exists \tau^* \in [0,1]$:
+$\varphi(\tau^*) > \varphi(0)$.
+But we assumed
+$\varphi(1)<\varphi(0)$,
+i.e.
+$\varphi(0)<\varphi(\tau^*)>\varphi(1)$.
+
+But note also
+that
+$\varphi(t)$ is a sum of three
+Euclidean distances of a form
+$\sqrt{(a+b\cdot t)^2 + (c+d \cdot t)^2}$,
+all having positive second derivative,
+so
+$d^2\varphi(t)/dt^2 \ge 0$,
+function
+$\varphi(t)$ is convex at
+$[0,1]$
+and cannot take the value
+in the inner point of interval
+that is greater than its values
+at the ends.
+
+This makes our assumption impossible.
+
+The shift of two neighboring vertices is considered. For more vertices, the proof is similar.
+
+So, the broken
+$L_*$
+delivers a local minimum.
+\qed
+\end{proof}
+
+\subsection{Global minimum}
+
+Now let's give a condition sufficient
+for a broken
+$L_*$
+to deliver a global minimum.
+
+Let
+$M_i \in C_i$ --
+vertex of of the broken line
+$L_*$.
+The adjacent vertices
+$M_{i-1}$
+and
+$M_{i+1}$
+are outside
+$C_i$,
+since there are no nested contours.
+By construction of
+$L_*$:
+$\forall M'_i \in C_i:
+|M_{i-1} M_i|+|M_i M_{i+1}|
+\le
+|M_{i-1} M'_i|+|M'_i M_{i+1}|
+$.
 
 \begin{condition}
   \thlabel{cond2}
-Let \textbf{one} of the following requirements be satisfied
-for every piercing point $M_i$:
-
+Let \textbf{one} of the following requirements be satisfied:
 \begin{enumerate}
   \item
   Segment $M_{i-1} M_{i+1}$ intersects the contour
@@ -533,7 +987,7 @@ for every piercing point $M_i$:
 \begin{proposition}
   Let \thref{cond2}
   is satisfied for
-  (every vertex of)
+  (every contour of)
   $L_*$.
 
   If we move several adjacent vertices of the broken line
@@ -543,11 +997,62 @@ for every piercing point $M_i$:
   $L_*$ delivers a global minimum.
 \end{proposition}
 
+\begin{proof}
+Use the same notations:
+consider four adjacent vertices
+$M_{i-1}$, $M_i$, $M_{i+1}$, $M_{i+2} \in L_*$.
+$M_i \in  C_i,
+M_{i+1} \in C_{i+1}$.
+
+Suppose
+$$
+\exists M'_i \in C_i,
+\exists M'_{i+1} \in C_{i+1}
+:
+|M_{i-1} M'_i M'_{i+1} M_{i+2}|
+<
+|M_{i-1} M_i M_{i+1} M_{i+2}|
+$$
+
+Again,
+$
+M'_i \ne M_i,
+M'_{i+1} \ne M_{i+1}
+$.
+
+Let
+$
+M_i(s)=M_i+s \cdot \overrightarrow{M_i M'_i}
+$,
+$
+ M_{i+1}(t)= M_{i+1}+t \cdot \overrightarrow{M_{i+1} M'_{i+1}}
+$
+($s,t \in[0,1]$),
+$f(s,t)=
+|M_{i-1} M_i(s) M_{i+1}(t) M_{i+2}|
+$.
+
+Now,
+\thref{cond2}
+gurantees that
+$f(s,0)\ge f(0,0)$
+for
+$s\in[0,1]$,
+i.e. again
+\begin{equation}
+  \frac{\partial f(s,t)}{\partial s} \Big|_{(0,0)} \ge 0,
+  \frac{\partial f(s,t)}{\partial t} \Big|_{(0,0)} \ge 0
+  % \label{partials}
+\end{equation}
+This allows us to repeat the rest of the previous proof verbatim.
+\qed
+\end{proof}
+
 \begin{remark}
 Suppose that besides the trajectory
 $L_*$ ,
 there is another trajectory delivering a global minimum.
-Then it follows from the last statement
+Then it follows from the proof
 that they coincide as lines,
 that is,
 the difference can only be at
