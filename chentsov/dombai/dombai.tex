@@ -1,0 +1,98 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{imi2017} % стилевой файл imi2015
+
+% здесь могут быть "свои" макрокоманды, например так
+\newcommand{\lqs}{\leqslant}
+\newcommand{\gqs}{\geqslant}
+%---------------------------------------
+\setcounter{page}{1} % номер страницы начала статьи проставляет
+                     % ответственный за выпуск
+
+\numberwithin{equation}{section}
+
+\numberwithin{lemma}{section}
+\numberwithin{theorem}{section}
+\numberwithin{definition}{section}
+\numberwithin{corollary}{section}
+\numberwithin{statement}{section}
+\numberwithin{proposition}{section}
+\numberwithin{hypothesis}{section}
+\numberwithin{property}{section}
+\numberwithin{assumption}{section}
+\numberwithin{example}{section}
+\numberwithin{condition}{section}
+\numberwithin{problem}{section}
+
+% Шифр УДК проставляет автор
+\UDC{}
+% Коды Mathematical Subject Classifications проставляет автор (см. www.ams.org/msc/)
+\MSC{}
+
+\doi{}
+%дата поступления статьи, выставляет ответственный за выпуск
+\received{}
+% Фамилии автора или авторов
+\author{}
+% Фамилии автора или авторов на английском
+\authoreng{}
+%Далее, название статьи
+\title{}
+%Название статьи на английском
+\titleeng{}
+
+\grant{} % В конце ставится точка.
+
+\abstract{}
+
+\abstracteng{}
+% Аннотация на английском языке (в конце ставим точку)
+
+\keywords{}
+% с маленькой буквы. В конце точка.
+
+\keywordseng{}
+% ключевые слова на английском языке (в конце ставим точку)
+
+\contacts{}
+\contactseng{}
+
+\begin{document}
+
+{\noindent\large\bf ДОМБАЙ \vskip 1ex}
+
+СТАТЬЯ ДЛЯ СПИИРАН (это раздел после Введения)
+
+\section{Сводка общих понятий}
+
+Используем стандартную теоретико множественную символику (кванторы, связки и др.); через $\varnothing$ обозначаем пустое множество,  $\stackrel{\triangle}{=}$ -- равенство по определению. Множество, все элементы которого сами являются множествами,
+называем семейством. Если $x$ и $y$ -- объекты, то $\{x;y\}$ есть их неупорядоченная пара:  $\{x;y\}$ содержит $x,\;y$ и не содержит никаких других элементов. Для всякого объекта $z$ в виде $\{z\} \stackrel{\triangle}{=} \{z;z\}$ имеем синглетон,
+содержащий $z.$ Множества являются объектами. Если $a$ и $b$ -- объекты, то \cite[c.67]{15} $(a,b) \stackrel{\triangle}{=} \{\{a\};\{a;b\}\}$ есть упорядоченная пара с первым элементом $a$ и вторым элементом $b.$ Для каждой упорядоченной пары $h$ через
+$\mathrm{pr}_1(h)$ и $\mathrm{pr}_2(h)$ обозначаем первый и второй элементы $h,$ однозначно определяемые условием $h = (\mathrm{pr} _1(h),\mathrm{pr} _1(h)).$ Если же $x,\;y$ и $z$ -- объекты, то $(x,y,z) \stackrel{\triangle}{=} ((x,y),z)$ есть их упорядоченный триплет. Соответственно, $A \times B \times C = (A \times B) \times C$ для любых трех множеств $A,\;B$ и $C;$ см.
+\cite[c.17]{16}.
+
+Множеству $H$ сопоставляется семейство $\mathcal{P}(H)$ всех подмножеств (п/м) $H$ и $\mathcal{P}'(H) \stackrel{\triangle}{=}
+\mathcal{P}(H) \setminus \{\varnothing\}$ -- семейство всех непустых п/м $H;$ через $\mathrm{Fin}(H)$ обозначаем семейство всех непустых конечных п/м $H,\;\mathrm{Fin}(H) \subset \mathcal{P}'(H).$ Для непустого конечного множества $H$ имеем равенство
+$\mathrm{Fin}(H) = \mathcal{P}'(H).$ Если $A$ и $B$ -- непустые множества, $f$ -- отображение (функция) из $A$ в $B,$  а $C \in \mathcal{P}(A),$ то $f^1(C) \stackrel{\triangle}{=} \{f(x):\;x \in C\} \in \mathcal{P}(B)$ есть образ $C$ при действии $f.$
+
+Как обычно, $\mathbb{R}$ -- вещественная прямая, $\mathbb{R}_+ \stackrel{\triangle}{=} \{\xi \in \mathbb{R} \vert 0 \le \xi\} = [0,\infty[,\;\mathbb{N} \stackrel{\triangle}{=} \{1;2;...\}$ и $\mathbb{N}_0 \stackrel{\triangle}{=} \{0\} \cup \mathbb{N} = \{0;1;2;...\};$ при $p \in \mathbb{N}_0$ и $q \in \mathbb{N}_0$
+$$
+\overline{p,q} = \{\;k \in \mathbb{N}_0 \vert (p \le k) \& (k \in q)\}
+$$
+(при $q < p$ имеем $\overline{p,q} = \varnothing$). Если $S$ -- непустое множество, то $\mathcal{R}_+[S]$ есть множество всех неотрицательных вещественнозначных (в/з) функций на $S.$ Каждому непустому конечному множеству $K$ сопоставляем его мощность $|K| \in \mathbb{N}$ и непустое множество $(\mathrm{bi})[K]$ всех биекций \cite[c.87]{17} "промежутка" $\overline{1,|K|}$ на $K;$ пусть $|\varnothing| \stackrel{\triangle}{=} 0.$ Ясно, что при $m \in \mathbb{N}$ в виде $(\mathrm{bi})[\overline{1,m}]$ имеем множество всех перестановок \cite[c.87]{17} множества $\overline{1,m};$ если $\alpha \in (\mathrm{bi})[\overline{1,m}],$ то определена перестановка $\alpha^{-1} \in (\mathrm{bi})[\overline{1,m}],$ обратная к $\alpha:\;\alpha(\alpha^{-1}(k)) =
+\alpha^{-1}(\alpha(k)) = k$ при $k \in \overline{1,m}.$ Напомним, что здесь и ниже символика соответствует \cite[$\S$3.1]{4}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
