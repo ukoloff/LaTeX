@@ -4,7 +4,7 @@
 
 
 \titleRus{
-  Маршрутные процессы в задачах последовательного обхода множеств при наличии ограничений
+  Маршрутные процессы в задачах последовательного обхода множеств при наличии ограничений%
 }
 
 \authorsRus{
@@ -17,9 +17,15 @@
 } % \smallcapfake необходим для имитации малых прописных букв ввиду отсутствия поддержки в используемом шрифте
 
 \abstractRus{
+  В статье рассматривается \ldots
 }
 
 \keywordsRus{
+  раз,
+  два,
+  три,
+  четыре,
+  пять
 }
 
 
@@ -42,7 +48,7 @@
 (имеется в виду дискретность и по времени и  по фазовому состоянию).
 Оптимизируется комплекс, включающий точку старта,
 вариант очередности исполнения заданий
-(далее – маршрут)
+(далее -- маршрут)
 и конкретную траекторию;
 сам возникающий при этом комплекс (триплет)
 именуем маршрутным процессом.
@@ -135,14 +141,14 @@ $\mathcal{R}_+[S]$
 сопоставляем его мощность $|K| \in \mathbb{N}$
 и непустое множество $(\mathrm{bi})[K]$
 всех биекций
-\cite[c.87]{17} <<промежутка>>
+\cite[c.~87]{17} <<промежутка>>
 $\overline{1,|K|}$ на $K;$
 пусть
 $|\varnothing| \stackrel{\triangle}{=} 0.$
 Ясно, что при
 $m \in \mathbb{N}$ в виде $(\mathrm{bi})[\overline{1,m}]$
 имеем множество всех перестановок
-\cite[c.87]{17} множества
+\cite[c.~87]{17} множества
 $\overline{1,m};$
 если $\alpha \in (\mathrm{bi})[\overline{1,m}],$
 то определена перестановка
@@ -152,5 +158,176 @@ $\alpha:\;\alpha(\alpha^{-1}(k)) = \alpha^{-1}(\alpha(k)) = k$
 при $k \in \overline{1,m}.$
 Напомним, что здесь и ниже символика соответствует
 \cite[$\S$3.1]{4}.
+
+\section{Математическая постановка задачи}
+
+Фиксируем непустое множество $X$
+(в содержательных задачах \cite{4}
+$X$ -- прямоугольник на плоскости)
+и $X^0 \in \mathrm{Fin}(X);$
+в пределах $X$ осуществляются рассматриваемые перемещения,
+для которых точки из $X^0$ играют роль стартовых.
+Пусть $N \in \mathbb{N}$ таково,
+что $2 \le N;$
+фиксируем $N$ множеств
+\begin{equation}\label{2.1}
+M_1 \in \mathrm{Fin}(X),...,M_N \in \mathrm{Fin}(X),
+\end{equation}
+именуемых далее мегаполисами,
+также $N$ отношений (см. \cite[гл.II,$\S$4]{15})
+\begin{equation}\label{2.2}
+\mathbb{M}_1 \in \mathcal{P}'(M_1 \times M_1),...,\mathbb{M}_N \in \mathcal{P}'(M_N \times M_N).
+\end{equation}
+
+Мегаполисы (\ref{2.1})
+являются объектами посещения,
+а точки каждого отношения в (\ref{2.2})
+определяют допустимые варианты выполнения работ,
+связанных с посещением соответствующего мегаполиса и именуемых далее внутренними.
+Если $j \in \overline{1,N},$
+то полагаем, что
+\begin{equation}\label{2.3}
+(\mathfrak{M}_j \stackrel{\triangle}{=}
+\{\;\mathrm{pr}_1(z):\;z \in \mathbb{M}_j\})
+\& (\mathbf{M}_j \stackrel{\triangle}{=}
+\{\;\mathrm{pr}_2(z):\;z \in \mathbb{M}_j\});
+\end{equation}
+
+В (\ref{2.3}) указаны множества возможных пунктов прибытия в $M_j$
+и отправления из $M_j$ соответственно.
+В связи с (\ref{2.3})
+отметим, что
+$$
+(\mathbb{X} \stackrel{\triangle}{=} X^0 \cup
+(\bigcup\limits_{i=1}^n \mathfrak{M}_i) \in \mathrm{Fin}(X))
+\& (\mathbf{X} = X^0 \cup (\bigcup\limits_{i=1}^N \mathbf{M}_i) \in \mathrm{Fin}(X)).
+$$
+Рассматриваемые ниже системы перемещений имеют вид
+\begin{equation}\label{2.4}
+  \begin{aligned}
+    (x \in X^0)
+    \to
+    (x_{1,1} \in \mathfrak{M}_{\alpha(1)} \leadsto x_{1,2} \in \mathbf{M}_{\alpha(1)})
+    \to \dots \\
+    \to
+    (x_{N,1} \in \mathfrak{M}_{\alpha(N)} \leadsto x_{N,2} \in \mathbf{M}_{\alpha(N)}),
+  \end{aligned}
+\end{equation}
+где $\alpha$ -- перестановка $\overline{1,N},$
+сплошные стрелки обозначают внешние перемещения,
+а волнистые -- перемещения при выполнении внутренних работ;
+в (\ref{2.4}) постулируется, что
+\begin{equation}\label{2.5}
+  (x_{1,1},x_{1,2}) \in \mathbb{M}_{\alpha(1)},
+  \dots,
+  (x_{N,1},x_{N,2}) \in \mathbb{M}_{\alpha(N)}.
+\end{equation}
+
+Мы рассматриваем (\ref{2.4}), (\ref{2.5})
+как реализацию маршрутного процесса.
+Выбор самого этого процесса должен удовлетворять
+ряду условий,
+среди которых особо выделяются условия предшествования (см.\cite{10}).
+Для введения этих условий полагаем сначала,
+что $\mathbb{P} \stackrel{\triangle}{=} (
+  \mathrm{bi})[\overline{1,N}],$
+так что в (\ref{2.4}), (\ref{2.5})
+$\alpha \in \mathbb{P}.$
+Фиксируем множество
+$\mathbf{K} \in \mathcal{P}(\overline{1,N} \times \overline{1,N}),$
+элементы которого
+(а это упорядоченные пары)
+называем адресными парами
+(итак, $\mathbf{K} \subset \overline{1,N} \times \overline{1,N}$);
+полагаем, что
+\begin{equation}\label{2.6}
+\forall{\mathbf{K}_0} \in \mathcal{P}'(\mathbf{K})\;\exists{z_0} \in \mathbf{K}_0:\;\mathrm{pr}_1(z_0)
+\ne \mathrm{pr}_1(z)\;\;\forall{z} \in \mathbf{K}_0.
+\end{equation}
+
+Первый элемент адресной пары часто называют отправителем,
+а второй -- получателем
+(груза, сообщения и др.).
+Тогда, как показано в \cite[часть 2]{14},
+\begin{multline}\label{2.7}
+  % \begin{aligned}
+    \mathbf{A} \stackrel{\triangle}{=} \\
+    \left\{\;\alpha \in \mathbb{P} \vert\;
+      \forall{t_1} \in \overline{1,N}\;\
+      \forall{t_2}  \in \overline{1,N}\;\;
+      ((\alpha(t_1),\alpha(t_2)) \in \mathbf{K})
+      \Longrightarrow (t_1 < t_2)
+    \right\} = \\
+    =
+    \left\{\;
+      \alpha \in \mathbb{P} \vert
+      \alpha^{-1}(\mathrm{pr}_1(z)) < \alpha^{-1}(\mathrm{pr}_2(z))\;\;\forall{z}
+      \in \mathbf{K}
+    \right\} \ne \varnothing
+  % \end{aligned}
+\end{multline}
+есть (при условии (\ref{2.6}))
+непустое множество всех маршрутов
+(следуем терминологии TSP,
+называя маршрутами перестановки индексов из $\overline{1,N}$),
+допустимых по предшествованию или $\mathbf{K}$-допустимых:
+имеются в виду маршруты,
+для которых у любой адресной пары мегаполис-отправитель посещается раньше,
+чем мегаполис-получатель.
+Возвращаясь к (\ref{2.4}),
+введем в рассмотрение траектории,
+согласованные с маршрутами.
+Сначала введем в рассмотрение множество
+$\mathbb{Z}$ всех кортежей
+$(z_i)_{i \in \overline{0,N}}: \overline{0,N} \longrightarrow \mathbb{X} \times \mathbf{X}.$
+Если $x \in X^0$ и $\alpha \in \mathbb{P},$
+то
+\begin{equation}\label{2.8}
+\mathcal{Z}_\alpha[x] \stackrel{\triangle}{=} \{(z_i)_{i \in \overline{0,N}}
+\in \mathbb{Z} \vert\;(z_0 = (x,x)) \& (z_t \in \mathbb{M}_{\alpha(t)}\;\forall{t} \in \overline{1,N})\} \in \mathrm{Fin}(\mathbb{Z}).
+\end{equation}
+
+Из (\ref{2.8}) видно,
+что траектории из
+$\mathcal{Z}_\alpha[x]$
+реализуют в строгой форме схему (\ref{2.4}), (\ref{2.5}).
+При $x \in X^0$
+получаем, что
+\begin{equation}\label{2.9}
+  \tilde{D}[x] \stackrel{\triangle}{=}
+  \{(\alpha,(z_i)_{i \in \overline{0,N}}) \in \mathbf{A} \times \mathbb{Z}
+  \vert \;(z_i)_{i \in \overline{0,N}} \in \mathcal{Z}_\alpha[x]\}
+  \in \mathrm{Fin}(\mathbf{A} \times \mathbb{Z});
+\end{equation}
+(\ref{2.9}) есть множество всех допустимых решений (ДР)
+частной задачи со стартом из $x,$ или $x$-задачи.
+Наконец,
+\begin{multline}\label{2.10}
+  \mathbf{D} \stackrel{\triangle}{=}
+  \{(\alpha,(z_i)_{i \in \overline{0,N}},x) \in \mathbf{A} \times \mathbb{Z} \times X^0 \vert
+  (\alpha,(z_i)_{i \in \overline{0,N}}) \in \tilde{D}[x]\}
+  \in
+  \\
+  \in \mathrm{Fin}(\mathbf{A} \times \mathbb{Z} \times X^0),
+\end{multline}
+получая множество всех ДР формулируемой ниже полной задачи.
+
+{\bf Функции стоимости.}
+Через $\mathfrak{N}$
+обозначим семейство всех непустых п/м
+$\overline{1,N}:\;\mathfrak{N} \in \mathcal{P}'(\overline{1,N}).$
+Фиксируем $N + 2$ функции
+\begin{equation}\label{2.11}
+  \mathbf{c} \in \mathcal{R}_+[\mathbf{X} \times \mathbb{X} \times \mathfrak{N}],\;
+  c_1 \in \mathcal{R}_+[\mathbb{M}_1 \times \mathfrak{N}],...,
+  c_N \in \mathcal{R}_+[\mathbb{M}_N \times \mathfrak{N}],\;
+  f \in \mathcal{R}_+[\mathbf{M}],
+\end{equation}
+где $\mathbf{M}$
+есть объединение всех множеств
+$\mathbf{M}_i,\;i \in \overline{1,N}.$
+
+
+
 
 \end{document}
