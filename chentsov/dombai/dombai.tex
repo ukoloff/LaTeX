@@ -388,6 +388,103 @@ c_{\alpha(i)}(z_i,\alpha^1(\overline{i,N}))] +
 (\ref{2.4}), (\ref{2.5}); см. \cite[$\S$3.3]{4}).
 C учетом (\ref{2.12}) получаем при
 $x \in X^0$ частную задачу ($x$-задачу)
+\begin{equation}\label{2.13}
+  \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}] \longrightarrow
+  \mathrm{min},\;\;(\alpha,(z_i)_{i \in \overline{0,N}}) \in \tilde{D}[x],
+\end{equation}
+которая характеризуется экстремумом $V[x]$
+(наименьшее из чисел
+$\mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}],\;(\alpha,(z_i)_{i \in \overline{0,N}}) \in \tilde{D}[x])$
+и множеством
+\begin{equation}\label{2.14}
+  (\mathrm{SOL})[x] \stackrel{\triangle}{=}
+  \{\;(\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in \tilde{D}[x] \vert
+  \mathfrak{C}_{\alpha^0}[(z_i^0)_{i \in \overline{1,N}}] = V[x]\} \in \mathcal{P}'(\tilde{D}[x])
+\end{equation}
+всех оптимальных
+(при старте из $x$)
+решений; (\ref{2.14}) -- непустое конечное множество.
+В виде
+\begin{equation}\label{2.15}
+  \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{1,N}}] \longrightarrow
+  \mathrm{min},\;\;(\alpha,(z_i)_{i \in \overline{0,N}},x) \in \mathbf{D},
+\end{equation}
+имеем полную задачу, характеризуемую (глобальным) экстремумом
+\begin{equation}\label{2.16}
+  \mathbb{V} \stackrel{\triangle}{=}
+  \min\limits_{(\alpha,(z_i)_{i \in \overline{0,N}},x) \in
+  \mathbf{D}}\mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{1,N}}]
+  = \min\limits_{x \in X^0} V[x] \in \mathbb{R}_+
+\end{equation}
+и (непустым конечным) экстремальным множеством
+\begin{equation}\label{2.17}
+  \mathbf{SOL} \stackrel{\triangle}{=}
+  \{\;(\alpha,(z_i)_{i \in \overline{0,N}},x) \in \mathbf{D}
+  \vert \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{1,N}}] =
+  \mathbb{V}\} \in \mathrm{Fin}(\mathbf{D}).
+\end{equation}
 
+В связи с (\ref{2.16})
+отметим также следующую задачу оптимизации точки старта
+\begin{equation}\label{2.18}
+  V[x] \longrightarrow \mathrm{min},\;\;x \in X^0,
+\end{equation}
+имеющую экстремум $\mathbb{V}$
+(см. (\ref{2.16})) и экстремальное множество
+\begin{equation}\label{2.19}
+  X^0_{\mathrm{opt}} \stackrel{\triangle}{=} \{\;x^0 \in X^0 \vert V[x^0] = \mathbb{V}\} \in \mathcal{P}'(X^0).
+\end{equation}
+
+\begin{proposition}
+\label{prop:2.1}
+Если
+$x^0 \in X^0_{\mathrm{opt}}$ и $(\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in (\mathrm{SOL})[x^0],$
+то
+\begin{equation}\label{2.20}
+  (\alpha^0,(z_i^0)_{i \in \overline{0,N}},x^0) \in \mathbf{SOL}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+
+Фиксируем $x^0$ и $(\alpha^0,(z_i^0)_{i \in \overline{0,N}})$
+в соответствии с условиями.
+Тогда (см. (\ref{2.19}))
+$V[x^0] = \mathbb{V},$
+\begin{equation}\label{2.21}
+ (\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in \tilde{D}[x^0].
+\end{equation}
+
+В частности,
+$(\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in \mathbf{A} \times \mathbb{Z}$
+обладает свойством
+$(z_i^0)_{i \in \overline{0,N}} \in \mathcal{Z}_{\alpha^0}[x^0].$
+Тогда
+$(\alpha^0,(z_i^0)_{i \in \overline{0,N}},x^0) \in \mathbf{D}$
+в силу (\ref{2.10}), (\ref{2.19}) и (\ref{2.21}).
+При этом согласно (\ref{2.14})
+имеем по выбору $x^0,$ что
+$$
+  \mathfrak{C}_{\alpha^0}[(z^0)_{i \in \overline{0,N}}] = V[x^0] = \mathbb{V}.
+$$
+
+С учетом (\ref{2.17}) получаем теперь нужное свойство (\ref{2.20}).
+\hfill $\Box$
+\end{proof}
+
+Из предложения \ref{prop:2.1} вытекает,
+что решение задачи (\ref{2.15})
+можно искать по следующей схеме:
+1) нахождение $x^0 \in X^0_{\mathrm{opt}};$
+2) решение задачи (\ref{2.13}) при $x = x^0;$
+3) использование (\ref{2.20}).
+
+\section{Конкретизация общей постановки}
+
+Совсем кратко напомним некоторые построения \cite[$\S$ 3.3]{4}.
+Полагаем здесь, что $X$ -- прямоугольник на плоскости:
+$X = [0,a] \times [0,b],$
+где $a \in \mathbb{R}_+ \setminus \{0\}$ и $b \in \mathbb{R}_+ \setminus \{0\}.$
+Итак, $a > 0$ и $b > 0.$
 
 \end{document}
