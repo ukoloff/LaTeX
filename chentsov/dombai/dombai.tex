@@ -570,4 +570,301 @@ $\mathbb{M}_j$
 и в
 \cite{18}.
 
+\section{Динамическое программирование (алгоритмический вариант)}
+
+Вернемся к весьма общей постановке раздела 2.
+Она опирается на общие положения, установленные в \cite{19,20}
+и восходящие к \cite[$\S$4.9]{14}.
+Мы ограничимся сейчас изложением в форме алгоритма на функциональном уровне,
+выделяя основные этапы построения.
+Прежде всего введем оператор вычеркивания
+(заданий из списка)
+$\mathbf{I},$ действующий в $\mathfrak{N}$ по правилу:
+для
+$K \in \mathfrak{N}$ список $\mathbf{I}(K) \in \mathfrak{N}$
+определяется следующим образом:
+\begin{equation}\label{4.1}
+  \mathbf{I}(K) \stackrel{\triangle}{=} K \setminus \{\;\mathrm{pr}_2(z):\;z \in \Sigma[K]\},
+\end{equation}
+где
+$\Sigma[K] \stackrel{\triangle}{=} \{z \in \mathbf{K} \vert (\mathrm{pr}_1(z) \in K) \& (\mathrm{pr}_2(z) \in K)\}.$
+Cвойства данного оператора подробно рассматриваются в \cite[часть 2]{14}
+(см., в частности, \cite[раздел 2.2]{14}).
+
+1) {\bf Построение существенных списков заданий.}
+Полагаем, что
+\begin{equation}\label{4.2}
+  \mathcal{G} \stackrel{\triangle}{=} \{\;K \in \mathfrak{N} \vert
+  \forall{z} \in \mathbf{K}\;\;(\mathrm{pr}_1(z) \in K) \Longrightarrow (\mathrm{pr}_2(z) \in K)\}.
+\end{equation}
+
+Множества -- элементы семейства (\ref{4.2}) --
+называем существенными списками
+(см. \cite[раздел 4.9]{14}).
+Введем ранжирование по мощности:
+$\mathcal{G}_s \stackrel{\triangle}{=} \{\;K \in \mathcal{G} \vert s = |K|\}\;\;\forall{s} \in \overline{1,N}.$
+Тогда
+$\{\mathcal{G}_1;...;\mathcal{G}_N\}$
+есть разбиение
+$\mathcal{G},\;\mathcal{G}_N = \{\overline{1,N}\}$
+(синглетон)
+и
+$\mathcal{G}_1 = \{\;\{t\}:\;t \in \overline{1,N} \setminus \mathbf{K}_1\},$
+где
+\begin{equation}\label{4.3}
+  \mathbf{K}_1 = \{\;\mathrm{pr}_1(z):\;z \in \mathbf{K}\}.
+\end{equation}
+
+Наконец,
+$\mathcal{G}_{s-1} = \{\;K \setminus\{t\}:\;K \in \mathcal{G}_s,\;t \in \mathbf{I}(K)\}$ при $s \in \overline{2,N};$
+см. \cite[$\S$3.5]{4}.
+Итак, получили рекуррентную процедуру построения существенных списков
+$$
+  \mathcal{G}_N \longrightarrow \mathcal{G}_{N-1} \longrightarrow ... \longrightarrow \mathcal{G}_1.
+$$
+
+2) {\bf Построение слоев пространства позиций.}
+Конструируем (см. \cite[$\S$4.9]{14})
+множества $D_0,D_1,...,D_N,$
+элементами которых являются пары
+$(x,K),\;x \in \mathbf{X},\;K \in \mathcal{G},$
+называемые позициями.
+Полагаем (см. (\ref{4.3}))
+\begin{equation}\label{4.3'}
+  (D_N \stackrel{\triangle}{=} \{\;(x,\overline{1,N}):\;x \in X^0\}) \&
+  (D_0 \stackrel{\triangle}{=} \{\;(x,\varnothing):\;x \in
+    \bigcup\limits_{i \in \overline{1,N} \setminus \mathbf{K}_1} \mathbf{\mathbf{M}}_i\}.
+\end{equation}
+
+Если
+$s \in \overline{1,N-1}$ и $K \in \mathcal{G}_s,$
+то последовательно строим
+$$
+  \mathcal{J}_s(K) \stackrel{\triangle}{=}
+  \{\;j \in \overline{1,N} \setminus K \vert \{j\} \cup K
+  \in \mathcal{G}_{s+1}\},\;\mathcal{M}_s[K] \stackrel{\triangle}{=}
+  \bigcup\limits_{j \in \mathcal{J}_s(K)} \mathbf{M}_j,\;\mathbb{D}_s[K] \stackrel{\triangle}{=}
+  \{(x,K):\;x \in \mathcal{M}_s[K]\}.
+$$
+
+Полагаем теперь, что при $s \in \overline{1,N - 1}$
+$$
+  D_s \stackrel{\triangle}{=} \bigcup\limits_{K \in \mathcal{G}_s} \mathbb{D}_s[K].
+$$
+
+Итак, все множества
+$D_0,D_1,...,D_N$ определены.
+Все они непусты
+(см. \cite[предложение 4.9.3]{14}
+при несложной коррекции обозначений,
+а также \cite{21}).
+Отметим легко проверяемое ключевое свойство
+\begin{equation}\label{4.4}
+  (\mathrm{pr}_2(z),K \setminus \{j\}) \in D_{s-1}\;\;
+  \forall{s} \in \overline{1,N}\;\forall{(x,K)} \in D_s\;
+  \forall{j} \in \mathbf{I}(K)\;\forall{z} \in \mathbb{M}_j.
+\end{equation}
+
+3) {\bf Построение слоев функции Беллмана.}
+Последовательно строим функции
+$v_0 \in \mathcal{R}_+[D_0],\;v_1 \in \mathcal{R}_+[D_1],...,v_N \in \mathcal{R}_+[D_N].$
+В рамках нашего алгоритма построение упомянутых функций (слоев)
+осуществляется посредством рекуррентной процедуры
+(см. \cite[$\S$4.9]{14}, \cite{18,19,20,21}).
+Определяем функцию $v_0$ условием
+\begin{equation}\label{4.5}
+  v_0(x,\varnothing) \stackrel{\triangle}{=} f(x)\;\;
+  \forall{x} \in \bigcup\limits_{i \in \overline{1,N} \setminus \mathbf{K}_1} \mathbf{\mathbf{M}}_i;
+\end{equation}
+учитываем при этом второе соотношение в (\ref{4.3'}).
+Пусть $s \in \overline{1,N}$
+и функция
+$v_{s-1} \in \mathcal{R}_+[D_{s-1}]$
+уже построена.
+С учетом (\ref{4.4}) имеем, что определены все значения
+$$
+  v_{s-1}(\mathrm{pr}_2(z),K \setminus \{j\}) \in \mathbb{R}_+,\;
+  (x,K) \in D_s,\;j \in \mathbf{I}(K),\;z \in \mathbb{M}_j.
+$$
+
+С учетом этого определяем функцию
+$v_s \in \mathcal{R}_+[D_s]$
+посредством следующего правила
+\begin{equation}\label{4.6}
+  v_s(x,K) \stackrel{\triangle}{=}
+  \min\limits_{j \in \mathbf{I}(K)} \min\limits_{z \in \mathbb{M}_j}
+  [\mathbf{c}(x,\mathrm{pr}_1(z),K) + c_j(z,K) + v_{s-1}(\mathrm{pr}_2(z),K \setminus \{j\})]\;\;\forall{(x,K)} \in D_s;
+\end{equation}
+см., в частности,
+\cite[(4.3.13)]{4}.
+Итак, (\ref{4.6})
+определяет преобразование $v_{s-1}$ в $v_s.$
+Мы получаем рекуррентную процедуру
+\begin{equation}\label{4.7}
+  v_0 \longrightarrow v_1 \longrightarrow ... \longrightarrow v_N.
+\end{equation}
+
+{\bf Замечание 4.1.}
+Важно отметить, что (как и в \cite{22} для несколько иной задачи)
+реализация (\ref{4.7}) требует сохранения на каждом шаге в памяти компьютера только одной из функций
+$v_0,v_1,...,v_N.$
+В самом деле, при
+$s \in \overline{1,N}$
+для построения $v_s$ требуется только функция $v_{s-1},$
+массив значений которой и должен находиться в памяти компьютера.
+Это обстоятельство определяет более экономичный
+(с точки зрения ресурсов памяти)
+вариант процедуры (\ref{4.7}).
+Заметим, однако, что для построения оптимального решения потребуются уже все вышеупомянутые функции.
+
+Возвращаясь к общему варианту (\ref{4.7}),
+отметим, что финалом данной процедуры является построение функции
+$v_N \in \mathcal{R}_+[D_N].$
+Важно отметить, что
+\begin{equation}\label{4.8}
+  V[x] = v_N(x,\overline{1,N})\;\;\forall{x} \in X^0.
+\end{equation}
+
+Данное свойство является следствием того,
+что все функции в (\ref{4.7}) являются сужениями единой функции Беллмана
+(функции оптимального результата)
+на слои пространства позиций.
+В этой связи отметим \cite[$\S$4.9]{14}, \cite{18}
+(см. также \cite[(4.3.1)]{4}).
+Из (\ref{4.6}), (\ref{4.8})
+имеем при
+$x \in X^0,$ что (см. (\ref{4.3'}))
+\begin{equation}\label{4.9'}
+  V[x] = \min\limits_{j \in \mathbf{I}(\overline{1,N})} \min\limits_{z \in \mathbb{M}_j}
+  [\mathbf{c}(x,\mathrm{pr}_1(z),\overline{1,N}) + c_j(z,\overline{1,N}) + v_{N-1}(\mathrm{pr}_2(z),\overline{1,N} \setminus \{j\})].
+\end{equation}
+
+Особо отметим, что в случае, когда требуется найти не только глобальный экстремум и оптимальную точку старта,
+но и построить само оптимальное решение, при реализации (\ref{4.7})
+в памяти компьютера требуется сохранять массивы значений всех функций
+$v_0,v_1,...,v_N$
+(в этой связи см. (\ref{4.9'})).
+
+4) {\bf Нахождение оптимальной точки старта.}
+В силу (\ref{4.8}) после реализации процедуры (\ref{4.7}) мы располагаем зависимостью
+$$
+  x \longmapsto V[x]:\;X^0 \longrightarrow \mathbb{R}_+;
+$$
+данная зависимость полностью определяется функцией $v_N.$
+Поэтому для решения задачи (\ref{2.18}) следует проминимизировать
+$v_N.$
+В самом деле, используя (\ref{2.16}) и (\ref{4.8}) определяем
+$\mathbb{V}$ по правилу
+\begin{equation}\label{4.9}
+  \mathbb{V} = \min\limits_{x \in X^0} v_N(x,\overline{1,N}),
+\end{equation}
+а точку
+$x^0 \in X^0_{\mathrm{opt}}$
+находим из условия:
+$x^0 \in X^0$ и при этом
+\begin{equation}\label{4.10}
+  \mathbb{V} = v_N(x^0,\overline{1,N}).
+\end{equation}
+
+Таким образом, на основе (\ref{4.7}) удается
+(см. (\ref{4.9}),(\ref{4.10})) решить задачу (\ref{2.18}),
+причем сделать это можно с некоторой экономией ресурсов памяти вычислителя
+(см. замечание 4.1).
+
+5) {\bf Построение оптимального решения.}
+На этом этапе определяется решение из множества (\ref{2.17}).
+Мы используем при этом значение
+$\mathbb{V}$ и точку
+$x^0 \in X^0_{\mathrm{opt}},$
+найденные на предыдущем этапе (см.(\ref{4.9}),(\ref{4.10})).
+Полагаем $z^0 \stackrel{\triangle}{=} (x^0,x^0).$
+Далее используем то, что согласно (\ref{4.6}), (\ref{4.8}) и (\ref{4.9'})
+\begin{equation}\label{4.11}
+  \mathbb{V} = v_N(x^0,\overline{1,N}) =
+  \min\limits_{j \in \mathbf{I}(\overline{1,N})}
+  \min\limits_{z \in \mathbb{M}_j}
+  [\mathbf{c}(x^0,\mathrm{pr}_1(z),\overline{1,N}) + c_j(z,\overline{1,N}) + v_{N-1}(\mathrm{pr}_2(z),\overline{1,N} \setminus \{j\})].
+\end{equation}
+
+Напомним, что
+$(x^0,\overline{1,N}) \in D_N$
+в силу (\ref{4.3'}) и (согласно (\ref{4.4})) при
+$j \in \mathbf{I}(\overline{1,N})$
+и
+$z \in \mathbb{M}_j$
+имеем свойство
+$(\mathrm{pr}_2(z),\overline{1,N} \setminus \{j\}) \in D_{N-1}.$
+С учетом (\ref{4.11}) находим
+$\eta_1 \in \mathbf{I}(\overline{1,N})$ и $z_1^0 \in \mathbb{M}_{\eta_1},$
+для которых
+\begin{equation}\label{4.12}
+  \mathbb{V} = \mathbf{c}(x^0,\mathrm{pr}_1(z_1^0),\overline{1,N}) +
+  c_{\eta_1}(z_1^0,\overline{1,N}) +
+  v_{N-1}(\mathrm{pr}_2(z_1^0),\overline{1,N} \setminus \{\eta_1\}),
+\end{equation}
+получая при этом свойство
+$(\mathrm{pr}_2(z_1^0),\overline{1,N} \setminus \{\eta_1\}) \in D_{N-1}.$
+Теперь для последнего слагаемого в (\ref{4.12}) имеем согласно (\ref{4.6}) равенство
+\begin{equation}\label{4.13}
+  \begin{array}{c}
+  v_{N-1}(\mathrm{pr}_2(z_1^0),\overline{1,N}
+  \setminus \{\eta_1\}) = \min\limits_{j \in \mathbf{I}(\overline{1,N}
+  \setminus \{\eta_1\})} \min\limits_{z \in \mathbb{M}_j}
+  [\mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z),\overline{1,N} \setminus \{\eta_1\})\\\qquad {} +
+   c_j(z,\overline{1,N} \setminus \{\eta_1\}) +
+   v_{N-2}(\mathrm{pr}_2(z),\overline{1,N} \setminus \{\eta_1;j\})],
+  \end{array}
+\end{equation}
+где согласно (\ref{4.4})
+$(\mathrm{pr}_2(z),\overline{1,N} \setminus \{\eta_1;j\}) =
+(\mathrm{pr}_2(z),(\overline{1,N} \setminus \{\eta_1\}) \setminus \{j\}) \in D_{N-2}$
+при
+$j \in \mathbf{I}(\overline{1,N} \setminus \{\eta_1\})$ и $z \in \mathbb{M}_j.$
+С учетом (\ref{4.13}) находим
+$\eta_2 \in \mathbf{I}(\overline{1,N} \setminus \{\eta_1\})$ и $z_2^0 \in \mathbb{M}_{\eta_2},$
+для которых
+\begin{equation}\label{4.14}\begin{array}{c}
+  v_{N-1}(\mathrm{pr}_2(z_1^0),\overline{1,N} \setminus \{\eta_1\}) =
+  \mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z_2^0),\overline{1,N}
+  \setminus \{\eta_1\}) + c_{\eta_2}(z_2^0,\overline{1,N}
+  \setminus \{\eta_1\})  \\\qquad {}
+  + v_{N-2}(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus
+  \{\eta_1;\eta_2\}),\end{array}
+\end{equation}
+где
+$(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus \{\eta_1;\eta_2\}) \in D_{N-2}.$
+Подставляя (\ref{4.14}) в (\ref{4.12}), получаем, что
+\begin{equation}\label{4.15}
+  \begin{array}{c}
+    \mathbb{V} =
+    \mathbf{c}(x^0,\mathrm{pr}_1(z_1^0),\overline{1,N}) +
+    \mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z_2^0),\overline{1,N} \setminus \{\eta_1\})\\\qquad {} +
+    c_{\eta_1}(z_1^0,\overline{1,N}) + c_{\eta_2}(z_2^0,\overline{1,N} \setminus \{\eta_1\}) +
+    v_{N-2}(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus \{\eta_1;\eta_2\}).
+  \end{array}
+\end{equation}
+Далее процедуры, подобные (\ref{4.12}), (\ref{4.14})
+следует продолжать вплоть до исчерпывания $\overline{1,N}.$
+В результате будут построены маршрут
+$\alpha^0 \stackrel{\triangle}{=} (\eta_t)_{t \in \overline{1,N}} \in \mathbf{A}$
+и траектория
+$(z_t^0)_{t \in \overline{0,N}} \in \mathcal{Z}_{\alpha^0}[x^0],$
+для которых
+$\mathbb{V} = \mathfrak{C}_{\alpha^0}[(z_t^0)_{t \in \overline{0,N}}]$
+(подробное рассуждение приведено в \cite{19}).
+Тогда согласно (\ref{2.9}) и (\ref{2.14})
+$(\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in (\mathrm{\mathrm{SOL}})[x^0].$
+С учетом предложения 2.1, (\ref{4.9}) и (\ref{4.10})
+получаем, что выполняется (\ref{2.20}),
+т.е. триплет
+$(\alpha^0,(z_i^0)_{i \in \overline{0,N}},x^0)$
+является оптимальным решением задачи (\ref{2.15}).
+
+\section{Модельный пример: оптимальное решение полной задачи}
+
+В настоящем разделе используем конкретизацию постановки раздела 3,
+т.е. рассматриваем вариант листовой резки деталей по замкнутому контуру.
+Для этого варианта будет получено оптимальное решение по схеме предыдущего раздела:
+построен алгоритм, реализованный в виде стандартной программы для ПЭВМ.
+
 \end{document}
