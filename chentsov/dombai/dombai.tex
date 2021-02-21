@@ -36,6 +36,7 @@
 \normalsize
 
 \section*{Введение}
+\label{sec:intro}
 
 Объектом исследования в статье
 являются задачи маршрутизации перемещений
@@ -76,6 +77,7 @@
 а также содержательные построения \cite[часть I]{4}.
 
 \section{Сводка общих понятий}
+\label{sec:1}
 
 Используем стандартную теоретико множественную символику
 (кванторы, связки и др.);
@@ -160,6 +162,7 @@ $\alpha:\;\alpha(\alpha^{-1}(k)) = \alpha^{-1}(\alpha(k)) = k$
 \cite[$\S$3.1]{4}.
 
 \section{Математическая постановка задачи}
+\label{sec:2}
 
 Фиксируем непустое множество $X$
 (в содержательных задачах \cite{4}
@@ -480,6 +483,7 @@ $$
 3) использование (\ref{2.20}).
 
 \section{Конкретизация общей постановки}
+\label{sec:3}
 
 Совсем кратко напомним некоторые построения \cite[$\S$ 3.3]{4}.
 Полагаем здесь, что $X$ -- прямоугольник на плоскости:
@@ -571,8 +575,9 @@ $\mathbb{M}_j$
 \cite{18}.
 
 \section{Динамическое программирование (алгоритмический вариант)}
+\label{sec:4}
 
-Вернемся к весьма общей постановке раздела 2.
+Вернемся к весьма общей постановке раздела \ref{sec:2}.
 Она опирается на общие положения, установленные в \cite{19,20}
 и восходящие к \cite[$\S$4.9]{14}.
 Мы ограничимся сейчас изложением в форме алгоритма на функциональном уровне,
@@ -639,13 +644,17 @@ $(x,K),\;x \in \mathbf{X},\;K \in \mathcal{G},$
 Если
 $s \in \overline{1,N-1}$ и $K \in \mathcal{G}_s,$
 то последовательно строим
-$$
+\begin{multline*}
   \mathcal{J}_s(K) \stackrel{\triangle}{=}
   \{\;j \in \overline{1,N} \setminus K \vert \{j\} \cup K
-  \in \mathcal{G}_{s+1}\},\;\mathcal{M}_s[K] \stackrel{\triangle}{=}
-  \bigcup\limits_{j \in \mathcal{J}_s(K)} \mathbf{M}_j,\;\mathbb{D}_s[K] \stackrel{\triangle}{=}
+  \in \mathcal{G}_{s+1}\},
+  \\
+  \mathcal{M}_s[K] \stackrel{\triangle}{=}
+  \bigcup\limits_{j \in \mathcal{J}_s(K)} \mathbf{M}_j,
+  \\
+  \mathbb{D}_s[K] \stackrel{\triangle}{=}
   \{(x,K):\;x \in \mathcal{M}_s[K]\}.
-$$
+\end{multline*}
 
 Полагаем теперь, что при $s \in \overline{1,N - 1}$
 $$
@@ -690,11 +699,13 @@ $$
 С учетом этого определяем функцию
 $v_s \in \mathcal{R}_+[D_s]$
 посредством следующего правила
-\begin{equation}\label{4.6}
-  v_s(x,K) \stackrel{\triangle}{=}
+\begin{multline}
+  \label{4.6}
+  v_s(x,K) \stackrel{\triangle}{=} \\
   \min\limits_{j \in \mathbf{I}(K)} \min\limits_{z \in \mathbb{M}_j}
-  [\mathbf{c}(x,\mathrm{pr}_1(z),K) + c_j(z,K) + v_{s-1}(\mathrm{pr}_2(z),K \setminus \{j\})]\;\;\forall{(x,K)} \in D_s;
-\end{equation}
+  [\mathbf{c}(x,\mathrm{pr}_1(z),K) + c_j(z,K) + v_{s-1}(\mathrm{pr}_2(z),K \setminus \{j\})] \\
+  \forall{(x,K)} \in D_s;
+\end{multline}
 см., в частности,
 \cite[(4.3.13)]{4}.
 Итак, (\ref{4.6})
@@ -734,10 +745,12 @@ $v_N \in \mathcal{R}_+[D_N].$
 Из (\ref{4.6}), (\ref{4.8})
 имеем при
 $x \in X^0,$ что (см. (\ref{4.3'}))
-\begin{equation}\label{4.9'}
-  V[x] = \min\limits_{j \in \mathbf{I}(\overline{1,N})} \min\limits_{z \in \mathbb{M}_j}
+\begin{multline}
+  \label{4.9'}
+  V[x] = \\
+  \min\limits_{j \in \mathbf{I}(\overline{1,N})} \min\limits_{z \in \mathbb{M}_j}
   [\mathbf{c}(x,\mathrm{pr}_1(z),\overline{1,N}) + c_j(z,\overline{1,N}) + v_{N-1}(\mathrm{pr}_2(z),\overline{1,N} \setminus \{j\})].
-\end{equation}
+\end{multline}
 
 Особо отметим, что в случае, когда требуется найти не только глобальный экстремум и оптимальную точку старта,
 но и построить само оптимальное решение, при реализации (\ref{4.7})
@@ -779,12 +792,13 @@ $x^0 \in X^0_{\mathrm{opt}},$
 найденные на предыдущем этапе (см.(\ref{4.9}),(\ref{4.10})).
 Полагаем $z^0 \stackrel{\triangle}{=} (x^0,x^0).$
 Далее используем то, что согласно (\ref{4.6}), (\ref{4.8}) и (\ref{4.9'})
-\begin{equation}\label{4.11}
-  \mathbb{V} = v_N(x^0,\overline{1,N}) =
+\begin{multline}
+  \label{4.11}
+  \mathbb{V} = v_N(x^0,\overline{1,N}) = \\
   \min\limits_{j \in \mathbf{I}(\overline{1,N})}
   \min\limits_{z \in \mathbb{M}_j}
   [\mathbf{c}(x^0,\mathrm{pr}_1(z),\overline{1,N}) + c_j(z,\overline{1,N}) + v_{N-1}(\mathrm{pr}_2(z),\overline{1,N} \setminus \{j\})].
-\end{equation}
+\end{multline}
 
 Напомним, что
 $(x^0,\overline{1,N}) \in D_N$
@@ -805,16 +819,19 @@ $\eta_1 \in \mathbf{I}(\overline{1,N})$ и $z_1^0 \in \mathbb{M}_{\eta_1},$
 получая при этом свойство
 $(\mathrm{pr}_2(z_1^0),\overline{1,N} \setminus \{\eta_1\}) \in D_{N-1}.$
 Теперь для последнего слагаемого в (\ref{4.12}) имеем согласно (\ref{4.6}) равенство
-\begin{equation}\label{4.13}
-  \begin{array}{c}
-  v_{N-1}(\mathrm{pr}_2(z_1^0),\overline{1,N}
-  \setminus \{\eta_1\}) = \min\limits_{j \in \mathbf{I}(\overline{1,N}
-  \setminus \{\eta_1\})} \min\limits_{z \in \mathbb{M}_j}
-  [\mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z),\overline{1,N} \setminus \{\eta_1\})\\\qquad {} +
-   c_j(z,\overline{1,N} \setminus \{\eta_1\}) +
-   v_{N-2}(\mathrm{pr}_2(z),\overline{1,N} \setminus \{\eta_1;j\})],
-  \end{array}
-\end{equation}
+\begin{multline}
+  \label{4.13}
+  v_{N-1}(\mathrm{pr}_2(z_1^0),\overline{1,N}  \setminus \{\eta_1\}) =
+  \\
+  \min\limits_{j \in \mathbf{I}(\overline{1,N} \setminus \{\eta_1\})}
+  \min\limits_{z \in \mathbb{M}_j}
+  \big [
+    \mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z),\overline{1,N} \setminus \{\eta_1\})
+    \\
+    + c_j(z,\overline{1,N} \setminus \{\eta_1\}) +
+    v_{N-2}(\mathrm{pr}_2(z),\overline{1,N} \setminus \{\eta_1;j\})
+  \big ],
+\end{multline}
 где согласно (\ref{4.4})
 $(\mathrm{pr}_2(z),\overline{1,N} \setminus \{\eta_1;j\}) =
 (\mathrm{pr}_2(z),(\overline{1,N} \setminus \{\eta_1\}) \setminus \{j\}) \in D_{N-2}$
@@ -823,14 +840,17 @@ $j \in \mathbf{I}(\overline{1,N} \setminus \{\eta_1\})$ и $z \in \mathbb{M}_j.$
 С учетом (\ref{4.13}) находим
 $\eta_2 \in \mathbf{I}(\overline{1,N} \setminus \{\eta_1\})$ и $z_2^0 \in \mathbb{M}_{\eta_2},$
 для которых
-\begin{equation}\label{4.14}\begin{array}{c}
+\begin{multline}
+  \label{4.14}
   v_{N-1}(\mathrm{pr}_2(z_1^0),\overline{1,N} \setminus \{\eta_1\}) =
+  \\
   \mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z_2^0),\overline{1,N}
   \setminus \{\eta_1\}) + c_{\eta_2}(z_2^0,\overline{1,N}
-  \setminus \{\eta_1\})  \\\qquad {}
-  + v_{N-2}(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus
-  \{\eta_1;\eta_2\}),\end{array}
-\end{equation}
+  \setminus \{\eta_1\})
+  + \\
+  v_{N-2}(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus
+  \{\eta_1;\eta_2\}),
+\end{multline}
 где
 $(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus \{\eta_1;\eta_2\}) \in D_{N-2}.$
 Подставляя (\ref{4.14}) в (\ref{4.12}), получаем, что
@@ -838,11 +858,13 @@ $(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus \{\eta_1;\eta_2\}) \in D_{N-2}.$
   \begin{array}{c}
     \mathbb{V} =
     \mathbf{c}(x^0,\mathrm{pr}_1(z_1^0),\overline{1,N}) +
-    \mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z_2^0),\overline{1,N} \setminus \{\eta_1\})\\\qquad {} +
-    c_{\eta_1}(z_1^0,\overline{1,N}) + c_{\eta_2}(z_2^0,\overline{1,N} \setminus \{\eta_1\}) +
-    v_{N-2}(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus \{\eta_1;\eta_2\}).
+    \mathbf{c}(\mathrm{pr}_2(z_1^0),\mathrm{pr}_1(z_2^0),\overline{1,N} \setminus \{\eta_1\})\\
+    + c_{\eta_1}(z_1^0,\overline{1,N}) + c_{\eta_2}(z_2^0,\overline{1,N} \setminus \{\eta_1\})
+    \\
+    + v_{N-2}(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus \{\eta_1;\eta_2\}).
   \end{array}
 \end{equation}
+
 Далее процедуры, подобные (\ref{4.12}), (\ref{4.14})
 следует продолжать вплоть до исчерпывания $\overline{1,N}.$
 В результате будут построены маршрут
@@ -861,8 +883,9 @@ $(\alpha^0,(z_i^0)_{i \in \overline{0,N}},x^0)$
 является оптимальным решением задачи (\ref{2.15}).
 
 \section{Модельный пример: оптимальное решение полной задачи}
+\label{sec:5}
 
-В настоящем разделе используем конкретизацию постановки раздела 3,
+В настоящем разделе используем конкретизацию постановки раздела~\ref{sec:3},
 т.е. рассматриваем вариант листовой резки деталей по замкнутому контуру.
 Для этого варианта будет получено оптимальное решение по схеме предыдущего раздела:
 построен алгоритм, реализованный в виде стандартной программы для ПЭВМ.
