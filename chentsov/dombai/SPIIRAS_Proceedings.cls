@@ -17,10 +17,10 @@ LaTeX class for preparing papers to "SPIIRAS Proceedings"]
 \RequirePackage[english,russian]{babel} % русификация
 \RequirePackage{tempora}
 \RequirePackage[T2A]{fontenc} % шрифты
-\RequirePackage[reqno,tbtags]{amsmath} % расширенные возможности для задания формул reqno, 
+\RequirePackage[reqno,tbtags]{amsmath} % расширенные возможности для задания формул reqno,
 \RequirePackage{amsfonts,amssymb,mathrsfs} % расширенные возможности написания математических формул
 \RequirePackage{graphicx} % добавление рисунков в статью
-\RequirePackage{cite} % объединение перечислений ссылок на элементы литерытуры в тексте статьи
+% \RequirePackage{cite} % объединение перечислений ссылок на элементы литерытуры в тексте статьи
 \RequirePackage{url} % корректное отображение и перенос ссылок на интернет ресурсы
 \RequirePackage{listings} % представление исходного кода, алгоритмов, включает в себя пакет algorithm
 \RequirePackage[font=small,format=plain,labelsep=period,justification=centering, skip=0pt]{caption}
@@ -63,7 +63,7 @@ LaTeX class for preparing papers to "SPIIRAS Proceedings"]
 
 %///////////////////////////////////////////////////////%
 
-% Листинги и Алгоритмы 
+% Листинги и Алгоритмы
 % far
 
 \lstset{breaklines=true,language=C,showstringspaces=false,breaklines=true,xleftmargin=\parindent,captionpos=b,basicstyle=\fontsize{9pt}{10}\sffamily,basewidth=0.42em}
@@ -83,15 +83,15 @@ LaTeX class for preparing papers to "SPIIRAS Proceedings"]
   \setlength{\parsep}{0mm}
   \setlength{\topsep}{0mm}
   \setlength{\partopsep}{0mm}}}{\end{list}}
- 
+
 \renewenvironment{enumerate}%
-{	
+{
 	\begin{list}{\nobreak\strut\smash{\parbox[t]\labelwidth{\raggedright{\arabic{enumi}.}}}}
 	{
 		\setlength{\labelwidth}{0pt}
 		\setlength{\leftmargin}{0pt}
 		\setlength{\labelwidth}{\widthof{\arabic{enumi}.}}
-		\setlength{\labelsep}{-5pt}		
+		\setlength{\labelsep}{-5pt}
 		\setlength{\itemindent}{\parindent}
 		%\addtolength{\itemindent}{\labelwidth}
 		\addtolength{\itemindent}{10pt}
@@ -103,7 +103,7 @@ LaTeX class for preparing papers to "SPIIRAS Proceedings"]
 		\setlength{\partopsep}{0mm}
 		\usecounter{enumi}
 	}
-}{\end{list}} 
+}{\end{list}}
 
 
 %///////////////////////////////////////////////////////%
@@ -218,7 +218,7 @@ LaTeX class for preparing papers to "SPIIRAS Proceedings"]
 \rule{\textwidth}{0.5pt}
 \textit{\@authorsEng}~\textbf{\@titleEng.}\\
 {\hspace*{0.5cm}\textbf{Abstract.}}~{\hyphenpenalty=10000\setlength{\parindent}{0.5cm} \@abstractEng}\par
-\hspace{-\parindent}\hspace*{0.5cm}\textbf{Keywords:}~\@keywordsEng \\[-4pt] % %% some magic to make last abstract paragraph look good 
+\hspace{-\parindent}\hspace*{0.5cm}\textbf{Keywords:}~\@keywordsEng \\[-4pt] % %% some magic to make last abstract paragraph look good
 \rule{\textwidth}{0.5pt} \\[-2pt] %
 }
 
@@ -252,7 +252,7 @@ LaTeX class for preparing papers to "SPIIRAS Proceedings"]
 \textit{\@authorsRus}~\textbf{\@titleRus.}\\[-10pt] %
 \small\@summaryRus
 \ifnum \summaryRusLenght>\halfoftextheight
-	\newpage	
+	\newpage
 \fi
 %\ifnum \summaryRusLenght<\halfoftextheight
 %	\ifnum \summaryEngLenght<\halfoftextheight

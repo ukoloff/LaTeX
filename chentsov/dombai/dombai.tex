@@ -2,8 +2,22 @@
 
 \graphicspath{{media/}}
 
-\udk{000.00}
+\usepackage[%
+  parentracker=true,
+  style=gost-numeric,
+  defernumbers=true,
+  movenames=false,
+  maxnames=100,
+  % isbn=false,
+  % doi=false,
+  sorting=none,
+]{biblatex}
 
+% \toggletrue{bbx:gostbibliography}
+
+\addbibresource{dombai.bib}
+
+\udk{000.00}
 
 \titleRus{
   Маршрутные процессы в задачах последовательного обхода множеств при наличии ограничений%
@@ -995,5 +1009,6 @@ Intel i7-2630QM и 8 Гб
   \label{fig:1}
 \end{figure}
 
+\printbibliography[title=Литература]
 
 \end{document}
