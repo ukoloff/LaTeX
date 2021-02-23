@@ -2,6 +2,10 @@
 
 \graphicspath{{media/}}
 
+\usepackage{subfig}
+\usepackage{tikz}
+\usetikzlibrary{patterns,intersections}
+
 \udk{000.00}
 
 \titleRus{
@@ -111,6 +115,73 @@
   \input{media/classes.pdf_tex}
   \caption{Классификация задач резки}
   \label{CP-classes}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \subfloat[На пересечении с контуром]{
+    \label{pierce-thru}
+    \tikz[rotate=27,scale=0.68]{
+        \draw[thick,name path=C1]
+            (0,5) node[above] {$C_{i-1}$}
+            to[bend right] (1,0);
+        \draw[thick,name path=C2]
+            (3,0) node[below] {$C_i$}
+            to[bend right] (3,2);
+        \draw[thick,name path=C3]
+            (4,3) node[above] {$C_{i+1}$}
+            to[bend right] (5,0);
+        \path[name path=L0]
+            (0,1.5) -- (6,2);
+        \path[name path=Lx]
+            (0,1) -- (6,1);
+        \fill[name intersections={of=C1 and Lx, name=X}]
+            (X-1) coordinate(M1) circle(3pt) node[below] {$M_{i-1}$};
+        \fill[name intersections={of=C2 and L0, name=X}]
+            (X-1) coordinate(M2) circle(3pt) node[below left]{$M_i$};
+        \draw[name intersections={of=C2 and Lx, name=X}]
+            (X-1) coordinate(M2x) node[below right]{$M'_i$};
+        \fill[name intersections={of=C3 and Lx, name=X}]
+            (X-1) coordinate(M3) circle(3pt) node[right] {$M_{i+1}$};
+        \draw[dashed]
+            (M1) -- (M3);
+        \draw[thin,-latex]
+            (M2)
+            to[bend right] (M2x);
+    }
+  }
+  \subfloat[Отражение по \textit{принципу Ферма}]{
+    \label{pierce-fermat}
+    \tikz[rotate=-12,scale=0.68]{
+      \draw[thick]
+          (0, 0) coordinate(zero) -- (5, 0) coordinate(future) node[right] {$C_i$};
+      \fill[black]
+          (1.5, 0) circle(3pt) coordinate(middle) node[below left]  {$M_i$}
+          (1, 1) circle(3pt) coordinate(from) node[above right] {$M_{i-1}$} ++(-1.5,0) node[above] {$C_{i-1}$}
+          (4.5, 2) circle(3pt) coordinate(to) node[above right] {$M_{i+1}$} ++(1.5,0) node[below] {$C_{i+1}$};
+      \begin{scope}
+          \clip (from) circle(1);
+          \draw[thick] (from) ++(0, 3) circle(3);
+      \end{scope};
+      \begin{scope}
+          \clip (to) circle(1.5);
+          \draw[thick] (to) ++(3, 4) circle(5);
+      \end{scope};
+      % \draw[dashed] (from) -- (middle) -- (to);
+      \draw[thin] (4.5, -2) circle(0.062) coordinate(mirror) node[right] {$\hat M_{i+1}$};
+      \coordinate (opt) at (intersection of zero--future and mirror--from);
+      % \draw[thin] (opt) circle(3pt);
+      \draw[dotted]
+          (mirror) -- (opt)
+          (mirror) -- (to);
+      \draw[dashed] (from) -- (opt) -- (to);
+
+      \draw[thin,-latex] (middle) to[bend right] (opt) node[below] {$M'_i$};
+    }
+  }
+  \caption{Выбор положения точки врезки}
+  \label{shift-pierce-point}
 \end{figure}
 
 \end{document}
