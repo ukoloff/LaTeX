@@ -8,6 +8,17 @@
 
 \usepackage{enumitem}
 
+\usepackage[%
+  parentracker=true,
+  style=gost-numeric,
+  defernumbers=true,
+  sorting=none,
+]{biblatex}
+
+% \toggletrue{bbx:gostbibliography}
+
+\addbibresource{ccp.bib}
+
 \udk{519.8.А}
 
 \titleRus{
@@ -1766,6 +1777,8 @@ MILP (Mixed Integer Linear Program)
 когда точки врезки лежат вне контуров деталей
 в соответствии с технологическими требованиями
 современного оборудования с ЧПУ.
+
+\printbibliography[title=Литература]
 
 \begin{aboutAuthors}
 
