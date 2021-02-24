@@ -111,6 +111,11 @@
 относящиеся к математической постановке,
 а также содержательные построения \cite[часть I]{4}.
 
+Рассматриваемая задача имеет своим прототипом известную труднорешаемую задачу коммивояжера
+или TSP в англоязычной литературе; см. \cite{7,8,9,10,11,12}. Однако существенные особенности качественного характера (прежде всего, наличие ограничений) мотивируют построение специализированной теории; см. \cite{1,3,4,5,6,13,14}.
+Разработке упомянутых теоретических вопросов посвящены, в частности, монографии \cite{13,14,14`}. В настоящем изложении мы выделяем \cite{4}, где на примере актуальной инженерной задачи удается продемонстрировать ряд принципиальных положений теоретического характера и, в частности, представить возможности динамического программирования (ДП) как общего метода решения различных прикладных задач.
+
+
 \section{Сводка общих понятий}
 \label{sec:1}
 
@@ -168,7 +173,7 @@ $\mathbb{R}_+ \stackrel{\triangle}{=} \{\xi \in \mathbb{R} \vert 0 \le \xi\} = [
 и $\mathbb{N}_0 \stackrel{\triangle}{=} \{0\} \cup \mathbb{N} = \{0;1;2;...\};$
 при $p \in \mathbb{N}_0$ и $q \in \mathbb{N}_0$
 $$
-\overline{p,q} = \{\;k \in \mathbb{N}_0 \vert (p \le k) \& (k \in q)\}
+\overline{p,q} = \{\;k \in \mathbb{N}_0 \vert (p \le k) \& (k \le q)\}
 $$
 (при $q < p$ имеем $\overline{p,q} = \varnothing$).
 Если $S$ -- непустое множество, то
@@ -211,7 +216,7 @@ $X$ -- прямоугольник на плоскости)
 \begin{equation}\label{2.1}
 M_1 \in \mathrm{Fin}(X),...,M_N \in \mathrm{Fin}(X),
 \end{equation}
-именуемых далее мегаполисами,
+именуемых далее мегаполисами, а
 также $N$ отношений (см. \cite[гл.II,$\S$4]{15})
 \begin{equation}\label{2.2}
 \mathbb{M}_1 \in \mathcal{P}'(M_1 \times M_1),...,\mathbb{M}_N \in \mathcal{P}'(M_N \times M_N).
@@ -280,7 +285,7 @@ $\mathbf{K} \in \mathcal{P}(\overline{1,N} \times \overline{1,N}),$
 полагаем, что
 \begin{equation}\label{2.6}
 \forall{\mathbf{K}_0} \in \mathcal{P}'(\mathbf{K})\;\exists{z_0} \in \mathbf{K}_0:\;\mathrm{pr}_1(z_0)
-\ne \mathrm{pr}_1(z)\;\;\forall{z} \in \mathbf{K}_0.
+\ne \mathrm{pr}_2(z)\;\;\forall{z} \in \mathbf{K}_0.
 \end{equation}
 
 Первый элемент адресной пары часто называют отправителем,
@@ -353,7 +358,7 @@ $\mathcal{Z}_\alpha[x]$
 {\bf Функции стоимости.}
 Через $\mathfrak{N}$
 обозначим семейство всех непустых п/м
-$\overline{1,N}:\;\mathfrak{N} \in \mathcal{P}'(\overline{1,N}).$
+$\overline{1,N}:\;\mathfrak{N} \stackrel{\triangle}{=}  \mathcal{P}'(\overline{1,N}).$
 Фиксируем $N + 2$ функции
 \begin{equation}\label{2.11}
   \mathbf{c} \in \mathcal{R}_+[\mathbf{X} \times \mathbb{X} \times \mathfrak{N}],\;
@@ -437,28 +442,28 @@ $\mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}],\;(\alpha,(z_i)_{i \in \ove
 \begin{equation}\label{2.14}
   (\mathrm{SOL})[x] \stackrel{\triangle}{=}
   \{\;(\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in \tilde{D}[x] \vert
-  \mathfrak{C}_{\alpha^0}[(z_i^0)_{i \in \overline{1,N}}] = V[x]\} \in \mathcal{P}'(\tilde{D}[x])
+  \mathfrak{C}_{\alpha^0}[(z_i^0)_{i \in \overline{0,N}}] = V[x]\} \in \mathcal{P}'(\tilde{D}[x])
 \end{equation}
 всех оптимальных
 (при старте из $x$)
 решений; (\ref{2.14}) -- непустое конечное множество.
 В виде
 \begin{equation}\label{2.15}
-  \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{1,N}}] \longrightarrow
+  \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}] \longrightarrow
   \mathrm{min},\;\;(\alpha,(z_i)_{i \in \overline{0,N}},x) \in \mathbf{D},
 \end{equation}
 имеем полную задачу, характеризуемую (глобальным) экстремумом
 \begin{equation}\label{2.16}
   \mathbb{V} \stackrel{\triangle}{=}
   \min\limits_{(\alpha,(z_i)_{i \in \overline{0,N}},x) \in
-  \mathbf{D}}\mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{1,N}}]
+  \mathbf{D}}\mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}]
   = \min\limits_{x \in X^0} V[x] \in \mathbb{R}_+
 \end{equation}
 и (непустым конечным) экстремальным множеством
 \begin{equation}\label{2.17}
   \mathbf{SOL} \stackrel{\triangle}{=}
   \{\;(\alpha,(z_i)_{i \in \overline{0,N}},x) \in \mathbf{D}
-  \vert \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{1,N}}] =
+  \vert \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}] =
   \mathbb{V}\} \in \mathrm{Fin}(\mathbf{D}).
 \end{equation}
 
@@ -503,7 +508,7 @@ $(\alpha^0,(z_i^0)_{i \in \overline{0,N}},x^0) \in \mathbf{D}$
 При этом согласно (\ref{2.14})
 имеем по выбору $x^0,$ что
 $$
-  \mathfrak{C}_{\alpha^0}[(z^0)_{i \in \overline{0,N}}] = V[x^0] = \mathbb{V}.
+  \mathfrak{C}_{\alpha^0}[(z_i^0)_{i \in \overline{0,N}}] = V[x^0] = \mathbb{V}.
 $$
 
 С учетом (\ref{2.17}) получаем теперь нужное свойство (\ref{2.20}).
@@ -594,7 +599,7 @@ $\mathbb{M}_j$
 Одна из них определяется суммой времен,
 затрачиваемых на перемещение
 от точки врезки до точки начала реза,
-и от последней точки выключения инструмента
+и от последней до точки выключения инструмента
 (перемещение в металле со скоростью рабочего хода).
 Вторая компонента определяется функцией штрафа и
 <<включается>> при нарушении тепловых допусков.
