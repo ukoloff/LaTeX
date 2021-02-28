@@ -713,44 +713,43 @@ $\mathcal N^k(I)$,
 \begin{figure}
   \centering
   \tikz[scale=0.68]{
-      \path
-          (-2,0.5) coordinate(M1)
-          (-1,1) coordinate(M2)
-          (8,2) coordinate (M4)
-          (9,4) coordinate (M5);
-      ;
-      \filldraw[thick,pattern=north east lines]
-          (M2) -- +(80:2) -- +(140:2) -- cycle
-          (M4) -- +(260:2) -- +(320:2) -- cycle;
-      ;
-      \filldraw[thick,rounded corners,pattern=north east lines,name path=Ai]
-          (0,0) rectangle (7,4)
-          (2,2) circle(1)
-      ;
-      \path[name path=Lx]
-          (M2) -- (M4);
-      \path[name intersections={of=Ai and Lx, name=Mi}]
-          (Mi-3) coordinate (M3)
-          (Mi-2) coordinate (M3_5)
-      ;
-      \fill
-          \foreach \i in {1,...,5} {
-              (M\i) circle (2pt)
-          }
-      ;
-      \draw [ultra thick]
-          (M3_5) circle(3pt) node[above right] {$M_+$}
-      ;
-      \draw[thin,-latex]
-          (M1) node[below] {$M_1$} --
-          (M2) node[below] {$M_2$} --
-          (M3) node[above right] {$M_3$} --
-          (M4) node[right] {$M_4$} --
-          (M5) node[left] {$M_5$}
-      ;
-
-      % \fill [name intersections={of=Ai and Lx, name=i, total=\t}] [red]
-      %     \foreach \s in {1,...,\t} {(i-\s) circle (2pt) node[black,above right] {\s}};
+    \path
+        (-2,0.5) coordinate(M1)
+        (-1,1) coordinate(M2)
+        (8,2) coordinate (M4)
+        (10,4) coordinate (M5);
+    ;
+    \filldraw[thick,pattern=crosshatch]
+        (M2) -- ++(80:1.2) -- ++(170:1.2) -- ++(260:1.2) -- cycle
+        (M4) -- ++(260:1.6) -- ++(20:1.6) -- cycle;
+    ;
+    \filldraw[thick,rounded corners,pattern=crosshatch,even odd rule,name path=Ai]
+        (0,0) rectangle (7,4)
+        (6,3) rectangle (6.8,3.8)
+        (6,1) rectangle (6.8,0.2)
+        (2,2) circle(1.6)
+    ;
+    \path[name path=Lx]
+        (M2) -- (M4);
+    \path[name intersections={of=Ai and Lx, name=Mi}]
+        (Mi-3) coordinate (M3)
+        (Mi-2) coordinate (M3_5)
+    ;
+    \fill
+        \foreach \i in {1,...,5} {
+            (M\i) circle (2pt)
+        }
+    ;
+    \draw [ultra thick]
+        (M3_5) circle(3pt) node[above right] {$M_+$}
+    ;
+    \draw[thin,-latex]
+        (M1) node[below] {$M_1$} --
+        (M2) node[below] {$M_2$} --
+        (M3) node[above right] {$M_3$} --
+        (M4) node[right] {$M_4$} --
+        (M5) node[left] {$M_5$}
+    ;
   }
   \caption{Добавление точек врезки во <<внешние>> контура $M_+$}
   \label{extra-pierce-point}
@@ -902,23 +901,22 @@ $O(N)$.
 % \end{remark}
 
 \begin{figure}
-  \begin{center}
+  \centering
   \begin{tikzpicture}[scale=2.5]
     \draw
       (1,-0.2) node(M3){} circle(0.027) node[below] {$M_3$}
       (-1,-0.2) node(M0){} circle(0.027) node[below] {$M_0$};
-    \draw [thick,pattern=north west lines]
-      (1.3,0) -- (2,0) -- (2,1) node[midway,left]{$C_2$} -- (1,1) node(M2x){} --
-      (1, 1.1) -- (2.1,1.1) -- (2.1,-0.1) -- (1.3, -0.1) node(M2) {} --cycle
-    % \draw [thick,pattern=north west lines]
-      (-1.3,0) -- (-2,0) -- (-2,1) node[midway,right]{$C_1$} -- (-1,1) node(M1x){} --
-      (-1, 1.1) -- (-2.1,1.1) -- (-2.1,-0.1) -- (-1.3, -0.1) node(M1){} --cycle;
-    \draw[dashed]
+
+    \draw [thick,pattern=crosshatch]
+      (-1.3, 0) arc(270:90:0.5) node[midway,right]{$C_1$} -- (-1.0, 1.0) node(M1x){} -- (-1.0, 1.1) -- (-1.3, 1.1) arc(90:270:0.6) node(M1){} -- cycle
+      (1.3, 0) arc(-90:+90:0.5) node[midway,left]{$C_2$} -- (1.0, 1.0) node(M2x){} -- (1.0, 1.1) -- (1.3, 1.1) arc(+90:-90:0.6) node(M2){} -- cycle
+      ;
+
+    \draw[dotted]
       (M0) -- (M1) -- (M2) node[midway,above]{Глобальный минимум} -- (M3);
-    \draw[dashed]
+    \draw[dotted]
       (M0) -- (M1x) -- (M2x) node[midway,below]{Локальный минимум} -- (M3);
   \end{tikzpicture}
-  \end{center}
   \caption{Два маршрута резки, доставляющие локальный и глобальный минимум}
   \label{counter-example}
 \end{figure}
