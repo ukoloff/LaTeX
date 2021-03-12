@@ -1,0 +1,74 @@
+%% Creator: Inkscape 1.0.1 (3bc2e813f5, 2020-09-07), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'classes.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%%
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{858.30766332bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.55101686)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0.48278528,0.43383045){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Континуум\\точек врезки\end{tabular}}}}%
+    \put(0.58148085,0.49739388){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}GSCCP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{classes.pdf}}%
+    \put(0.13156589,0.08371584){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}TSP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{classes.pdf}}%
+    \put(0.45358266,0.27437243){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ECP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{classes.pdf}}%
+    \put(0.353923,0.50099385){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}SCCP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{classes.pdf}}%
+    \put(0.82707674,0.50553749){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ICP\end{tabular}}}}%
+    \put(0.98994773,0.28210589){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}Конечное множество\\точек врезки\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{classes.pdf}}%
+    \put(0.98795788,0.09223701){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}Фиксированные\\точки врезки\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{classes.pdf}}%
+    \put(0.59773048,0.50362828){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}GSCCP\end{tabular}}}}%
+    \put(0.110563,0.50445065){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}CCP\end{tabular}}}}%
+    \put(0.12024208,0.27284383){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}GTSP\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
