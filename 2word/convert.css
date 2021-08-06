@@ -1,3 +1,6 @@
+form {
+  border-bottom: 1px dashed black;
+}
 body {
   margin: 0;
   padding: 1em;
