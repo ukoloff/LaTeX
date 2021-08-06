@@ -4,13 +4,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LaTeX 2 M$ Word converter</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
+    integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="convert.css">
   <script
     defer
     src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"
     integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"
     crossorigin="anonymous"></script>
+  <script src="convert.js"></script>
 </head>
 <body>
+<h1>LaTeX 2 M$ Word converter</h1>
 
+This converts LaTeX' equations to easily paste into M$ Word...
+
+<form>
+  <textarea placeholder="Paste LaTeX equation here..."></textarea>
+  <p></p>
+  <textarea readonly></textarea>
+</form>
 </body>
 </html>
