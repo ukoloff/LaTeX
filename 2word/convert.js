@@ -20,31 +20,30 @@ function init() {
   form.getElementsByTagName('button')[0].onclick = selectAll
 
   var prev
+  var modeMatchers = [
+    /^\\\[\s*(.*?)\s*\\\]$/,
+    /^\\\(\s*(.*?)\s*\\\)$/,
+    /^\${2}(?!\$)\s*(.*?)\s*\${2}$/,
+    /^\$(?!\$)\s*(.*?)\s*\$$/
+  ]
   function update() {
     var value = src.value.trim()
     if (prev === value) return
     prev = value
 
-    var m // RegExp match result
     var mode  //LaTeX mode: inline / display
-    if (m = /^\\\(\s*(.*?)\s*\\\)$/.exec(value)) {
-      value = m[1]
-      mode = false
-    } else if (m = /^\\\[\s*(.*?)\s*\\\]$/.exec(value)) {
-      value = m[1]
-      mode = true
-    } else if (m = /^\${2}(?!\$)\s*(.*?)\s*\${2}$/.exec(value)) {
-      value = m[1]
-      mode = true
-    } else if (m = /^\$(?!\$)\s*(.*?)\s*\$$/.exec(value)) {
-      value = m[1]
-      mode = false
-    } else {
-      mode = !rbs[0].checked
+    for (var re of modeMatchers) {
+      mode = !mode
+      var m = re.exec(value)
+      if (!m) continue
+      convert(m[1], mode)
+      return
     }
+    convert(value, !rbs[0].checked)
+  }
 
-
-    katex.render(value, res, {
+  function convert(latex, mode) {
+    katex.render(latex, res, {
       displayMode: mode,
       throwOnError: false,
     })
