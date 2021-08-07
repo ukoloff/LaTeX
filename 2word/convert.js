@@ -25,9 +25,26 @@ function init() {
     if (prev === value) return
     prev = value
 
-    var mode = !rbs[0].checked
+    var m // RegExp match result
+    var mode  //LaTeX mode: inline / display
+    if (m = /^\\\(\s*(.*?)\s*\\\)$/.exec(value)) {
+      value = m[1]
+      mode = false
+    } else if (m = /^\\\[\s*(.*?)\s*\\\]$/.exec(value)) {
+      value = m[1]
+      mode = true
+    } else if (m = /^\${2}(?!\$)\s*(.*?)\s*\${2}$/.exec(value)) {
+      value = m[1]
+      mode = true
+    } else if (m = /^\$(?!\$)\s*(.*?)\s*\$$/.exec(value)) {
+      value = m[1]
+      mode = false
+    } else {
+      mode = !rbs[0].checked
+    }
 
-    katex.render(prev, res, {
+
+    katex.render(value, res, {
       displayMode: mode,
       throwOnError: false,
     })
