@@ -1,5 +1,6 @@
 form {
   border-bottom: 1px dashed black;
+  text-align: center;
 }
 body {
   margin: 0;
@@ -11,10 +12,10 @@ textarea {
   min-height: 10em;
 }
 
-form > div {
-  text-align: center;
-}
-
 form > button {
   width: 100%;
+}
+
+fieldset {
+  display: inline;
 }

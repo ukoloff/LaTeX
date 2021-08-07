@@ -21,12 +21,27 @@
 
   <form>
     <textarea placeholder="Paste LaTeX equation here..."></textarea>
-    <p></p>
+    <div>
+      <fieldset>
+        <legend>LaTeX mode</legend>
+        <label>
+          <input type="radio" name="m">
+          <b>\(</b>
+          inline
+          <b>\)</b>
+        </label>
+        <label>
+          <input type="radio" name="m" checked>
+          <b>\[</b>
+          display
+          <b>\]</b>
+        </label>
+      </fieldset>
+    </div>
     <textarea readonly></textarea>
     <br>
     <button type='button'>Select all</button>
-    <div></div>
-    <div></div>
+    <p></p>
   </form>
 
   <ul>
