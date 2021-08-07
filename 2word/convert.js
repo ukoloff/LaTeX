@@ -37,9 +37,11 @@ function init() {
       var m = re.exec(value)
       if (!m) continue
       convert(m[1], mode)
+      allowMode(false)
       return
     }
     convert(value, !rbs[0].checked)
+    allowMode(true)
   }
 
   function convert(latex, mode) {
@@ -49,6 +51,12 @@ function init() {
     })
     var [math] = res.getElementsByTagName('math')
     dst.value = math ? math.outerHTML : ''
+  }
+
+  function allowMode(enable) {
+    for (var rb of rbs) {
+      rb.disabled = !enable
+    }
   }
 
   function selectAll() {
