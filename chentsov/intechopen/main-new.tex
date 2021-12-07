@@ -10,60 +10,47 @@ A. Chentsov,
 P. Chentsov
 
 \textbf{%
-    Routing processes in constrained problems of sequential traversal of sets
+  Some applications of optimization routing problems with additional constraints
 }
 \end{center}
 
 \begin{abstract}
-    The problem of routing
-    with constraints and
-    objective function both depending on
-    the list of tasks
-    is explored.
-    The considered setting is focused primarily on engineering applications,
-    related to sheet cutting CNC machines;
-    other applications are possible,
-    for example
-    in the problem of minimizing the dose
-    loads during dismantling of radiation hazardous elements
-    in case of accidents at nuclear power plants.
-    The objects to visit are non-empty finite sets -- megacities.
-    Problem of tool routing for CNC sheet cutting machines,
-    known as
-    Cutting Path Problem or Tool Path Problem,
-    is considered primary.
-    This problem arises during the developing control programs for a CNC machine,
-    which set the tool path and a number of technological commands.
-    Among formal constraints, the precedence constraints are emphasized,
-    which allow to reduce computational complexity and build feasible solutions.
-    Dynamic programming (DP) is used as the main research method,
-    adopted to take into account the precedence constraints
-    and the dependence of objective functions on the list of tasks.
-    This type of dependence is of class of very complex constraints
-    that determine the admissibility of the route through megacity,
-    depending on the path traveled so far.
-    With regard to the problem of tool routing in sheet-cutting machines,
-    the dependence of the objective function on the list of tasks
-    makes it possible to reduce thermal deformations of the material
-    during thermal cutting.
-    The rigorous mathematical formalization of the constrained routing problem
-    and the description of the exact algorithm to solve it
-    are provided.
-    During the solution process,
-    the sequence of tasks execution,
-    the trajectory of the process
-    and the starting point are optimized.
-    Algorithm is implemented as a PC program;
-    model examples solved.
+  An extremal routing problem with constraints is investigated.
+  In the general formulation,
+  it is assumed that the objects of visit are any non-empty finite sets -- megalopolises.
+  As the main applied problem,
+  the paper considers the routing problem the tool of CNC sheet cutting machines,
+  known as the Cutting Path Problem.
+  This problem arises at the stage of developing control programs for the CNC machines.
+  Other applications are also possible.
+  In particular,
+  the results obtained can be used in the problem of minimizing the dose load
+  during dismantling of the system of radiation hazardous elements in accidents at nuclear power plants,
+  in transport problems.
+  Among the constraints in this formulation,
+  the precedence constraints stand out,
+  which can be used to reduce the computational complexity.
+  As the main method, the widely understood dynamic programming is used,
+  which takes into account the precedence constraints and the dependence of cost functions on the list of tasks.
+  This dependence belongs to the class of very complex conditions that determine the route admissibility
+  at each routing step, depending on the tasks already completed or,
+  on the contrary, not yet completed.
+  As applied to the Cutting Path Problem,
+  taking into account the dependence of the objective function on the list of tasks
+  makes it possible to reduce thermal deformations of the material during cutting.
+  The chapter provides a mathematical formalization of an extremal routing problem with constraints,
+  a description of the method and the exact algorithm obtained with its help.
+  The order of execution of tasks,
+  the specific trajectory of the process and the starting point are optimized
 \end{abstract}
 
 \textbf{Keywords}:
 {
-    dynamic programming,
-    feasible solution,
-    route,
-    trajectory,
-    tool path
+  dynamic programming,
+  additional constraints,
+  megalopolises,
+  toolpath,
+  routing
 }
 
 \section*{Introduction}
