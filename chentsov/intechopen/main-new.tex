@@ -505,7 +505,7 @@ we fix $N$ sets
 \begin{equation}\label{2.1}
 M_1 \in \mathrm{Fin}(X),...,M_N \in \mathrm{Fin}(X),
 \end{equation}
-hereinafter referred to as megacities,
+hereinafter referred to as megalopolises,
 as well as
 $N$
 relations
@@ -515,11 +515,11 @@ relations
     \mathbb{M}_N \in \mathcal{P}'(M_N \times M_N).
 \end{equation}
 
-Megacities \eqref{2.1}
+megalopolises \eqref{2.1}
 are the objects to visit,
 and the points of each relation in \eqref{2.2}
 determine the acceptable options for tasks to perform
-while visiting the corresponding megacity
+while visiting the corresponding megalopolis
 and hereinafter referred to as internal.
 We suppose
 $M_j \cap X^0 = \varnothing$
@@ -715,7 +715,7 @@ $\mathbf{c}$
 evaluates external movements,
 i.e. ones between cities,
 as well as one from points of the set $ X ^ 0 $
-to megacities.
+to megalopolises.
 For $j \in \overline{1,N}$
 function $ c_j $
 evaluates the performance of internal works,
@@ -987,12 +987,12 @@ piercing points and their corresponding cut-off points
 are positioned:
 the punch-in procedure is sampled appropriately.
 As a result, non-empty finite sets
--- megacities --
+-- megalopolises --
 arise,
 elements of which are pierce points
 and the tool switch-off points.
 Points of these two types are grouped in pairs.
-For any megacity
+For any megalopolis
 $M_j$
 relation
 $\mathbb{M}_j$
@@ -1009,7 +1009,7 @@ the ``large'' parts are cut first.
 Among other restrictions, we now note
 thermal tolerances
 (see~\cite{18}),
-which correspond to the heuristic rule of ``part hardness''
+which correspond to the heuristic rule of ``part stiffness''
 \cite{4}.
 This means ensuring the situation,
 where
@@ -1531,13 +1531,13 @@ constraints
 on  cutting internal contours
 and the outer contour of the parts.
 
-Megacities are constructed from pierce points and tool-off points.
+megalopolises are constructed from pierce points and tool-off points.
 Their ordered pairs form a relationship \eqref{2.2}.
 At the same time,
-it is convenient to associate a set of ports with each megacity.
-It is assumed that the minimum number of ports for a megacity is 4
-(while the number of ``cities'' of the megacity is 8),
-and the maximum number of ports for a megacity is 34.
+it is convenient to associate a set of ports with each megalopolis.
+It is assumed that the minimum number of ports for a megalopolis is 4
+(while the number of ``cities'' of the megalopolis is 8),
+and the maximum number of ports for a megalopolis is 34.
 Number of possible start points
 (cardinality of the set $ X ^ 0 $)
 is 58.
@@ -1589,7 +1589,7 @@ where, in particular, the optimal starting point is indicated.
   \label{fig:1}
 \end{figure}
 
-The megacities model is also applicable
+The megalopolises model is also applicable
 when using non-standard cutting techniques,
 in particular, the so-called ``multi-contour cutting'',
 which, as noted above, assumes the use of only
@@ -1607,12 +1607,12 @@ when cutting 19 parts defined by 24 contours.
 \end{figure}
 
 For pairs of parts numbered 1--2, 3--4, 5--6
-three separate megacities were formed,
+three separate megalopolises were formed,
 21 total.
 Possible pierce points are marked with green dots.
 The optimal starting point was not calculated in this example.
 The time to obtain an exact solution is 16 seconds.
-This example shows that the application of the model megacities,
+This example shows that the application of the model megalopolises,
 which are used as a discrete image of the ``cutting segment'',
 allows to obtain optimal solutions to the problem of
 minimizing cutting time for GSCCP problem either.
@@ -1627,8 +1627,8 @@ on an ordinary personal computer,
 exact solutions for the tasks of tool path routing for CNC sheet cutting machines
 for up to 30 or more parts,
 while ensuring the manufacturability of the solution in terms of sheet cutting constraints based on heuristic rules
-``part hardness'' and
-``sheet hardness''.
+``part stiffness'' and
+``sheet stiffness''.
 To comply with these rules,
 the routing algorithms described
 use the above-mentioned penalty mechanism.
