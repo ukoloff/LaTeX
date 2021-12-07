@@ -4,56 +4,60 @@
 \graphicspath{{media/}}
 \newtheorem{proposition}{Proposition}
 
+\makeindex
+
 \begin{document}
 
-\begin{center}
-A. Petunin,
-A. Chentsov,
-P. Chentsov
+\begin{frontmatter}
 
-\textbf{%
-  Some applications of optimization routing problems with additional constraints
-}
-\end{center}
+  \chapter{Some applications of optimization routing problems with additional constraints}
+  % Enter author names EXACTLY as you would like them to appear in the final manuscript; only use pattern: first name, last name. Do NOT use pattern: last name, first name. Patronyms fall into the first name category.
+  \author{A. Petunin}
+  \author{A. Chentsov}
+  \author{P. Chentsov}
 
-\begin{abstract}
-  An extremal routing problem with constraints is investigated.
-  In the general formulation,
-  it is assumed that the objects of visit are any non-empty finite sets -- megalopolises.
-  As the main applied problem,
-  the paper considers the routing problem the tool of CNC sheet cutting machines,
-  known as the Cutting Path Problem.
-  This problem arises at the stage of developing control programs for the CNC machines.
-  Other applications are also possible.
-  In particular,
-  the results obtained can be used in the problem of minimizing the dose load
-  during dismantling of the system of radiation hazardous elements in accidents at nuclear power plants,
-  in transport problems.
-  Among the constraints in this formulation,
-  the precedence constraints stand out,
-  which can be used to reduce the computational complexity.
-  As the main method, the widely understood dynamic programming is used,
-  which takes into account the precedence constraints and the dependence of cost functions on the list of tasks.
-  This dependence belongs to the class of very complex conditions that determine the route admissibility
-  at each routing step, depending on the tasks already completed or,
-  on the contrary, not yet completed.
-  As applied to the Cutting Path Problem,
-  taking into account the dependence of the objective function on the list of tasks
-  makes it possible to reduce thermal deformations of the material during cutting.
-  The chapter provides a mathematical formalization of an extremal routing problem with constraints,
-  a description of the method and the exact algorithm obtained with its help.
-  The order of execution of tasks,
-  the specific trajectory of the process and the starting point are optimized
-\end{abstract}
+  \makechaptertitle
 
-\textbf{Keywords}:
-{
-  dynamic programming,
-  additional constraints,
-  megalopolises,
-  toolpath,
-  routing
-}
+  \chaptermark{Routing optimization with constraints}
+
+  \begin{abstract} % abstract = max 200 words, unstructured format, single paragraph
+    An extremal routing problem with constraints is investigated.
+    In the general formulation,
+    it is assumed that the objects of visit are any non-empty finite sets -- megalopolises.
+    As the main applied problem,
+    the paper considers the routing problem the tool of CNC sheet cutting machines,
+    known as the Cutting Path Problem.
+    This problem arises at the stage of developing control programs for the CNC machines.
+    Other applications are also possible.
+    In particular,
+    the results obtained can be used in the problem of minimizing the dose load
+    during dismantling of the system of radiation hazardous elements in accidents at nuclear power plants,
+    in transport problems.
+    Among the constraints in this formulation,
+    the precedence constraints stand out,
+    which can be used to reduce the computational complexity.
+    As the main method, the widely understood dynamic programming is used,
+    which takes into account the precedence constraints and the dependence of cost functions on the list of tasks.
+    This dependence belongs to the class of very complex conditions that determine the route admissibility
+    at each routing step, depending on the tasks already completed or,
+    on the contrary, not yet completed.
+    As applied to the Cutting Path Problem,
+    taking into account the dependence of the objective function on the list of tasks
+    makes it possible to reduce thermal deformations of the material during cutting.
+    The chapter provides a mathematical formalization of an extremal routing problem with constraints,
+    a description of the method and the exact algorithm obtained with its help.
+    The order of execution of tasks,
+    the specific trajectory of the process and the starting point are optimized
+  \end{abstract}
+
+  \begin{keywords} % use a minimum of 5 kwrds, separate them with a comma
+    dynamic programming,
+    additional constraints,
+    megalopolises,
+    toolpath,
+    routing
+  \end{keywords}
+\end{frontmatter}
 
 \section*{Introduction}
 \label{sec:intro}
