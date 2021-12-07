@@ -18,7 +18,7 @@
 
   \makechaptertitle
 
-  \chaptermark{Routing optimization with constraints}
+  % \chaptermark{Routing optimization with constraints}
 
   \begin{abstract} % abstract = max 200 words, unstructured format, single paragraph
     An extremal routing problem with constraints is investigated.
@@ -1590,9 +1590,12 @@ where, in particular, the optimal starting point is indicated.
 
 \begin{figure}
   \centering
-  \includegraphics[width=130mm]{image.pdf}
-  \caption{The route and trajectory of set traversal}
-  \label{fig:1}
+  \FIG{
+    \includegraphics[width=130mm]{image.pdf}
+  }{
+    \caption{The route and trajectory of set traversal}
+    \label{fig:1}
+  }
 \end{figure}
 
 The megalopolises model is also applicable
@@ -1607,9 +1610,12 @@ when cutting 19 parts defined by 24 contours.
 
 \begin{figure}
   \centering
-  \includegraphics[width=130mm]{cut19.png}
-  \caption{Optimal cutting path when using multi-contour cutting technique}
-  \label{fig:2}
+  \FIG{
+    \includegraphics[width=130mm]{cut19.png}
+  }{
+    \caption{Optimal cutting path when using multi-contour cutting technique}
+    \label{fig:2}
+  }
 \end{figure}
 
 For pairs of parts numbered 1--2, 3--4, 5--6
