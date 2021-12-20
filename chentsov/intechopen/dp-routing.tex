@@ -22,36 +22,12 @@
   % \chaptermark{Routing optimization with constraints}
 
   \begin{abstract} % abstract = max 200 words, unstructured format, single paragraph
-    An extremal routing problem with constraints is investigated.
-    In the general formulation,
-    it is assumed that the objects of visit are any non-empty finite sets -- megalopolises.
-    As the main applied problem,
-    the paper considers the routing problem the tool of CNC sheet cutting machines,
-    known as the Cutting Path Problem.
-    This problem arises at the stage of developing control programs for the CNC machines.
-    Other applications are also possible.
-    In particular,
-    the results obtained can be used in the problem of minimizing the dose load
-    during dismantling of the system of radiation hazardous elements in accidents at nuclear power plants,
-    in transport problems.
-    Among the constraints in this formulation,
-    the precedence constraints stand out,
-    which can be used to reduce the computational complexity.
-    As the main method, the widely understood dynamic programming is used,
-    which takes into account the precedence constraints and the dependence of cost functions on the list of tasks.
-    This dependence belongs to the class of very complex conditions that determine the route admissibility
-    at each routing step, depending on the tasks already completed or,
-    on the contrary, not yet completed.
-    As applied to the Cutting Path Problem,
-    taking into account the dependence of the objective function on the list of tasks
-    makes it possible to reduce thermal deformations of the material during cutting.
-    The chapter provides a mathematical formalization of an extremal routing problem with constraints,
-    a description of the method and the exact algorithm obtained with its help.
-    The order of execution of tasks,
-    the specific trajectory of the process and the starting point are optimized
+
+The paper deals with an extremal routing problem with constraints. In the general formulation, it is assumed that the objects of visiting are any non-empty finite sets -- megalopolises. The main applied problem considered in this study is the tool path problem for CNC sheet-cutting machines, known as the Cutting Path Problem. This problem arises at the stage of developing control programs for CNC machines. Other applications are also possible. In particular, the results obtained in the chapter can be used in the problem of minimizing the radiation dose when dismantling a system of radiation-hazardous elements after accidents at nuclear power plants and in transport problems. Among tasks constraints, the precedence constraints are investigated. These constraints can be used to reduce computational complexity. As the main method, the study used widely understood dynamic programming. The offered realization of the method takes into account the precedence constraints and the dependence of the objective functions on the task list. This dependence belongs to the class of very complex conditions that determine the route admissibility at each routing step, depending on the tasks already completed or, on the contrary, not yet completed. As applied to the Cutting Path Problem, the dependence of the objective function on the task list makes it possible to reduce thermal deformations of the material during cutting. The chapter provides a mathematical formalization of an extremal routing problem with additional constraints, a description of the method, and the exact algorithm obtained with its help. The order of tasks execution, the specific trajectory of the process, and the starting point are optimized.
+
   \end{abstract}
 
-  \begin{keywords} % use a minimum of 5 kwrds, separate them with a comma
+  \begin{keywords} % use a minimum of 5 words, separate them with a comma
     dynamic programming,
     additional constraints,
     megalopolises,
@@ -63,43 +39,43 @@
 \section{Introduction}
 \label{sec:intro}
 
-A problem of movement routing
-with various constraints is considered;
-among the latter, we highlight
-the precedence constraints
-as well as that of a dynamic nature,
-arising during the process while certain tasks are being performed.
+The study considers the problem of movement routing
+with various constraints.
+Among the latter, we highlight
+precedence constraints,
+as well as those of a dynamic nature,
+arising during the process when certain tasks are performed.
 With proper formalization, a problem statement arises,
 conceptually close to discrete control problems of large dimension
 (meaning discreteness both in time and in phase state).
 Several objects are optimized,
 including the starting point,
 order of task execution
-(hereinafter referred to as the route)
+(hereinafter referred to as the route),
 and a specific trajectory;
 we call this triplet
 the routing process.
 This approach can be applied
-to  the task of minimizing the dose load
-during the dismantling of radiation hazardous facilities
+to the task of minimizing the radiation dose
+when dismantling radiation-hazardous facilities
 (see~\cite {1,3})
-and tool path routing problem
-for CNC sheet cutting machines
+and the tool path routing problem
+for CNC sheet-cutting machines
 in mechanical engineering (see \cite {4,5});
-other applications exits.
+other applications also exist.
 We focus on the application of the developed methods in mechanical engineering
 in this article,
 following the monograph~\cite{4}.
 The initial task of controlling the cutting tool
 with precedence and dynamic constraints
 is converted to a strict mathematical statement of
-optimization problem
-in the class of the aforementioned routing processes;
-the goal is to find
-global extremum and the corresponding optimal solution.
+the optimization problem
+in the class of the aforementioned routing processes.
+The goal is to find
+the global extremum and the corresponding optimal solution.
 The elements of the general theory and
 the optimal algorithm constructed on its basis,
-implemented on a multi-core PC
+implemented on a multi-core PC,
 are explained.
 The method used is based on
 broadly understood dynamic programming
@@ -107,7 +83,7 @@ broadly understood dynamic programming
 that takes into account the precedence constraints.
 Concepts and notations from
 \cite[part II]{4}
-are used
+are used,
 as well as
 meaningful constructions
 \cite[part I]{4}.
@@ -119,124 +95,114 @@ TSP;
 see~\cite{7,8,9,10,11,12}.
 However, essential qualitative features
 (the presence of constraints, first of all)
-motivate the need of a specialized theory;
+motivate the need for a specialized theory;
 see \cite {1,3,4,5,14}.
-In this presentation,
+In this paper,
 we single out \cite{4},
 where, considering an actual engineering problem,
 a number of fundamental provisions of a theoretical nature
-were demonstrated
-including usage of
-DP
+are demonstrated including the use of DP
 as a general method for solving various applied problems.
 
-The problem of tool routing for CNC sheet cutting machines,
-known as Cutting Path Problem or Tool Path Problem \cite{bibx:100},
+The problem of tool routing for CNC sheet-cutting machines,
+known as the Cutting Path Problem or Tool Path Problem \cite{bibx:100},
 is considered primarily.
 It arises during the development of control programs for a CNC machine,
 which set the trajectory of the tool and a number of technological commands,
-determining the parameters of sheet material cutting to get
+determining the parameters of cutting sheet material to get
 the parts of known shapes and sizes.
-The input data for modeling the route of the tool for CNC machine
-is the information about positions of all the parts
+The input data for modeling the route of the tool for the CNC machine
+is the information about the positions of all the parts
 that is generated at the appropriate development stage
-after solution of ``nesting'' problem~\cite{bibx:101, bibx:102, bibx:303}.
+after solving the ``nesting'' problem~\cite{bibx:101, bibx:102, bibx:303}.
 From the point of view of geometric optimization,
-this problem belongs to the class of cutting-packing problems
-(Cutting \& Packing) \cite{bibx:103},
+this problem belongs to the class of cutting and packing problems
+\cite{bibx:103},
 for which, as well as for routing optimization problems,
 no algorithms of polynomial complexity are known.
-Nesting problem is beyond of scope in this paper.
+The nesting problem is beyond the scope of this paper.
 
 Generally speaking about the problem of tool path optimization
-for CNC sheet cutting  equipment,
-there is still no common theoretical basis for solving this problem
-so far.
-There are almost no works describing exact algorithms,
+for CNC sheet-cutting equipment, it should be noted that
+there is still no common theoretical basis for solving this problem so far.
+Almost no works describe exact algorithms,
 used to solve tool routing problems.
 Separate groups of scientists are known,
 who are studying special cases of this problem.
 In addition,
 several Computer-Aided-Manufacturing (CAM) systems
-contains special module to solve some optimization problems,
-e.g. minimizing air move,
+contain a special module to solve some optimization problems,
+e.g. minimizing air motion;
 however, this does not ensure compliance
 with the technological requirements for CNC cutting machines
-and do not allow getting cutting routes,
+and does not allow getting cutting routes,
 close to optimal from the point of view of the integrated criterion of the cost of cutting
 taking into account the working stroke of the tool,
 the cost of piercing, etc.
-However, when combined with interactive design methods
+However, when combined with interactive design methods,
 they provide rational and technologically acceptable options
-for the tool path development for CNC sheet cutting machines.
+for tool path development for CNC sheet-cutting machines.
 It should be emphasized that algorithms implemented in commercial software
-are not described in the scientific literature.
+are not described in scientific literature.
+
+Probably the first attempt to classify tool path problems was made by Hoeft and Palekar \cite{bibx:306}.
 
 
-In Russia,
-the first papers about optimization of the sheet cutting route for CNC machines
-were published by V.~Frolovsky~\cite{bibx:104}
-and M.~Verkhoturov~\cite{bibx:105}.
-The authors used simple graph and combinatorial mathematical models,
-reducing to the classical traveling salesman problem without additional constraints.
-However, these works were not continued.
-In recent years,
-several publications by A.~Panyukov
-and T.~Makarovskikh on this subject
-appeared
-\cite{bibx:106,bibx:107,bibx:108},
-involving the use of a combined cutting technique
-for the tool path of a CNC machine.
-Note that these works can actually be attributed to the class of works
-only routing in graphs,
-although they are announced as works on tool routing for CNC laser machines,
-since in these works a computational experiment is completely absent
-and the issues of technological admissibility of the implementation of the resulting trajectories on CNC sheet cutting machines are poorly investigated.
-The reason for this is that the graph model
-cannot take into account all the geometric aspects of the cutting map,
-which is the initial information for solving practical problems of constructing feasible options for the tool route.
-
-Among foreign competitors, one should especially highlight R.Dewil and his colleagues who conduct similar research \cite{bibx:100,bibx:109,bibx:110}.
-In these works, an attempt is made to link the features of laser cutting with routing algorithms.
-\cite{bibx:109} provides an overview of routing algorithms,
+Among modern scientists who conduct similar research, Devil and his colleagues should be singled out \cite{bibx:100, bibx:109, bibx:110, bibx:307}.
+These works make an attempt to link the features of laser cutting with routing algorithms.
+The work \cite{bibx:109} provides an overview of routing algorithms,
 related to curly sheet cutting on CNC machines.
 
 The authors categorize the existing literature on routing
 for six classes of problems:
 continuous cutting task (CCP),
-Finite Point Cutting Problem (ECP),
-interrupted cutting task (ICP),
+endpoint cutting problem (ECP),
+intermittent cutting task (ICP),
 polygon traversal problem (TPP),
-Traveling Salesman Problem (TSP)
-and the Generalized Traveling Salesman Problem (GTSP).
+traveling salesman problem (TSP),
+and the generalized traveling salesman problem (GTSP).
 All of the above classes of problems, except for CCP, use discrete mathematical models.
-The routing problem in general cutting can be thought of as ICP.
+The routing problem in general cutting can be thought of as an ICP.
 However, the ICP literature is very scarce,
 and most scientific articles are limited to solving problems of other classes (see, in particular, \cite{bibx:301}).
-In \cite{bibx:112}
-based on the introduced concepts of ``cutting segment''
-and ``basic cutting segment''
+
+Many Russian scientists have also investigated the cutting path problem. The first papers about the optimization of the sheet cutting route for CNC machines
+were published by ~Frolovsky~\cite{bibx:104}
+and ~Verkhoturov~\cite{bibx:105}.
+The authors used simple graph and combinatorial mathematical models,
+reduced to the classical traveling salesman problem without additional constraints.
+However, these works were not continued.
+In recent years, several publications by ~Panyukov
+and ~Makarovskikh on this subject appeared
+\cite{bibx:106,bibx:107,bibx:108},
+involving the use of a combined cutting technique
+for the tool path of a CNC machine.
+Note that these works can actually be attributed to the class of works only routing in graphs, although they are announced as works on tool routing for CNC laser machines, since in these works a computational experiment is completely absent
+and the issues of technological admissibility of the implementation of the resulting trajectories on CNC sheet-cutting machines are poorly investigated.
+The reason for this is that the graph model
+cannot take into account all the geometric aspects of the cutting map, which is the initial information for solving practical problems of constructing feasible options for the tool route.
+
+
+The work \cite{bibx:308,bibx:112},
+based on the introduced concepts of a ``cutting segment''
+and ``basic cutting segment'',
 managed to distinguish a fairly wide subclass of problems in the ICP class,
 which boil down to the CCP and GTSP classes.
-The cutting segment here refers to the tool path.
-between the plunge point and the corresponding tool off point, and the base segment is the part of the cutting segment without the initial part of the path between the plunge point and the tool entry point into the contour,
-and the end part between the contour exit point and the tool off point.
-This concept allowed, in particular,
-solve problems of different classes,
+The cutting segment here is defined as the tool path between the pierce point and the corresponding tool switch-off point, and the base segment is the part of the cutting segment without the initial part of the path between the pierce point and the tool entry point into the contour, and the end part between the contour exit point and the tool switch-off point.
+This concept made it possible, in particular,
+to solve problems of different classes,
 in which it is possible to use different cutting techniques within the same route,
 including ``combined cut'', ``multi-contour cutting''
 \cite[part I] {4}, etc.
-We must immediately make a reservation that within the framework of this article we do not consider optimization problems of the CCP class using continuous models,
-since for them the issue of guaranteed obtaining the global extremum remains practically unexplored.
+We must immediately make a reservation that within the framework of this article, we do not consider optimization problems of the CCP class using continuous models,
+since for them, the issue of guaranteed obtaining the global extremum remains practically unexplored.
 
-
-In general, we note once again that the research of the Cutting Path Problem, as a rule, concerns the development of separate algorithms for only one of the above classes in \cite{bibx:109},
-at the same time,
+In general, we note once again that the research of the cutting path problem, as a rule, concerns the development of separate algorithms for only one of the above classes in \cite{bibx:109}.
+At the same time,
 these studies often do not take into account the important technological limitations of sheet cutting on CNC machines,
 limiting themselves only to the conditions of precedence.
-The greatest difficulty is presented by the so-called ``Dynamic constraints''
-generated by thermal deformations of the material and causing changes
-formal mathematical conditions of the problem
+The greatest difficulty is presented by the so-called ``dynamic constraints''\cite{bibx:309} generated by thermal deformations of the material and causing changes
+in the formal mathematical conditions of the problem
 in the process of constructing the tool path of a CNC machine.
 To account for this kind of restrictions, at present, basically,
 two approaches are applied:
@@ -247,113 +213,94 @@ two approaches are applied:
   interactive mode; and
   \item
   the use of engineering analysis systems for
-  modeling of temperature fields in the material arising in
-  thermal cutting process.
+  modeling temperature fields in the material arising in
+  the thermal cutting process.
 \end{enumerate}
 
-The first approach includes the rule
-``part stiffness'',
-which limits the choice of feasible points
-tie-in at the part selected for cutting, and the rule
-``sheet stiffness'',
+The first approach includes the rule of
+``part hardness'',
+which limits the choice of feasible tie-in points
+at the part selected for cutting, and the rule of
+``sheet hardness'',
 which, in turn, when forming a route, imposes restrictions on the choice of the next part to be cut
-(see \cite[part I]{4}).
+(see \cite[part I]{4}, \cite{bibx:309}).
 The second approach is implemented, for example, in the works \cite{bibx:114,bibx:116}.
 
 From other works, to one degree or another taking into account the thermal deformations of the material when modeling the cutting route, we note
-\cite{bibx:113,bibx:115,bibx:302}.
-\cite{bibx:113} proposes a parallel constraint programming approach
+\cite{bibx:113,bibx:115,bibx:302,bibx:307}.
+The work \cite{bibx:113} proposes a parallel constraint programming approach
 for routing laser cutting with explicit precedence constraints
 and implicit consideration of thermal constraints. The authors emphasize the importance of considering all
 practical routing considerations already in the nesting phase.
-However, no follow-up studies have been published.
-aimed at solving this complex problem.
-In \cite{bibx:114}, more accurate and faster thermal estimation methods have been developed. While this line of research is encouraging,
-a more detailed study of the problem of the relationship between material temperature and acceptable route options is required.
-It is important to note that \cite{bibx:100, bibx:116} shows a practical
-the possibility of using heuristic approaches of the theoretical model
-GTSP / Metropolitan Area for Tool Route Modeling Problem
-thermal cutting machines with simultaneous temperature control
-material.
-At the same time, the results of calculations presented in all works,
-taking into account the thermal aspects of the machine tool routing
-thermal cutting with CNC, while they look not very convincing
-in terms of real optimization of the time and cost of the process
-cutting. The main reason for this is that the proposed
-techniques for reducing thermal distortion problems
-material when cutting, are mainly of a qualitative nature. Can
-it is sufficiently reliable to assert that until now there has not been
-accurate numerical data on the magnitude of geometric distortions were obtained
-parts when choosing one or another cutting route, depending on
-the degree of fulfillment of heuristic rules of ``stringency'' or in
-dependence on the distribution of temperature fields at thermal
-cutting. It is clear that the magnitude of thermal deformations is also exerted by
-significant influence and brand, and thickness of the material, and features
-equipment. The features of the equipment include, first of all,
-the technology used for sheet thermal cutting (laser,
-plasma, gas). Research in this area has not actually been
-were carried out.
-Therefore, the mathematical formalization of dynamic constraints in
-tool routing tasks cause obvious difficulties, in
-in contrast to tasks related to nuclear power, where these
-restrictions are set naturally \cite{1,3}
+However, no follow-up studies aimed at solving this complex problem
+have been published.
+The work \cite{bibx:114} developed more accurate and faster thermal estimation methods. While this line of research is encouraging, a more detailed study of the problem of the relationship between material temperature and acceptable route options is required.
+Sensor solutions for laser
+cutting are rarely used in practice. In \cite{bibx:307}, a coaxial photodiode-based monitoring system was
+developed and investigated for 4 kW fiber laser cutting of mild and stainless steel thick plates.
 
-On the other hand, when routing tool machines
-CNC waterjet cutting dynamic constraints are often not taken into account
-is necessary. It is only important to take into account the conditions of precedence.
-Due to this,
-efficient algorithms for solving classical routing problems of discrete optimization are of certain interest for the route optimization of the tool of sheet cutting machines with CNC.
-If we talk about algorithms using the classical model
-generalized traveling salesman problem, then two main
-approach in their development:
-the first approach is associated with the development of accurate
-algorithms for special cases and approximation algorithms with
-theoretical guarantees of performance, the second is based on
-application of various heuristics and metaheuristics.
-As part of the first approach, we note the branch and bound and branch algorithms
-and cuts (see, for example, \cite{bibx:228}) and approximate schemes
-polynomial complexity (PTAS) for some special cases
+It is important to note that \cite{bibx:100, bibx:116, bibx:307} show a practical possibility of using heuristic approaches of the theoretical model of GTSP /megalopolises for the tool route modeling problem for thermal cutting machines with simultaneous control of material temperature.
+At the same time, the results of calculations presented in all works, taking into account the thermal aspects for the CNC machine, look not very convincing in terms of real optimization of the time and cost of the cutting process. The main reason for this is that the proposed
+techniques for reducing the problems of thermal distortion of
+material when cutting are mainly of a qualitative nature. It is sufficiently reliable to assert that until now, no accurate numerical data has been obtained on the magnitude of geometric distortions of parts when choosing one or another cutting route, depending on the degree of fulfillment of heuristic rules of ``stringency'' or depending on the distribution of temperature fields at thermal cutting. It is clear that the magnitude of thermal deformations is also determined by the brand and thickness of the material, as well as the features of
+the equipment. The features of the equipment include, first of all, the technology used for sheet thermal cutting (laser,
+plasma, gas). Research in this area has not actually been
+carried out.
+Therefore, the mathematical formalization of dynamic constraints in
+tool routing tasks causes obvious difficulties,
+in contrast to tasks related to nuclear power, where these
+restrictions are set naturally \cite{1,3}.
+
+On the other hand, when optimizing the tool path for CNC waterjet cutting machines, the dynamic constraints are often not taken into account because it is not necessary. It is only important to take into account the conditions of precedence.
+
+Due to this, efficient algorithms for solving classical routing problems of discrete optimization are of certain interest for tool path generation of CNC sheet-cutting machines.
+
+If we talk about algorithms using the classical model of the generalized traveling salesman problem, then there are two main approaches in their development. The first approach is associated with the development of accurate algorithms for special cases and approximation algorithms with theoretical guarantees of performance, the second is based on the application of various heuristics and meta-heuristics.
+
+As part of the first approach, we note the branch and bound and branch and cut algorithms
+(see, for example, \cite{bibx:228}) and polynomial-time
+approximation schemes for some special cases
 \cite{bibx:214}. We also note the studies of the TSP problem with
 the dependence of the cost of movements on time
-\cite{bibx:218,bibx:219} and with ``dependency on
+\cite{bibx:218,bibx:219} and with the ``dependency on
 prehistory''
-\cite{bibx:221}. The last dependence on the semantic
-content corresponds to function
+\cite{bibx:221}. The latter dependence in terms of its semantic
+content corresponds to the function of
 cost ``depending on the list of tasks''
 \cite{1,3}, which
-can be used to construct an admissible (from the point of view
-thermal deformations of the material) trajectory
+can be used to construct an admissible (from the point of view of
+thermal deformations of the material) trajectory of a
 CNC machine tool for thermal cutting.
-The second approach is mainly represented by works in which the model
-GTSP is used in its most general form without any additional
-restrictions. So, G. Gutin and D. Karapetyan \cite{Gutin-2010}
-proposed an efficient memetic algorithm, in
-\cite{Helsgaun-2015} the famous heuristic
-the Lin-Kernighan-Helsgaun solver has been extended to GTSP,
-and in \cite{bibx:230} was developed
-powerful metaheuristic of GNLS, which today is
-most effective. In the case of GTSP with precedence conditions
-arbitrary form algorithmic results still remain
-rather few in number. You can check the \cite{SALMAN2016} heuristic
-and a specialized algorithm based on the idea of the branching and
-borders \cite{SALMAN2020}.
-Note that classical metaheuristics are also actively used and
+The second approach is mainly represented by works in which the GTSP model is used in its most general form without any additional
+restrictions. So, Gutin and Karapetyan \cite{Gutin-2010}
+proposed an efficient memetic algorithm. The work
+\cite{Helsgaun-2015} extended the famous heuristic
+Lin-Kernighan-Helsgaun solver to the GTSP,
+and \cite{bibx:230} developed
+powerful meta-heuristics of GNLS, which today is
+the most effective. In the case of a GTSP with precedence conditions
+of arbitrary form, algorithmic results still remain
+rather few in number. We can note heuristics \cite{SALMAN2016} and the specialized algorithm based on the branch-and-bound method idea \cite{SALMAN2020}.
+
+We also note recent works using both models of classical meta-heuristics and specialized heuristics
+\cite{Hajad2020SolvingTL,Li2020AutomaticGO}.
+
+
+Note that classical meta-heuristics are also actively used
 when solving problems of routing the tool of CNC machines for
 machining (see, for example, \cite{bibx:305,bibx:300,bibx:304}).
 
 Returning to the optimization problems of sheet cutting, we also note
-work \cite{bibx:117}, which explores an approach based on
-technological method of leaving "jumpers" in the process of thermal
+the work \cite{bibx:117}, which explores an approach based on
+the technological method of leaving "jumpers" in the process of thermal
 cutting to increase the rigidity of sheet material
-and reduction of geometric deformations of parts.
+and reduce the geometric deformations of parts.
 
-The above mentioned articles demonstrate
-what works for optimal tool routing for
-sheet cutting machines are actively developing,
+The above-mentioned articles demonstrate
+that works for optimal tool routing for
+sheet-cutting machines are actively developing,
 and this topic needs a more structured scientific approach.
-Within the framework of this topic, two relevant
-directions exist:
-
+Within the framework of this topic, there are two relevant directions:
 \begin{enumerate}
   \item
   development of precise algorithms and algorithms with
@@ -361,16 +308,15 @@ directions exist:
   \item
   adequate consideration of the dynamic constraints of thermal cutting.
 \end{enumerate}
-
 The following is a rigorous mathematical formalization
 of the
 problems of routing
 with constraints and cost functions,
 depending on the list of tasks,
 the study of which, in particular,
-allows to get optimal solutions for a variety of
+allows getting optimal solutions for a variety of
 tool routing problems
-for sheet cutting NC machines,
+for sheet-cutting NC machines,
 including tasks with some types of
 ``dynamic'' constraints.
 
@@ -378,17 +324,17 @@ including tasks with some types of
 \label{sec:1}
 
 We use standard set-theoretic notation;
-$\varnothing$ denotes the empty set,
-${\triangleq}$ means definition.
+$\varnothing$ denotes an empty set,
+${\triangleq}$ means equality by definition.
 A set consisting of sets
 is called a family.
 For any two objects $x$
 and $y$,
 $\{x;y\}$
-is unordered pair of them:
+is an unordered pair of them:
 $\{x;y\}$ contains $x,\;y$
 and no other elements.
-For any object $z$
+For any object $z$,
 $\{z\} {\triangleq} \{z;z\}$
 is a singleton, containing
 $z$.
@@ -396,10 +342,10 @@ Sets are objects themselves.
 If $a$ and $b$ are objects, then
 \cite[~67]{15}
 $(a,b) {\triangleq} \{\{a\};\{a;b\}\}$
-is ordered pair with
+is an ordered pair with
 the first element $a$
 and the second $b$.
-For any ordered pair $h$
+For any ordered pair $h$,
 its elements are
 $\mathrm{pr}_1(h)$
 and
@@ -415,26 +361,26 @@ $A \times B \times C = (A \times B) \times C$
 for any three sets
 $A,\;B$ and $C$;
 see~\cite[17]{16}.
-if sets
+If sets
 $A, B, C$
 and
 $D$
 are not empty and
 $\mathbb{f}$
-is mapping
+is mapping of
 $A\times B\times C$ onto $D$,
 then for
 $y \in A\times B$
 and
-$z \in C$
-value of
+$z \in C$,
+the value of
 $\mathbb f(y,z)\in D$
-is defined in point
+is defined in the point
 $(y,z) = (\mathrm{pr}_1(y), \mathrm{pr}_2(y), z)$,
-that we denote as
+which we denote as
 $\mathbb f(y,z) = \mathbb f(\mathrm{pr}_1(y), \mathrm{pr}_2(y), z)$.
 
-Set $H$
+The set $H$
 gives rise to a family $\mathcal{P}(H)$
 of all its subsets
 and $\mathcal{P}'(H) {\triangleq}
@@ -448,8 +394,8 @@ $\mathrm{Fin}(H) \subset \mathcal{P}'(H)$.
 For any finite non-empty set
 $H$:
 $\mathrm{Fin}(H) = \mathcal{P}'(H)$.
-If sets $A$ and $B$ are non-empty,
-$f$ -- mapping (function) from $A$ onto $B$,
+If the sets $A$ and $B$ are non-empty,
+$f$ is mapping (function) from $A$ onto $B$,
 and $C \in \mathcal{P}(A)$,
 then
 $f^1(C) {\triangleq} \{f(x):\;x \in C\} \in \mathcal{P}(B)$
@@ -465,33 +411,33 @@ $$
 \overline{p,q} = \{\;k \in \mathbb{N}_0 \vert (p \le k) \& (k \le q)\}
 $$
 (for $q < p$ we get $\overline{p,q} = \varnothing$).
-For non-empty set
-$S$:
+For a non-empty set
+$S$,
 $\mathcal{R}_+[S]$
 is
 by definition
-set of all non-negative real-valued functions on
+a set of all non-negative real-valued functions on
 $S$.
 Every non-empty finite set $K$
 has its cardinality
 $|K| \in \mathbb{N}$
-and non-empty set $(\mathrm{bi})[K]$
+and a non-empty set $(\mathrm{bi})[K]$
 of all bijections
 \cite[87]{17}
-of interval
+of the interval
 $\overline{1,|K|}$
 onto $K$;
 $|\varnothing| {\triangleq} 0$.
 It is clear that for
 $m \in \mathbb{N}$,
 $(\mathrm{bi})[\overline{1,m}]$
-is the set of all permutation
+is the set of all permutations
 \cite[87]{17}
 of the set
 $\overline{1,m}$;
 if
 $\alpha \in (\mathrm{bi})[\overline{1,m}],$
-then reverse permutation
+then a reverse permutation
 $\alpha^{-1} \in (\mathrm{bi})[\overline{1,m}]$
 exists:
 $$
@@ -504,14 +450,14 @@ Recall that here and below the symbolism corresponds to
 \section{Mathematical statement of the problem}
 \label{sec:2}
 
-For the fixed non-empty set
+Consider a fixed non-empty set
 $X$
 (in practical applications
 \cite{4}
 $X$
 is a rectangle on the plane)
 and $X^0 \in \mathrm{Fin}(X)$;
-within $ X $ the considered movements are carried out
+within $ X $, the considered movements are carried out
 from the starting point
 $ X ^ 0 $.
 Let $N \in \mathbb{N}$,
@@ -524,19 +470,19 @@ hereinafter referred to as megalopolises,
 as well as
 $N$
 relations
-(see \cite[chapter II,$\S$4]{15})
+(see \cite[chapter II, $\S$4]{15})
 \begin{equation}\label{2.2}
 \mathbb{M}_1 \in \mathcal{P}'(M_1 \times M_1), \dots ,
     \mathbb{M}_N \in \mathcal{P}'(M_N \times M_N).
 \end{equation}
 
-megalopolises  (\ref{2.1})
+Megalopolises (\ref{2.1})
 are the objects to visit,
-and the points of each relation in  (\ref{2.2})
+and the points of each relation in (\ref{2.2})
 determine the acceptable options for tasks to perform
 while visiting the corresponding megalopolis
 and hereinafter referred to as internal.
-We suppose
+We suppose that
 $M_j \cap X^0 = \varnothing$
 for
 $j \in \overline{1,N}$;
@@ -545,7 +491,7 @@ $M_p \cap M_q = \varnothing$
 for
 $p \in \overline{1,N},\;q \in \overline{1,N},\;p \ne q$.
 So,
-the sets  (\ref{2.1})
+the sets (\ref{2.1})
 are pairwise disjoint and do not intersect with
 $ X ^ 0 $.
 These assumptions are typical for the tasks
@@ -559,16 +505,16 @@ then we assume that
     \{\;\mathrm{pr}_2(z):\;z \in \mathbb{M}_j\})
     ;
 \end{equation}
-sets  (\ref{2.3})
-are the subsets
+sets (\ref{2.3})
+are the subsets o
 $M_j$.
- (\ref{2.3})
-contains set of possible ariivals to
+Equation (\ref{2.3})
+contains a set of possible ariivals to
 $M_j$
-and departures from $M_j$
+and departures from $M_j$,
 respectively.
 In connection with
- (\ref{2.3})
+ (\ref{2.3}),
 we note that
 $$
 (\mathbb{X} {\triangleq} X^0 \cup
@@ -588,10 +534,10 @@ The systems of movements considered below have the form
   \end{aligned}
 \end{equation}
 where
-$\alpha$ is permutation $\overline{1,N}$,
+$\alpha$ is the permutation $\overline{1,N}$,
 solid arrows indicate external movements,
-and wavy ones --  performing internal work;
-We postulate in  (\ref{2.4}) that
+and wavy ones -- performing internal work.
+We postulate in (\ref{2.4}) that
 \begin{equation}\label{2.5}
   (x_{1,1},x_{1,2}) \in \mathbb{M}_{\alpha(1)},
   \dots,
@@ -599,17 +545,17 @@ We postulate in  (\ref{2.4}) that
 \end{equation}
 
 We consider
- (\ref{2.4}),  (\ref{2.5})
+ (\ref{2.4}), (\ref{2.5})
 as an implementation of a single routing process.
 The choice of this process itself must satisfy
-a number of constraints
-among which the precedence constraint stand out
+a number of constraints,
+among which the precedence constraints stand out
 (see \cite{10}).
 To introduce these constraints,
 we first set
 $\mathbb{P} {\triangleq} (
   \mathrm{bi})[\overline{1,N}],$
-so as in  (\ref{2.4}),  (\ref{2.5})
+so as in (\ref{2.4}), (\ref{2.5})
 $\alpha \in \mathbb{P}$.
 Then,
 $\mathbb{P}$
@@ -618,7 +564,7 @@ $\overline{1,N}$,
 hereinafter referred to as the route.
 We fix the set
 $\mathbf{K} \in \mathcal{P}(\overline{1,N} \times \overline{1,N}),$
-which elements
+the elements of which
 (they all are ordered pairs)
 we call address pairs
 (i.e. $\mathbf{K} \subset \overline{1,N} \times \overline{1,N}$);
@@ -629,9 +575,9 @@ suppose that
 \end{equation}
 
 The first element of an address pair
-is often referred to as the sender.
-and the second -- by the recipient
-(cargo, messages, etc.).
+is often referred to as the sender,
+and the second -- the recipient
+(of cargo, messages, etc.).
 Then, as shown in \cite[part 2]{14},
 \begin{multline}\label{2.7}
   % \begin{aligned}
@@ -650,17 +596,17 @@ Then, as shown in \cite[part 2]{14},
     \right\} \ne \varnothing
   % \end{aligned}
 \end{multline}
-yes
-(assuming  (\ref{2.6}))
-non-empty set of all routes
+there is
+(assuming (\ref{2.6}))
+a non-empty set of all routes
 (following the TSP terminology,
 we name permutation of indices $\overline {1, N}$
 the route),
 admissible by precedence or $\mathbf {K}$-admissible:
 we consider the routes
-where the sender is visited earlier for any address pair,
+where the sender is visited earlier for any address pair
 than the recipient.
-Going back to  (\ref{2.4}),
+Going back to (\ref{2.4}),
 we introduce the trajectories,
 consistent with routes.
 First, we introduce the set
@@ -669,22 +615,22 @@ of all the tuples
 $(z_i)_{i \in \overline{0,N}}: \overline{0,N} \longrightarrow \mathbb{X} \times \mathbf{X}$.
 If $x \in X^0$ and $\alpha \in \mathbb{P}$,
 then
-set of all trajectories,
+the set of all trajectories,
 starting from $ x $
-and matched with $\alpha $
+and matched with $\alpha $,
 has the form
 \begin{equation}\label{2.8}
 \mathcal{Z}_\alpha[x] {\triangleq} \{(z_i)_{i \in \overline{0,N}}
 \in \mathbb{Z} \vert\;(z_0 = (x,x)) \& (z_t \in \mathbb{M}_{\alpha(t)}\;\forall{t} \in \overline{1,N})\} \in \mathrm{Fin}(\mathbb{Z}).
 \end{equation}
 
-From  (\ref{2.8})
+From (\ref{2.8}),
 one can see
 that the trajectories from
 $ \mathcal {Z}_\alpha[x] $
 strictly implement the scheme
- (\ref{2.4}),  (\ref{2.5})).
-For $x \in X^0$
+ (\ref{2.4}), (\ref{2.5})).
+For $x \in X^0$,
 we get
 \begin{equation}\label{2.9}
   \tilde{D}[x] {\triangleq}
@@ -694,10 +640,9 @@ we get
 \end{equation}
  (\ref{2.9})
 is the set of all feasible solutions
-(DP)
-of a particular problem starting from $x$,
-we call it $x$-problem.
-Finally we assume
+to a particular problem starting from $x$,
+we call it an $x$-problem.
+Finally, we assume
 \begin{multline}\label{2.10}
   \mathbf{D} {\triangleq}
   \{(\alpha,(z_i)_{i \in \overline{0,N}},x) \in \mathbf{A} \times \mathbb{Z} \times X^0 \vert
@@ -707,10 +652,10 @@ Finally we assume
   \in \mathrm{Fin}(\mathbf{A} \times \mathbb{Z} \times X^0),
 \end{multline}
 obtaining the set of all
-feasible solutions of the complete problem formulated below,
+feasible solutions to the complete problem formulated below,
 i.e. optimization in the class of routing processes.
 
-{\bf Objective functions}.
+{\bf Cost functions}.
 Through $\mathfrak{N}$
 we denote the family of all non-empty subsets
 $\overline{1,N}:\;\mathfrak{N} {\triangleq}  \mathcal{P}'(\overline{1,N})$.
@@ -731,21 +676,21 @@ evaluates external movements,
 i.e. ones between cities,
 as well as one from points of the set $ X ^ 0 $
 to megalopolises.
-For $j \in \overline{1,N}$
-function $ c_j $
+For $j \in \overline{1,N}$,
+the function $ c_j $
 evaluates the performance of internal works,
 related to visiting $ M_j$.
 Finally, the function $ f $
-evaluates terminal state
+evaluates the terminal state
 (point $x_{N,2}$
-in  (\ref{2.5})).
-As seen from  (\ref{2.11}),
+in (\ref{2.5})).
+As seen from (\ref{2.11}),
 one of the arguments of the functions
 $ \mathbf {c}, c_1, ..., c_N $
 is an element of the family $\mathfrak{N}$,
-i.e. non-empty subset $\overline{1, N}$,
+i.e. a non-empty subset $\overline{1, N}$,
 hereinafter referred to as a list (of tasks).
-In subsequent theoretical constructions
+In subsequent theoretical constructions,
 it can be considered as
 the list of tasks
 not completed so far,
@@ -754,11 +699,11 @@ associated with the maintenance of nuclear power plants
 and the elimination of possible accidents;
 see \cite{1,3}.
 In the case of curly sheet cutting
-(see \cite{4})
+(see \cite{4}),
 here occurs
 (due to dynamic constraints)
 the need to use dependency
-from the list of already completed tasks;
+on the list of already completed tasks;
 thus, by imposing appropriate penalties,
 it is possible to take into account the constraints of a dynamic nature
 (see \cite{18}).
@@ -774,7 +719,7 @@ $\overline{1,N}$,
 one can also reduce this case to the application of dependencies
  (\ref{2.11}).
 Further, the additive criterion is optimized.
-for which to introduce
+To introduce this criterion, assume that
 when
 $x \in X^0,\;\alpha \in \mathbb{P}$
 and
@@ -789,22 +734,22 @@ c_{\alpha(i)}(z_i,\alpha^1(\overline{i,N}))] +
 + f(\mathrm{pr}_2(z_N));
 \end{multline}
 
-So in  (\ref{2.12})
+So in (\ref{2.12}),
 we summarize the cost indicators for external movements,
-for interior work and terminal state
+for interior work and the terminal state
 (in the case of sheet cutting,
-one of the important options  (\ref{2.12})
+one of the important options (\ref{2.12})
 is the cumulative execution time for all tasks;
-here however
+here, however,
 there is a significant transformation of the setting
 in comparison with the original substantive problem
 at the stage of reduction to the scheme
- (\ref{2.4}),  (\ref{2.5});
-see. \cite[$\S$3.3]{4}).
-Taking into account  (\ref{2.12}),
+ (\ref{2.4}), (\ref{2.5});
+see \cite[$\S$3.3]{4}).
+Taking into account (\ref{2.12}),
 we obtain for
 $ x \in X ^ 0 $
-particular problem
+a particular problem
 ($ x $-problem)
 \begin{equation}\label{2.13}
   \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}] \longrightarrow
@@ -814,7 +759,7 @@ which is characterized by the extremum
 $V[x]$
 (the smallest of the numbers
 $\mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}],\;(\alpha,(z_i)_{i \in \overline{0,N}}) \in \tilde{D}[x]$)
-and
+and the
 (non-empty finite)
 set
 \begin{equation}\label{2.14}
@@ -823,10 +768,10 @@ set
   \mathfrak{C}_{\alpha^0}[(z_i^0)_{i \in \overline{0,N}}] = V[x]\} \in \mathcal{P}'(\tilde{D}[x])
 \end{equation}
 of all optimal solutions
-(stating from $x$);
+(starting from $x$);
 so,
  (\ref{2.14})
-is non-empty finite set.
+is a non-empty finite set.
 As
 \begin{equation}\label{2.15}
   \mathfrak{C}_{\alpha}[(z_i)_{i \in \overline{0,N}}] \longrightarrow
@@ -847,7 +792,7 @@ and a (nonempty finite) extreme set
   \mathbb{V}\} \in \mathrm{Fin}(\mathbf{D}).
 \end{equation}
 
-Due to  (\ref{2.16})
+Due to (\ref{2.16}),
 we also note the following
 subsidiary
 start point optimization problem
@@ -856,7 +801,7 @@ start point optimization problem
 \end{equation}
 having an extremum
 $\mathbb{V}$
-(see.  (\ref{2.16}))
+(see (\ref{2.16}))
 and extreme set
 \begin{equation}\label{2.19}
   X^0_{\mathrm{opt}} {\triangleq} \{\;x^0 \in X^0 \vert V[x^0] = \mathbb{V}\} \in \mathcal{P}'(X^0).
@@ -880,7 +825,7 @@ and
 $(\alpha^0,(z_i^0)_{i \in \overline{0,N}})$
 according to conditions.
 Then
-(see.  (\ref{2.19}))
+(see (\ref{2.19}))
 $V[x^0] = \mathbb{V},$
 \begin{equation}\label{2.21}
  (\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in \tilde{D}[x^0].
@@ -893,11 +838,11 @@ $(z_i^0)_{i \in \overline{0,N}} \in \mathcal{Z}_{\alpha^0}[x^0]$.
 Then
 $(\alpha^0,(z_i^0)_{i \in \overline{0,N}},x^0) \in \mathbf{D}$
 due to
- (\ref{2.10}),  (\ref{2.19}) and  (\ref{2.21}).
-Moreover according to
- (\ref{2.14})
+ (\ref{2.10}), (\ref{2.19}) and (\ref{2.21}).
+Moreover, according to
+ (\ref{2.14}),
 we have by choice
-$x^0$,
+$x^0$
 that
 $$
   \mathfrak{C}_{\alpha^0}[(z_i^0)_{i \in \overline{0,N}}] = V[x^0] = \mathbb{V}.
@@ -911,53 +856,51 @@ we now obtain the required property
 \end{proof}
 
 From the proposition
-\ref{prop:2.1}
+\ref{prop:2.1},
 it follows that
 the solution to the problem
  (\ref{2.15})
 can be found according to the following scheme:
 1) finding $ x ^ 0 \in X ^ 0 _ {\mathrm{opt}}$;
-2) the solution of the problem  (\ref{2.13}) for $ x = x ^ 0$;
-3) using  (\ref{2.20}).
+2) the solution to the problem (\ref{2.13}) for $ x = x ^ 0$;
+3) using (\ref{2.20}).
 
 To solve the problem
- (\ref{2.15})
+ (\ref{2.15}),
 we use a general approach,
-associated with the use of a non-standard option of
-dynamic programming
-(DP).
-We are talking primarily about research of
+associated with the use of a non-standard DP option.
+We are talking primarily about the research of
 the evolution of the extremum of partial problems.
 In this case, we build a DP procedure,
 taking precedence constraints into account,
-see.~ (\ref{2.7}).
+see~ (\ref{2.7}).
 They are the restriction on
 ``the whole''
-route
+route,
 which makes it difficult to implement the DP design,
-dating back to the work of R. Bellman
+dating back to the work of Bellman
 \cite{11}.
 In this regard,
 the stage of expanding the main task,
 realizing the construction of a system of partial tasks,
 includes
 (see~\cite[part 2]{14})
-transformation of the system
+the transformation of the system
 of constraints itself:
 precedence admissibility
 is replaced by strikethrough tolerance
-for jobs from the list.
-Turns out,
-(see~\cite[Theorem 2.2.1]{14}),
-that in full
+for tasks from the list.
+It turns out
+(see~\cite[Theorem 2.2.1]{14})
+that in the full
 (original)
-problem
+problem,
 such a replacement does not lead to
 a change in the stock of feasible solutions.
-This allows to use
+This allows using
 strikethrough tolerance
 in the DP design
-related to the implementation of on current movement constraints,
+related to the implementation of current movement constraints,
 that is
 (within the meaning of)
 stepwise restrictions.
@@ -987,17 +930,17 @@ multiple inner contours
 (see~\cite[\S~3.2]{4}).
 In practice,
 the contours are surrounded by equidistant lines close to them.
-For sake of simplicity,
+For the sake of simplicity,
 however,
 we will consider them coinciding with the contours,
-that is, we cutting will go along the contours.
-For technological reasons
+that is, cutting will go along the contours.
+For technological reasons,
 cutting the inner contours of the part
 (if any)
 must precede cutting the outer contour.
-Thus a natural variant of precedence constraints arises.
+Thus, a natural variant of precedence constraints arises.
 We suppose
-that next to each contour the possible
+that next to each contour, the possible
 piercing points and their corresponding cut-off points
 are positioned:
 the punch-in procedure is sampled appropriately.
@@ -1009,55 +952,45 @@ and the tool switch-off points.
 Points of these two types are grouped in pairs.
 For any megalopolis
 $M_j$
-relation
+the relation
 $\mathbb{M}_j$
 consists of ordered pairs;
 elements of each such pair are
-pierce point
+the pierce point
 and the corresponding tool switch-off point.
-One option has already been noted above
-precedence constraint.
-Other options are also possible,
-for example,
-the rule can be used:
-the ``large'' parts are cut first.
+One precedence constraint option has already been noted above.
+Other options are also possible;
+for example, the rule can be used: the ``large'' parts are cut first.
 Among other restrictions, we now note
-thermal tolerances
-(see~\cite{18}),
+thermal tolerances (see~\cite{18}),
 which correspond to the heuristic rule of ``part stiffness''
 \cite{4}.
 This means ensuring the situation,
 where
-sufficient ``amount''
-of uncut metal
-remains next to pierce and tool switch-off points.
-near the points of insertion and points of switching off of the tool
-thus allowing appropriate
-heat dissipation
-for the case of thermal cutting.
-A more detailed description of the mathematical
-formalizing
-for this additional
-constraints
-belonging to the class of dynamic constraints,
-can be found at~\cite{18}.
+a sufficient ``amount''
+of uncut metal remains next to pierce and tool switch-off points, thus allowing appropriate
+heat dissipation for the case of thermal cutting.
+A more detailed description of mathematical
+formalizing for this additional
+constraint belonging to the class of dynamic constraints
+can be found in~\cite{18}.
 
-In the cutting model in question
-actual time of contour cutting
+In the cutting model in question,
+the actual time of contour cutting
 is excluded
 as it remains the same for all solutions
-and can be easily accounted for by introducing of
+and can be easily accounted for by introducing an
 additional term.
 However,
 the described model can be easily generalized to
-the case of  multi-contour cutting,
+the case of multi-contour cutting,
 when
 several parts are cut within one cutting segment,
 while the pierce point
 and tool-off point
 may not coincide
-(the example will be given at the end
-of the paper)
+(an example will be given at the end
+of the paper).
 
 Time spent during air movement
 is an
@@ -1069,16 +1002,16 @@ The cost of interior work
 is obtained by summing the two components.
 One of them is determined by the sum of times
 spent on moving
-from the pierce point  to the beginning of the cut,
-and from the last to the tool switching-off point
+from the pierce point to the beginning of the cut,
+and from the latter to the tool switching-off point
 (movement in metal at the working speed).
 The second component is determined by the penalty function and
-appears in case of thermal tolerance violation.
+appears in the case of thermal tolerance violation.
 It is assumed that the starting point of the cut
 matches each pair
 of pierce and switch-off points.
-Thus
-the value  (\ref{2.12})
+Thus,
+the value (\ref{2.12})
 is obtained
 for each routing process.
 See details in
@@ -1093,7 +1026,7 @@ building an optimal solution%
 }
 \label{sec:4}
 
-Let's go back to a very general statement of the section
+Let us go back to a very general statement of the section
 \ref{sec:2}.
 It relies on general assumptions going back to
 \cite[$\S$4.9]{14}.
@@ -1128,9 +1061,9 @@ $ \overline {1, N} $
 lists
 (of tasks);
 so,
-list is of elements of family
+a list is of elements of the family
 $\mathfrak{N}$.
-Among all kinds of lists
+Among all kinds of lists,
 we highlight some,
 important for the purposes of constructing the Bellman layer functions.
 Moreover,
@@ -1144,10 +1077,10 @@ We suppose
 \end{equation}
 
 We call
-sets -- elements of the family  (\ref{4.2}) --
-essential lists.
+sets -- elements of the family (\ref{4.2})
+essential lists
 (see \cite[$\S 4.9$]{14}).
-Let's introduce a ranking by cardinality:
+Let us introduce a ranking by cardinality:
 $\mathcal{G}_s {\triangleq} \{\;K \in \mathcal{G} \vert s = |K|\}\;\;\forall{s} \in \overline{1,N}.$
 Then
 $\{\mathcal{G}_1;...;\mathcal{G}_N\}$
@@ -1164,7 +1097,7 @@ where
 Finally,
 $\mathcal{G}_{s-1} = \{\;K \setminus\{t\}:\;K \in \mathcal{G}_s,\;t \in \mathbf{I}(K)\}$
 for $s \in \overline{2,N};$
-see. \cite[$\S$3.5]{4}.
+see \cite[$\S$3.5]{4}.
 So, we got a recurrent procedure for constructing essential lists
 $$
   \mathcal{G}_N \longrightarrow \mathcal{G}_{N-1} \longrightarrow ... \longrightarrow \mathcal{G}_1.
@@ -1177,11 +1110,11 @@ the sets $D_0,D_1,...,D_N,$
 of pairs
 $(x,K),\;x \in \mathbf{X},\;K \in \mathcal{G},$
 referred to as positions.
-We therefor call that sets
+We therefore call those sets
 $D_0, D_1, \dots, D_N$
 layers of position space.
-Let's suppose
-(see  (\ref{4.3}))
+Let us suppose
+(see (\ref{4.3}))
 \begin{equation}\label{4.3'}
   (D_N {\triangleq} \{\;(x,\overline{1,N}):\;x \in X^0\}) \&
   (D_0 {\triangleq} \{\;(x,\varnothing):\;x \in
@@ -1189,7 +1122,7 @@ Let's suppose
 \end{equation}
 
 By
- (\ref{4.3'})
+ (\ref{4.3'}),
 the extreme layers of the position space are defined.
 If
 $s \in \overline{1,N-1}$ and $K \in \mathcal{G}_s,$
@@ -1217,7 +1150,7 @@ Thus we defined all the sets
 $D_0,D_1,...,D_N$.
 They are non-empty
 (see~\cite[prop.~4.9.3]{14}
-with simple adaptation of notation).
+with a simple adaptation of notation).
 Note the easily verified key property
 \begin{equation}\label{4.4}
   (\mathrm{pr}_2(z),K \setminus \{j\}) \in D_{s-1}\;\;
@@ -1230,18 +1163,18 @@ We build functions sequentially
 $v_0 \in \mathcal{R}_+[D_0],\;v_1 \in \mathcal{R}_+[D_1],...,v_N \in \mathcal{R}_+[D_N]$.
 Within the framework of our algorithm, the construction of the mentioned functions
 (layers)
-is performed by  recurrent procedure
+is performed by a recurrent procedure
 (see~\cite[$\S$4.9]{14}, \cite{18}).
 We define
-initial
+the initial
 function $ v_0 $ by the condition
 \begin{equation}\label{4.5}
   v_0(x,\varnothing) {\triangleq} f(x)\;\;
   \forall{x} \in \bigcup\limits_{i \in \overline{1,N} \setminus \mathbf{K}_1} \mathbf{\mathbf{M}}_i;
 \end{equation}
-taking into account the second relation in  (\ref{4.3'}).
+taking into account the second relation in (\ref{4.3'}).
 Let $s \in \overline{1,N}$
-and function
+and the function
 $v_{s-1} \in \mathcal{R}_+[D_{s-1}]$
 is already constructed.
 Taking into account
@@ -1265,8 +1198,8 @@ with the following rule
 \end{multline}
 see, in particular,
 \cite[(4.3.13)]{4}.
-So,  (\ref{4.6})
-defines transformation
+So, (\ref{4.6})
+defines a transformation of
 $v_{s-1}$ into $v_s.$
 We get a recurring procedure
 \begin{equation}\label{4.7}
@@ -1277,10 +1210,10 @@ We get a recurring procedure
 It is important to note that
 (as in \cite {22} for a slightly different task)
 when we need to find
-only extremum
+only the extremum
 $ \mathbb V $
 and the optimal starting point,
-implementing  (\ref{4.7})
+implementing (\ref{4.7})
 requires saving in the computer memory
 at each step
 only one of the functions
@@ -1293,11 +1226,11 @@ requires only $v_{s-1}$
 which must be stored in the memory.
 This circumstance determines a more economical
 (in terms of memory resources)
-variant of the procedure  (\ref{4.7}).
+variant of the procedure (\ref{4.7}).
 Note, however,
 that all of the above functions are required to construct an optimal solution.
 
-Returning to the general version  (\ref{4.7}),
+Returning to the general version (\ref{4.7}),
 note that the final of this procedure is the construction of the function
 $v_N \in \mathcal{R}_+[D_N]$.
 It is important to note that
@@ -1314,11 +1247,11 @@ onto the layers of the position space.
 In this regard, we note
 \cite[$\S$4.9]{14}, \cite{18}
 (see also \cite[(4.3.1)]{4}).
-Due to (\ref{4.6}), (\ref{4.8})
+Due to (\ref{4.6}), (\ref{4.8}),
 we get for
-$x \in X^0$,
+$x \in X^0$
 that
-(see  (\ref{4.3'}))
+(see (\ref{4.3'}))
 \begin{multline}
   \label{4.9'}
   V[x] = \\
@@ -1327,36 +1260,36 @@ that
 \end{multline}
 
 We especially note that in the case
-when it is required to find not only the global extremum
-and the optimal starting point,
+when it is required not only to find the global extremum
+and the optimal starting point
 but also to build the optimal solution itself,
-when implementing  (\ref{4.7})
+when implementing (\ref{4.7}),
 arrays of values of all functions
 $v_0,v_1,...,v_N$
 must be stored in memory
-(in this regard see  (\ref{4.9'})).
+(in this regard see (\ref{4.9'})).
 
 4) {\bf Finding the optimal starting point.}
 Due to
- (\ref{4.8})
+ (\ref{4.8}),
 after the implementation of the procedure
- (\ref{4.7}) we have the dependency
+ (\ref{4.7}), we have the dependency
 $$
-  x \longmapsto V[x]:\;X^0 \longrightarrow \mathbb{R}_+;
+  x \longmapsto V[x]:\;X^0 \longrightarrow \mathbb{R}_+,
 $$
 which is completely determined by the function
 $v_N$.
-Therefore, to solve the problem  (\ref{2.18}), one should minimize
+Therefore, to solve the problem (\ref{2.18}), one should minimize
 $v_N$.
 Indeed,
-using  (\ref{2.16}) and  (\ref{4.8})
+using (\ref{2.16}) and (\ref{4.8})
 we define
 $\mathbb{V}$
-according to rule
+according to the rule
 \begin{equation}\label{4.9}
   \mathbb{V} = \min\limits_{x \in X^0} v_N(x,\overline{1,N}),
 \end{equation}
-and optimal strating point
+and the optimal starting point
 $x^0 \in X^0_{\mathrm{opt}}$
 can be found using
 $x^0 \in X^0$ and also
@@ -1365,16 +1298,16 @@ $x^0 \in X^0$ and also
 \end{equation}
 
 Thus,
-based on  (\ref{4.7}),
+based on (\ref{4.7}),
 it is possible to
-solve the problem  (\ref{2.18})
-(see  (\ref{4.9}),  (\ref{4.10})),
+solve the problem (\ref{2.18})
+(see (\ref{4.9}), (\ref{4.10}));
 moreover,
 this can be done with some savings in the memory
 (see Note 4.1).
 
 5) {\bf Building an optimal solution.}
-At this stage, a solution is determined from the set  (\ref{2.17}).
+At this stage, a solution is determined from the set (\ref{2.17}).
 We solve the problem
  (\ref{2.13})
 for
@@ -1384,10 +1317,10 @@ $\mathbb{V}$
 and the point
 $x^0 \in X^0_{\mathrm{opt}}$,
 found at the previous step
-(see  (\ref{4.9}),  (\ref{4.10})).
+(see (\ref{4.9}), (\ref{4.10})).
 We define $z^0 {\triangleq} (x^0,x^0)$.
 In what follows, we use the fact that, according to
- (\ref{4.6}),  (\ref{4.8}) and  (\ref{4.9'})
+ (\ref{4.6}), (\ref{4.8}) and (\ref{4.9'})
 \begin{multline}
   \label{4.11}
   \mathbb{V} = v_N(x^0,\overline{1,N}) = \\
@@ -1398,9 +1331,9 @@ In what follows, we use the fact that, according to
 
 Recall that
 $(x^0,\overline{1,N}) \in D_N$
-due to  (\ref{4.3'})
+due to (\ref{4.3'})
 and
-(according to  (\ref{4.4}))
+(according to (\ref{4.4}))
 for
 $j \in \mathbf{I}(\overline{1,N})$
 and
@@ -1411,7 +1344,7 @@ $$
   .
 $$
 
-Taking  (\ref{4.11}) into account, we find
+Taking (\ref{4.11}) into account, we find
 $\eta_1 \in \mathbf{I}(\overline{1,N})$ and $z_1^0 \in \mathbb{M}_{\eta_1},$
 for which
 \begin{equation}\label{4.12}
@@ -1419,11 +1352,11 @@ for which
   c_{\eta_1}(z_1^0,\overline{1,N}) +
   v_{N-1}(\mathrm{pr}_2(z_1^0),\overline{1,N} \setminus \{\eta_1\}),
 \end{equation}
-that gets us
+which gives us
 $(\mathrm{pr}_2(z_1^0),\overline{1,N} \setminus \{\eta_1\}) \in D_{N-1}$.
 Now,
-for the last term in  (\ref{4.12}),
-according to  (\ref{4.6}),
+for the last term in (\ref{4.12}),
+according to (\ref{4.6}),
 we have the equality
 \begin{multline}
   \label{4.13}
@@ -1446,7 +1379,7 @@ $$
 $$
 for
 $j \in \mathbf{I}(\overline{1,N} \setminus \{\eta_1\})$ and $z \in \mathbb{M}_j.$
-Using  (\ref{4.13})
+Using (\ref{4.13}),
 we get
 $\eta_2 \in \mathbf{I}(\overline{1,N} \setminus \{\eta_1\})$ and $z_2^0 \in \mathbb{M}_{\eta_2},$
 for which
@@ -1463,7 +1396,7 @@ for which
 \end{multline}
 where
 $(\mathrm{pr}_2(z_2^0),\overline{1,N} \setminus \{\eta_1;\eta_2\}) \in D_{N-2}.$
-Substituting  (\ref{4.14}) into  (\ref{4.12}), we obtain
+Substituting (\ref{4.14}) into (\ref{4.12}), we obtain
 \begin{equation}\label{4.15}
   \begin{array}{c}
     \mathbb{V} =
@@ -1476,7 +1409,7 @@ Substituting  (\ref{4.14}) into  (\ref{4.12}), we obtain
 \end{equation}
 
 Further selection procedures,
-like  (\ref{4.12}) and  (\ref{4.14})
+like (\ref{4.12}) and (\ref{4.14}),
 should continue until
 $\overline{1, N}$ is exhausted.
 This leads us to the route
@@ -1486,32 +1419,32 @@ $(z_t^0)_{t \in \overline{0,N}} \in \mathcal{Z}_{\alpha^0}[x^0],$
 having
 $\mathbb{V} = \mathfrak{C}_{\alpha^0}[(z_t^0)_{t \in \overline{0,N}}]$.
 Then according to
- (\ref{2.9}) and  (\ref{2.14})
+ (\ref{2.9}) and (\ref{2.14})
 $(\alpha^0,(z_i^0)_{i \in \overline{0,N}}) \in (\mathrm{\mathrm{SOL}})[x^0]$.
 Considering the proposition
-\ref{prop:2.1},  (\ref{4.9}) and  (\ref{4.10})
-we get that  (\ref{2.20}) holds,
-that is triplet
+\ref{prop:2.1}, (\ref{4.9}) and (\ref{4.10}),
+we get that (\ref{2.20}) holds,
+that is, the triplet
 $(\alpha^0,(z_i^0)_{i \in \overline{0,N}},x^0)$
-is the optimal solution of the problem
+is the optimal solution to the problem
  (\ref{2.15}).
 Note that
-that for $ N = 2 $
+for $ N = 2 $,
 the optimality of this solution directly follows from
  (\ref{4.15}).
 
-\section{Model example: optimal solution to a complete problem}
+\section{Model examples: optimal solution to a complete problem}
 \label{sec:5}
 
-In this section, we use the concretization of the statement
-from the section~\ref{sec:3},
-i.e. we consider the option of sheet cutting of parts along a closed contour.
+In this section, we use the concretization of the problem statement from section~\ref{sec:3}, i.e. we consider the sheet cutting of parts. As an objective function, the time of cutting a part is used, which includes the time of working cutting, the time of moving, and the time for piercings of sheet material.
+
+
 For this option, an optimal solution will be obtained according to the scheme of the previous section:
 an algorithm is built, implemented in the form of a standard program for a personal computer.
-The given example shows, in fact, the limiting (in the sense of dimension) possibilities of solving the basic problem on a PC.
+The first example shows, in fact, the limiting (in the sense of dimension) possibilities of solving the basic problem on a PC.
 The optimal solution was found, but it took a lot of time.
 A supercomputer is required to speed up the solution process.
-Recall once again that within the framework of this article
+Recall once again that within the framework of this article,
 we do not consider the use of heuristics
 to obtain approximate solutions to the problem.
 
@@ -1522,7 +1455,7 @@ The disposition of parts is fixed,
 so we need to cut
 $N = 30$
 contours
-and 16 parts.
+and 16 parts
 (the details themselves are not considered,
 since only contours are essential for our task).
 It is useful to introduce a special concept of a port,
@@ -1532,28 +1465,28 @@ the corresponding tool switch-off point,
 as well as the starting point of the cut.
 Our model considers
 visiting the ports system.
-The tool off point is close to the pierce point.
+The tool switch-off point is close to the pierce point.
 The example assumes that the total number of pierce points
 (for all the contours)
 is 508.
-Number of address pairs,
+The number of address pairs,
 determining a specific variant of the set
-$\mathbf{K}$
+$\mathbf{K}$,
 is 20
 in this example.
-This refers to specified in section ~\ref{sec:3}
-constraints
-on  cutting internal contours
-and the outer contour of the parts.
+This refers to
+the constraints
+on cutting internal contours
+and the outer contour of the parts specified in section ~\ref{sec:3}.
 
-Megalopolises are constructed from pierce points and tool-off points.
-Their ordered pairs form a relationship  (\ref{2.2}).
+Megalopolises are constructed from pierce points and tool turn-off points.
+Their ordered pairs form a relationship (\ref{2.2}).
 At the same time,
 it is convenient to associate a set of ports with each megalopolis.
 It is assumed that the minimum number of ports for a megalopolis is 4
 (while the number of ``cities'' of the megalopolis is 8),
 and the maximum number of ports for a megalopolis is 34.
-Number of possible start points
+The number of possible start points
 (cardinality of the set $ X ^ 0 $)
 is 58.
 They are located on the sides of the original rectangle
@@ -1561,40 +1494,36 @@ with the coordinates of the corners
 (0.0), (0.1000), (1900.1000), (1900.0)
 evenly with a step of 100
 (clockwise).
-The finish point has coordinates (0, 0).
-All dimensions are specified in millimeters.
-Air move speed is 500 mm/s,
+The finish point has the coordinates (0, 0).
+All the dimensions are specified in millimeters.
+The air move speed is 500 mm/s,
 cutting speed is 10 mm/s.
 It is assumed that the inner workings are determined
 as the sum of the travel times in the cutting mode
 from the pierce point to the start of the cut
 and from this last point to
-tool switch-off point,
+the tool switch-off point,
 as well as the value of the penalty function,
 defined as in
 \cite{18}.
 For the penalty function,
 the length of the cutting completion area is 100 mm,
 width is 25 mm,
-threshold value 0.25.
+the threshold value 0.25.
 If more than 25~\% of its area
 falls on the voids in the metal or on the space outside the sheet,
 then the penalty function has a value of 1,000,000, otherwise 0.
 
-To carry out the calculations,
-a computer
-was used
-with a processor
-Intel i7-2630QM and 8 GB RAM
-running Windows 7 (64-bit).
-The program is developed in the C++ language,
+For calculations, a computer with a processor Intel i7-
+2630QM and 8 GB RAM running Windows 7 (64-bit) was used.
+The program was developed in the C++ language,
 compiled with the MinGW compiler using the Qt library.
-Numerical experiment gave the extremum 67.555
+The numerical experiment gave the extremum 67.555
 after
 51 min 58 sec.
-Start point coordinates
-(1600 mm, 0 mm).
-The optimal solution is shown in Fig.~\ref{fig:1},
+The start point coordinates
+are(1600 mm, 0 mm).
+The optimal solution is shown in Figure~\ref{fig:1},
 where, in particular, the optimal starting point is indicated.
 
 \begin{figure}
@@ -1607,13 +1536,13 @@ where, in particular, the optimal starting point is indicated.
   }
 \end{figure}
 
-The megalopolises model is also applicable
+The model of megalopolises is also applicable
 when using non-standard cutting techniques,
 in particular, the so-called ``multi-contour cutting'',
 which, as noted above, assumes the use of only
 one pierce point
 for cutting two or more contours within one cutting segment.
-Fig.~\ref{fig:2}
+Figure~\ref{fig:2}
 shows an example of calculating the optimal tool path
 when cutting 19 parts defined by 24 contours.
 
@@ -1622,51 +1551,35 @@ when cutting 19 parts defined by 24 contours.
   \FIG{
     \includegraphics[width=130mm]{cut19.png}
   }{
-    \caption{Optimal cutting path when using multi-contour cutting technique}
+    \caption{Optimal cutting path when using the multi-contour cutting technique}
     \label{fig:2}
   }
 \end{figure}
 
-For pairs of parts numbered 1--2, 3--4, 5--6
+For pairs of parts numbered 1--2, 3--4, 5--6,
 three separate megalopolises were formed,
-21 total.
+a total of 21.
 Possible pierce points are marked with green dots.
 The optimal starting point was not calculated in this example.
 The time to obtain an exact solution is 16 seconds.
-This example shows that the application of the model megalopolises,
-which are used as a discrete image of the ``cutting segment'',
-allows to obtain optimal solutions to the problem of
-minimizing cutting time for GSCCP problem either.
+This example shows that the application of the model of megalopolises, which are used as a discrete image of the ``cutting segment'', allows obtaining optimal solutions to the problem of minimizing cutting time for the GSCCP problem \cite{bibx:305} either.
 In this case,
-the objective function includes,
-in addition to the air-move length,
-the time of the cutting and piercing into the material.
+the objective function also includes,
+in addition to the airtime motion,
+the time of work cutting and time of piercings into the material.
 It should be especially noted
 that the mathematical model described in the article
 makes it possible to obtain,
 on an ordinary personal computer,
-exact solutions for the tasks of tool path routing for CNC sheet cutting machines
-for up to 30 or more parts,
-while ensuring the manufacturability of the solution in terms of sheet cutting constraints based on heuristic rules
-``part stiffness'' and
-``sheet stiffness''.
-To comply with these rules,
-the routing algorithms described
-use the above-mentioned penalty mechanism.
+exact solutions for the tasks of tool path routing for CNC sheet-cutting machines for up to 30 or more (if we use non-standard cutting techniques) parts, while ensuring the manufacturability of the solution in terms of sheet cutting constraints based on heuristic rules (``a part hardness rule'' and ``a sheet hardness rule''). To comply with these rules, the routing algorithms described use the above-mentioned penalty mechanism. As noted above, the precedence constraints also significantly reduce the computational complexity of the problem.
 
-Thus,
-summarizing the scientific aspects of the results obtained by the authors,
+Thus, summarizing the scientific aspects of the results obtained by the authors,
 it can be emphasized that the proposed
-theoretical constructions guarantee obtaining a global extremum
-of route optimization problems
-in the range of problem sizes relevant for practice.
+theoretical constructions guarantee obtaining a global extremum of route optimization problems
+in the range of problem sizes that are relevant for practice.
 Further studies of the influence of the tool path on
-the magnitude of thermal deformations of the material will ensure
-the compliance of the obtained exact solutions
-to the real optimal
-(in terms of cutting time and cost)
-feasible technological routes
-for sheet cutting CNC machines.
+the magnitude of thermal deformations of parts will ensure the compliance of the obtained exact solutions
+to the real optimal and feasible technological routes for CNC sheet-cutting machines.
 
 \begin{backmatter}
 
@@ -1688,7 +1601,7 @@ for sheet cutting CNC machines.
 \end{authordetails}
 
 \bibliographystyle{ieeetr}
-\bibliography{dombai.bib}
+\bibliography{Chentsov.bib}
 
 \end{backmatter}
 
