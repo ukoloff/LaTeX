@@ -138,4 +138,294 @@ tool path optimization problem
   {\bf{Introduction}}
 \end{flushleft}
 
+The study considers the problem of movement routing
+with various constraints.
+Among the latter, we highlight
+precedence constraints,
+as well as those of a dynamic nature,
+arising during the process when certain tasks are performed.
+With proper formalization, a problem statement arises,
+conceptually close to discrete control problems of large dimension
+(meaning discreteness both in time and in phase state).
+Several objects are optimized,
+including the starting point,
+order of task execution
+(hereinafter referred to as the route),
+and a specific trajectory;
+we call this triplet
+the routing process.
+This approach can be applied
+to the task of minimizing the radiation dose
+when dismantling radiation-hazardous facilities
+(see~\cite {1,3})
+and the tool path routing problem
+for CNC sheet-cutting machines
+in mechanical engineering (see \cite {4,5});
+other applications also exist.
+We focus on the application of the developed methods in mechanical engineering
+in this article,
+following the monograph~\cite{4}.
+The initial task of controlling the cutting tool
+with precedence and dynamic constraints
+is converted to a strict mathematical statement of
+the optimization problem
+in the class of the aforementioned routing processes.
+The goal is to find
+the global extremum and the corresponding optimal solution.
+The elements of the general theory and
+the optimal algorithm constructed on its basis,
+implemented on a multi-core PC,
+are explained.
+The method used is based on
+broadly understood dynamic programming
+(DP)
+that takes into account the precedence constraints.
+Concepts and notations from
+\cite[part II]{4}
+are used,
+as well as
+meaningful constructions
+\cite[part I]{4}.
+
+The problem under consideration
+has as its prototype the well-known
+traveling salesman problem,
+TSP;
+see~\cite{7,8,9,10,11,12}.
+However, essential qualitative features
+(the presence of constraints, first of all)
+motivate the need for a specialized theory;
+see \cite {1,3,4,5,14}.
+In this paper,
+we single out \cite{4},
+where, considering an actual engineering problem,
+a number of fundamental provisions of a theoretical nature
+are demonstrated including the use of DP
+as a general method for solving various applied problems.
+
+The problem of tool routing for CNC sheet-cutting machines,
+known as the Cutting Path Problem or Tool Path Problem \cite{bibx:100},
+is considered primarily.
+It arises during the development of control programs for a CNC machine,
+which set the trajectory of the tool and a number of technological commands,
+determining the parameters of cutting sheet material to get
+the parts of known shapes and sizes.
+The input data for modeling the route of the tool for the CNC machine
+is the information about the positions of all the parts
+that is generated at the appropriate development stage
+after solving the ``nesting'' problem~\cite{bibx:101, bibx:102}.
+From the point of view of geometric optimization,
+this problem belongs to the class of cutting and packing problems
+\cite{bibx:103},
+for which, as well as for routing optimization problems,
+no algorithms of polynomial complexity are known.
+The nesting problem is beyond the scope of this paper.
+
+Generally speaking about the problem of tool path optimization
+for CNC sheet-cutting equipment, it should be noted that
+there is still no common theoretical basis for solving this problem so far.
+Almost no works describe exact algorithms,
+used to solve tool routing problems.
+Separate groups of scientists are known,
+who are studying special cases of this problem.
+In addition,
+several Computer-Aided-Manufacturing (CAM) systems
+contain a special module to solve some optimization problems,
+e.g. minimizing air motion;
+however, this does not ensure compliance
+with the technological requirements for CNC cutting machines
+and does not allow getting cutting routes,
+close to optimal from the point of view of the integrated criterion of the cost of cutting
+taking into account the working stroke of the tool,
+the cost of piercing, etc.
+However, when combined with interactive design methods,
+they provide rational and technologically acceptable options
+for tool path development for CNC sheet-cutting machines.
+It should be emphasized that algorithms implemented in commercial software
+are not described in scientific literature.
+
+Probably the first attempt to classify tool path problems was made by Hoeft and Palekar \cite{bibx:306}.
+
+
+Among modern scientists who conduct similar research, Devil and his colleagues should be singled out \cite{bibx:100, bibx:109, bibx:110, bibx:307}.
+These works make an attempt to link the features of laser cutting with routing algorithms.
+The work \cite{bibx:109} provides an overview of routing algorithms,
+related to curly sheet cutting on CNC machines.
+
+The authors categorize the existing literature on routing
+for six classes of problems:
+continuous cutting task (CCP),
+endpoint cutting problem (ECP),
+intermittent cutting task (ICP),
+polygon traversal problem (TPP),
+traveling salesman problem (TSP),
+and the generalized traveling salesman problem (GTSP).
+All of the above classes of problems, except for CCP, use discrete mathematical models.
+The routing problem in general cutting can be thought of as an ICP.
+However, the ICP literature is very scarce,
+and most scientific articles are limited to solving problems of other classes (see, in particular, \cite{bibx:301}).
+
+Many Russian scientists have also investigated the cutting path problem. The first papers about the optimization of the sheet cutting route for CNC machines
+were published by ~Frolovsky~\cite{bibx:104}
+and ~Verkhoturov~\cite{bibx:105}.
+The authors used simple graph and combinatorial mathematical models,
+reduced to the classical traveling salesman problem without additional constraints.
+However, these works were not continued.
+In recent years, several publications by ~Panyukov
+and ~Makarovskikh on this subject appeared
+\cite{bibx:106,bibx:107,bibx:108},
+involving the use of a combined cutting technique
+for the tool path of a CNC machine.
+Note that these works can actually be attributed to the class of works only routing in graphs, although they are announced as works on tool routing for CNC laser machines, since in these works a computational experiment is completely absent
+and the issues of technological admissibility of the implementation of the resulting trajectories on CNC sheet-cutting machines are poorly investigated.
+The reason for this is that the graph model
+cannot take into account all the geometric aspects of the cutting map, which is the initial information for solving practical problems of constructing feasible options for the tool route.
+
+
+The work \cite{bibx:308,bibx:112},
+based on the introduced concepts of a ``cutting segment''
+and ``basic cutting segment'',
+managed to distinguish a fairly wide subclass of problems in the ICP class,
+which boil down to the CCP and GTSP classes.
+The cutting segment here is defined as the tool path between the pierce point and the corresponding tool switch-off point, and the base segment is the part of the cutting segment without the initial part of the path between the pierce point and the tool entry point into the contour, and the end part between the contour exit point and the tool switch-off point.
+This concept made it possible, in particular,
+to solve problems of different classes,
+in which it is possible to use different cutting techniques within the same route,
+including ``combined cut'', ``multi-contour cutting''
+\cite[part I] {4}, etc.
+We must immediately make a reservation that within the framework of this article, we do not consider optimization problems of the CCP class using continuous models,
+since for them, the issue of guaranteed obtaining the global extremum remains practically unexplored.
+
+In general, we note once again that the research of the cutting path problem, as a rule, concerns the development of separate algorithms for only one of the above classes in \cite{bibx:109}.
+At the same time,
+these studies often do not take into account the important technological limitations of sheet cutting on CNC machines,
+limiting themselves only to the conditions of precedence.
+The greatest difficulty is presented by the so-called ``dynamic constraints''\cite{bibx:309} generated by thermal deformations of the material and causing changes
+in the formal mathematical conditions of the problem
+in the process of constructing the tool path of a CNC machine.
+To account for this kind of restrictions, at present, basically,
+two approaches are applied:
+\begin{enumerate}
+  \item
+  formalization of heuristic rules,
+  developed by experienced technologists for routing the tool in
+  interactive mode; and
+  \item
+  the use of engineering analysis systems for
+  modeling temperature fields in the material arising in
+  the thermal cutting process.
+\end{enumerate}
+
+The first approach includes the rule of
+``part hardness'',
+which limits the choice of feasible tie-in points
+at the part selected for cutting, and the rule of
+``sheet hardness'',
+which, in turn, when forming a route, imposes restrictions on the choice of the next part to be cut
+(see \cite[part I]{4}, \cite{bibx:309}).
+The second approach is implemented, for example, in the works \cite{bibx:114,bibx:116}.
+
+From other works, to one degree or another taking into account the thermal deformations of the material when modeling the cutting route, we note
+\cite{bibx:113,bibx:115,bibx:302,bibx:307}.
+The work \cite{bibx:113} proposes a parallel constraint programming approach
+for routing laser cutting with explicit precedence constraints
+and implicit consideration of thermal constraints. The authors emphasize the importance of considering all
+practical routing considerations already in the nesting phase.
+However, no follow-up studies aimed at solving this complex problem
+have been published.
+The work \cite{bibx:114} developed more accurate and faster thermal estimation methods. While this line of research is encouraging, a more detailed study of the problem of the relationship between material temperature and acceptable route options is required.
+Sensor solutions for laser
+cutting are rarely used in practice. In \cite{bibx:307}, a coaxial photodiode-based monitoring system was
+developed and investigated for 4 kW fiber laser cutting of mild and stainless steel thick plates.
+
+It is important to note that \cite{bibx:100, bibx:116, bibx:307} show a practical possibility of using heuristic approaches of the theoretical model of GTSP /megalopolises for the tool route modeling problem for thermal cutting machines with simultaneous control of material temperature.
+At the same time, the results of calculations presented in all works, taking into account the thermal aspects for the CNC machine, look not very convincing in terms of real optimization of the time and cost of the cutting process. The main reason for this is that the proposed
+techniques for reducing the problems of thermal distortion of
+material when cutting are mainly of a qualitative nature. It is sufficiently reliable to assert that until now, no accurate numerical data has been obtained on the magnitude of geometric distortions of parts when choosing one or another cutting route, depending on the degree of fulfillment of heuristic rules of ``stringency'' or depending on the distribution of temperature fields at thermal cutting. It is clear that the magnitude of thermal deformations is also determined by the brand and thickness of the material, as well as the features of
+the equipment. The features of the equipment include, first of all, the technology used for sheet thermal cutting (laser,
+plasma, gas). Research in this area has not actually been
+carried out.
+Therefore, the mathematical formalization of dynamic constraints in
+tool routing tasks causes obvious difficulties,
+in contrast to tasks related to nuclear power, where these
+restrictions are set naturally \cite{1,3}.
+
+On the other hand, when optimizing the tool path for CNC waterjet cutting machines, the dynamic constraints are often not taken into account because it is not necessary. It is only important to take into account the conditions of precedence.
+
+Due to this, efficient algorithms for solving classical routing problems of discrete optimization are of certain interest for tool path generation of CNC sheet-cutting machines.
+
+If we talk about algorithms using the classical model of the generalized traveling salesman problem, then there are two main approaches in their development. The first approach is associated with the development of accurate algorithms for special cases and approximation algorithms with theoretical guarantees of performance, the second is based on the application of various heuristics and meta-heuristics.
+
+As part of the first approach, we note the branch and bound and branch and cut algorithms
+(see, for example, \cite{bibx:228}) and polynomial-time
+approximation schemes for some special cases
+\cite{bibx:214}. We also note the studies of the TSP problem with
+the dependence of the cost of movements on time
+\cite{bibx:218,bibx:219} and with the ``dependency on
+prehistory''
+\cite{bibx:221}. The latter dependence in terms of its semantic
+content corresponds to the function of
+cost ``depending on the list of tasks''
+\cite{1,3}, which
+can be used to construct an admissible (from the point of view of
+thermal deformations of the material) trajectory of a
+CNC machine tool for thermal cutting.
+The second approach is mainly represented by works in which the GTSP model is used in its most general form without any additional
+restrictions. So, Gutin and Karapetyan \cite{Gutin-2010}
+proposed an efficient memetic algorithm. The work
+\cite{Helsgaun-2015} extended the famous heuristic
+Lin-Kernighan-Helsgaun solver to the GTSP,
+and \cite{bibx:230} developed
+powerful meta-heuristics of GNLS, which today is
+the most effective. In the case of a GTSP with precedence conditions
+of arbitrary form, algorithmic results still remain
+rather few in number. We can note heuristics \cite{SALMAN2016} and the specialized algorithm based on the branch-and-bound method idea \cite{SALMAN2020}.
+
+We also note recent works using both models of classical meta-heuristics and specialized heuristics
+\cite{Hajad2020SolvingTL,Li2020AutomaticGO}.
+
+
+Note that classical meta-heuristics are also actively used
+when solving problems of routing the tool of CNC machines for
+machining (see, for example, \cite{bibx:305,bibx:300,bibx:304}).
+
+Returning to the optimization problems of sheet cutting, we also note
+the work \cite{bibx:117}, which explores an approach based on
+the technological method of leaving "jumpers" in the process of thermal
+cutting to increase the rigidity of sheet material
+and reduce the geometric deformations of parts.
+
+The above-mentioned articles demonstrate
+that works for optimal tool routing for
+sheet-cutting machines are actively developing,
+and this topic needs a more structured scientific approach.
+Within the framework of this topic, there are two relevant directions:
+\begin{enumerate}
+  \item
+  development of precise algorithms and algorithms with
+  guaranteed estimations;
+  \item
+  adequate consideration of the dynamic constraints of thermal cutting.
+\end{enumerate}
+The following is a rigorous mathematical formalization
+of the
+problems of routing
+with constraints and cost functions,
+depending on the list of tasks,
+the study of which, in particular,
+allows getting optimal solutions for a variety of
+tool routing problems
+for sheet-cutting NC machines,
+including tasks with some types of
+``dynamic'' constraints.
+
+\sect{Summary of notation}
+\label{sec:1}
+
+
+% \bibliographystyle{abbrv}
+\bibliographystyle{ieeetr}
+\bibliography{Chentsov.bib}
+
+
 \end{document}
