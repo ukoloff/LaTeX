@@ -1,5 +1,5 @@
 \input{vum-english2021.tex} %%% Macro style file. Don't Change!!!
-\inputencoding{utf8}
+% \inputencoding{utf8}
 
 \graphicspath{{media/}}
 
@@ -67,7 +67,7 @@ This research was funded by the Russian Foundation for Basic Research, grant no.
 Применительно к задаче резки
 зависимость целевой функции от списка задач позволяет
 уменьшать термические деформации материала при резке.
-В работе ​​математическая формализация
+В работе математическая формализация
 экстремальной задачи маршрутизации с дополнительными ограничениями,
 описание метода и полученный с его помощью точный алгоритм.
 Оптимизации подлежат
@@ -125,7 +125,7 @@ tool path optimization problem
 
 \newcommand{\datereceive}{01.04.2022} %%% dd.mm.yyyy
 
-\newcommand{\contactinformationeng}{
+\newcommand{\contactinformationeng}{%
 Petunin Alexander Alexandrovich,
 Doctor of Technical Sciences, Professor, Department of Information Technologies and Design Automation,
 Ural Federal University, 620002, Russia, Yekaterinburg,
@@ -149,7 +149,7 @@ E-mail: p.chentsov@mail.ru
 %%% Full Last name, Full First name, Patronymic name (if exists), science degree (optional)
 %%% academic status (optional), post, organization,
 %%% Work Address. \\ E-mail \\ ORCID
-\newcommand{\contactinformationrus}{
+\newcommand{\contactinformationrus}{%
 Петунин Александр Александрович,
 д.\,т.\,н., профессор, кафедра информационных технологий и автоматизации проектирования,
 Уральский государственный университет, 620002, Россия, г. Екатеринбург,
@@ -1584,7 +1584,7 @@ the optimality of this solution directly follows from
 
 In this section, we use the concretization of the problem statement from section~\ref{sec:3}, i.e. we consider the sheet cutting of parts. As an objective function, the total time for cutting the parts is used, which includes the time of working cutting, the airtime time of tool moving, and the time for piercings of sheet material.
 
-For this option, an optimal solution will be obtained according to the scheme of the previous section: an algorithm is built, implemented in the form of a standard program for a personal computer. The ﬁrst example shows, in fact, the limiting (in the sense of dimension) possibilities of solving the basic problem on a PC. The optimal solution was found, but it took a lot of time.  Recall once again that within the framework of this article, we do not consider the use of heuristics to obtain approximate solutions to the problem.
+For this option, an optimal solution will be obtained according to the scheme of the previous section: an algorithm is built, implemented in the form of a standard program for a personal computer. The first example shows, in fact, the limiting (in the sense of dimension) possibilities of solving the basic problem on a PC. The optimal solution was found, but it took a lot of time.  Recall once again that within the framework of this article, we do not consider the use of heuristics to obtain approximate solutions to the problem.
 So, we follow the meaningful setting of section ~\ref{sec:3}.
 For the sake of brevity,
 we will confine ourselves now to a brief description of the task parameters.
@@ -1759,5 +1759,30 @@ plus 1ex minus 1ex}{1.3ex plus .1ex}{}}
 
 \contactseng
 
+\titlerus
+
+\pagestyle{basestylerus}
+
+\referrus
+
+\selectlanguage{russian}
+\begin{center}
+СПИСОК ЛИТЕРАТУРЫ
+\end{center}
+\setlength{\leftmargini}{1.8em}
+\begin{enumerate}
+\setlength{\itemsep}{0em}
+\parskip=0pt
+
+\item
+V. V. Korobkin, A. N. Sesekin, O. L. Tashlykov, and A. G. Chentsov, Metody marshrutizatsii
+i ikh prilozheniya v zadachakh povysheniya ehffektivnosti i bezopasnosti ehkspluatatsii atomnykh
+stantsiy. Izdatel’stvo "Novye tekhnologii", 2012.
+
+\end{enumerate}
+
+\receivedrus
+
+\contactsrus
 
 \end{document}

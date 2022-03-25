@@ -1,6 +1,7 @@
 %%% Macro style File of Vestnik. Don't change!
 \documentclass[12pt,a4paper,twoside]{article}  %MikTeX
-\usepackage[cp1251]{inputenc}                  %Win
+% \usepackage[cp1251]{inputenc}                  %Win
+\usepackage[utf8]{inputenc}                  % Unicode!!!
 \usepackage[T1,T2A]{fontenc}
 \usepackage{amsmath,amsfonts,amssymb,amscd,euscript}
 \usepackage[russian, english]{babel}
@@ -23,12 +24,12 @@
 %\topmargin=-7mm
 
 \usepackage{ifthen}
-\newcommand{\seriesrus}{\ifthenelse{\equal{MATHEMATICS}{\serieseng}}{ÌÀÒÅÌÀÒÈÊÀ}{\ifthenelse{\equal{MECHANICS}{\serieseng}}{ÌÅÕÀÍÈÊÀ}{\ifthenelse{\equal{COMPUTER SCIENCE}{\serieseng}}{ÊÎÌÏÜŞÒÅĞÍÛÅ ÍÀÓÊÈ}{UNDEFINED}}}}
+\newcommand{\seriesrus}{\ifthenelse{\equal{MATHEMATICS}{\serieseng}}{ĞœĞĞ¢Ğ•ĞœĞĞ¢Ğ˜ĞšĞ}{\ifthenelse{\equal{MECHANICS}{\serieseng}}{ĞœĞ•Ğ¥ĞĞĞ˜ĞšĞ}{\ifthenelse{\equal{COMPUTER SCIENCE}{\serieseng}}{ĞšĞĞœĞŸĞ¬Ğ®Ğ¢Ğ•Ğ ĞĞ«Ğ• ĞĞĞ£ĞšĞ˜}{UNDEFINED}}}}
 
 \makeatletter
 
 \global\let\@fundingrus\@empty
-\def\fundingrus#1{\gdef\@fundingrus{\@ifempty{#1}{\@empty}{\noindent{\bf Ôèíàíñèğîâàíèå.} #1}}}
+\def\fundingrus#1{\gdef\@fundingrus{\@ifempty{#1}{\@empty}{\noindent{\bf Ğ¤Ğ¸Ğ½Ğ°Ğ½ÑĞ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ.} #1}}}
 
 \global\let\@fundingeng\@empty
 \def\fundingeng#1{\gdef\@fundingeng{\@ifempty{#1}{\@empty}{\noindent{\bf Funding.} #1}}}
@@ -56,9 +57,9 @@
 \vspace{2pt plus 1pt minus 0pt}\par
 \noindent\parbox{\textwidth}{\small\noindent\textbf{\articletitlerus}}\par
 \vspace{6pt plus 1pt minus 0pt}\par
-\noindent\parbox{\textwidth}{\small\noindent{\it Êëş÷åâûå ñëîâà: }\keywordsrus} \par
+\noindent\parbox{\textwidth}{\small\noindent{\it ĞšĞ»ÑÑ‡ĞµĞ²Ñ‹Ğµ ÑĞ»Ğ¾Ğ²Ğ°: }\keywordsrus} \par
 \vspace{8pt}
-\noindent{\small{ÓÄÊ} \UDC}\par%
+\noindent{\small{Ğ£Ğ”Ğš} \UDC}\par%
 \vspace{7pt}
 \noindent{\small{\textrm DOI:} \paperdoi}
 \end{otherlanguage}}
@@ -68,7 +69,7 @@
 %Received
 \def\receivedeng{\begin{otherlanguage}{english}\vspace{3ex} \hfill Received~~\datereceive \par \vspace{5ex} \par\end{otherlanguage}}
 
-\def\receivedrus{\begin{otherlanguage}{russian}\vspace{3ex} \hfill Ïîñòóïèëà  â ğåäàêöèş~~\datereceive \par \vspace{5ex} \par\end{otherlanguage}}
+\def\receivedrus{\begin{otherlanguage}{russian}\vspace{3ex} \hfill ĞŸĞ¾ÑÑ‚ÑƒĞ¿Ğ¸Ğ»Ğ°  Ğ² Ñ€ĞµĞ´Ğ°ĞºÑ†Ğ¸Ñ~~\datereceive \par \vspace{5ex} \par\end{otherlanguage}}
 
 %contact information about authors
 \def\contactseng{\begin{otherlanguage}{english}\noindent\parbox{\textwidth}{\small\noindent \contactinformationeng\par\vspace{20pt}\par
@@ -76,7 +77,7 @@
 
 \def\contactsrus{%
 \begin{otherlanguage}{russian}\noindent\parbox{\textwidth}{\small\noindent\contactinformationrus\par\vspace{10pt}\par
-\noindent{\bf Öèòèğîâàíèå: }\authorsrus.~\articletitlerus~// Âåñòíèê Óäìóğòñêîãî óíèâåğñèòåòà. Ìàòåìàòèêà. Ìåõàíèêà. Êîìïüşòåğíûå íàóêè. \paperyear. Ò.~\papervolume. Âûï.~\papernumber. \mbox{Ñ.~\pageref{paperfirstpage}--\pageref{paperlastpage}.}\label{paperlastpage}}\end{otherlanguage}
+\noindent{\bf Ğ¦Ğ¸Ñ‚Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ: }\authorsrus.~\articletitlerus~// Ğ’ĞµÑÑ‚Ğ½Ğ¸Ğº Ğ£Ğ´Ğ¼ÑƒÑ€Ñ‚ÑĞºĞ¾Ğ³Ğ¾ ÑƒĞ½Ğ¸Ğ²ĞµÑ€ÑĞ¸Ñ‚ĞµÑ‚Ğ°. ĞœĞ°Ñ‚ĞµĞ¼Ğ°Ñ‚Ğ¸ĞºĞ°. ĞœĞµÑ…Ğ°Ğ½Ğ¸ĞºĞ°. ĞšĞ¾Ğ¼Ğ¿ÑŒÑÑ‚ĞµÑ€Ğ½Ñ‹Ğµ Ğ½Ğ°ÑƒĞºĞ¸. \paperyear. Ğ¢.~\papervolume. Ğ’Ñ‹Ğ¿.~\papernumber. \mbox{Ğ¡.~\pageref{paperfirstpage}--\pageref{paperlastpage}.}\label{paperlastpage}}\end{otherlanguage}
 }
 
 \@addtoreset{equation}{section}
@@ -133,7 +134,7 @@ plus 1ex minus .1ex}{1.3ex plus .1ex}{\bf\,\S\,}}
 {%
 \vbox{\hbox to\textwidth{\thepage\strut\hfil\authorseng\hfil}\hrule\vspace{8pt}
 }}%
-\end{otherlanguage}%	
+\end{otherlanguage}%
 }
 
 \renewcommand{\@oddhead}%
@@ -154,11 +155,11 @@ plus 1ex minus .1ex}{1.3ex plus .1ex}{\bf\,\S\,}}
 \fancypagestyle{firstpagestylerus}{
 \fancyhf{}
 \headheight=30pt
-\fancyhead[C]{\parbox{\textwidth}{{\scriptsize ÂÅÑÒÍÈÊ\hfill ÓÄÌÓĞÒÑÊÎÃÎ\hfill ÓÍÈÂÅĞÑÈÒÅÒÀ.\hfill ÌÀÒÅÌÀÒÈÊÀ.\hfill ÌÅÕÀÍÈÊÀ.\hfill ÊÎÌÏÜŞÒÅĞÍÛÅ\hfill ÍÀÓÊÈ}
+\fancyhead[C]{\parbox{\textwidth}{{\scriptsize Ğ’Ğ•Ğ¡Ğ¢ĞĞ˜Ğš\hfill Ğ£Ğ”ĞœĞ£Ğ Ğ¢Ğ¡ĞšĞĞ“Ğ\hfill Ğ£ĞĞ˜Ğ’Ğ•Ğ Ğ¡Ğ˜Ğ¢Ğ•Ğ¢Ğ.\hfill ĞœĞĞ¢Ğ•ĞœĞĞ¢Ğ˜ĞšĞ.\hfill ĞœĞ•Ğ¥ĞĞĞ˜ĞšĞ.\hfill ĞšĞĞœĞŸĞ¬Ğ®Ğ¢Ğ•Ğ ĞĞ«Ğ•\hfill ĞĞĞ£ĞšĞ˜}
 \vspace{2pt}
 \hrule
 \vspace{8pt}
-{\small \hbox to \textwidth{\seriesrus \hfill  \paperyear. Ò.~\papervolume. Âûï.~\papernumber. Ñ.~\pageref{paperfirstpage}--\pageref{paperlastpage}.}}}}
+{\small \hbox to \textwidth{\seriesrus \hfill  \paperyear. Ğ¢.~\papervolume. Ğ’Ñ‹Ğ¿.~\papernumber. Ğ¡.~\pageref{paperfirstpage}--\pageref{paperlastpage}.}}}}
 \renewcommand{\headrulewidth}{0.0pt}
 }
 
@@ -189,4 +190,4 @@ plus 1ex minus .1ex}{1.3ex plus .1ex}{\bf\,\S\,}}
 \renewcommand{\headrulewidth}{0.4pt}
 }
 
-\pagestyle{basestyleeng} 
+\pagestyle{basestyleeng}
