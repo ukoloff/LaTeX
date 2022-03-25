@@ -12,6 +12,130 @@
 \newcommand{\authorsrus}{А.\,А.~Петунин, А.\,Г.~Ченцов, П.\,А.~Ченцов} %%% Russian
 
 
+%%% Full English title of article
+\newcommand{\articletitleeng}{%
+Some applications of optimization routing problems with additional constraints%
+}
+%%% Short English title of article
+\newcommand{\articleshorttitleeng}{Routing optimization with constraints}
+%%% Full Russian title of article
+\newcommand{\articletitlerus}{%
+Некоторые приложения задач оптимизации маршрутизации с дополнительными ограничениями%
+}
+%%% Short Russian title of article
+\newcommand{\articleshorttitlerus}{Приложения задач оптимизации маршрутизации}
+
+%%%  Mathematical Subject Classification (no more than 3) UDC Classification.
+\newcommand{\UDC}{517.977} %%% Specified by authors
+\newcommand{\MSC}{34D08, 93C15} %%%  Specified by authors
+
+\newcommand{\paperdoi}{10.35634/vmXXXXXX}
+
+\fundingeng{%
+This research was funded by the Russian Foundation for Basic Research, grant no. 20-08-00873.%
+} %Funding English
+
+\fundingrus{%
+Работа выполнена при финансовой поддержке Российского фонда фундаментальных исследований, грант №. 20-08-00873.%
+} %Funding Russian
+
+%%% Russian abstract
+%%% Don't use references to the literature in the abstract.
+\newcommand{\referatrus}{%
+В статье рассматривается экстремальная задача маршрутизации с ограничениями.
+В общей формулировке
+предполагается, что объектами посещения являются любые непустые конечные множества - мегаполисы.
+Основной прикладной задачей, рассматриваемой в данном исследовании,
+является задача траектории движения инструмента для станков листовой резки с ЧПУ,
+известная как задача резки.
+Эта проблема возникает на этапе разработки управляющих программ для станков с ЧПУ.
+Возможны и другие приложения.
+В частности, результаты исследования могут быть использованы в задаче
+минимизация дозы облучения при демонтаже системы радиационно-опасных элементов
+после аварий на АЭС и в транспортных проблемах.
+В качестве ограничений исследуются ограничения предшествования.
+Они могут быть использованы для уменьшения вычислительной сложности.
+В качестве основного метода исследования использовалось широко понимаемое динамическое программирование.
+Предлагаемая реализация метода учитывает ограничения предшествования и
+зависимость целевых функций от списка задач.
+Последняя относится к классу очень сложных состояний
+которые определяют допустимость маршрута на каждом шаге маршрутизации,
+в зависимости от уже выполненных или, наоборот,
+еще не завершенных задач.
+Применительно к задаче резки
+зависимость целевой функции от списка задач позволяет
+уменьшать термические деформации материала при резке.
+В работе ​​математическая формализация
+экстремальной задачи маршрутизации с дополнительными ограничениями,
+описание метода и полученный с его помощью точный алгоритм.
+Оптимизации подлежат
+порядок выполнения задач, конкретная траектория процесса,
+и его начальная точка.
+}
+%%% English abstract
+%%% not exceeding 250 words
+\newcommand{\referateng}{%
+The paper deals with an extremal routing problem with constraints.
+In the general formulation,
+it is assumed that the objects of visiting are any non-empty finite sets -- megalopolises.
+The main applied problem considered in this study is the tool path problem for CNC sheet-cutting machines,
+known as the Cutting Path Problem.
+This problem arises at the stage of developing control programs for CNC machines.
+Other applications are also possible.
+In particular, the results obtained in the chapter can be used in the problem of
+minimizing the radiation dose when dismantling a system of radiation-hazardous elements
+after accidents at nuclear power plants and in transport problems.
+Among tasks constraints, the precedence constraints are investigated.
+These constraints can be used to reduce computational complexity.
+As the main method, the study used widely understood dynamic programming.
+The offered realization of the method takes into account the precedence constraints
+and the dependence of the objective functions on the task list.
+This dependence belongs to the class of very complex conditions
+that determine the route admissibility at each routing step,
+depending on the tasks already completed or, on the contrary,
+not yet completed.
+As applied to the Cutting Path Problem,
+the dependence of the objective function on the task list makes it possible
+to reduce thermal deformations of the material during cutting.
+The chapter provides a mathematical formalization of an
+extremal routing problem with additional constraints,
+a description of the method, and the exact algorithm obtained with its help.
+The order of tasks execution, the specific trajectory of the process,
+and the starting point are optimized.
+}
+%%% Keywords (no more than 10 words).
+\newcommand{\keywordseng}{%
+dynamic programming,
+additional constraints,
+megalopolises,
+routing
+CNC sheet cutting machines
+tool path optimization problem
+}
+\newcommand{\keywordsrus}{%
+динамическое программирование,
+дополнительные ограничения,
+мегаполисы,
+маршрутизация
+Станки листовой резки с ЧПУ
+проблема оптимизации пути инструмента
+}
+
+%%% Own notation
+\newcommand{\pX}{{\mathcal X}}
+\let\msf=\mathsf
+\newcommand{\var}{\mathop{\sf Var}}
+%---------------------------------------
+\setcounter{page}{1} %
+%---------------------------------------
+
 \begin{document}
-+
+
+\titleeng
+\annotationandkeywordseng
+
+\begin{flushleft}
+  {\bf{Introduction}}
+\end{flushleft}
+
 \end{document}
