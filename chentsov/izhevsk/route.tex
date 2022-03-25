@@ -424,9 +424,7 @@ for sheet-cutting NC machines,
 including tasks with some types of
 ``dynamic'' constraints.
 
-\sect{Summary of notation}
-\label{sec:1}
-
+\sect{Summary of notation\label{sec:1}}
 
 We use standard set-theoretic notation;
 $\varnothing$ denotes an empty set,
@@ -552,8 +550,7 @@ for $k \in \overline{1,m}.$
 Recall that here and below the symbolism corresponds to
 \cite[$\S$3.1]{4}.
 
-\sect{Mathematical statement of the problem}
-\label{sec:2}
+\sect{Mathematical statement of the problem\label{sec:2}}
 
 Consider a fixed non-empty set
 $X$
@@ -1016,8 +1013,7 @@ related to the derivation of the Bellman equation
 are not considered
 in this paper.
 
-\sect{Concretization of the general setting}
-\label{sec:3}
+\sect{Concretization of the general setting\label{sec:3}}
 
 Let us very briefly recall some of the constructions of
 \cite [$\S$ 3.3]{4}.
@@ -1125,12 +1121,10 @@ See details in
 and also in
 \cite{18}.
 
-\sect{%
-Dynamic programming
+\sect{Dynamic programming
 (algorithmic version);
-building an optimal solution%
-}
-\label{sec:4}
+building an optimal solution
+\label{sec:4}}
 
 Let us go back to a very general statement of the section
 \ref{sec:2}.
@@ -1539,8 +1533,7 @@ for $ N = 2 $,
 the optimality of this solution directly follows from
  (\ref{4.15}).
 
-\sect{ The model examples: optimal solution to a complete problem}
-\label{sec:5}
+\sect{The model examples: optimal solution to a complete problem\label{sec:5}}
 
 In this section, we use the concretization of the problem statement from section~\ref{sec:3}, i.e. we consider the sheet cutting of parts. As an objective function, the total time for cutting the parts is used, which includes the time of working cutting, the airtime time of tool moving, and the time for piercings of sheet material.
 
@@ -1679,8 +1672,8 @@ Further studies of the influence of the tool path on
 the magnitude of thermal deformations of parts will ensure the compliance of the obtained exact solutions
 to the real optimal and admissible technological routes for CNC sheet-cutting machines.
 
-\sect{Conclusion}
-\label{sec:6}
+\sect{Conclusion\label{sec:6}}
+
 The chapter explores routing problems focused on engineering applications associated with cutting of parts on CNC sheet cutting machines. At the same time, a very general formulation is presented that allows for other applications, among which we especially note the problem of successive dismantling of radiation on hazardous objects. For the aforementioned general arrangement of constructions, an optimal algorithm is based on a non-standard version of dynamic programming; the computational implementation of this algorithm is achieved for problems with a limited number of dimensions. In the general case, the scheme of the algorithm presented in the article determines the structure of the optimal solution, defined as a route process that includes the route itself (permutation of indices), the trajectory and the starting point. The entire mentioned complex (route process) is optimized under constraints including precedence conditions and cost functions depending on the list of tasks. These complications are motivated by the aforementioned engineering applications. Let's note the main stages of the research.
 
 1. Formalization of the problem, including the model of metropolises, adequately taking into account the possible multivariance of the movements of the controlled object, and the strict definition of permissible routing processes. The precedence conditions are formulated and cost functions are introduced with a possible dependence on the list of tasks that have not been completed at a given time. Aggregation of costs is assumed to be additive.
@@ -1694,6 +1687,22 @@ The chapter explores routing problems focused on engineering applications associ
 5. In the problem of tool control during sheet cutting of parts on CNC machines, megalopolises in the simplest case are obtained by discretizing the equidistant contours to be cut (meaning cutting along a closed contour). However, other options for definitions metropolises are possible (and this is shown in the chapter), when it is allowed to combine several contours into one whole, or several fragments of contours, there are cutting segments in mind. With this approach, after some preliminary constructions in order to determine cost indicators, it turns out to be possible to reduce the dimension, which is essential in problems of this kind.
 
 6. The prospect of solving large-scale problems can be associated, in particular, with the construction of optimizing inputs and multi-inputs, as well as iterative procedures using these inputs. In this case, of course, it is assumed that the optimizing inputs have a limited dimension, which allows for the use of dynamic programming in local versions (optimization in windows). It is also possible to use the branch and bound method and various metaheuristics.
+
+%----------------------------------------------
+\vspace{1ex}
+
+\makeatletter
+\@fundingeng\par
+\@addtoreset{equation}{section}
+\@addtoreset{footnote}{section}
+\renewcommand{\section}{\@startsection{section}{1}{0pt}{1.3ex
+plus 1ex minus 1ex}{1.3ex plus .1ex}{}}
+
+\vspace{3ex}
+\small
+{ %\scriptsize
+
+\renewcommand{\refname}{{\rm\centerline{REFERENCES}}}
 
 
 
